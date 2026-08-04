@@ -1,0 +1,116 @@
+"use client";
+
+import { ReactNode, useEffect, useMemo } from "react";
+import { FormProvider, useForm, DefaultValues } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ZodSchema } from "zod";
+import FieldRenderer from "./FieldRenderer";
+import { FieldConfig } from "@/types";
+import { cn } from "@/lib/utils";
+import { Button } from "../ui/button";
+import { Spinner } from "@/components/ui/spinner";
+
+type Props<T extends Record<string, unknown>> = {
+  config: FieldConfig[];
+  title?: string;
+  description?: string;
+  schema: ZodSchema<T>;
+  onSubmit: (values: T) => void | Promise<void>;
+  submitText?: string;
+  className?: string;
+  footer?: ReactNode;
+  values?: Partial<T>;
+};
+
+export default function FormBuilder<T extends Record<string, unknown>>({
+  config,
+  schema,
+  onSubmit,
+  title,
+  description,
+  submitText,
+  footer,
+  values,
+}: Props<T>) {
+  // const defaults = config.reduce((acc, field) => {
+  //   acc[field.name] = field.defaultValue;
+  //   return acc;
+  // }, {} as DefaultValues<T>);
+
+  // const methods = useForm<T>({
+  //   resolver: zodResolver(schema as any),
+
+  //   defaultValues: {
+  //     ...defaults,
+  //     ...values,
+  //   },
+
+  //   mode: "onChange",
+  // });
+
+  const defaults = useMemo(
+    () =>
+      config.reduce((acc, field) => {
+        acc[field.name] = field.defaultValue;
+        return acc;
+      }, {} as DefaultValues<T>),
+    [config],
+  );
+
+  const methods = useForm<T>({
+    resolver: zodResolver(schema as any),
+    defaultValues: {
+      ...defaults,
+      ...values,
+    },
+    mode: "onChange",
+  });
+
+  useEffect(() => {
+    if (values) {
+      methods.reset({
+        ...defaults,
+        ...values,
+      });
+    }
+  }, [values, defaults]);
+
+  return (
+    <>
+      <div className="w-full max-w-xl">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold">{title}</h1>
+
+          <p className="mt-3 text-slate-500">{description}</p>
+        </div>
+        <FormProvider {...methods}>
+          <form
+            onSubmit={methods.handleSubmit(onSubmit)}
+            className="mt-5 space-y-4"
+          >
+            {config.map((field) => (
+              <div key={field.name}>
+                <div className="w-full">
+                  <FieldRenderer key={field.name} field={field} />
+                </div>
+              </div>
+            ))}
+
+            <div className="flex py-5">
+              <Button
+                size="lg"
+                type="submit"
+                disabled={methods.formState.isSubmitting}
+                className="px-5 py-3 text-white w-full"
+              >
+                {submitText ?? "Submit"}{" "}
+                {methods.formState.isSubmitting && <Spinner />}
+              </Button>
+            </div>
+          </form>
+        </FormProvider>
+        {footer}
+      </div>
+    </>
+  );
+}

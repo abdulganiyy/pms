@@ -1,0 +1,609 @@
+generator client {
+  provider     = "prisma-client-js"
+  output       = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+
+model User {
+  id                     String       @id @default(uuid())
+  email                  String       @unique
+  phone                  String?      @unique
+  fullname               String
+  password               String       @unique
+
+  emailVerified          Boolean      @default(false)
+  emailOtpHash           String?
+  emailOtpExpiresAt      DateTime?
+  otp                    String?
+  otpExpiresAt           DateTime?
+  resetPasswordToken     String?
+  resetPasswordExpiresAt DateTime?
+
+  profileImage      String?
+
+
+  pin           String?
+
+  status            UserStatus  @default(PENDING_VERIFICATION)
+
+  phoneVerified     Boolean     @default(false)
+
+  paystackCustomerId                    String?
+
+  lastLogin              DateTime?
+
+  createdAt              DateTime     @default(now())
+  updatedAt              DateTime     @updatedAt
+  deleted                Boolean      @default(false)
+  deletedAt         DateTime?
+
+
+  userRoles              UserRole[]
+}
+
+model Guest {
+  id                String   @id @default(cuid())
+
+  // Personal Information
+  firstName         String
+  lastName          String
+  middleName        String?
+
+  email             String?
+  phone             String?
+
+  dateOfBirth       DateTime?
+  gender            Gender?
+
+  nationality       String?
+  language          String?
+
+  occupation        String?
+
+  profileImage      String?
+  passportId        String?
+
+
+  // Loyalty
+  loyaltyNumber     String? @unique
+  loyaltyPoints     Int @default(0)
+
+  // Preferences
+  vip               Boolean @default(false)
+  blacklisted       Boolean @default(false)
+
+  notes             String?
+
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  reservations      Reservation[]
+
+  addresses         GuestAddress[]
+  documents         GuestDocument[]
+  emergencyContacts GuestEmergencyContact[]
+  paymentMethods    GuestPaymentMethod[]
+  restaurantOrders     RestaurantOrder[]
+  companyId String?
+  company   Company? @relation(fields: [companyId], references: [id])
+
+  @@index([lastName])
+  @@index([phone])
+  @@index([email])
+}
+
+
+model GuestAddress {
+
+  id String @id @default(cuid())
+
+  guestId String
+  guest Guest @relation(fields:[guestId], references:[id], onDelete: Cascade)
+
+  type AddressType
+
+  address1 String
+  address2 String?
+
+  city String
+  state String?
+  postalCode String?
+
+  country String
+
+  isPrimary Boolean @default(false)
+
+  createdAt DateTime @default(now())
+}
+
+model GuestDocument {
+
+  id String @id @default(cuid())
+
+  guestId String
+  guest Guest @relation(fields:[guestId], references:[id], onDelete: Cascade)
+
+  type DocumentType
+
+  documentNumber String
+
+  issuingCountry String
+
+  issueDate DateTime?
+  expiryDate DateTime?
+
+  imageFront String?
+  imageBack String?
+
+  createdAt DateTime @default(now())
+
+  @@index([documentNumber])
+}
+
+model GuestEmergencyContact {
+
+  id String @id @default(cuid())
+
+  guestId String
+  guest Guest @relation(fields:[guestId], references:[id], onDelete: Cascade)
+
+  fullName String
+
+  relationship String
+
+  phone String
+
+  email String?
+
+  address String?
+}
+
+model GuestPaymentMethod {
+
+  id String @id @default(cuid())
+
+  guestId String
+  guest Guest @relation(fields:[guestId], references:[id], onDelete: Cascade)
+
+  provider PaymentProvider
+
+  token String
+
+  last4 String?
+
+  brand String?
+
+  expiryMonth Int?
+  expiryYear Int?
+
+  isDefault Boolean @default(false)
+
+  createdAt DateTime @default(now())
+}
+
+model RoomType {
+  id          String @id @default(cuid())
+
+  name        String
+  code        String
+
+  description String?
+
+  maxAdults   Int
+  maxChildren Int
+
+  baseOccupancy Int
+
+  size         Int?
+
+  rooms         Room[]
+  rates         RoomRate[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([code])
+}
+
+model RatePlan {
+
+  id String @id @default(cuid())
+
+  name String
+
+  cancellationPolicy String?
+
+  includesBreakfast Boolean
+
+  refundable Boolean
+
+  rates RoomRate[]
+}
+
+model Room {
+  id            String @id @default(cuid())
+  number        String
+  status RoomStatus
+
+  floor Int?
+
+  roomTypeId String
+
+  roomType RoomType @relation(fields:[roomTypeId], references:[id])
+
+  reservations  Reservation[]
+  maintenance   Maintenance[]
+}
+
+model RoomRate {
+
+  id String @id @default(cuid())
+
+  roomTypeId String
+
+  roomType RoomType    @relation(fields:[roomTypeId], references:[id])
+
+  ratePlanId String
+
+  ratePlan RatePlan  @relation(fields:[ratePlanId], references:[id])
+
+  startDate DateTime
+
+  endDate DateTime
+
+  price Decimal
+
+  currency String
+
+  reservations      Reservation[]
+
+  createdAt DateTime @default(now())
+}
+
+model Reservation {
+
+  id String @id @default(cuid())
+
+  guestId String
+  guest Guest @relation(fields:[guestId], references:[id])
+
+  roomId String
+  room Room @relation(fields:[roomId], references:[id])
+
+  roomRateId   String
+  roomRate     RoomRate @relation(fields: [roomRateId], references: [id])
+
+  nightlyRate  Decimal
+
+  tax  Decimal?
+  discount  Decimal?
+
+  totalAmount  Decimal
+
+  checkIn DateTime
+  checkOut DateTime
+
+  adults Int
+  children Int
+
+  paymentStatus ReservationPaymentStatus
+
+  type ReservationType   
+
+  status ReservationStatus
+
+  folio Folio? 
+
+  restaurantOrders RestaurantOrder[]
+
+  createdAt DateTime @default(now())
+}
+
+model Folio {
+
+    id String @id @default(cuid())
+
+    reservationId String @unique
+
+    reservation Reservation @relation(fields:[reservationId], references:[id])
+
+    transactions FolioTransaction[]
+
+    payments Payment[]
+}
+
+model FolioTransaction {
+
+    id String @id @default(cuid())
+
+    folioId String
+
+    folio Folio   @relation(fields:[folioId], references:[id])
+
+    type FolioTransactionType
+
+    amount Decimal
+
+    description String
+}
+
+model Payment {
+
+    id String @id @default(cuid())
+
+    folioId String
+
+    folio Folio  @relation(fields:[folioId], references:[id])
+
+    amount Decimal
+
+    method PaymentMethod
+}
+
+model RestaurantOrder {
+
+  id String @id @default(cuid())
+
+  reservationId String?
+
+  reservation Reservation? @relation(fields:[reservationId], references:[id])
+
+  guestId String?
+
+  guest Guest?    @relation(fields:[guestId], references:[id])
+
+  roomNumber String?
+
+  waiterId String
+
+  status RestaurantOrderStatus
+
+  items RestaurantOrderItem[]
+
+  subtotal Decimal
+
+  tax Decimal
+
+  total Decimal
+
+  createdAt DateTime @default(now())
+}
+
+model RestaurantOrderItem {
+
+  id String @id @default(cuid())
+
+  orderId String
+
+  order RestaurantOrder @relation(fields:[orderId], references:[id])
+
+  menuItemId String
+
+  menuItem MenuItem @relation(fields:[menuItemId], references:[id])
+
+  quantity Int
+
+  price Decimal
+
+  total Decimal
+}
+
+
+model MenuItem {
+
+  id String @id @default(cuid())
+
+  name String
+
+  description String?
+
+  orderItems RestaurantOrderItem[]
+}
+
+model Maintenance {
+    id String @id @default(cuid())
+
+    roomId String
+    room Room @relation(fields:[roomId], references:[id])
+
+    startDate DateTime
+    endDate DateTime
+
+    reason String
+}
+
+model Company {
+  id            String @id @default(cuid())
+  name          String
+  email         String?
+  phone         String?
+
+  guests        Guest[]
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum ReservationStatus {
+  PENDING
+  CONFIRMED
+  CHECKED_IN
+  CHECKED_OUT
+  CANCELLED
+  NO_SHOW
+}
+
+enum ReservationPaymentStatus {
+  UNPAID
+  PARTIALLY_PAID
+  PAID
+  REFUNDED
+  PARTIALLY_REFUNDED
+}
+
+enum ReservationType {
+  WALK_IN
+  ONLINE
+  PHONE
+  EMAIL
+  OTA
+  CORPORATE
+  GROUP
+}
+
+enum AddressType {
+  HOME
+  WORK
+  BILLING
+  OTHER
+}
+
+enum DocumentType {
+  PASSPORT
+  NATIONAL_ID
+  DRIVERS_LICENSE
+  RESIDENCE_PERMIT
+  VISA
+}
+
+enum PaymentProvider {
+  STRIPE
+  PAYSTACK
+  FLUTTERWAVE
+  CASH
+  BANK_TRANSFER
+}
+
+enum RoomStatus {
+  AVAILABLE        // Ready for sale
+  OCCUPIED         // Guest currently staying
+  RESERVED         // Assigned to an upcoming reservation
+  DIRTY            // Needs housekeeping
+  CLEANING         // Housekeeping in progress
+  INSPECTING       // Awaiting supervisor inspection
+  OUT_OF_SERVICE   // Temporarily unavailable (minor issues)
+  OUT_OF_ORDER     // Major maintenance
+  BLOCKED          // Reserved internally / VIP / management
+}
+
+enum FolioTransactionType {
+  ROOM_CHARGE
+  RESTAURANT_CHARGE
+  ROOM_SERVICE_CHARGE
+  LAUNDRY_CHARGE
+  SPA_CHARGE
+  GYM_CHARGE
+  MINIBAR_CHARGE
+  TRANSPORT_CHARGE
+  PARKING_CHARGE
+  TELEPHONE_CHARGE
+  CONFERENCE_CHARGE
+  EXTRA_BED_CHARGE
+
+  TAX
+  SERVICE_CHARGE
+
+  DISCOUNT
+  ADJUSTMENT
+  REFUND
+
+  PAYMENT
+}
+
+enum PaymentMethod {
+  CASH
+  CARD
+  BANK_TRANSFER
+  MOBILE_MONEY
+  WALLET
+  ONLINE_GATEWAY
+  POS
+
+  COMPANY_ACCOUNT
+  TRAVEL_AGENT
+
+  COMPLIMENTARY
+  VOUCHER
+}
+
+enum RestaurantOrderStatus {
+  PENDING
+  CONFIRMED
+  PREPARING
+  READY
+  SERVED
+  CANCELLED
+}
+
+enum RestaurantBillingStatus {
+  UNBILLED
+  CHARGED_TO_ROOM
+  PAID
+  REFUNDED
+}
+
+model Role {
+  id              String           @id @default(uuid())
+  name            RoleName         @unique
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  rolePermissions RolePermission[]
+  userRoles       UserRole[]
+}
+
+model UserRole {
+  id        String   @id @default(uuid())
+  userId    String
+  roleId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  role      Role     @relation(fields: [roleId], references: [id])
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, roleId])
+}
+
+model Permission {
+  id              String           @id @default(uuid())
+  name            String           @unique
+  description     String?
+  rolePermissions RolePermission[]
+}
+
+model RolePermission {
+  roleId       String
+  permissionId String
+  permission   Permission @relation(fields: [permissionId], references: [id])
+  role         Role       @relation(fields: [roleId], references: [id])
+
+  @@id([roleId, permissionId])
+}
+
+
+enum RoleName {
+  SUPER_ADMIN
+  ADMIN
+  USER
+}
+
+enum UserStatus {
+  PENDING_VERIFICATION
+  ACTIVE
+  SUSPENDED
+  BLOCKED
+  DELETED
+}
+
+
+enum Currency {
+  NGN
+  USD
+}
+
