@@ -11,6 +11,13 @@ import { PaymentModule } from './payment/payment.module';
 import { SmsModule } from './sms/sms.module';
 import { QueueModule } from './queue/queue.module';
 import { GuestModule } from './guest/guest.module';
+import { RoomtypeModule } from './roomtype/roomtype.module';
+import { RateplanModule } from './rateplan/rateplan.module';
+import { RoomrateModule } from './roomrate/roomrate.module';
+import { RoomModule } from './room/room.module';
+import { ReservationModule } from './reservation/reservation.module';
+import { FolioModule } from './folio/folio.module';
+import { FoliotransactionModule } from './foliotransaction/foliotransaction.module';
 
 @Module({
   imports: [
@@ -27,6 +34,13 @@ import { GuestModule } from './guest/guest.module';
     SmsModule,
     QueueModule,
     GuestModule,
+    RoomtypeModule,
+    RateplanModule,
+    RoomrateModule,
+    RoomModule,
+    ReservationModule,
+    FolioModule,
+    FoliotransactionModule,
   ],
   controllers: [AppController],
   providers: [AppService],

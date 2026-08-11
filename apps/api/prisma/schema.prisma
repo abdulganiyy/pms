@@ -226,7 +226,7 @@ model RatePlan {
 
 model Room {
   id            String @id @default(cuid())
-  number        String
+  number        String @unique
   status RoomStatus
 
   floor Int?
@@ -284,13 +284,19 @@ model Reservation {
 
   totalAmount  Decimal
 
+  cancelledAt   DateTime?
+  cancelledById String?
+  cancellationReason String?
+
+  checkedInAt   DateTime?
+  checkedOutAt  DateTime?
+  noShowAt      DateTime?
+
   checkIn DateTime
   checkOut DateTime
 
-  adults Int
-  children Int
-
-  paymentStatus ReservationPaymentStatus
+  adults       Int                @default(1)
+  children      Int                @default(0)
 
   type ReservationType   
 
@@ -298,9 +304,43 @@ model Reservation {
 
   folio Folio? 
 
+  auditLogs     ReservationAudit[]
+
   restaurantOrders RestaurantOrder[]
 
   createdAt DateTime @default(now())
+
+  @@index([roomId, checkIn, checkOut])
+  @@index([status])
+}
+
+enum ReservationAuditAction {
+  CREATED
+  UPDATED
+  CANCELLED
+  CHECKED_IN
+  CHECKED_OUT
+  NO_SHOW
+  ROOM_CHANGED
+}
+
+model ReservationAudit {
+  id            String                  @id @default(cuid())
+  reservationId String
+
+  action        ReservationAuditAction
+
+  performedById String?
+  reason        String?
+
+  oldValues     Json?
+  newValues     Json?
+
+  createdAt     DateTime                @default(now())
+
+  reservation   Reservation             @relation(fields: [reservationId],references: [id],onDelete: Cascade)
+
+  @@index([reservationId, createdAt])
 }
 
 model Folio {

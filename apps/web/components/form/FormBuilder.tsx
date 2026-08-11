@@ -32,22 +32,6 @@ export default function FormBuilder<T extends Record<string, unknown>>({
   footer,
   values,
 }: Props<T>) {
-  // const defaults = config.reduce((acc, field) => {
-  //   acc[field.name] = field.defaultValue;
-  //   return acc;
-  // }, {} as DefaultValues<T>);
-
-  // const methods = useForm<T>({
-  //   resolver: zodResolver(schema as any),
-
-  //   defaultValues: {
-  //     ...defaults,
-  //     ...values,
-  //   },
-
-  //   mode: "onChange",
-  // });
-
   const defaults = useMemo(
     () =>
       config.reduce((acc, field) => {
@@ -74,6 +58,8 @@ export default function FormBuilder<T extends Record<string, unknown>>({
       });
     }
   }, [values, defaults]);
+
+  console.log(methods.formState.errors);
 
   return (
     <>

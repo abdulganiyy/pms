@@ -2,21 +2,19 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { CustomTable } from "@/components/table/CustomTable";
-import Status from "@/components/Status";
 import axios from "axios";
-import { Edit2, EyeIcon, Plus, Trash2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
 import { createSelectionColumn } from "@/components/table/SelectionColumn";
 import { buildQueryParams } from "@/utils/helper-function";
 import ErrorState from "@/components/ErrorState";
 import { TableSkeleton } from "@/components/table/TableSkeleton";
-import { IconDialog } from "@/components/IconDialog";
 import UserDetails from "@/components/user/UserDetails";
 import { User } from "@/types";
 import EditUser from "@/components/user/EditUser";
 import DeleteUser from "@/components/user/DeleteUser";
 import CreateNewUser from "@/components/user/CreateNewUser";
+import { StatusBadge } from "@/components/StatusBadge";
 
 export default function UserPage() {
   const [pagination, setPagination] = useState({
@@ -48,7 +46,7 @@ export default function UserPage() {
   if (isError) {
     return (
       <ErrorState
-        title="Unable to load users"
+        title={error?.message ?? "Unable to load users"}
         description="Please check your connection and try again."
         onRetry={refetch}
       />
@@ -88,7 +86,13 @@ export default function UserPage() {
                 return (
                   <div className="space-x-1">
                     {roles.map((role) => {
-                      return <Badge key={role.id}>{role.name}</Badge>;
+                      return (
+                        <StatusBadge
+                          key={role.id}
+                          type="role"
+                          status={role.name}
+                        ></StatusBadge>
+                      );
                     })}
                   </div>
                 );
@@ -116,13 +120,6 @@ export default function UserPage() {
                   </>
                 );
               },
-            },
-            {
-              accessorKey: "status",
-              header: "Status",
-              cell: ({ row }) => (
-                <Status title={row.original.status.toLowerCase()} />
-              ),
             },
             {
               header: "Actions",

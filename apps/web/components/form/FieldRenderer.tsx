@@ -50,6 +50,7 @@ export default function FieldRenderer({ field }: Props) {
 
           {field.type === "select" && (
             <Select
+              items={field.options}
               name={rhField.name}
               value={rhField.value}
               onValueChange={rhField.onChange}

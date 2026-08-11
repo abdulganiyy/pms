@@ -2,7 +2,7 @@
 import { cn } from "@/lib/utils";
 import { useDroppable } from "@dnd-kit/core";
 import Reservation from "./Reservation";
-import { ReservationType, RoomType } from "@/types";
+import { ReservationType, Room as RoomType } from "@/types";
 
 type RoomProps = {
   room: RoomType;
@@ -29,23 +29,40 @@ const CalendarCell = ({
 }: Omit<RoomProps, "dates" | "calendarStartDate" | "calendarEndDate"> & {
   day: Date;
 }) => {
-  const handleMouseDown = () => {
+  const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
+    const target = event.target as HTMLElement;
+
+    if (target.closest("[data-reservation]")) {
+      return;
+    }
+
     setIsSelecting(true);
 
     setSelection({
-      roomId: room.id,
+      room: {
+        id: room.id,
+        number: room.number,
+      },
       start: day,
       end: day,
     });
   };
 
-  const handleMouseEnter = () => {
+  const handleMouseEnter = (event: React.MouseEvent<HTMLDivElement>) => {
+    const target = event.target as HTMLElement;
+
+    if (target.closest("[data-reservation]")) {
+      return;
+    }
+
     if (!isSelecting) return;
 
     setSelection((prev: any) => {
       if (!prev) return prev;
 
-      if (prev.roomId !== room.id) return prev;
+      if (prev.room.id !== room.id) {
+        return prev;
+      }
 
       return {
         ...prev,
@@ -54,16 +71,23 @@ const CalendarCell = ({
     });
   };
 
-  const handleMouseUp = () => {
-    setIsSelecting(false);
+  const handleMouseUp = (event: React.MouseEvent<HTMLDivElement>) => {
+    const target = event.target as HTMLElement;
 
+    if (target.closest("[data-reservation]")) {
+      return;
+    }
+
+    if (!isSelecting) return;
+
+    setIsSelecting(false);
     setOpenBookingDialog(true);
   };
 
-  const { setNodeRef } = useDroppable({
+  const { setNodeRef, isOver } = useDroppable({
     id: `${room.id}-${day.toISOString()}`,
     data: {
-      roomId: room.id,
+      room: { id: room.id, number: room.number },
       date: day,
     },
   });
@@ -71,7 +95,11 @@ const CalendarCell = ({
   return (
     <div
       ref={setNodeRef}
-      className={cn("border-l border-t border-[#eee]", isLast && "border-b")}
+      className={cn(
+        "border-l border-t border-[#eee]",
+        isLast && "border-b",
+        isOver && "bg-blue-100",
+      )}
       onMouseDown={handleMouseDown}
       onMouseEnter={handleMouseEnter}
       onMouseUp={handleMouseUp}
@@ -93,13 +121,14 @@ const Room = ({
 }: RoomProps) => {
   return (
     <div
-      className="grid"
+      className="relative grid"
       style={{
         gridTemplateColumns: `120px repeat(${dates.length}, minmax(164px, 1fr))`,
+        gridTemplateRows: "60px",
       }}
     >
       <div className="p-4 flex justify-end items-center text-[#B5B7C0]">
-        Room {room.roomNumber}
+        Room {room.number}
       </div>
       {dates.map((day: any) => (
         <CalendarCell
@@ -116,13 +145,14 @@ const Room = ({
       ))}
       {room.reservations
         .filter((reservation) => {
-          const start = new Date(reservation.start);
-          const end = new Date(reservation.end);
+          const start = new Date(reservation.checkIn);
+          const end = new Date(reservation.checkOut);
 
           return end >= calendarStartDate && start <= calendarEndDate;
         })
         .map((reservation: ReservationType) => (
           <Reservation
+            data-reservation
             key={reservation.id}
             reservation={reservation}
             calendarStartDate={calendarStartDate}

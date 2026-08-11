@@ -65,7 +65,7 @@ export const DashboardNavbar = () => {
           <DropdownMenuTrigger className="inline-flex items-center gap-4">
             <span className="h-auto rounded-full p-1">
               <Avatar className="h-8 w-8">
-                <AvatarImage src="/" />
+                <AvatarImage src={data?.profileImage} />
 
                 <AvatarFallback className="bg-[#FFE6CC] text-black">
                   {data?.fullname?.trim()?.[0]?.toUpperCase() ?? "?"}
@@ -79,28 +79,11 @@ export const DashboardNavbar = () => {
           <DropdownMenuContent align="end" className="w-56">
             <DropdownMenuItem>
               <Link
-                href="/profile"
+                href="/dashboard/profile"
                 className="flex cursor-pointer items-center"
               >
                 <User className="mr-2 h-4 w-4" />
                 Profile
-              </Link>
-            </DropdownMenuItem>
-
-            <DropdownMenuItem>
-              <Link href="/cards" className="flex cursor-pointer items-center">
-                <CreditCard className="mr-2 h-4 w-4" />
-                Cards
-              </Link>
-            </DropdownMenuItem>
-
-            <DropdownMenuItem>
-              <Link
-                href="/security"
-                className="flex cursor-pointer items-center"
-              >
-                <Shield className="mr-2 h-4 w-4" />
-                Security
               </Link>
             </DropdownMenuItem>
 

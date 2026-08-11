@@ -268,13 +268,29 @@ exports.Prisma.ReservationScalarFieldEnum = {
   tax: 'tax',
   discount: 'discount',
   totalAmount: 'totalAmount',
+  cancelledAt: 'cancelledAt',
+  cancelledById: 'cancelledById',
+  cancellationReason: 'cancellationReason',
+  checkedInAt: 'checkedInAt',
+  checkedOutAt: 'checkedOutAt',
+  noShowAt: 'noShowAt',
   checkIn: 'checkIn',
   checkOut: 'checkOut',
   adults: 'adults',
   children: 'children',
-  paymentStatus: 'paymentStatus',
   type: 'type',
   status: 'status',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.ReservationAuditScalarFieldEnum = {
+  id: 'id',
+  reservationId: 'reservationId',
+  action: 'action',
+  performedById: 'performedById',
+  reason: 'reason',
+  oldValues: 'oldValues',
+  newValues: 'newValues',
   createdAt: 'createdAt'
 };
 
@@ -372,6 +388,11 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
+};
+
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
@@ -380,6 +401,12 @@ exports.Prisma.QueryMode = {
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
 };
 exports.UserStatus = exports.$Enums.UserStatus = {
   PENDING_VERIFICATION: 'PENDING_VERIFICATION',
@@ -430,14 +457,6 @@ exports.RoomStatus = exports.$Enums.RoomStatus = {
   BLOCKED: 'BLOCKED'
 };
 
-exports.ReservationPaymentStatus = exports.$Enums.ReservationPaymentStatus = {
-  UNPAID: 'UNPAID',
-  PARTIALLY_PAID: 'PARTIALLY_PAID',
-  PAID: 'PAID',
-  REFUNDED: 'REFUNDED',
-  PARTIALLY_REFUNDED: 'PARTIALLY_REFUNDED'
-};
-
 exports.ReservationType = exports.$Enums.ReservationType = {
   WALK_IN: 'WALK_IN',
   ONLINE: 'ONLINE',
@@ -455,6 +474,16 @@ exports.ReservationStatus = exports.$Enums.ReservationStatus = {
   CHECKED_OUT: 'CHECKED_OUT',
   CANCELLED: 'CANCELLED',
   NO_SHOW: 'NO_SHOW'
+};
+
+exports.ReservationAuditAction = exports.$Enums.ReservationAuditAction = {
+  CREATED: 'CREATED',
+  UPDATED: 'UPDATED',
+  CANCELLED: 'CANCELLED',
+  CHECKED_IN: 'CHECKED_IN',
+  CHECKED_OUT: 'CHECKED_OUT',
+  NO_SHOW: 'NO_SHOW',
+  ROOM_CHANGED: 'ROOM_CHANGED'
 };
 
 exports.FolioTransactionType = exports.$Enums.FolioTransactionType = {
@@ -519,6 +548,7 @@ exports.Prisma.ModelName = {
   Room: 'Room',
   RoomRate: 'RoomRate',
   Reservation: 'Reservation',
+  ReservationAudit: 'ReservationAudit',
   Folio: 'Folio',
   FolioTransaction: 'FolioTransaction',
   Payment: 'Payment',

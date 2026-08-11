@@ -69,6 +69,11 @@ export type RoomRate = $Result.DefaultSelection<Prisma.$RoomRatePayload>
  */
 export type Reservation = $Result.DefaultSelection<Prisma.$ReservationPayload>
 /**
+ * Model ReservationAudit
+ * 
+ */
+export type ReservationAudit = $Result.DefaultSelection<Prisma.$ReservationAuditPayload>
+/**
  * Model Folio
  * 
  */
@@ -133,7 +138,20 @@ export type RolePermission = $Result.DefaultSelection<Prisma.$RolePermissionPayl
  * Enums
  */
 export namespace $Enums {
-  export const Gender: {
+  export const ReservationAuditAction: {
+  CREATED: 'CREATED',
+  UPDATED: 'UPDATED',
+  CANCELLED: 'CANCELLED',
+  CHECKED_IN: 'CHECKED_IN',
+  CHECKED_OUT: 'CHECKED_OUT',
+  NO_SHOW: 'NO_SHOW',
+  ROOM_CHANGED: 'ROOM_CHANGED'
+};
+
+export type ReservationAuditAction = (typeof ReservationAuditAction)[keyof typeof ReservationAuditAction]
+
+
+export const Gender: {
   MALE: 'MALE',
   FEMALE: 'FEMALE',
   OTHER: 'OTHER'
@@ -316,6 +334,10 @@ export const Currency: {
 export type Currency = (typeof Currency)[keyof typeof Currency]
 
 }
+
+export type ReservationAuditAction = $Enums.ReservationAuditAction
+
+export const ReservationAuditAction: typeof $Enums.ReservationAuditAction
 
 export type Gender = $Enums.Gender
 
@@ -607,6 +629,16 @@ export class PrismaClient<
     * ```
     */
   get reservation(): Prisma.ReservationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.reservationAudit`: Exposes CRUD operations for the **ReservationAudit** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ReservationAudits
+    * const reservationAudits = await prisma.reservationAudit.findMany()
+    * ```
+    */
+  get reservationAudit(): Prisma.ReservationAuditDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.folio`: Exposes CRUD operations for the **Folio** model.
@@ -1185,6 +1217,7 @@ export namespace Prisma {
     Room: 'Room',
     RoomRate: 'RoomRate',
     Reservation: 'Reservation',
+    ReservationAudit: 'ReservationAudit',
     Folio: 'Folio',
     FolioTransaction: 'FolioTransaction',
     Payment: 'Payment',
@@ -1212,7 +1245,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "guest" | "guestAddress" | "guestDocument" | "guestEmergencyContact" | "guestPaymentMethod" | "roomType" | "ratePlan" | "room" | "roomRate" | "reservation" | "folio" | "folioTransaction" | "payment" | "restaurantOrder" | "restaurantOrderItem" | "menuItem" | "maintenance" | "company" | "role" | "userRole" | "permission" | "rolePermission"
+      modelProps: "user" | "guest" | "guestAddress" | "guestDocument" | "guestEmergencyContact" | "guestPaymentMethod" | "roomType" | "ratePlan" | "room" | "roomRate" | "reservation" | "reservationAudit" | "folio" | "folioTransaction" | "payment" | "restaurantOrder" | "restaurantOrderItem" | "menuItem" | "maintenance" | "company" | "role" | "userRole" | "permission" | "rolePermission"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2027,6 +2060,80 @@ export namespace Prisma {
           count: {
             args: Prisma.ReservationCountArgs<ExtArgs>
             result: $Utils.Optional<ReservationCountAggregateOutputType> | number
+          }
+        }
+      }
+      ReservationAudit: {
+        payload: Prisma.$ReservationAuditPayload<ExtArgs>
+        fields: Prisma.ReservationAuditFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ReservationAuditFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReservationAuditPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ReservationAuditFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReservationAuditPayload>
+          }
+          findFirst: {
+            args: Prisma.ReservationAuditFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReservationAuditPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ReservationAuditFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReservationAuditPayload>
+          }
+          findMany: {
+            args: Prisma.ReservationAuditFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReservationAuditPayload>[]
+          }
+          create: {
+            args: Prisma.ReservationAuditCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReservationAuditPayload>
+          }
+          createMany: {
+            args: Prisma.ReservationAuditCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ReservationAuditCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReservationAuditPayload>[]
+          }
+          delete: {
+            args: Prisma.ReservationAuditDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReservationAuditPayload>
+          }
+          update: {
+            args: Prisma.ReservationAuditUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReservationAuditPayload>
+          }
+          deleteMany: {
+            args: Prisma.ReservationAuditDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ReservationAuditUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ReservationAuditUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReservationAuditPayload>[]
+          }
+          upsert: {
+            args: Prisma.ReservationAuditUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReservationAuditPayload>
+          }
+          aggregate: {
+            args: Prisma.ReservationAuditAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateReservationAudit>
+          }
+          groupBy: {
+            args: Prisma.ReservationAuditGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ReservationAuditGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ReservationAuditCountArgs<ExtArgs>
+            result: $Utils.Optional<ReservationAuditCountAggregateOutputType> | number
           }
         }
       }
@@ -3052,6 +3159,7 @@ export namespace Prisma {
     room?: RoomOmit
     roomRate?: RoomRateOmit
     reservation?: ReservationOmit
+    reservationAudit?: ReservationAuditOmit
     folio?: FolioOmit
     folioTransaction?: FolioTransactionOmit
     payment?: PaymentOmit
@@ -3393,10 +3501,12 @@ export namespace Prisma {
    */
 
   export type ReservationCountOutputType = {
+    auditLogs: number
     restaurantOrders: number
   }
 
   export type ReservationCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    auditLogs?: boolean | ReservationCountOutputTypeCountAuditLogsArgs
     restaurantOrders?: boolean | ReservationCountOutputTypeCountRestaurantOrdersArgs
   }
 
@@ -3409,6 +3519,13 @@ export namespace Prisma {
      * Select specific fields to fetch from the ReservationCountOutputType
      */
     select?: ReservationCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ReservationCountOutputType without action
+   */
+  export type ReservationCountOutputTypeCountAuditLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReservationAuditWhereInput
   }
 
   /**
@@ -15598,11 +15715,16 @@ export namespace Prisma {
     tax: Decimal | null
     discount: Decimal | null
     totalAmount: Decimal | null
+    cancelledAt: Date | null
+    cancelledById: string | null
+    cancellationReason: string | null
+    checkedInAt: Date | null
+    checkedOutAt: Date | null
+    noShowAt: Date | null
     checkIn: Date | null
     checkOut: Date | null
     adults: number | null
     children: number | null
-    paymentStatus: $Enums.ReservationPaymentStatus | null
     type: $Enums.ReservationType | null
     status: $Enums.ReservationStatus | null
     createdAt: Date | null
@@ -15617,11 +15739,16 @@ export namespace Prisma {
     tax: Decimal | null
     discount: Decimal | null
     totalAmount: Decimal | null
+    cancelledAt: Date | null
+    cancelledById: string | null
+    cancellationReason: string | null
+    checkedInAt: Date | null
+    checkedOutAt: Date | null
+    noShowAt: Date | null
     checkIn: Date | null
     checkOut: Date | null
     adults: number | null
     children: number | null
-    paymentStatus: $Enums.ReservationPaymentStatus | null
     type: $Enums.ReservationType | null
     status: $Enums.ReservationStatus | null
     createdAt: Date | null
@@ -15636,11 +15763,16 @@ export namespace Prisma {
     tax: number
     discount: number
     totalAmount: number
+    cancelledAt: number
+    cancelledById: number
+    cancellationReason: number
+    checkedInAt: number
+    checkedOutAt: number
+    noShowAt: number
     checkIn: number
     checkOut: number
     adults: number
     children: number
-    paymentStatus: number
     type: number
     status: number
     createdAt: number
@@ -15675,11 +15807,16 @@ export namespace Prisma {
     tax?: true
     discount?: true
     totalAmount?: true
+    cancelledAt?: true
+    cancelledById?: true
+    cancellationReason?: true
+    checkedInAt?: true
+    checkedOutAt?: true
+    noShowAt?: true
     checkIn?: true
     checkOut?: true
     adults?: true
     children?: true
-    paymentStatus?: true
     type?: true
     status?: true
     createdAt?: true
@@ -15694,11 +15831,16 @@ export namespace Prisma {
     tax?: true
     discount?: true
     totalAmount?: true
+    cancelledAt?: true
+    cancelledById?: true
+    cancellationReason?: true
+    checkedInAt?: true
+    checkedOutAt?: true
+    noShowAt?: true
     checkIn?: true
     checkOut?: true
     adults?: true
     children?: true
-    paymentStatus?: true
     type?: true
     status?: true
     createdAt?: true
@@ -15713,11 +15855,16 @@ export namespace Prisma {
     tax?: true
     discount?: true
     totalAmount?: true
+    cancelledAt?: true
+    cancelledById?: true
+    cancellationReason?: true
+    checkedInAt?: true
+    checkedOutAt?: true
+    noShowAt?: true
     checkIn?: true
     checkOut?: true
     adults?: true
     children?: true
-    paymentStatus?: true
     type?: true
     status?: true
     createdAt?: true
@@ -15819,11 +15966,16 @@ export namespace Prisma {
     tax: Decimal | null
     discount: Decimal | null
     totalAmount: Decimal
+    cancelledAt: Date | null
+    cancelledById: string | null
+    cancellationReason: string | null
+    checkedInAt: Date | null
+    checkedOutAt: Date | null
+    noShowAt: Date | null
     checkIn: Date
     checkOut: Date
     adults: number
     children: number
-    paymentStatus: $Enums.ReservationPaymentStatus
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt: Date
@@ -15857,11 +16009,16 @@ export namespace Prisma {
     tax?: boolean
     discount?: boolean
     totalAmount?: boolean
+    cancelledAt?: boolean
+    cancelledById?: boolean
+    cancellationReason?: boolean
+    checkedInAt?: boolean
+    checkedOutAt?: boolean
+    noShowAt?: boolean
     checkIn?: boolean
     checkOut?: boolean
     adults?: boolean
     children?: boolean
-    paymentStatus?: boolean
     type?: boolean
     status?: boolean
     createdAt?: boolean
@@ -15869,6 +16026,7 @@ export namespace Prisma {
     room?: boolean | RoomDefaultArgs<ExtArgs>
     roomRate?: boolean | RoomRateDefaultArgs<ExtArgs>
     folio?: boolean | Reservation$folioArgs<ExtArgs>
+    auditLogs?: boolean | Reservation$auditLogsArgs<ExtArgs>
     restaurantOrders?: boolean | Reservation$restaurantOrdersArgs<ExtArgs>
     _count?: boolean | ReservationCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["reservation"]>
@@ -15882,11 +16040,16 @@ export namespace Prisma {
     tax?: boolean
     discount?: boolean
     totalAmount?: boolean
+    cancelledAt?: boolean
+    cancelledById?: boolean
+    cancellationReason?: boolean
+    checkedInAt?: boolean
+    checkedOutAt?: boolean
+    noShowAt?: boolean
     checkIn?: boolean
     checkOut?: boolean
     adults?: boolean
     children?: boolean
-    paymentStatus?: boolean
     type?: boolean
     status?: boolean
     createdAt?: boolean
@@ -15904,11 +16067,16 @@ export namespace Prisma {
     tax?: boolean
     discount?: boolean
     totalAmount?: boolean
+    cancelledAt?: boolean
+    cancelledById?: boolean
+    cancellationReason?: boolean
+    checkedInAt?: boolean
+    checkedOutAt?: boolean
+    noShowAt?: boolean
     checkIn?: boolean
     checkOut?: boolean
     adults?: boolean
     children?: boolean
-    paymentStatus?: boolean
     type?: boolean
     status?: boolean
     createdAt?: boolean
@@ -15926,22 +16094,28 @@ export namespace Prisma {
     tax?: boolean
     discount?: boolean
     totalAmount?: boolean
+    cancelledAt?: boolean
+    cancelledById?: boolean
+    cancellationReason?: boolean
+    checkedInAt?: boolean
+    checkedOutAt?: boolean
+    noShowAt?: boolean
     checkIn?: boolean
     checkOut?: boolean
     adults?: boolean
     children?: boolean
-    paymentStatus?: boolean
     type?: boolean
     status?: boolean
     createdAt?: boolean
   }
 
-  export type ReservationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "guestId" | "roomId" | "roomRateId" | "nightlyRate" | "tax" | "discount" | "totalAmount" | "checkIn" | "checkOut" | "adults" | "children" | "paymentStatus" | "type" | "status" | "createdAt", ExtArgs["result"]["reservation"]>
+  export type ReservationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "guestId" | "roomId" | "roomRateId" | "nightlyRate" | "tax" | "discount" | "totalAmount" | "cancelledAt" | "cancelledById" | "cancellationReason" | "checkedInAt" | "checkedOutAt" | "noShowAt" | "checkIn" | "checkOut" | "adults" | "children" | "type" | "status" | "createdAt", ExtArgs["result"]["reservation"]>
   export type ReservationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     guest?: boolean | GuestDefaultArgs<ExtArgs>
     room?: boolean | RoomDefaultArgs<ExtArgs>
     roomRate?: boolean | RoomRateDefaultArgs<ExtArgs>
     folio?: boolean | Reservation$folioArgs<ExtArgs>
+    auditLogs?: boolean | Reservation$auditLogsArgs<ExtArgs>
     restaurantOrders?: boolean | Reservation$restaurantOrdersArgs<ExtArgs>
     _count?: boolean | ReservationCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -15963,6 +16137,7 @@ export namespace Prisma {
       room: Prisma.$RoomPayload<ExtArgs>
       roomRate: Prisma.$RoomRatePayload<ExtArgs>
       folio: Prisma.$FolioPayload<ExtArgs> | null
+      auditLogs: Prisma.$ReservationAuditPayload<ExtArgs>[]
       restaurantOrders: Prisma.$RestaurantOrderPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -15974,11 +16149,16 @@ export namespace Prisma {
       tax: Prisma.Decimal | null
       discount: Prisma.Decimal | null
       totalAmount: Prisma.Decimal
+      cancelledAt: Date | null
+      cancelledById: string | null
+      cancellationReason: string | null
+      checkedInAt: Date | null
+      checkedOutAt: Date | null
+      noShowAt: Date | null
       checkIn: Date
       checkOut: Date
       adults: number
       children: number
-      paymentStatus: $Enums.ReservationPaymentStatus
       type: $Enums.ReservationType
       status: $Enums.ReservationStatus
       createdAt: Date
@@ -16380,6 +16560,7 @@ export namespace Prisma {
     room<T extends RoomDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RoomDefaultArgs<ExtArgs>>): Prisma__RoomClient<$Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     roomRate<T extends RoomRateDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RoomRateDefaultArgs<ExtArgs>>): Prisma__RoomRateClient<$Result.GetResult<Prisma.$RoomRatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     folio<T extends Reservation$folioArgs<ExtArgs> = {}>(args?: Subset<T, Reservation$folioArgs<ExtArgs>>): Prisma__FolioClient<$Result.GetResult<Prisma.$FolioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    auditLogs<T extends Reservation$auditLogsArgs<ExtArgs> = {}>(args?: Subset<T, Reservation$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReservationAuditPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     restaurantOrders<T extends Reservation$restaurantOrdersArgs<ExtArgs> = {}>(args?: Subset<T, Reservation$restaurantOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RestaurantOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -16418,11 +16599,16 @@ export namespace Prisma {
     readonly tax: FieldRef<"Reservation", 'Decimal'>
     readonly discount: FieldRef<"Reservation", 'Decimal'>
     readonly totalAmount: FieldRef<"Reservation", 'Decimal'>
+    readonly cancelledAt: FieldRef<"Reservation", 'DateTime'>
+    readonly cancelledById: FieldRef<"Reservation", 'String'>
+    readonly cancellationReason: FieldRef<"Reservation", 'String'>
+    readonly checkedInAt: FieldRef<"Reservation", 'DateTime'>
+    readonly checkedOutAt: FieldRef<"Reservation", 'DateTime'>
+    readonly noShowAt: FieldRef<"Reservation", 'DateTime'>
     readonly checkIn: FieldRef<"Reservation", 'DateTime'>
     readonly checkOut: FieldRef<"Reservation", 'DateTime'>
     readonly adults: FieldRef<"Reservation", 'Int'>
     readonly children: FieldRef<"Reservation", 'Int'>
-    readonly paymentStatus: FieldRef<"Reservation", 'ReservationPaymentStatus'>
     readonly type: FieldRef<"Reservation", 'ReservationType'>
     readonly status: FieldRef<"Reservation", 'ReservationStatus'>
     readonly createdAt: FieldRef<"Reservation", 'DateTime'>
@@ -16846,6 +17032,30 @@ export namespace Prisma {
   }
 
   /**
+   * Reservation.auditLogs
+   */
+  export type Reservation$auditLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReservationAudit
+     */
+    select?: ReservationAuditSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReservationAudit
+     */
+    omit?: ReservationAuditOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReservationAuditInclude<ExtArgs> | null
+    where?: ReservationAuditWhereInput
+    orderBy?: ReservationAuditOrderByWithRelationInput | ReservationAuditOrderByWithRelationInput[]
+    cursor?: ReservationAuditWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ReservationAuditScalarFieldEnum | ReservationAuditScalarFieldEnum[]
+  }
+
+  /**
    * Reservation.restaurantOrders
    */
   export type Reservation$restaurantOrdersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -16885,6 +17095,1100 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: ReservationInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ReservationAudit
+   */
+
+  export type AggregateReservationAudit = {
+    _count: ReservationAuditCountAggregateOutputType | null
+    _min: ReservationAuditMinAggregateOutputType | null
+    _max: ReservationAuditMaxAggregateOutputType | null
+  }
+
+  export type ReservationAuditMinAggregateOutputType = {
+    id: string | null
+    reservationId: string | null
+    action: $Enums.ReservationAuditAction | null
+    performedById: string | null
+    reason: string | null
+    createdAt: Date | null
+  }
+
+  export type ReservationAuditMaxAggregateOutputType = {
+    id: string | null
+    reservationId: string | null
+    action: $Enums.ReservationAuditAction | null
+    performedById: string | null
+    reason: string | null
+    createdAt: Date | null
+  }
+
+  export type ReservationAuditCountAggregateOutputType = {
+    id: number
+    reservationId: number
+    action: number
+    performedById: number
+    reason: number
+    oldValues: number
+    newValues: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type ReservationAuditMinAggregateInputType = {
+    id?: true
+    reservationId?: true
+    action?: true
+    performedById?: true
+    reason?: true
+    createdAt?: true
+  }
+
+  export type ReservationAuditMaxAggregateInputType = {
+    id?: true
+    reservationId?: true
+    action?: true
+    performedById?: true
+    reason?: true
+    createdAt?: true
+  }
+
+  export type ReservationAuditCountAggregateInputType = {
+    id?: true
+    reservationId?: true
+    action?: true
+    performedById?: true
+    reason?: true
+    oldValues?: true
+    newValues?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type ReservationAuditAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ReservationAudit to aggregate.
+     */
+    where?: ReservationAuditWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReservationAudits to fetch.
+     */
+    orderBy?: ReservationAuditOrderByWithRelationInput | ReservationAuditOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ReservationAuditWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReservationAudits from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReservationAudits.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ReservationAudits
+    **/
+    _count?: true | ReservationAuditCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ReservationAuditMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ReservationAuditMaxAggregateInputType
+  }
+
+  export type GetReservationAuditAggregateType<T extends ReservationAuditAggregateArgs> = {
+        [P in keyof T & keyof AggregateReservationAudit]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateReservationAudit[P]>
+      : GetScalarType<T[P], AggregateReservationAudit[P]>
+  }
+
+
+
+
+  export type ReservationAuditGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReservationAuditWhereInput
+    orderBy?: ReservationAuditOrderByWithAggregationInput | ReservationAuditOrderByWithAggregationInput[]
+    by: ReservationAuditScalarFieldEnum[] | ReservationAuditScalarFieldEnum
+    having?: ReservationAuditScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ReservationAuditCountAggregateInputType | true
+    _min?: ReservationAuditMinAggregateInputType
+    _max?: ReservationAuditMaxAggregateInputType
+  }
+
+  export type ReservationAuditGroupByOutputType = {
+    id: string
+    reservationId: string
+    action: $Enums.ReservationAuditAction
+    performedById: string | null
+    reason: string | null
+    oldValues: JsonValue | null
+    newValues: JsonValue | null
+    createdAt: Date
+    _count: ReservationAuditCountAggregateOutputType | null
+    _min: ReservationAuditMinAggregateOutputType | null
+    _max: ReservationAuditMaxAggregateOutputType | null
+  }
+
+  type GetReservationAuditGroupByPayload<T extends ReservationAuditGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ReservationAuditGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ReservationAuditGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ReservationAuditGroupByOutputType[P]>
+            : GetScalarType<T[P], ReservationAuditGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ReservationAuditSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reservationId?: boolean
+    action?: boolean
+    performedById?: boolean
+    reason?: boolean
+    oldValues?: boolean
+    newValues?: boolean
+    createdAt?: boolean
+    reservation?: boolean | ReservationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["reservationAudit"]>
+
+  export type ReservationAuditSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reservationId?: boolean
+    action?: boolean
+    performedById?: boolean
+    reason?: boolean
+    oldValues?: boolean
+    newValues?: boolean
+    createdAt?: boolean
+    reservation?: boolean | ReservationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["reservationAudit"]>
+
+  export type ReservationAuditSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reservationId?: boolean
+    action?: boolean
+    performedById?: boolean
+    reason?: boolean
+    oldValues?: boolean
+    newValues?: boolean
+    createdAt?: boolean
+    reservation?: boolean | ReservationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["reservationAudit"]>
+
+  export type ReservationAuditSelectScalar = {
+    id?: boolean
+    reservationId?: boolean
+    action?: boolean
+    performedById?: boolean
+    reason?: boolean
+    oldValues?: boolean
+    newValues?: boolean
+    createdAt?: boolean
+  }
+
+  export type ReservationAuditOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "reservationId" | "action" | "performedById" | "reason" | "oldValues" | "newValues" | "createdAt", ExtArgs["result"]["reservationAudit"]>
+  export type ReservationAuditInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    reservation?: boolean | ReservationDefaultArgs<ExtArgs>
+  }
+  export type ReservationAuditIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    reservation?: boolean | ReservationDefaultArgs<ExtArgs>
+  }
+  export type ReservationAuditIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    reservation?: boolean | ReservationDefaultArgs<ExtArgs>
+  }
+
+  export type $ReservationAuditPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ReservationAudit"
+    objects: {
+      reservation: Prisma.$ReservationPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      reservationId: string
+      action: $Enums.ReservationAuditAction
+      performedById: string | null
+      reason: string | null
+      oldValues: Prisma.JsonValue | null
+      newValues: Prisma.JsonValue | null
+      createdAt: Date
+    }, ExtArgs["result"]["reservationAudit"]>
+    composites: {}
+  }
+
+  type ReservationAuditGetPayload<S extends boolean | null | undefined | ReservationAuditDefaultArgs> = $Result.GetResult<Prisma.$ReservationAuditPayload, S>
+
+  type ReservationAuditCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ReservationAuditFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ReservationAuditCountAggregateInputType | true
+    }
+
+  export interface ReservationAuditDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ReservationAudit'], meta: { name: 'ReservationAudit' } }
+    /**
+     * Find zero or one ReservationAudit that matches the filter.
+     * @param {ReservationAuditFindUniqueArgs} args - Arguments to find a ReservationAudit
+     * @example
+     * // Get one ReservationAudit
+     * const reservationAudit = await prisma.reservationAudit.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ReservationAuditFindUniqueArgs>(args: SelectSubset<T, ReservationAuditFindUniqueArgs<ExtArgs>>): Prisma__ReservationAuditClient<$Result.GetResult<Prisma.$ReservationAuditPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ReservationAudit that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ReservationAuditFindUniqueOrThrowArgs} args - Arguments to find a ReservationAudit
+     * @example
+     * // Get one ReservationAudit
+     * const reservationAudit = await prisma.reservationAudit.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ReservationAuditFindUniqueOrThrowArgs>(args: SelectSubset<T, ReservationAuditFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ReservationAuditClient<$Result.GetResult<Prisma.$ReservationAuditPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ReservationAudit that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReservationAuditFindFirstArgs} args - Arguments to find a ReservationAudit
+     * @example
+     * // Get one ReservationAudit
+     * const reservationAudit = await prisma.reservationAudit.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ReservationAuditFindFirstArgs>(args?: SelectSubset<T, ReservationAuditFindFirstArgs<ExtArgs>>): Prisma__ReservationAuditClient<$Result.GetResult<Prisma.$ReservationAuditPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ReservationAudit that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReservationAuditFindFirstOrThrowArgs} args - Arguments to find a ReservationAudit
+     * @example
+     * // Get one ReservationAudit
+     * const reservationAudit = await prisma.reservationAudit.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ReservationAuditFindFirstOrThrowArgs>(args?: SelectSubset<T, ReservationAuditFindFirstOrThrowArgs<ExtArgs>>): Prisma__ReservationAuditClient<$Result.GetResult<Prisma.$ReservationAuditPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ReservationAudits that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReservationAuditFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ReservationAudits
+     * const reservationAudits = await prisma.reservationAudit.findMany()
+     * 
+     * // Get first 10 ReservationAudits
+     * const reservationAudits = await prisma.reservationAudit.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const reservationAuditWithIdOnly = await prisma.reservationAudit.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ReservationAuditFindManyArgs>(args?: SelectSubset<T, ReservationAuditFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReservationAuditPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ReservationAudit.
+     * @param {ReservationAuditCreateArgs} args - Arguments to create a ReservationAudit.
+     * @example
+     * // Create one ReservationAudit
+     * const ReservationAudit = await prisma.reservationAudit.create({
+     *   data: {
+     *     // ... data to create a ReservationAudit
+     *   }
+     * })
+     * 
+     */
+    create<T extends ReservationAuditCreateArgs>(args: SelectSubset<T, ReservationAuditCreateArgs<ExtArgs>>): Prisma__ReservationAuditClient<$Result.GetResult<Prisma.$ReservationAuditPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ReservationAudits.
+     * @param {ReservationAuditCreateManyArgs} args - Arguments to create many ReservationAudits.
+     * @example
+     * // Create many ReservationAudits
+     * const reservationAudit = await prisma.reservationAudit.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ReservationAuditCreateManyArgs>(args?: SelectSubset<T, ReservationAuditCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ReservationAudits and returns the data saved in the database.
+     * @param {ReservationAuditCreateManyAndReturnArgs} args - Arguments to create many ReservationAudits.
+     * @example
+     * // Create many ReservationAudits
+     * const reservationAudit = await prisma.reservationAudit.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ReservationAudits and only return the `id`
+     * const reservationAuditWithIdOnly = await prisma.reservationAudit.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ReservationAuditCreateManyAndReturnArgs>(args?: SelectSubset<T, ReservationAuditCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReservationAuditPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ReservationAudit.
+     * @param {ReservationAuditDeleteArgs} args - Arguments to delete one ReservationAudit.
+     * @example
+     * // Delete one ReservationAudit
+     * const ReservationAudit = await prisma.reservationAudit.delete({
+     *   where: {
+     *     // ... filter to delete one ReservationAudit
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ReservationAuditDeleteArgs>(args: SelectSubset<T, ReservationAuditDeleteArgs<ExtArgs>>): Prisma__ReservationAuditClient<$Result.GetResult<Prisma.$ReservationAuditPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ReservationAudit.
+     * @param {ReservationAuditUpdateArgs} args - Arguments to update one ReservationAudit.
+     * @example
+     * // Update one ReservationAudit
+     * const reservationAudit = await prisma.reservationAudit.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ReservationAuditUpdateArgs>(args: SelectSubset<T, ReservationAuditUpdateArgs<ExtArgs>>): Prisma__ReservationAuditClient<$Result.GetResult<Prisma.$ReservationAuditPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ReservationAudits.
+     * @param {ReservationAuditDeleteManyArgs} args - Arguments to filter ReservationAudits to delete.
+     * @example
+     * // Delete a few ReservationAudits
+     * const { count } = await prisma.reservationAudit.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ReservationAuditDeleteManyArgs>(args?: SelectSubset<T, ReservationAuditDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ReservationAudits.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReservationAuditUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ReservationAudits
+     * const reservationAudit = await prisma.reservationAudit.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ReservationAuditUpdateManyArgs>(args: SelectSubset<T, ReservationAuditUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ReservationAudits and returns the data updated in the database.
+     * @param {ReservationAuditUpdateManyAndReturnArgs} args - Arguments to update many ReservationAudits.
+     * @example
+     * // Update many ReservationAudits
+     * const reservationAudit = await prisma.reservationAudit.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ReservationAudits and only return the `id`
+     * const reservationAuditWithIdOnly = await prisma.reservationAudit.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ReservationAuditUpdateManyAndReturnArgs>(args: SelectSubset<T, ReservationAuditUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReservationAuditPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ReservationAudit.
+     * @param {ReservationAuditUpsertArgs} args - Arguments to update or create a ReservationAudit.
+     * @example
+     * // Update or create a ReservationAudit
+     * const reservationAudit = await prisma.reservationAudit.upsert({
+     *   create: {
+     *     // ... data to create a ReservationAudit
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ReservationAudit we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ReservationAuditUpsertArgs>(args: SelectSubset<T, ReservationAuditUpsertArgs<ExtArgs>>): Prisma__ReservationAuditClient<$Result.GetResult<Prisma.$ReservationAuditPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ReservationAudits.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReservationAuditCountArgs} args - Arguments to filter ReservationAudits to count.
+     * @example
+     * // Count the number of ReservationAudits
+     * const count = await prisma.reservationAudit.count({
+     *   where: {
+     *     // ... the filter for the ReservationAudits we want to count
+     *   }
+     * })
+    **/
+    count<T extends ReservationAuditCountArgs>(
+      args?: Subset<T, ReservationAuditCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ReservationAuditCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ReservationAudit.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReservationAuditAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ReservationAuditAggregateArgs>(args: Subset<T, ReservationAuditAggregateArgs>): Prisma.PrismaPromise<GetReservationAuditAggregateType<T>>
+
+    /**
+     * Group by ReservationAudit.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReservationAuditGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ReservationAuditGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ReservationAuditGroupByArgs['orderBy'] }
+        : { orderBy?: ReservationAuditGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ReservationAuditGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetReservationAuditGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ReservationAudit model
+   */
+  readonly fields: ReservationAuditFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ReservationAudit.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ReservationAuditClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    reservation<T extends ReservationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ReservationDefaultArgs<ExtArgs>>): Prisma__ReservationClient<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ReservationAudit model
+   */
+  interface ReservationAuditFieldRefs {
+    readonly id: FieldRef<"ReservationAudit", 'String'>
+    readonly reservationId: FieldRef<"ReservationAudit", 'String'>
+    readonly action: FieldRef<"ReservationAudit", 'ReservationAuditAction'>
+    readonly performedById: FieldRef<"ReservationAudit", 'String'>
+    readonly reason: FieldRef<"ReservationAudit", 'String'>
+    readonly oldValues: FieldRef<"ReservationAudit", 'Json'>
+    readonly newValues: FieldRef<"ReservationAudit", 'Json'>
+    readonly createdAt: FieldRef<"ReservationAudit", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ReservationAudit findUnique
+   */
+  export type ReservationAuditFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReservationAudit
+     */
+    select?: ReservationAuditSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReservationAudit
+     */
+    omit?: ReservationAuditOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReservationAuditInclude<ExtArgs> | null
+    /**
+     * Filter, which ReservationAudit to fetch.
+     */
+    where: ReservationAuditWhereUniqueInput
+  }
+
+  /**
+   * ReservationAudit findUniqueOrThrow
+   */
+  export type ReservationAuditFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReservationAudit
+     */
+    select?: ReservationAuditSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReservationAudit
+     */
+    omit?: ReservationAuditOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReservationAuditInclude<ExtArgs> | null
+    /**
+     * Filter, which ReservationAudit to fetch.
+     */
+    where: ReservationAuditWhereUniqueInput
+  }
+
+  /**
+   * ReservationAudit findFirst
+   */
+  export type ReservationAuditFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReservationAudit
+     */
+    select?: ReservationAuditSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReservationAudit
+     */
+    omit?: ReservationAuditOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReservationAuditInclude<ExtArgs> | null
+    /**
+     * Filter, which ReservationAudit to fetch.
+     */
+    where?: ReservationAuditWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReservationAudits to fetch.
+     */
+    orderBy?: ReservationAuditOrderByWithRelationInput | ReservationAuditOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ReservationAudits.
+     */
+    cursor?: ReservationAuditWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReservationAudits from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReservationAudits.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ReservationAudits.
+     */
+    distinct?: ReservationAuditScalarFieldEnum | ReservationAuditScalarFieldEnum[]
+  }
+
+  /**
+   * ReservationAudit findFirstOrThrow
+   */
+  export type ReservationAuditFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReservationAudit
+     */
+    select?: ReservationAuditSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReservationAudit
+     */
+    omit?: ReservationAuditOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReservationAuditInclude<ExtArgs> | null
+    /**
+     * Filter, which ReservationAudit to fetch.
+     */
+    where?: ReservationAuditWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReservationAudits to fetch.
+     */
+    orderBy?: ReservationAuditOrderByWithRelationInput | ReservationAuditOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ReservationAudits.
+     */
+    cursor?: ReservationAuditWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReservationAudits from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReservationAudits.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ReservationAudits.
+     */
+    distinct?: ReservationAuditScalarFieldEnum | ReservationAuditScalarFieldEnum[]
+  }
+
+  /**
+   * ReservationAudit findMany
+   */
+  export type ReservationAuditFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReservationAudit
+     */
+    select?: ReservationAuditSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReservationAudit
+     */
+    omit?: ReservationAuditOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReservationAuditInclude<ExtArgs> | null
+    /**
+     * Filter, which ReservationAudits to fetch.
+     */
+    where?: ReservationAuditWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReservationAudits to fetch.
+     */
+    orderBy?: ReservationAuditOrderByWithRelationInput | ReservationAuditOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ReservationAudits.
+     */
+    cursor?: ReservationAuditWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReservationAudits from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReservationAudits.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ReservationAudits.
+     */
+    distinct?: ReservationAuditScalarFieldEnum | ReservationAuditScalarFieldEnum[]
+  }
+
+  /**
+   * ReservationAudit create
+   */
+  export type ReservationAuditCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReservationAudit
+     */
+    select?: ReservationAuditSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReservationAudit
+     */
+    omit?: ReservationAuditOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReservationAuditInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ReservationAudit.
+     */
+    data: XOR<ReservationAuditCreateInput, ReservationAuditUncheckedCreateInput>
+  }
+
+  /**
+   * ReservationAudit createMany
+   */
+  export type ReservationAuditCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ReservationAudits.
+     */
+    data: ReservationAuditCreateManyInput | ReservationAuditCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ReservationAudit createManyAndReturn
+   */
+  export type ReservationAuditCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReservationAudit
+     */
+    select?: ReservationAuditSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReservationAudit
+     */
+    omit?: ReservationAuditOmit<ExtArgs> | null
+    /**
+     * The data used to create many ReservationAudits.
+     */
+    data: ReservationAuditCreateManyInput | ReservationAuditCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReservationAuditIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ReservationAudit update
+   */
+  export type ReservationAuditUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReservationAudit
+     */
+    select?: ReservationAuditSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReservationAudit
+     */
+    omit?: ReservationAuditOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReservationAuditInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ReservationAudit.
+     */
+    data: XOR<ReservationAuditUpdateInput, ReservationAuditUncheckedUpdateInput>
+    /**
+     * Choose, which ReservationAudit to update.
+     */
+    where: ReservationAuditWhereUniqueInput
+  }
+
+  /**
+   * ReservationAudit updateMany
+   */
+  export type ReservationAuditUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ReservationAudits.
+     */
+    data: XOR<ReservationAuditUpdateManyMutationInput, ReservationAuditUncheckedUpdateManyInput>
+    /**
+     * Filter which ReservationAudits to update
+     */
+    where?: ReservationAuditWhereInput
+    /**
+     * Limit how many ReservationAudits to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ReservationAudit updateManyAndReturn
+   */
+  export type ReservationAuditUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReservationAudit
+     */
+    select?: ReservationAuditSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReservationAudit
+     */
+    omit?: ReservationAuditOmit<ExtArgs> | null
+    /**
+     * The data used to update ReservationAudits.
+     */
+    data: XOR<ReservationAuditUpdateManyMutationInput, ReservationAuditUncheckedUpdateManyInput>
+    /**
+     * Filter which ReservationAudits to update
+     */
+    where?: ReservationAuditWhereInput
+    /**
+     * Limit how many ReservationAudits to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReservationAuditIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ReservationAudit upsert
+   */
+  export type ReservationAuditUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReservationAudit
+     */
+    select?: ReservationAuditSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReservationAudit
+     */
+    omit?: ReservationAuditOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReservationAuditInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ReservationAudit to update in case it exists.
+     */
+    where: ReservationAuditWhereUniqueInput
+    /**
+     * In case the ReservationAudit found by the `where` argument doesn't exist, create a new ReservationAudit with this data.
+     */
+    create: XOR<ReservationAuditCreateInput, ReservationAuditUncheckedCreateInput>
+    /**
+     * In case the ReservationAudit was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ReservationAuditUpdateInput, ReservationAuditUncheckedUpdateInput>
+  }
+
+  /**
+   * ReservationAudit delete
+   */
+  export type ReservationAuditDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReservationAudit
+     */
+    select?: ReservationAuditSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReservationAudit
+     */
+    omit?: ReservationAuditOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReservationAuditInclude<ExtArgs> | null
+    /**
+     * Filter which ReservationAudit to delete.
+     */
+    where: ReservationAuditWhereUniqueInput
+  }
+
+  /**
+   * ReservationAudit deleteMany
+   */
+  export type ReservationAuditDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ReservationAudits to delete
+     */
+    where?: ReservationAuditWhereInput
+    /**
+     * Limit how many ReservationAudits to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ReservationAudit without action
+   */
+  export type ReservationAuditDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReservationAudit
+     */
+    select?: ReservationAuditSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReservationAudit
+     */
+    omit?: ReservationAuditOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReservationAuditInclude<ExtArgs> | null
   }
 
 
@@ -30131,17 +31435,36 @@ export namespace Prisma {
     tax: 'tax',
     discount: 'discount',
     totalAmount: 'totalAmount',
+    cancelledAt: 'cancelledAt',
+    cancelledById: 'cancelledById',
+    cancellationReason: 'cancellationReason',
+    checkedInAt: 'checkedInAt',
+    checkedOutAt: 'checkedOutAt',
+    noShowAt: 'noShowAt',
     checkIn: 'checkIn',
     checkOut: 'checkOut',
     adults: 'adults',
     children: 'children',
-    paymentStatus: 'paymentStatus',
     type: 'type',
     status: 'status',
     createdAt: 'createdAt'
   };
 
   export type ReservationScalarFieldEnum = (typeof ReservationScalarFieldEnum)[keyof typeof ReservationScalarFieldEnum]
+
+
+  export const ReservationAuditScalarFieldEnum: {
+    id: 'id',
+    reservationId: 'reservationId',
+    action: 'action',
+    performedById: 'performedById',
+    reason: 'reason',
+    oldValues: 'oldValues',
+    newValues: 'newValues',
+    createdAt: 'createdAt'
+  };
+
+  export type ReservationAuditScalarFieldEnum = (typeof ReservationAuditScalarFieldEnum)[keyof typeof ReservationAuditScalarFieldEnum]
 
 
   export const FolioScalarFieldEnum: {
@@ -30277,6 +31600,14 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+  export const NullableJsonNullValueInput: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull
+  };
+
+  export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
   export const QueryMode: {
     default: 'default',
     insensitive: 'insensitive'
@@ -30291,6 +31622,15 @@ export namespace Prisma {
   };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   /**
@@ -30446,20 +31786,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'ReservationPaymentStatus'
-   */
-  export type EnumReservationPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReservationPaymentStatus'>
-    
-
-
-  /**
-   * Reference to a field of type 'ReservationPaymentStatus[]'
-   */
-  export type ListEnumReservationPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReservationPaymentStatus[]'>
-    
-
-
-  /**
    * Reference to a field of type 'ReservationType'
    */
   export type EnumReservationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReservationType'>
@@ -30484,6 +31810,34 @@ export namespace Prisma {
    * Reference to a field of type 'ReservationStatus[]'
    */
   export type ListEnumReservationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReservationStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'ReservationAuditAction'
+   */
+  export type EnumReservationAuditActionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReservationAuditAction'>
+    
+
+
+  /**
+   * Reference to a field of type 'ReservationAuditAction[]'
+   */
+  export type ListEnumReservationAuditActionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReservationAuditAction[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -31334,17 +32688,17 @@ export namespace Prisma {
 
   export type RoomWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    number?: string
     AND?: RoomWhereInput | RoomWhereInput[]
     OR?: RoomWhereInput[]
     NOT?: RoomWhereInput | RoomWhereInput[]
-    number?: StringFilter<"Room"> | string
     status?: EnumRoomStatusFilter<"Room"> | $Enums.RoomStatus
     floor?: IntNullableFilter<"Room"> | number | null
     roomTypeId?: StringFilter<"Room"> | string
     roomType?: XOR<RoomTypeScalarRelationFilter, RoomTypeWhereInput>
     reservations?: ReservationListRelationFilter
     maintenance?: MaintenanceListRelationFilter
-  }, "id">
+  }, "id" | "number">
 
   export type RoomOrderByWithAggregationInput = {
     id?: SortOrder
@@ -31460,11 +32814,16 @@ export namespace Prisma {
     tax?: DecimalNullableFilter<"Reservation"> | Decimal | DecimalJsLike | number | string | null
     discount?: DecimalNullableFilter<"Reservation"> | Decimal | DecimalJsLike | number | string | null
     totalAmount?: DecimalFilter<"Reservation"> | Decimal | DecimalJsLike | number | string
+    cancelledAt?: DateTimeNullableFilter<"Reservation"> | Date | string | null
+    cancelledById?: StringNullableFilter<"Reservation"> | string | null
+    cancellationReason?: StringNullableFilter<"Reservation"> | string | null
+    checkedInAt?: DateTimeNullableFilter<"Reservation"> | Date | string | null
+    checkedOutAt?: DateTimeNullableFilter<"Reservation"> | Date | string | null
+    noShowAt?: DateTimeNullableFilter<"Reservation"> | Date | string | null
     checkIn?: DateTimeFilter<"Reservation"> | Date | string
     checkOut?: DateTimeFilter<"Reservation"> | Date | string
     adults?: IntFilter<"Reservation"> | number
     children?: IntFilter<"Reservation"> | number
-    paymentStatus?: EnumReservationPaymentStatusFilter<"Reservation"> | $Enums.ReservationPaymentStatus
     type?: EnumReservationTypeFilter<"Reservation"> | $Enums.ReservationType
     status?: EnumReservationStatusFilter<"Reservation"> | $Enums.ReservationStatus
     createdAt?: DateTimeFilter<"Reservation"> | Date | string
@@ -31472,6 +32831,7 @@ export namespace Prisma {
     room?: XOR<RoomScalarRelationFilter, RoomWhereInput>
     roomRate?: XOR<RoomRateScalarRelationFilter, RoomRateWhereInput>
     folio?: XOR<FolioNullableScalarRelationFilter, FolioWhereInput> | null
+    auditLogs?: ReservationAuditListRelationFilter
     restaurantOrders?: RestaurantOrderListRelationFilter
   }
 
@@ -31484,11 +32844,16 @@ export namespace Prisma {
     tax?: SortOrderInput | SortOrder
     discount?: SortOrderInput | SortOrder
     totalAmount?: SortOrder
+    cancelledAt?: SortOrderInput | SortOrder
+    cancelledById?: SortOrderInput | SortOrder
+    cancellationReason?: SortOrderInput | SortOrder
+    checkedInAt?: SortOrderInput | SortOrder
+    checkedOutAt?: SortOrderInput | SortOrder
+    noShowAt?: SortOrderInput | SortOrder
     checkIn?: SortOrder
     checkOut?: SortOrder
     adults?: SortOrder
     children?: SortOrder
-    paymentStatus?: SortOrder
     type?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
@@ -31496,6 +32861,7 @@ export namespace Prisma {
     room?: RoomOrderByWithRelationInput
     roomRate?: RoomRateOrderByWithRelationInput
     folio?: FolioOrderByWithRelationInput
+    auditLogs?: ReservationAuditOrderByRelationAggregateInput
     restaurantOrders?: RestaurantOrderOrderByRelationAggregateInput
   }
 
@@ -31511,11 +32877,16 @@ export namespace Prisma {
     tax?: DecimalNullableFilter<"Reservation"> | Decimal | DecimalJsLike | number | string | null
     discount?: DecimalNullableFilter<"Reservation"> | Decimal | DecimalJsLike | number | string | null
     totalAmount?: DecimalFilter<"Reservation"> | Decimal | DecimalJsLike | number | string
+    cancelledAt?: DateTimeNullableFilter<"Reservation"> | Date | string | null
+    cancelledById?: StringNullableFilter<"Reservation"> | string | null
+    cancellationReason?: StringNullableFilter<"Reservation"> | string | null
+    checkedInAt?: DateTimeNullableFilter<"Reservation"> | Date | string | null
+    checkedOutAt?: DateTimeNullableFilter<"Reservation"> | Date | string | null
+    noShowAt?: DateTimeNullableFilter<"Reservation"> | Date | string | null
     checkIn?: DateTimeFilter<"Reservation"> | Date | string
     checkOut?: DateTimeFilter<"Reservation"> | Date | string
     adults?: IntFilter<"Reservation"> | number
     children?: IntFilter<"Reservation"> | number
-    paymentStatus?: EnumReservationPaymentStatusFilter<"Reservation"> | $Enums.ReservationPaymentStatus
     type?: EnumReservationTypeFilter<"Reservation"> | $Enums.ReservationType
     status?: EnumReservationStatusFilter<"Reservation"> | $Enums.ReservationStatus
     createdAt?: DateTimeFilter<"Reservation"> | Date | string
@@ -31523,6 +32894,7 @@ export namespace Prisma {
     room?: XOR<RoomScalarRelationFilter, RoomWhereInput>
     roomRate?: XOR<RoomRateScalarRelationFilter, RoomRateWhereInput>
     folio?: XOR<FolioNullableScalarRelationFilter, FolioWhereInput> | null
+    auditLogs?: ReservationAuditListRelationFilter
     restaurantOrders?: RestaurantOrderListRelationFilter
   }, "id">
 
@@ -31535,11 +32907,16 @@ export namespace Prisma {
     tax?: SortOrderInput | SortOrder
     discount?: SortOrderInput | SortOrder
     totalAmount?: SortOrder
+    cancelledAt?: SortOrderInput | SortOrder
+    cancelledById?: SortOrderInput | SortOrder
+    cancellationReason?: SortOrderInput | SortOrder
+    checkedInAt?: SortOrderInput | SortOrder
+    checkedOutAt?: SortOrderInput | SortOrder
+    noShowAt?: SortOrderInput | SortOrder
     checkIn?: SortOrder
     checkOut?: SortOrder
     adults?: SortOrder
     children?: SortOrder
-    paymentStatus?: SortOrder
     type?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
@@ -31562,14 +32939,89 @@ export namespace Prisma {
     tax?: DecimalNullableWithAggregatesFilter<"Reservation"> | Decimal | DecimalJsLike | number | string | null
     discount?: DecimalNullableWithAggregatesFilter<"Reservation"> | Decimal | DecimalJsLike | number | string | null
     totalAmount?: DecimalWithAggregatesFilter<"Reservation"> | Decimal | DecimalJsLike | number | string
+    cancelledAt?: DateTimeNullableWithAggregatesFilter<"Reservation"> | Date | string | null
+    cancelledById?: StringNullableWithAggregatesFilter<"Reservation"> | string | null
+    cancellationReason?: StringNullableWithAggregatesFilter<"Reservation"> | string | null
+    checkedInAt?: DateTimeNullableWithAggregatesFilter<"Reservation"> | Date | string | null
+    checkedOutAt?: DateTimeNullableWithAggregatesFilter<"Reservation"> | Date | string | null
+    noShowAt?: DateTimeNullableWithAggregatesFilter<"Reservation"> | Date | string | null
     checkIn?: DateTimeWithAggregatesFilter<"Reservation"> | Date | string
     checkOut?: DateTimeWithAggregatesFilter<"Reservation"> | Date | string
     adults?: IntWithAggregatesFilter<"Reservation"> | number
     children?: IntWithAggregatesFilter<"Reservation"> | number
-    paymentStatus?: EnumReservationPaymentStatusWithAggregatesFilter<"Reservation"> | $Enums.ReservationPaymentStatus
     type?: EnumReservationTypeWithAggregatesFilter<"Reservation"> | $Enums.ReservationType
     status?: EnumReservationStatusWithAggregatesFilter<"Reservation"> | $Enums.ReservationStatus
     createdAt?: DateTimeWithAggregatesFilter<"Reservation"> | Date | string
+  }
+
+  export type ReservationAuditWhereInput = {
+    AND?: ReservationAuditWhereInput | ReservationAuditWhereInput[]
+    OR?: ReservationAuditWhereInput[]
+    NOT?: ReservationAuditWhereInput | ReservationAuditWhereInput[]
+    id?: StringFilter<"ReservationAudit"> | string
+    reservationId?: StringFilter<"ReservationAudit"> | string
+    action?: EnumReservationAuditActionFilter<"ReservationAudit"> | $Enums.ReservationAuditAction
+    performedById?: StringNullableFilter<"ReservationAudit"> | string | null
+    reason?: StringNullableFilter<"ReservationAudit"> | string | null
+    oldValues?: JsonNullableFilter<"ReservationAudit">
+    newValues?: JsonNullableFilter<"ReservationAudit">
+    createdAt?: DateTimeFilter<"ReservationAudit"> | Date | string
+    reservation?: XOR<ReservationScalarRelationFilter, ReservationWhereInput>
+  }
+
+  export type ReservationAuditOrderByWithRelationInput = {
+    id?: SortOrder
+    reservationId?: SortOrder
+    action?: SortOrder
+    performedById?: SortOrderInput | SortOrder
+    reason?: SortOrderInput | SortOrder
+    oldValues?: SortOrderInput | SortOrder
+    newValues?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    reservation?: ReservationOrderByWithRelationInput
+  }
+
+  export type ReservationAuditWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ReservationAuditWhereInput | ReservationAuditWhereInput[]
+    OR?: ReservationAuditWhereInput[]
+    NOT?: ReservationAuditWhereInput | ReservationAuditWhereInput[]
+    reservationId?: StringFilter<"ReservationAudit"> | string
+    action?: EnumReservationAuditActionFilter<"ReservationAudit"> | $Enums.ReservationAuditAction
+    performedById?: StringNullableFilter<"ReservationAudit"> | string | null
+    reason?: StringNullableFilter<"ReservationAudit"> | string | null
+    oldValues?: JsonNullableFilter<"ReservationAudit">
+    newValues?: JsonNullableFilter<"ReservationAudit">
+    createdAt?: DateTimeFilter<"ReservationAudit"> | Date | string
+    reservation?: XOR<ReservationScalarRelationFilter, ReservationWhereInput>
+  }, "id">
+
+  export type ReservationAuditOrderByWithAggregationInput = {
+    id?: SortOrder
+    reservationId?: SortOrder
+    action?: SortOrder
+    performedById?: SortOrderInput | SortOrder
+    reason?: SortOrderInput | SortOrder
+    oldValues?: SortOrderInput | SortOrder
+    newValues?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: ReservationAuditCountOrderByAggregateInput
+    _max?: ReservationAuditMaxOrderByAggregateInput
+    _min?: ReservationAuditMinOrderByAggregateInput
+  }
+
+  export type ReservationAuditScalarWhereWithAggregatesInput = {
+    AND?: ReservationAuditScalarWhereWithAggregatesInput | ReservationAuditScalarWhereWithAggregatesInput[]
+    OR?: ReservationAuditScalarWhereWithAggregatesInput[]
+    NOT?: ReservationAuditScalarWhereWithAggregatesInput | ReservationAuditScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ReservationAudit"> | string
+    reservationId?: StringWithAggregatesFilter<"ReservationAudit"> | string
+    action?: EnumReservationAuditActionWithAggregatesFilter<"ReservationAudit"> | $Enums.ReservationAuditAction
+    performedById?: StringNullableWithAggregatesFilter<"ReservationAudit"> | string | null
+    reason?: StringNullableWithAggregatesFilter<"ReservationAudit"> | string | null
+    oldValues?: JsonNullableWithAggregatesFilter<"ReservationAudit">
+    newValues?: JsonNullableWithAggregatesFilter<"ReservationAudit">
+    createdAt?: DateTimeWithAggregatesFilter<"ReservationAudit"> | Date | string
   }
 
   export type FolioWhereInput = {
@@ -33254,11 +34706,16 @@ export namespace Prisma {
     tax?: Decimal | DecimalJsLike | number | string | null
     discount?: Decimal | DecimalJsLike | number | string | null
     totalAmount: Decimal | DecimalJsLike | number | string
+    cancelledAt?: Date | string | null
+    cancelledById?: string | null
+    cancellationReason?: string | null
+    checkedInAt?: Date | string | null
+    checkedOutAt?: Date | string | null
+    noShowAt?: Date | string | null
     checkIn: Date | string
     checkOut: Date | string
-    adults: number
-    children: number
-    paymentStatus: $Enums.ReservationPaymentStatus
+    adults?: number
+    children?: number
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt?: Date | string
@@ -33266,6 +34723,7 @@ export namespace Prisma {
     room: RoomCreateNestedOneWithoutReservationsInput
     roomRate: RoomRateCreateNestedOneWithoutReservationsInput
     folio?: FolioCreateNestedOneWithoutReservationInput
+    auditLogs?: ReservationAuditCreateNestedManyWithoutReservationInput
     restaurantOrders?: RestaurantOrderCreateNestedManyWithoutReservationInput
   }
 
@@ -33278,15 +34736,21 @@ export namespace Prisma {
     tax?: Decimal | DecimalJsLike | number | string | null
     discount?: Decimal | DecimalJsLike | number | string | null
     totalAmount: Decimal | DecimalJsLike | number | string
+    cancelledAt?: Date | string | null
+    cancelledById?: string | null
+    cancellationReason?: string | null
+    checkedInAt?: Date | string | null
+    checkedOutAt?: Date | string | null
+    noShowAt?: Date | string | null
     checkIn: Date | string
     checkOut: Date | string
-    adults: number
-    children: number
-    paymentStatus: $Enums.ReservationPaymentStatus
+    adults?: number
+    children?: number
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt?: Date | string
     folio?: FolioUncheckedCreateNestedOneWithoutReservationInput
+    auditLogs?: ReservationAuditUncheckedCreateNestedManyWithoutReservationInput
     restaurantOrders?: RestaurantOrderUncheckedCreateNestedManyWithoutReservationInput
   }
 
@@ -33296,11 +34760,16 @@ export namespace Prisma {
     tax?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
-    paymentStatus?: EnumReservationPaymentStatusFieldUpdateOperationsInput | $Enums.ReservationPaymentStatus
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -33308,6 +34777,7 @@ export namespace Prisma {
     room?: RoomUpdateOneRequiredWithoutReservationsNestedInput
     roomRate?: RoomRateUpdateOneRequiredWithoutReservationsNestedInput
     folio?: FolioUpdateOneWithoutReservationNestedInput
+    auditLogs?: ReservationAuditUpdateManyWithoutReservationNestedInput
     restaurantOrders?: RestaurantOrderUpdateManyWithoutReservationNestedInput
   }
 
@@ -33320,15 +34790,21 @@ export namespace Prisma {
     tax?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
-    paymentStatus?: EnumReservationPaymentStatusFieldUpdateOperationsInput | $Enums.ReservationPaymentStatus
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     folio?: FolioUncheckedUpdateOneWithoutReservationNestedInput
+    auditLogs?: ReservationAuditUncheckedUpdateManyWithoutReservationNestedInput
     restaurantOrders?: RestaurantOrderUncheckedUpdateManyWithoutReservationNestedInput
   }
 
@@ -33341,11 +34817,16 @@ export namespace Prisma {
     tax?: Decimal | DecimalJsLike | number | string | null
     discount?: Decimal | DecimalJsLike | number | string | null
     totalAmount: Decimal | DecimalJsLike | number | string
+    cancelledAt?: Date | string | null
+    cancelledById?: string | null
+    cancellationReason?: string | null
+    checkedInAt?: Date | string | null
+    checkedOutAt?: Date | string | null
+    noShowAt?: Date | string | null
     checkIn: Date | string
     checkOut: Date | string
-    adults: number
-    children: number
-    paymentStatus: $Enums.ReservationPaymentStatus
+    adults?: number
+    children?: number
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt?: Date | string
@@ -33357,11 +34838,16 @@ export namespace Prisma {
     tax?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
-    paymentStatus?: EnumReservationPaymentStatusFieldUpdateOperationsInput | $Enums.ReservationPaymentStatus
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -33376,13 +34862,94 @@ export namespace Prisma {
     tax?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
-    paymentStatus?: EnumReservationPaymentStatusFieldUpdateOperationsInput | $Enums.ReservationPaymentStatus
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReservationAuditCreateInput = {
+    id?: string
+    action: $Enums.ReservationAuditAction
+    performedById?: string | null
+    reason?: string | null
+    oldValues?: NullableJsonNullValueInput | InputJsonValue
+    newValues?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    reservation: ReservationCreateNestedOneWithoutAuditLogsInput
+  }
+
+  export type ReservationAuditUncheckedCreateInput = {
+    id?: string
+    reservationId: string
+    action: $Enums.ReservationAuditAction
+    performedById?: string | null
+    reason?: string | null
+    oldValues?: NullableJsonNullValueInput | InputJsonValue
+    newValues?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type ReservationAuditUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    action?: EnumReservationAuditActionFieldUpdateOperationsInput | $Enums.ReservationAuditAction
+    performedById?: NullableStringFieldUpdateOperationsInput | string | null
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    oldValues?: NullableJsonNullValueInput | InputJsonValue
+    newValues?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reservation?: ReservationUpdateOneRequiredWithoutAuditLogsNestedInput
+  }
+
+  export type ReservationAuditUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reservationId?: StringFieldUpdateOperationsInput | string
+    action?: EnumReservationAuditActionFieldUpdateOperationsInput | $Enums.ReservationAuditAction
+    performedById?: NullableStringFieldUpdateOperationsInput | string | null
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    oldValues?: NullableJsonNullValueInput | InputJsonValue
+    newValues?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReservationAuditCreateManyInput = {
+    id?: string
+    reservationId: string
+    action: $Enums.ReservationAuditAction
+    performedById?: string | null
+    reason?: string | null
+    oldValues?: NullableJsonNullValueInput | InputJsonValue
+    newValues?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type ReservationAuditUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    action?: EnumReservationAuditActionFieldUpdateOperationsInput | $Enums.ReservationAuditAction
+    performedById?: NullableStringFieldUpdateOperationsInput | string | null
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    oldValues?: NullableJsonNullValueInput | InputJsonValue
+    newValues?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReservationAuditUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reservationId?: StringFieldUpdateOperationsInput | string
+    action?: EnumReservationAuditActionFieldUpdateOperationsInput | $Enums.ReservationAuditAction
+    performedById?: NullableStringFieldUpdateOperationsInput | string | null
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    oldValues?: NullableJsonNullValueInput | InputJsonValue
+    newValues?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -34943,13 +36510,6 @@ export namespace Prisma {
     not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
   }
 
-  export type EnumReservationPaymentStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.ReservationPaymentStatus | EnumReservationPaymentStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.ReservationPaymentStatus[] | ListEnumReservationPaymentStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.ReservationPaymentStatus[] | ListEnumReservationPaymentStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumReservationPaymentStatusFilter<$PrismaModel> | $Enums.ReservationPaymentStatus
-  }
-
   export type EnumReservationTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.ReservationType | EnumReservationTypeFieldRefInput<$PrismaModel>
     in?: $Enums.ReservationType[] | ListEnumReservationTypeFieldRefInput<$PrismaModel>
@@ -34979,6 +36539,16 @@ export namespace Prisma {
     isNot?: FolioWhereInput | null
   }
 
+  export type ReservationAuditListRelationFilter = {
+    every?: ReservationAuditWhereInput
+    some?: ReservationAuditWhereInput
+    none?: ReservationAuditWhereInput
+  }
+
+  export type ReservationAuditOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type ReservationCountOrderByAggregateInput = {
     id?: SortOrder
     guestId?: SortOrder
@@ -34988,11 +36558,16 @@ export namespace Prisma {
     tax?: SortOrder
     discount?: SortOrder
     totalAmount?: SortOrder
+    cancelledAt?: SortOrder
+    cancelledById?: SortOrder
+    cancellationReason?: SortOrder
+    checkedInAt?: SortOrder
+    checkedOutAt?: SortOrder
+    noShowAt?: SortOrder
     checkIn?: SortOrder
     checkOut?: SortOrder
     adults?: SortOrder
     children?: SortOrder
-    paymentStatus?: SortOrder
     type?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
@@ -35016,11 +36591,16 @@ export namespace Prisma {
     tax?: SortOrder
     discount?: SortOrder
     totalAmount?: SortOrder
+    cancelledAt?: SortOrder
+    cancelledById?: SortOrder
+    cancellationReason?: SortOrder
+    checkedInAt?: SortOrder
+    checkedOutAt?: SortOrder
+    noShowAt?: SortOrder
     checkIn?: SortOrder
     checkOut?: SortOrder
     adults?: SortOrder
     children?: SortOrder
-    paymentStatus?: SortOrder
     type?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
@@ -35035,11 +36615,16 @@ export namespace Prisma {
     tax?: SortOrder
     discount?: SortOrder
     totalAmount?: SortOrder
+    cancelledAt?: SortOrder
+    cancelledById?: SortOrder
+    cancellationReason?: SortOrder
+    checkedInAt?: SortOrder
+    checkedOutAt?: SortOrder
+    noShowAt?: SortOrder
     checkIn?: SortOrder
     checkOut?: SortOrder
     adults?: SortOrder
     children?: SortOrder
-    paymentStatus?: SortOrder
     type?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
@@ -35070,16 +36655,6 @@ export namespace Prisma {
     _max?: NestedDecimalNullableFilter<$PrismaModel>
   }
 
-  export type EnumReservationPaymentStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.ReservationPaymentStatus | EnumReservationPaymentStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.ReservationPaymentStatus[] | ListEnumReservationPaymentStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.ReservationPaymentStatus[] | ListEnumReservationPaymentStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumReservationPaymentStatusWithAggregatesFilter<$PrismaModel> | $Enums.ReservationPaymentStatus
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumReservationPaymentStatusFilter<$PrismaModel>
-    _max?: NestedEnumReservationPaymentStatusFilter<$PrismaModel>
-  }
-
   export type EnumReservationTypeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.ReservationType | EnumReservationTypeFieldRefInput<$PrismaModel>
     in?: $Enums.ReservationType[] | ListEnumReservationTypeFieldRefInput<$PrismaModel>
@@ -35100,9 +36675,104 @@ export namespace Prisma {
     _max?: NestedEnumReservationStatusFilter<$PrismaModel>
   }
 
+  export type EnumReservationAuditActionFilter<$PrismaModel = never> = {
+    equals?: $Enums.ReservationAuditAction | EnumReservationAuditActionFieldRefInput<$PrismaModel>
+    in?: $Enums.ReservationAuditAction[] | ListEnumReservationAuditActionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ReservationAuditAction[] | ListEnumReservationAuditActionFieldRefInput<$PrismaModel>
+    not?: NestedEnumReservationAuditActionFilter<$PrismaModel> | $Enums.ReservationAuditAction
+  }
+  export type JsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
   export type ReservationScalarRelationFilter = {
     is?: ReservationWhereInput
     isNot?: ReservationWhereInput
+  }
+
+  export type ReservationAuditCountOrderByAggregateInput = {
+    id?: SortOrder
+    reservationId?: SortOrder
+    action?: SortOrder
+    performedById?: SortOrder
+    reason?: SortOrder
+    oldValues?: SortOrder
+    newValues?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ReservationAuditMaxOrderByAggregateInput = {
+    id?: SortOrder
+    reservationId?: SortOrder
+    action?: SortOrder
+    performedById?: SortOrder
+    reason?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ReservationAuditMinOrderByAggregateInput = {
+    id?: SortOrder
+    reservationId?: SortOrder
+    action?: SortOrder
+    performedById?: SortOrder
+    reason?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EnumReservationAuditActionWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ReservationAuditAction | EnumReservationAuditActionFieldRefInput<$PrismaModel>
+    in?: $Enums.ReservationAuditAction[] | ListEnumReservationAuditActionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ReservationAuditAction[] | ListEnumReservationAuditActionFieldRefInput<$PrismaModel>
+    not?: NestedEnumReservationAuditActionWithAggregatesFilter<$PrismaModel> | $Enums.ReservationAuditAction
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumReservationAuditActionFilter<$PrismaModel>
+    _max?: NestedEnumReservationAuditActionFilter<$PrismaModel>
+  }
+  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedJsonNullableFilter<$PrismaModel>
+    _max?: NestedJsonNullableFilter<$PrismaModel>
   }
 
   export type FolioTransactionListRelationFilter = {
@@ -36332,6 +38002,13 @@ export namespace Prisma {
     connect?: FolioWhereUniqueInput
   }
 
+  export type ReservationAuditCreateNestedManyWithoutReservationInput = {
+    create?: XOR<ReservationAuditCreateWithoutReservationInput, ReservationAuditUncheckedCreateWithoutReservationInput> | ReservationAuditCreateWithoutReservationInput[] | ReservationAuditUncheckedCreateWithoutReservationInput[]
+    connectOrCreate?: ReservationAuditCreateOrConnectWithoutReservationInput | ReservationAuditCreateOrConnectWithoutReservationInput[]
+    createMany?: ReservationAuditCreateManyReservationInputEnvelope
+    connect?: ReservationAuditWhereUniqueInput | ReservationAuditWhereUniqueInput[]
+  }
+
   export type RestaurantOrderCreateNestedManyWithoutReservationInput = {
     create?: XOR<RestaurantOrderCreateWithoutReservationInput, RestaurantOrderUncheckedCreateWithoutReservationInput> | RestaurantOrderCreateWithoutReservationInput[] | RestaurantOrderUncheckedCreateWithoutReservationInput[]
     connectOrCreate?: RestaurantOrderCreateOrConnectWithoutReservationInput | RestaurantOrderCreateOrConnectWithoutReservationInput[]
@@ -36343,6 +38020,13 @@ export namespace Prisma {
     create?: XOR<FolioCreateWithoutReservationInput, FolioUncheckedCreateWithoutReservationInput>
     connectOrCreate?: FolioCreateOrConnectWithoutReservationInput
     connect?: FolioWhereUniqueInput
+  }
+
+  export type ReservationAuditUncheckedCreateNestedManyWithoutReservationInput = {
+    create?: XOR<ReservationAuditCreateWithoutReservationInput, ReservationAuditUncheckedCreateWithoutReservationInput> | ReservationAuditCreateWithoutReservationInput[] | ReservationAuditUncheckedCreateWithoutReservationInput[]
+    connectOrCreate?: ReservationAuditCreateOrConnectWithoutReservationInput | ReservationAuditCreateOrConnectWithoutReservationInput[]
+    createMany?: ReservationAuditCreateManyReservationInputEnvelope
+    connect?: ReservationAuditWhereUniqueInput | ReservationAuditWhereUniqueInput[]
   }
 
   export type RestaurantOrderUncheckedCreateNestedManyWithoutReservationInput = {
@@ -36358,10 +38042,6 @@ export namespace Prisma {
     decrement?: Decimal | DecimalJsLike | number | string
     multiply?: Decimal | DecimalJsLike | number | string
     divide?: Decimal | DecimalJsLike | number | string
-  }
-
-  export type EnumReservationPaymentStatusFieldUpdateOperationsInput = {
-    set?: $Enums.ReservationPaymentStatus
   }
 
   export type EnumReservationTypeFieldUpdateOperationsInput = {
@@ -36406,6 +38086,20 @@ export namespace Prisma {
     update?: XOR<XOR<FolioUpdateToOneWithWhereWithoutReservationInput, FolioUpdateWithoutReservationInput>, FolioUncheckedUpdateWithoutReservationInput>
   }
 
+  export type ReservationAuditUpdateManyWithoutReservationNestedInput = {
+    create?: XOR<ReservationAuditCreateWithoutReservationInput, ReservationAuditUncheckedCreateWithoutReservationInput> | ReservationAuditCreateWithoutReservationInput[] | ReservationAuditUncheckedCreateWithoutReservationInput[]
+    connectOrCreate?: ReservationAuditCreateOrConnectWithoutReservationInput | ReservationAuditCreateOrConnectWithoutReservationInput[]
+    upsert?: ReservationAuditUpsertWithWhereUniqueWithoutReservationInput | ReservationAuditUpsertWithWhereUniqueWithoutReservationInput[]
+    createMany?: ReservationAuditCreateManyReservationInputEnvelope
+    set?: ReservationAuditWhereUniqueInput | ReservationAuditWhereUniqueInput[]
+    disconnect?: ReservationAuditWhereUniqueInput | ReservationAuditWhereUniqueInput[]
+    delete?: ReservationAuditWhereUniqueInput | ReservationAuditWhereUniqueInput[]
+    connect?: ReservationAuditWhereUniqueInput | ReservationAuditWhereUniqueInput[]
+    update?: ReservationAuditUpdateWithWhereUniqueWithoutReservationInput | ReservationAuditUpdateWithWhereUniqueWithoutReservationInput[]
+    updateMany?: ReservationAuditUpdateManyWithWhereWithoutReservationInput | ReservationAuditUpdateManyWithWhereWithoutReservationInput[]
+    deleteMany?: ReservationAuditScalarWhereInput | ReservationAuditScalarWhereInput[]
+  }
+
   export type RestaurantOrderUpdateManyWithoutReservationNestedInput = {
     create?: XOR<RestaurantOrderCreateWithoutReservationInput, RestaurantOrderUncheckedCreateWithoutReservationInput> | RestaurantOrderCreateWithoutReservationInput[] | RestaurantOrderUncheckedCreateWithoutReservationInput[]
     connectOrCreate?: RestaurantOrderCreateOrConnectWithoutReservationInput | RestaurantOrderCreateOrConnectWithoutReservationInput[]
@@ -36430,6 +38124,20 @@ export namespace Prisma {
     update?: XOR<XOR<FolioUpdateToOneWithWhereWithoutReservationInput, FolioUpdateWithoutReservationInput>, FolioUncheckedUpdateWithoutReservationInput>
   }
 
+  export type ReservationAuditUncheckedUpdateManyWithoutReservationNestedInput = {
+    create?: XOR<ReservationAuditCreateWithoutReservationInput, ReservationAuditUncheckedCreateWithoutReservationInput> | ReservationAuditCreateWithoutReservationInput[] | ReservationAuditUncheckedCreateWithoutReservationInput[]
+    connectOrCreate?: ReservationAuditCreateOrConnectWithoutReservationInput | ReservationAuditCreateOrConnectWithoutReservationInput[]
+    upsert?: ReservationAuditUpsertWithWhereUniqueWithoutReservationInput | ReservationAuditUpsertWithWhereUniqueWithoutReservationInput[]
+    createMany?: ReservationAuditCreateManyReservationInputEnvelope
+    set?: ReservationAuditWhereUniqueInput | ReservationAuditWhereUniqueInput[]
+    disconnect?: ReservationAuditWhereUniqueInput | ReservationAuditWhereUniqueInput[]
+    delete?: ReservationAuditWhereUniqueInput | ReservationAuditWhereUniqueInput[]
+    connect?: ReservationAuditWhereUniqueInput | ReservationAuditWhereUniqueInput[]
+    update?: ReservationAuditUpdateWithWhereUniqueWithoutReservationInput | ReservationAuditUpdateWithWhereUniqueWithoutReservationInput[]
+    updateMany?: ReservationAuditUpdateManyWithWhereWithoutReservationInput | ReservationAuditUpdateManyWithWhereWithoutReservationInput[]
+    deleteMany?: ReservationAuditScalarWhereInput | ReservationAuditScalarWhereInput[]
+  }
+
   export type RestaurantOrderUncheckedUpdateManyWithoutReservationNestedInput = {
     create?: XOR<RestaurantOrderCreateWithoutReservationInput, RestaurantOrderUncheckedCreateWithoutReservationInput> | RestaurantOrderCreateWithoutReservationInput[] | RestaurantOrderUncheckedCreateWithoutReservationInput[]
     connectOrCreate?: RestaurantOrderCreateOrConnectWithoutReservationInput | RestaurantOrderCreateOrConnectWithoutReservationInput[]
@@ -36442,6 +38150,24 @@ export namespace Prisma {
     update?: RestaurantOrderUpdateWithWhereUniqueWithoutReservationInput | RestaurantOrderUpdateWithWhereUniqueWithoutReservationInput[]
     updateMany?: RestaurantOrderUpdateManyWithWhereWithoutReservationInput | RestaurantOrderUpdateManyWithWhereWithoutReservationInput[]
     deleteMany?: RestaurantOrderScalarWhereInput | RestaurantOrderScalarWhereInput[]
+  }
+
+  export type ReservationCreateNestedOneWithoutAuditLogsInput = {
+    create?: XOR<ReservationCreateWithoutAuditLogsInput, ReservationUncheckedCreateWithoutAuditLogsInput>
+    connectOrCreate?: ReservationCreateOrConnectWithoutAuditLogsInput
+    connect?: ReservationWhereUniqueInput
+  }
+
+  export type EnumReservationAuditActionFieldUpdateOperationsInput = {
+    set?: $Enums.ReservationAuditAction
+  }
+
+  export type ReservationUpdateOneRequiredWithoutAuditLogsNestedInput = {
+    create?: XOR<ReservationCreateWithoutAuditLogsInput, ReservationUncheckedCreateWithoutAuditLogsInput>
+    connectOrCreate?: ReservationCreateOrConnectWithoutAuditLogsInput
+    upsert?: ReservationUpsertWithoutAuditLogsInput
+    connect?: ReservationWhereUniqueInput
+    update?: XOR<XOR<ReservationUpdateToOneWithWhereWithoutAuditLogsInput, ReservationUpdateWithoutAuditLogsInput>, ReservationUncheckedUpdateWithoutAuditLogsInput>
   }
 
   export type ReservationCreateNestedOneWithoutFolioInput = {
@@ -37309,13 +39035,6 @@ export namespace Prisma {
     not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
   }
 
-  export type NestedEnumReservationPaymentStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.ReservationPaymentStatus | EnumReservationPaymentStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.ReservationPaymentStatus[] | ListEnumReservationPaymentStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.ReservationPaymentStatus[] | ListEnumReservationPaymentStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumReservationPaymentStatusFilter<$PrismaModel> | $Enums.ReservationPaymentStatus
-  }
-
   export type NestedEnumReservationTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.ReservationType | EnumReservationTypeFieldRefInput<$PrismaModel>
     in?: $Enums.ReservationType[] | ListEnumReservationTypeFieldRefInput<$PrismaModel>
@@ -37346,16 +39065,6 @@ export namespace Prisma {
     _max?: NestedDecimalNullableFilter<$PrismaModel>
   }
 
-  export type NestedEnumReservationPaymentStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.ReservationPaymentStatus | EnumReservationPaymentStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.ReservationPaymentStatus[] | ListEnumReservationPaymentStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.ReservationPaymentStatus[] | ListEnumReservationPaymentStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumReservationPaymentStatusWithAggregatesFilter<$PrismaModel> | $Enums.ReservationPaymentStatus
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumReservationPaymentStatusFilter<$PrismaModel>
-    _max?: NestedEnumReservationPaymentStatusFilter<$PrismaModel>
-  }
-
   export type NestedEnumReservationTypeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.ReservationType | EnumReservationTypeFieldRefInput<$PrismaModel>
     in?: $Enums.ReservationType[] | ListEnumReservationTypeFieldRefInput<$PrismaModel>
@@ -37374,6 +39083,46 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumReservationStatusFilter<$PrismaModel>
     _max?: NestedEnumReservationStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumReservationAuditActionFilter<$PrismaModel = never> = {
+    equals?: $Enums.ReservationAuditAction | EnumReservationAuditActionFieldRefInput<$PrismaModel>
+    in?: $Enums.ReservationAuditAction[] | ListEnumReservationAuditActionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ReservationAuditAction[] | ListEnumReservationAuditActionFieldRefInput<$PrismaModel>
+    not?: NestedEnumReservationAuditActionFilter<$PrismaModel> | $Enums.ReservationAuditAction
+  }
+
+  export type NestedEnumReservationAuditActionWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ReservationAuditAction | EnumReservationAuditActionFieldRefInput<$PrismaModel>
+    in?: $Enums.ReservationAuditAction[] | ListEnumReservationAuditActionFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ReservationAuditAction[] | ListEnumReservationAuditActionFieldRefInput<$PrismaModel>
+    not?: NestedEnumReservationAuditActionWithAggregatesFilter<$PrismaModel> | $Enums.ReservationAuditAction
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumReservationAuditActionFilter<$PrismaModel>
+    _max?: NestedEnumReservationAuditActionFilter<$PrismaModel>
+  }
+  export type NestedJsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
   export type NestedEnumFolioTransactionTypeFilter<$PrismaModel = never> = {
@@ -37501,17 +39250,23 @@ export namespace Prisma {
     tax?: Decimal | DecimalJsLike | number | string | null
     discount?: Decimal | DecimalJsLike | number | string | null
     totalAmount: Decimal | DecimalJsLike | number | string
+    cancelledAt?: Date | string | null
+    cancelledById?: string | null
+    cancellationReason?: string | null
+    checkedInAt?: Date | string | null
+    checkedOutAt?: Date | string | null
+    noShowAt?: Date | string | null
     checkIn: Date | string
     checkOut: Date | string
-    adults: number
-    children: number
-    paymentStatus: $Enums.ReservationPaymentStatus
+    adults?: number
+    children?: number
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt?: Date | string
     room: RoomCreateNestedOneWithoutReservationsInput
     roomRate: RoomRateCreateNestedOneWithoutReservationsInput
     folio?: FolioCreateNestedOneWithoutReservationInput
+    auditLogs?: ReservationAuditCreateNestedManyWithoutReservationInput
     restaurantOrders?: RestaurantOrderCreateNestedManyWithoutReservationInput
   }
 
@@ -37523,15 +39278,21 @@ export namespace Prisma {
     tax?: Decimal | DecimalJsLike | number | string | null
     discount?: Decimal | DecimalJsLike | number | string | null
     totalAmount: Decimal | DecimalJsLike | number | string
+    cancelledAt?: Date | string | null
+    cancelledById?: string | null
+    cancellationReason?: string | null
+    checkedInAt?: Date | string | null
+    checkedOutAt?: Date | string | null
+    noShowAt?: Date | string | null
     checkIn: Date | string
     checkOut: Date | string
-    adults: number
-    children: number
-    paymentStatus: $Enums.ReservationPaymentStatus
+    adults?: number
+    children?: number
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt?: Date | string
     folio?: FolioUncheckedCreateNestedOneWithoutReservationInput
+    auditLogs?: ReservationAuditUncheckedCreateNestedManyWithoutReservationInput
     restaurantOrders?: RestaurantOrderUncheckedCreateNestedManyWithoutReservationInput
   }
 
@@ -37760,11 +39521,16 @@ export namespace Prisma {
     tax?: DecimalNullableFilter<"Reservation"> | Decimal | DecimalJsLike | number | string | null
     discount?: DecimalNullableFilter<"Reservation"> | Decimal | DecimalJsLike | number | string | null
     totalAmount?: DecimalFilter<"Reservation"> | Decimal | DecimalJsLike | number | string
+    cancelledAt?: DateTimeNullableFilter<"Reservation"> | Date | string | null
+    cancelledById?: StringNullableFilter<"Reservation"> | string | null
+    cancellationReason?: StringNullableFilter<"Reservation"> | string | null
+    checkedInAt?: DateTimeNullableFilter<"Reservation"> | Date | string | null
+    checkedOutAt?: DateTimeNullableFilter<"Reservation"> | Date | string | null
+    noShowAt?: DateTimeNullableFilter<"Reservation"> | Date | string | null
     checkIn?: DateTimeFilter<"Reservation"> | Date | string
     checkOut?: DateTimeFilter<"Reservation"> | Date | string
     adults?: IntFilter<"Reservation"> | number
     children?: IntFilter<"Reservation"> | number
-    paymentStatus?: EnumReservationPaymentStatusFilter<"Reservation"> | $Enums.ReservationPaymentStatus
     type?: EnumReservationTypeFilter<"Reservation"> | $Enums.ReservationType
     status?: EnumReservationStatusFilter<"Reservation"> | $Enums.ReservationStatus
     createdAt?: DateTimeFilter<"Reservation"> | Date | string
@@ -38685,17 +40451,23 @@ export namespace Prisma {
     tax?: Decimal | DecimalJsLike | number | string | null
     discount?: Decimal | DecimalJsLike | number | string | null
     totalAmount: Decimal | DecimalJsLike | number | string
+    cancelledAt?: Date | string | null
+    cancelledById?: string | null
+    cancellationReason?: string | null
+    checkedInAt?: Date | string | null
+    checkedOutAt?: Date | string | null
+    noShowAt?: Date | string | null
     checkIn: Date | string
     checkOut: Date | string
-    adults: number
-    children: number
-    paymentStatus: $Enums.ReservationPaymentStatus
+    adults?: number
+    children?: number
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt?: Date | string
     guest: GuestCreateNestedOneWithoutReservationsInput
     roomRate: RoomRateCreateNestedOneWithoutReservationsInput
     folio?: FolioCreateNestedOneWithoutReservationInput
+    auditLogs?: ReservationAuditCreateNestedManyWithoutReservationInput
     restaurantOrders?: RestaurantOrderCreateNestedManyWithoutReservationInput
   }
 
@@ -38707,15 +40479,21 @@ export namespace Prisma {
     tax?: Decimal | DecimalJsLike | number | string | null
     discount?: Decimal | DecimalJsLike | number | string | null
     totalAmount: Decimal | DecimalJsLike | number | string
+    cancelledAt?: Date | string | null
+    cancelledById?: string | null
+    cancellationReason?: string | null
+    checkedInAt?: Date | string | null
+    checkedOutAt?: Date | string | null
+    noShowAt?: Date | string | null
     checkIn: Date | string
     checkOut: Date | string
-    adults: number
-    children: number
-    paymentStatus: $Enums.ReservationPaymentStatus
+    adults?: number
+    children?: number
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt?: Date | string
     folio?: FolioUncheckedCreateNestedOneWithoutReservationInput
+    auditLogs?: ReservationAuditUncheckedCreateNestedManyWithoutReservationInput
     restaurantOrders?: RestaurantOrderUncheckedCreateNestedManyWithoutReservationInput
   }
 
@@ -38895,17 +40673,23 @@ export namespace Prisma {
     tax?: Decimal | DecimalJsLike | number | string | null
     discount?: Decimal | DecimalJsLike | number | string | null
     totalAmount: Decimal | DecimalJsLike | number | string
+    cancelledAt?: Date | string | null
+    cancelledById?: string | null
+    cancellationReason?: string | null
+    checkedInAt?: Date | string | null
+    checkedOutAt?: Date | string | null
+    noShowAt?: Date | string | null
     checkIn: Date | string
     checkOut: Date | string
-    adults: number
-    children: number
-    paymentStatus: $Enums.ReservationPaymentStatus
+    adults?: number
+    children?: number
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt?: Date | string
     guest: GuestCreateNestedOneWithoutReservationsInput
     room: RoomCreateNestedOneWithoutReservationsInput
     folio?: FolioCreateNestedOneWithoutReservationInput
+    auditLogs?: ReservationAuditCreateNestedManyWithoutReservationInput
     restaurantOrders?: RestaurantOrderCreateNestedManyWithoutReservationInput
   }
 
@@ -38917,15 +40701,21 @@ export namespace Prisma {
     tax?: Decimal | DecimalJsLike | number | string | null
     discount?: Decimal | DecimalJsLike | number | string | null
     totalAmount: Decimal | DecimalJsLike | number | string
+    cancelledAt?: Date | string | null
+    cancelledById?: string | null
+    cancellationReason?: string | null
+    checkedInAt?: Date | string | null
+    checkedOutAt?: Date | string | null
+    noShowAt?: Date | string | null
     checkIn: Date | string
     checkOut: Date | string
-    adults: number
-    children: number
-    paymentStatus: $Enums.ReservationPaymentStatus
+    adults?: number
+    children?: number
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt?: Date | string
     folio?: FolioUncheckedCreateNestedOneWithoutReservationInput
+    auditLogs?: ReservationAuditUncheckedCreateNestedManyWithoutReservationInput
     restaurantOrders?: RestaurantOrderUncheckedCreateNestedManyWithoutReservationInput
   }
 
@@ -39151,6 +40941,36 @@ export namespace Prisma {
     create: XOR<FolioCreateWithoutReservationInput, FolioUncheckedCreateWithoutReservationInput>
   }
 
+  export type ReservationAuditCreateWithoutReservationInput = {
+    id?: string
+    action: $Enums.ReservationAuditAction
+    performedById?: string | null
+    reason?: string | null
+    oldValues?: NullableJsonNullValueInput | InputJsonValue
+    newValues?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type ReservationAuditUncheckedCreateWithoutReservationInput = {
+    id?: string
+    action: $Enums.ReservationAuditAction
+    performedById?: string | null
+    reason?: string | null
+    oldValues?: NullableJsonNullValueInput | InputJsonValue
+    newValues?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type ReservationAuditCreateOrConnectWithoutReservationInput = {
+    where: ReservationAuditWhereUniqueInput
+    create: XOR<ReservationAuditCreateWithoutReservationInput, ReservationAuditUncheckedCreateWithoutReservationInput>
+  }
+
+  export type ReservationAuditCreateManyReservationInputEnvelope = {
+    data: ReservationAuditCreateManyReservationInput | ReservationAuditCreateManyReservationInput[]
+    skipDuplicates?: boolean
+  }
+
   export type RestaurantOrderCreateWithoutReservationInput = {
     id?: string
     roomNumber?: string | null
@@ -39341,6 +41161,36 @@ export namespace Prisma {
     payments?: PaymentUncheckedUpdateManyWithoutFolioNestedInput
   }
 
+  export type ReservationAuditUpsertWithWhereUniqueWithoutReservationInput = {
+    where: ReservationAuditWhereUniqueInput
+    update: XOR<ReservationAuditUpdateWithoutReservationInput, ReservationAuditUncheckedUpdateWithoutReservationInput>
+    create: XOR<ReservationAuditCreateWithoutReservationInput, ReservationAuditUncheckedCreateWithoutReservationInput>
+  }
+
+  export type ReservationAuditUpdateWithWhereUniqueWithoutReservationInput = {
+    where: ReservationAuditWhereUniqueInput
+    data: XOR<ReservationAuditUpdateWithoutReservationInput, ReservationAuditUncheckedUpdateWithoutReservationInput>
+  }
+
+  export type ReservationAuditUpdateManyWithWhereWithoutReservationInput = {
+    where: ReservationAuditScalarWhereInput
+    data: XOR<ReservationAuditUpdateManyMutationInput, ReservationAuditUncheckedUpdateManyWithoutReservationInput>
+  }
+
+  export type ReservationAuditScalarWhereInput = {
+    AND?: ReservationAuditScalarWhereInput | ReservationAuditScalarWhereInput[]
+    OR?: ReservationAuditScalarWhereInput[]
+    NOT?: ReservationAuditScalarWhereInput | ReservationAuditScalarWhereInput[]
+    id?: StringFilter<"ReservationAudit"> | string
+    reservationId?: StringFilter<"ReservationAudit"> | string
+    action?: EnumReservationAuditActionFilter<"ReservationAudit"> | $Enums.ReservationAuditAction
+    performedById?: StringNullableFilter<"ReservationAudit"> | string | null
+    reason?: StringNullableFilter<"ReservationAudit"> | string | null
+    oldValues?: JsonNullableFilter<"ReservationAudit">
+    newValues?: JsonNullableFilter<"ReservationAudit">
+    createdAt?: DateTimeFilter<"ReservationAudit"> | Date | string
+  }
+
   export type RestaurantOrderUpsertWithWhereUniqueWithoutReservationInput = {
     where: RestaurantOrderWhereUniqueInput
     update: XOR<RestaurantOrderUpdateWithoutReservationInput, RestaurantOrderUncheckedUpdateWithoutReservationInput>
@@ -39357,23 +41207,149 @@ export namespace Prisma {
     data: XOR<RestaurantOrderUpdateManyMutationInput, RestaurantOrderUncheckedUpdateManyWithoutReservationInput>
   }
 
-  export type ReservationCreateWithoutFolioInput = {
+  export type ReservationCreateWithoutAuditLogsInput = {
     id?: string
     nightlyRate: Decimal | DecimalJsLike | number | string
     tax?: Decimal | DecimalJsLike | number | string | null
     discount?: Decimal | DecimalJsLike | number | string | null
     totalAmount: Decimal | DecimalJsLike | number | string
+    cancelledAt?: Date | string | null
+    cancelledById?: string | null
+    cancellationReason?: string | null
+    checkedInAt?: Date | string | null
+    checkedOutAt?: Date | string | null
+    noShowAt?: Date | string | null
     checkIn: Date | string
     checkOut: Date | string
-    adults: number
-    children: number
-    paymentStatus: $Enums.ReservationPaymentStatus
+    adults?: number
+    children?: number
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt?: Date | string
     guest: GuestCreateNestedOneWithoutReservationsInput
     room: RoomCreateNestedOneWithoutReservationsInput
     roomRate: RoomRateCreateNestedOneWithoutReservationsInput
+    folio?: FolioCreateNestedOneWithoutReservationInput
+    restaurantOrders?: RestaurantOrderCreateNestedManyWithoutReservationInput
+  }
+
+  export type ReservationUncheckedCreateWithoutAuditLogsInput = {
+    id?: string
+    guestId: string
+    roomId: string
+    roomRateId: string
+    nightlyRate: Decimal | DecimalJsLike | number | string
+    tax?: Decimal | DecimalJsLike | number | string | null
+    discount?: Decimal | DecimalJsLike | number | string | null
+    totalAmount: Decimal | DecimalJsLike | number | string
+    cancelledAt?: Date | string | null
+    cancelledById?: string | null
+    cancellationReason?: string | null
+    checkedInAt?: Date | string | null
+    checkedOutAt?: Date | string | null
+    noShowAt?: Date | string | null
+    checkIn: Date | string
+    checkOut: Date | string
+    adults?: number
+    children?: number
+    type: $Enums.ReservationType
+    status: $Enums.ReservationStatus
+    createdAt?: Date | string
+    folio?: FolioUncheckedCreateNestedOneWithoutReservationInput
+    restaurantOrders?: RestaurantOrderUncheckedCreateNestedManyWithoutReservationInput
+  }
+
+  export type ReservationCreateOrConnectWithoutAuditLogsInput = {
+    where: ReservationWhereUniqueInput
+    create: XOR<ReservationCreateWithoutAuditLogsInput, ReservationUncheckedCreateWithoutAuditLogsInput>
+  }
+
+  export type ReservationUpsertWithoutAuditLogsInput = {
+    update: XOR<ReservationUpdateWithoutAuditLogsInput, ReservationUncheckedUpdateWithoutAuditLogsInput>
+    create: XOR<ReservationCreateWithoutAuditLogsInput, ReservationUncheckedCreateWithoutAuditLogsInput>
+    where?: ReservationWhereInput
+  }
+
+  export type ReservationUpdateToOneWithWhereWithoutAuditLogsInput = {
+    where?: ReservationWhereInput
+    data: XOR<ReservationUpdateWithoutAuditLogsInput, ReservationUncheckedUpdateWithoutAuditLogsInput>
+  }
+
+  export type ReservationUpdateWithoutAuditLogsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nightlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
+    checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
+    adults?: IntFieldUpdateOperationsInput | number
+    children?: IntFieldUpdateOperationsInput | number
+    type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
+    status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    guest?: GuestUpdateOneRequiredWithoutReservationsNestedInput
+    room?: RoomUpdateOneRequiredWithoutReservationsNestedInput
+    roomRate?: RoomRateUpdateOneRequiredWithoutReservationsNestedInput
+    folio?: FolioUpdateOneWithoutReservationNestedInput
+    restaurantOrders?: RestaurantOrderUpdateManyWithoutReservationNestedInput
+  }
+
+  export type ReservationUncheckedUpdateWithoutAuditLogsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    guestId?: StringFieldUpdateOperationsInput | string
+    roomId?: StringFieldUpdateOperationsInput | string
+    roomRateId?: StringFieldUpdateOperationsInput | string
+    nightlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
+    checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
+    adults?: IntFieldUpdateOperationsInput | number
+    children?: IntFieldUpdateOperationsInput | number
+    type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
+    status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    folio?: FolioUncheckedUpdateOneWithoutReservationNestedInput
+    restaurantOrders?: RestaurantOrderUncheckedUpdateManyWithoutReservationNestedInput
+  }
+
+  export type ReservationCreateWithoutFolioInput = {
+    id?: string
+    nightlyRate: Decimal | DecimalJsLike | number | string
+    tax?: Decimal | DecimalJsLike | number | string | null
+    discount?: Decimal | DecimalJsLike | number | string | null
+    totalAmount: Decimal | DecimalJsLike | number | string
+    cancelledAt?: Date | string | null
+    cancelledById?: string | null
+    cancellationReason?: string | null
+    checkedInAt?: Date | string | null
+    checkedOutAt?: Date | string | null
+    noShowAt?: Date | string | null
+    checkIn: Date | string
+    checkOut: Date | string
+    adults?: number
+    children?: number
+    type: $Enums.ReservationType
+    status: $Enums.ReservationStatus
+    createdAt?: Date | string
+    guest: GuestCreateNestedOneWithoutReservationsInput
+    room: RoomCreateNestedOneWithoutReservationsInput
+    roomRate: RoomRateCreateNestedOneWithoutReservationsInput
+    auditLogs?: ReservationAuditCreateNestedManyWithoutReservationInput
     restaurantOrders?: RestaurantOrderCreateNestedManyWithoutReservationInput
   }
 
@@ -39386,14 +41362,20 @@ export namespace Prisma {
     tax?: Decimal | DecimalJsLike | number | string | null
     discount?: Decimal | DecimalJsLike | number | string | null
     totalAmount: Decimal | DecimalJsLike | number | string
+    cancelledAt?: Date | string | null
+    cancelledById?: string | null
+    cancellationReason?: string | null
+    checkedInAt?: Date | string | null
+    checkedOutAt?: Date | string | null
+    noShowAt?: Date | string | null
     checkIn: Date | string
     checkOut: Date | string
-    adults: number
-    children: number
-    paymentStatus: $Enums.ReservationPaymentStatus
+    adults?: number
+    children?: number
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt?: Date | string
+    auditLogs?: ReservationAuditUncheckedCreateNestedManyWithoutReservationInput
     restaurantOrders?: RestaurantOrderUncheckedCreateNestedManyWithoutReservationInput
   }
 
@@ -39465,17 +41447,23 @@ export namespace Prisma {
     tax?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
-    paymentStatus?: EnumReservationPaymentStatusFieldUpdateOperationsInput | $Enums.ReservationPaymentStatus
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     guest?: GuestUpdateOneRequiredWithoutReservationsNestedInput
     room?: RoomUpdateOneRequiredWithoutReservationsNestedInput
     roomRate?: RoomRateUpdateOneRequiredWithoutReservationsNestedInput
+    auditLogs?: ReservationAuditUpdateManyWithoutReservationNestedInput
     restaurantOrders?: RestaurantOrderUpdateManyWithoutReservationNestedInput
   }
 
@@ -39488,14 +41476,20 @@ export namespace Prisma {
     tax?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
-    paymentStatus?: EnumReservationPaymentStatusFieldUpdateOperationsInput | $Enums.ReservationPaymentStatus
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auditLogs?: ReservationAuditUncheckedUpdateManyWithoutReservationNestedInput
     restaurantOrders?: RestaurantOrderUncheckedUpdateManyWithoutReservationNestedInput
   }
 
@@ -39638,11 +41632,16 @@ export namespace Prisma {
     tax?: Decimal | DecimalJsLike | number | string | null
     discount?: Decimal | DecimalJsLike | number | string | null
     totalAmount: Decimal | DecimalJsLike | number | string
+    cancelledAt?: Date | string | null
+    cancelledById?: string | null
+    cancellationReason?: string | null
+    checkedInAt?: Date | string | null
+    checkedOutAt?: Date | string | null
+    noShowAt?: Date | string | null
     checkIn: Date | string
     checkOut: Date | string
-    adults: number
-    children: number
-    paymentStatus: $Enums.ReservationPaymentStatus
+    adults?: number
+    children?: number
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt?: Date | string
@@ -39650,6 +41649,7 @@ export namespace Prisma {
     room: RoomCreateNestedOneWithoutReservationsInput
     roomRate: RoomRateCreateNestedOneWithoutReservationsInput
     folio?: FolioCreateNestedOneWithoutReservationInput
+    auditLogs?: ReservationAuditCreateNestedManyWithoutReservationInput
   }
 
   export type ReservationUncheckedCreateWithoutRestaurantOrdersInput = {
@@ -39661,15 +41661,21 @@ export namespace Prisma {
     tax?: Decimal | DecimalJsLike | number | string | null
     discount?: Decimal | DecimalJsLike | number | string | null
     totalAmount: Decimal | DecimalJsLike | number | string
+    cancelledAt?: Date | string | null
+    cancelledById?: string | null
+    cancellationReason?: string | null
+    checkedInAt?: Date | string | null
+    checkedOutAt?: Date | string | null
+    noShowAt?: Date | string | null
     checkIn: Date | string
     checkOut: Date | string
-    adults: number
-    children: number
-    paymentStatus: $Enums.ReservationPaymentStatus
+    adults?: number
+    children?: number
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt?: Date | string
     folio?: FolioUncheckedCreateNestedOneWithoutReservationInput
+    auditLogs?: ReservationAuditUncheckedCreateNestedManyWithoutReservationInput
   }
 
   export type ReservationCreateOrConnectWithoutRestaurantOrdersInput = {
@@ -39783,11 +41789,16 @@ export namespace Prisma {
     tax?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
-    paymentStatus?: EnumReservationPaymentStatusFieldUpdateOperationsInput | $Enums.ReservationPaymentStatus
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -39795,6 +41806,7 @@ export namespace Prisma {
     room?: RoomUpdateOneRequiredWithoutReservationsNestedInput
     roomRate?: RoomRateUpdateOneRequiredWithoutReservationsNestedInput
     folio?: FolioUpdateOneWithoutReservationNestedInput
+    auditLogs?: ReservationAuditUpdateManyWithoutReservationNestedInput
   }
 
   export type ReservationUncheckedUpdateWithoutRestaurantOrdersInput = {
@@ -39806,15 +41818,21 @@ export namespace Prisma {
     tax?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
-    paymentStatus?: EnumReservationPaymentStatusFieldUpdateOperationsInput | $Enums.ReservationPaymentStatus
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     folio?: FolioUncheckedUpdateOneWithoutReservationNestedInput
+    auditLogs?: ReservationAuditUncheckedUpdateManyWithoutReservationNestedInput
   }
 
   export type GuestUpsertWithoutRestaurantOrdersInput = {
@@ -40631,11 +42649,16 @@ export namespace Prisma {
     tax?: Decimal | DecimalJsLike | number | string | null
     discount?: Decimal | DecimalJsLike | number | string | null
     totalAmount: Decimal | DecimalJsLike | number | string
+    cancelledAt?: Date | string | null
+    cancelledById?: string | null
+    cancellationReason?: string | null
+    checkedInAt?: Date | string | null
+    checkedOutAt?: Date | string | null
+    noShowAt?: Date | string | null
     checkIn: Date | string
     checkOut: Date | string
-    adults: number
-    children: number
-    paymentStatus: $Enums.ReservationPaymentStatus
+    adults?: number
+    children?: number
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt?: Date | string
@@ -40705,17 +42728,23 @@ export namespace Prisma {
     tax?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
-    paymentStatus?: EnumReservationPaymentStatusFieldUpdateOperationsInput | $Enums.ReservationPaymentStatus
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     room?: RoomUpdateOneRequiredWithoutReservationsNestedInput
     roomRate?: RoomRateUpdateOneRequiredWithoutReservationsNestedInput
     folio?: FolioUpdateOneWithoutReservationNestedInput
+    auditLogs?: ReservationAuditUpdateManyWithoutReservationNestedInput
     restaurantOrders?: RestaurantOrderUpdateManyWithoutReservationNestedInput
   }
 
@@ -40727,15 +42756,21 @@ export namespace Prisma {
     tax?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
-    paymentStatus?: EnumReservationPaymentStatusFieldUpdateOperationsInput | $Enums.ReservationPaymentStatus
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     folio?: FolioUncheckedUpdateOneWithoutReservationNestedInput
+    auditLogs?: ReservationAuditUncheckedUpdateManyWithoutReservationNestedInput
     restaurantOrders?: RestaurantOrderUncheckedUpdateManyWithoutReservationNestedInput
   }
 
@@ -40747,11 +42782,16 @@ export namespace Prisma {
     tax?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
-    paymentStatus?: EnumReservationPaymentStatusFieldUpdateOperationsInput | $Enums.ReservationPaymentStatus
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -41057,11 +43097,16 @@ export namespace Prisma {
     tax?: Decimal | DecimalJsLike | number | string | null
     discount?: Decimal | DecimalJsLike | number | string | null
     totalAmount: Decimal | DecimalJsLike | number | string
+    cancelledAt?: Date | string | null
+    cancelledById?: string | null
+    cancellationReason?: string | null
+    checkedInAt?: Date | string | null
+    checkedOutAt?: Date | string | null
+    noShowAt?: Date | string | null
     checkIn: Date | string
     checkOut: Date | string
-    adults: number
-    children: number
-    paymentStatus: $Enums.ReservationPaymentStatus
+    adults?: number
+    children?: number
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt?: Date | string
@@ -41080,17 +43125,23 @@ export namespace Prisma {
     tax?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
-    paymentStatus?: EnumReservationPaymentStatusFieldUpdateOperationsInput | $Enums.ReservationPaymentStatus
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     guest?: GuestUpdateOneRequiredWithoutReservationsNestedInput
     roomRate?: RoomRateUpdateOneRequiredWithoutReservationsNestedInput
     folio?: FolioUpdateOneWithoutReservationNestedInput
+    auditLogs?: ReservationAuditUpdateManyWithoutReservationNestedInput
     restaurantOrders?: RestaurantOrderUpdateManyWithoutReservationNestedInput
   }
 
@@ -41102,15 +43153,21 @@ export namespace Prisma {
     tax?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
-    paymentStatus?: EnumReservationPaymentStatusFieldUpdateOperationsInput | $Enums.ReservationPaymentStatus
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     folio?: FolioUncheckedUpdateOneWithoutReservationNestedInput
+    auditLogs?: ReservationAuditUncheckedUpdateManyWithoutReservationNestedInput
     restaurantOrders?: RestaurantOrderUncheckedUpdateManyWithoutReservationNestedInput
   }
 
@@ -41122,11 +43179,16 @@ export namespace Prisma {
     tax?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
-    paymentStatus?: EnumReservationPaymentStatusFieldUpdateOperationsInput | $Enums.ReservationPaymentStatus
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -41161,11 +43223,16 @@ export namespace Prisma {
     tax?: Decimal | DecimalJsLike | number | string | null
     discount?: Decimal | DecimalJsLike | number | string | null
     totalAmount: Decimal | DecimalJsLike | number | string
+    cancelledAt?: Date | string | null
+    cancelledById?: string | null
+    cancellationReason?: string | null
+    checkedInAt?: Date | string | null
+    checkedOutAt?: Date | string | null
+    noShowAt?: Date | string | null
     checkIn: Date | string
     checkOut: Date | string
-    adults: number
-    children: number
-    paymentStatus: $Enums.ReservationPaymentStatus
+    adults?: number
+    children?: number
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt?: Date | string
@@ -41177,17 +43244,23 @@ export namespace Prisma {
     tax?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
-    paymentStatus?: EnumReservationPaymentStatusFieldUpdateOperationsInput | $Enums.ReservationPaymentStatus
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     guest?: GuestUpdateOneRequiredWithoutReservationsNestedInput
     room?: RoomUpdateOneRequiredWithoutReservationsNestedInput
     folio?: FolioUpdateOneWithoutReservationNestedInput
+    auditLogs?: ReservationAuditUpdateManyWithoutReservationNestedInput
     restaurantOrders?: RestaurantOrderUpdateManyWithoutReservationNestedInput
   }
 
@@ -41199,15 +43272,21 @@ export namespace Prisma {
     tax?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
-    paymentStatus?: EnumReservationPaymentStatusFieldUpdateOperationsInput | $Enums.ReservationPaymentStatus
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     folio?: FolioUncheckedUpdateOneWithoutReservationNestedInput
+    auditLogs?: ReservationAuditUncheckedUpdateManyWithoutReservationNestedInput
     restaurantOrders?: RestaurantOrderUncheckedUpdateManyWithoutReservationNestedInput
   }
 
@@ -41219,14 +43298,29 @@ export namespace Prisma {
     tax?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
-    paymentStatus?: EnumReservationPaymentStatusFieldUpdateOperationsInput | $Enums.ReservationPaymentStatus
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReservationAuditCreateManyReservationInput = {
+    id?: string
+    action: $Enums.ReservationAuditAction
+    performedById?: string | null
+    reason?: string | null
+    oldValues?: NullableJsonNullValueInput | InputJsonValue
+    newValues?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
   }
 
   export type RestaurantOrderCreateManyReservationInput = {
@@ -41239,6 +43333,36 @@ export namespace Prisma {
     tax: Decimal | DecimalJsLike | number | string
     total: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
+  }
+
+  export type ReservationAuditUpdateWithoutReservationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    action?: EnumReservationAuditActionFieldUpdateOperationsInput | $Enums.ReservationAuditAction
+    performedById?: NullableStringFieldUpdateOperationsInput | string | null
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    oldValues?: NullableJsonNullValueInput | InputJsonValue
+    newValues?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReservationAuditUncheckedUpdateWithoutReservationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    action?: EnumReservationAuditActionFieldUpdateOperationsInput | $Enums.ReservationAuditAction
+    performedById?: NullableStringFieldUpdateOperationsInput | string | null
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    oldValues?: NullableJsonNullValueInput | InputJsonValue
+    newValues?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReservationAuditUncheckedUpdateManyWithoutReservationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    action?: EnumReservationAuditActionFieldUpdateOperationsInput | $Enums.ReservationAuditAction
+    performedById?: NullableStringFieldUpdateOperationsInput | string | null
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    oldValues?: NullableJsonNullValueInput | InputJsonValue
+    newValues?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RestaurantOrderUpdateWithoutReservationInput = {

@@ -261,6 +261,24 @@ export class AuthService {
   async me(email: string) {
     const user = await this.userService.getUserByEmail(email);
 
-    return { emailVerified: user?.emailVerified, fullname: user?.fullname };
+    if (!user) throw new BadRequestException('Incorrect credentials');
+
+    const roles = user.userRoles.map((ur) => ur.role.name);
+
+    const permissions = [
+      ...new Set(
+        user.userRoles.flatMap((ur) =>
+          ur.role.rolePermissions.map((rp) => rp.permission.name),
+        ),
+      ),
+    ];
+
+    return {
+      emailVerified: user?.emailVerified,
+      fullname: user?.fullname,
+      profileImage: user?.profileImage,
+      roles,
+      permissions,
+    };
   }
 }

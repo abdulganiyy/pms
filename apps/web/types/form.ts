@@ -17,7 +17,8 @@ export type FieldConfig = {
     | "checkbox"
     | "radio"
     | "file"
-    | "date";
+    | "date"
+    | "number";
 
   placeholder?: string;
 

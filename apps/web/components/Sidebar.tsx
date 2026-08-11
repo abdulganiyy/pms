@@ -11,23 +11,23 @@ import { usePathname } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 export const Sidebar = () => {
-  // const { data: user } = useUser();
+  const { data: user } = useUser();
 
   const pathName = usePathname();
 
-  // if (!user) return null;
+  if (!user) return null;
 
   return (
-    <div className="w-60 border-r-2 border-gray-100 bg-[#f1f2f7] pl-4.25 pr-5.75">
+    <div className="w-68 border-r-2 border-gray-100 bg-[#f1f2f7] pl-4.25 pr-5.75">
       <div className="border-b-2 border-gray-100 px-5.5 flex items-center gap-2 text-[#5A67BA] mt-5 mb-14">
         <Avatar>
-          <AvatarImage src="/logo" />
+          <AvatarImage src="/logo.JPG" />
           <AvatarFallback className="bg-[#5A67BA] text-white">C</AvatarFallback>
         </Avatar>
-        CITY HOTEL
+        CITY WEST HOTEL
       </div>
 
-      {getSidebar(["*"]).map((section) => (
+      {getSidebar(user?.permissions ?? ["*"]).map((section) => (
         <div key={section.label} className="mb-7.75">
           {!section.children && section?.href ? (
             <Link
