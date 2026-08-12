@@ -12,8 +12,6 @@ export const POST = withCheckRoute(
     try {
       const { id } = await params;
 
-      console.log(id);
-
       const response = await api.post(`/reservation/${id}/checkin`);
 
       return Response.json(response.data);

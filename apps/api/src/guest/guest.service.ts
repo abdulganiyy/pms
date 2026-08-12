@@ -1,16 +1,8 @@
-import {
-  Injectable,
-  BadRequestException,
-  InternalServerErrorException,
-  ConflictException,
-} from '@nestjs/common';
+import { Injectable, ConflictException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { Prisma, PrismaClient } from '@prisma/client/extension';
 import { CreateGuestDto } from './dto/create-guest.dto';
 import { UpdateGuestDto } from './dto/update-guest.dto';
 import { GetGuestsDto } from './dto/get-guests.dto';
-
-type PrismaExecutor = PrismaClient | Prisma.TransactionClient;
 
 @Injectable()
 export class GuestService {

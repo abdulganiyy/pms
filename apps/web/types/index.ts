@@ -113,3 +113,65 @@ export type RoomRate = {
   startDate: string;
   endDate: string;
 };
+
+export type Menu = {
+  id: string;
+  name: string;
+  price: number;
+  description?: string;
+};
+
+export type RestaurantOrderItem = {
+  id: string;
+
+  orderId: string;
+
+  menuItemId: string;
+  menuItem?: Menu;
+
+  quantity: number;
+
+  price: number | string;
+  total: number | string;
+};
+
+export type RestaurantOrderStatus =
+  "PENDING" | "PREPARING" | "READY" | "SERVED" | "COMPLETED" | "CANCELLED";
+
+export type RestaurantPaymentStatus =
+  | "UNPAID"
+  | "PARTIALLY_PAID"
+  | "PAID"
+  | "ROOM_CHARGED"
+  | "PARTIALLY_REFUNDED"
+  | "REFUNDED";
+
+export type RestaurantSettlementMethod = "DIRECT_PAYMENT" | "ROOM_CHARGE";
+
+export type RestaurantOrder = {
+  id: string;
+
+  reservation?: ReservationType | null;
+
+  guest?: Guest | null;
+
+  roomNumber?: string | null;
+
+  waiterId: string;
+
+  waiter: any;
+  // status: string;
+  status: RestaurantOrderStatus;
+
+  paymentStatus: RestaurantPaymentStatus;
+
+  settlementMethod?: RestaurantSettlementMethod | null;
+
+  items: RestaurantOrderItem[];
+
+  subtotal: number | string;
+  tax: number | string;
+  total: number;
+
+  createdAt: string;
+};

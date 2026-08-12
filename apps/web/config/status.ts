@@ -14,6 +14,10 @@ type StatusConfig = {
 
 export const statusConfig: Record<StatusType, Record<string, StatusConfig>> = {
   payment: {
+    UNPAID: {
+      label: "Unpaid",
+      className: "bg-yellow-100 text-yellow-800",
+    },
     PENDING: {
       label: "Pending",
       className: "bg-yellow-100 text-yellow-800",
@@ -32,6 +36,14 @@ export const statusConfig: Record<StatusType, Record<string, StatusConfig>> = {
     },
     REFUNDED: {
       label: "Refunded",
+      className: "bg-purple-100 text-purple-800",
+    },
+    PARTIALLY_REFUNDED: {
+      label: "Partially Refunded",
+      className: "bg-purple-100 text-purple-800",
+    },
+    ROOM_CHARGED: {
+      label: "Room Charged",
       className: "bg-purple-100 text-purple-800",
     },
   },
@@ -94,6 +106,11 @@ export const statusConfig: Record<StatusType, Record<string, StatusConfig>> = {
     READY: {
       label: "Ready",
       className: "bg-green-100 text-green-800",
+    },
+    SERVED: { label: "Served", className: "bg-green-100 text-green-800" },
+    CONFIRMED: {
+      label: "Completed",
+      className: "bg-gray-100 text-gray-800",
     },
     COMPLETED: {
       label: "Completed",

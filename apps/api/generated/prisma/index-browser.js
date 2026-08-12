@@ -310,8 +310,23 @@ exports.Prisma.FolioTransactionScalarFieldEnum = {
 exports.Prisma.PaymentScalarFieldEnum = {
   id: 'id',
   folioId: 'folioId',
+  restaurantOrderId: 'restaurantOrderId',
   amount: 'amount',
+  refundedAmount: 'refundedAmount',
+  status: 'status',
+  reference: 'reference',
   method: 'method'
+};
+
+exports.Prisma.PaymentRefundScalarFieldEnum = {
+  id: 'id',
+  paymentId: 'paymentId',
+  amount: 'amount',
+  status: 'status',
+  reason: 'reason',
+  providerReference: 'providerReference',
+  createdAt: 'createdAt',
+  completedAt: 'completedAt'
 };
 
 exports.Prisma.RestaurantOrderScalarFieldEnum = {
@@ -321,9 +336,16 @@ exports.Prisma.RestaurantOrderScalarFieldEnum = {
   roomNumber: 'roomNumber',
   waiterId: 'waiterId',
   status: 'status',
+  paymentStatus: 'paymentStatus',
+  settlementMethod: 'settlementMethod',
   subtotal: 'subtotal',
   tax: 'tax',
   total: 'total',
+  cancelledAt: 'cancelledAt',
+  cancelledById: 'cancelledById',
+  cancellationReason: 'cancellationReason',
+  completedAt: 'completedAt',
+  completedById: 'completedById',
   createdAt: 'createdAt'
 };
 
@@ -339,6 +361,7 @@ exports.Prisma.RestaurantOrderItemScalarFieldEnum = {
 exports.Prisma.MenuItemScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  price: 'price',
   description: 'description'
 };
 
@@ -507,6 +530,12 @@ exports.FolioTransactionType = exports.$Enums.FolioTransactionType = {
   PAYMENT: 'PAYMENT'
 };
 
+exports.PaymentStatus = exports.$Enums.PaymentStatus = {
+  COMPLETED: 'COMPLETED',
+  REFUNDED: 'REFUNDED',
+  PARTIALLY_REFUNDED: 'PARTIALLY_REFUNDED'
+};
+
 exports.PaymentMethod = exports.$Enums.PaymentMethod = {
   CASH: 'CASH',
   CARD: 'CARD',
@@ -521,13 +550,33 @@ exports.PaymentMethod = exports.$Enums.PaymentMethod = {
   VOUCHER: 'VOUCHER'
 };
 
+exports.PaymentRefundStatus = exports.$Enums.PaymentRefundStatus = {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED'
+};
+
 exports.RestaurantOrderStatus = exports.$Enums.RestaurantOrderStatus = {
   PENDING: 'PENDING',
-  CONFIRMED: 'CONFIRMED',
   PREPARING: 'PREPARING',
   READY: 'READY',
   SERVED: 'SERVED',
+  COMPLETED: 'COMPLETED',
   CANCELLED: 'CANCELLED'
+};
+
+exports.RestaurantPaymentStatus = exports.$Enums.RestaurantPaymentStatus = {
+  UNPAID: 'UNPAID',
+  PARTIALLY_PAID: 'PARTIALLY_PAID',
+  PAID: 'PAID',
+  ROOM_CHARGED: 'ROOM_CHARGED',
+  REFUNDED: 'REFUNDED',
+  PARTIALLY_REFUNDED: 'PARTIALLY_REFUNDED'
+};
+
+exports.RestaurantSettlementMethod = exports.$Enums.RestaurantSettlementMethod = {
+  DIRECT_PAYMENT: 'DIRECT_PAYMENT',
+  ROOM_CHARGE: 'ROOM_CHARGE'
 };
 
 exports.RoleName = exports.$Enums.RoleName = {
@@ -552,6 +601,7 @@ exports.Prisma.ModelName = {
   Folio: 'Folio',
   FolioTransaction: 'FolioTransaction',
   Payment: 'Payment',
+  PaymentRefund: 'PaymentRefund',
   RestaurantOrder: 'RestaurantOrder',
   RestaurantOrderItem: 'RestaurantOrderItem',
   MenuItem: 'MenuItem',

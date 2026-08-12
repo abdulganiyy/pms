@@ -138,3 +138,29 @@ export const createFolioTransactionSchema = z.object({
   amount: z.coerce.number().min(0, "Amount cannot be negative"),
   description: z.string().min(1, "Description is required"),
 });
+
+export const createMenuSchema = z.object({
+  name: z.string().min(1, "Menu name is required"),
+  description: z.string().optional(),
+  price: z.coerce.number().int().min(1),
+});
+
+export const createRestaurantOrderSchema = z.object({
+  reservationId: z.string().optional(),
+
+  guestId: z.string().optional(),
+
+  // roomNumber: z.string().optional(),
+
+  // waiterId: z.string().min(1, "Waiter is required"),
+
+  items: z
+    .array(
+      z.object({
+        menuItemId: z.string().min(1, "Menu item is required"),
+
+        quantity: z.number().int().min(1, "Quantity must be at least 1"),
+      }),
+    )
+    .min(1, "At least one menu item is required"),
+});

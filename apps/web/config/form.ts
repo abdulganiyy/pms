@@ -1,4 +1,4 @@
-import { FieldConfig } from "@/types";
+import { FieldConfig, FieldOption, Guest, Menu } from "@/types";
 
 export const registerFieldConfig: FieldConfig[] = [
   {
@@ -413,5 +413,92 @@ export const createFolioTransactionFieldConfig: FieldConfig[] = [
     label: "Description",
     type: "textarea",
     fullWidth: true,
+  },
+];
+
+export const createMenuFieldConfig: FieldConfig[] = [
+  {
+    name: "name",
+    label: "Name",
+    type: "text",
+  },
+  {
+    name: "description",
+    label: "Description",
+    type: "text",
+  },
+
+  {
+    name: "price",
+    label: "Price",
+    type: "number",
+  },
+];
+
+export const createRestaurantOrderFieldConfig = ({
+  menuItems,
+  guestOptions,
+  reservationOptions,
+}: {
+  menuItems: Menu[];
+  guestOptions: FieldOption[];
+  reservationOptions: FieldOption[];
+}): FieldConfig[] => [
+  // {
+  //   name: "waiterId",
+  //   label: "Waiter",
+  //   type: "searchable-select",
+  //   placeholder: "Search waiter...",
+  //   options: waiterOptions,
+  // },
+  {
+    name: "reservationId",
+    label: "Reservation",
+    type: "select",
+    placeholder: "Select reservation",
+    options: reservationOptions,
+  },
+
+  {
+    name: "guestId",
+    label: "Guest",
+    type: "select",
+    placeholder: "Select guest",
+    options: guestOptions,
+  },
+
+  // {
+  //   name: "roomNumber",
+  //   label: "Room Number",
+  //   type: "text",
+  //   placeholder: "Enter room number",
+  // },
+
+  {
+    name: "items",
+    label: "Order Items",
+    type: "array",
+
+    fields: [
+      {
+        name: "menuItemId",
+        label: "Menu Item",
+        type: "select",
+        placeholder: "Search menu item...",
+
+        options: menuItems.map((menuItem) => ({
+          label: menuItem.name,
+          value: menuItem.id,
+        })),
+      },
+
+      {
+        name: "quantity",
+        label: "Quantity",
+        type: "number",
+        placeholder: "1",
+        min: 1,
+      },
+    ],
   },
 ];

@@ -375,13 +375,57 @@ model Payment {
 
     id String @id @default(cuid())
 
-    folioId String
+    folioId String?
 
-    folio Folio  @relation(fields:[folioId], references:[id])
+    folio Folio?  @relation(fields:[folioId], references:[id])
+
+    restaurantOrderId String?
+
+    restaurantOrder RestaurantOrder? @relation(fields: [restaurantOrderId],references: [id])
 
     amount Decimal
 
+    refundedAmount Decimal @default(0)
+
+    status PaymentStatus @default(COMPLETED)
+
+    reference String?
+
     method PaymentMethod
+
+    refunds PaymentRefund[]
+
+}
+
+enum PaymentRefundStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
+
+model PaymentRefund {
+  id String @id @default(cuid())
+
+  paymentId String
+
+  payment Payment @relation(fields: [paymentId], references: [id])
+
+  amount Decimal
+
+  status PaymentRefundStatus @default(PENDING)
+
+  reason String?
+
+  providerReference String?
+
+  createdAt DateTime @default(now())
+
+  completedAt DateTime?
+}
+
+enum RestaurantSettlementMethod {
+  DIRECT_PAYMENT
+  ROOM_CHARGE
 }
 
 model RestaurantOrder {
@@ -400,15 +444,28 @@ model RestaurantOrder {
 
   waiterId String
 
-  status RestaurantOrderStatus
+  status RestaurantOrderStatus 
+
+  paymentStatus RestaurantPaymentStatus @default(UNPAID)
+
+  settlementMethod RestaurantSettlementMethod?
 
   items RestaurantOrderItem[]
+
+  payments Payment[]
 
   subtotal Decimal
 
   tax Decimal
 
   total Decimal
+
+  cancelledAt DateTime?
+  cancelledById String?
+  cancellationReason String?
+
+  completedAt DateTime?
+  completedById String?
 
   createdAt DateTime @default(now())
 }
@@ -438,6 +495,9 @@ model MenuItem {
   id String @id @default(cuid())
 
   name String
+
+  price       Decimal
+
 
   description String?
 
@@ -557,6 +617,12 @@ enum FolioTransactionType {
   PAYMENT
 }
 
+enum PaymentStatus {
+  COMPLETED
+  REFUNDED
+  PARTIALLY_REFUNDED
+}
+
 enum PaymentMethod {
   CASH
   CARD
@@ -575,18 +641,20 @@ enum PaymentMethod {
 
 enum RestaurantOrderStatus {
   PENDING
-  CONFIRMED
   PREPARING
   READY
   SERVED
+  COMPLETED
   CANCELLED
 }
 
-enum RestaurantBillingStatus {
-  UNBILLED
-  CHARGED_TO_ROOM
+enum RestaurantPaymentStatus {
+  UNPAID
+  PARTIALLY_PAID
   PAID
+  ROOM_CHARGED
   REFUNDED
+  PARTIALLY_REFUNDED
 }
 
 model Role {

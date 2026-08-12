@@ -26,13 +26,16 @@ import {
 import { FileUpload } from "./FileUpload";
 import { DatePicker } from "../DatePicker";
 import { cloudinaryUploader } from "@/lib/upload";
+import { ArrayField } from "./ArrayField";
+import { SearchableSelect } from "./SearchableSelect";
+import { MultiSelectField } from "./MultiSelect";
 
 type Props = {
   field: FieldConfig;
 };
 
 export default function FieldRenderer({ field }: Props) {
-  const { control } = useFormContext();
+  const { control, formState, register } = useFormContext();
 
   return (
     <Controller
@@ -151,6 +154,22 @@ export default function FieldRenderer({ field }: Props) {
             <DatePicker value={rhField.value} onChange={rhField.onChange} />
           )}
 
+          {field.type === "array" && (
+            <ArrayField
+              field={field}
+              control={control}
+              register={register}
+              errors={formState.errors}
+            />
+          )}
+
+          {field.type === "searchable-select" && (
+            <SearchableSelect field={field} control={control} />
+          )}
+          {field.type === "multi-select" && (
+            <MultiSelectField field={field} control={control} />
+          )}
+
           {![
             "textarea",
             "select",
@@ -158,6 +177,9 @@ export default function FieldRenderer({ field }: Props) {
             "radio",
             "file",
             "date",
+            "array",
+            "multi-select",
+            "searchable-select",
           ].includes(field.type) && (
             <Input
               {...rhField}

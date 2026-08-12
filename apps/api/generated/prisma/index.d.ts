@@ -89,6 +89,11 @@ export type FolioTransaction = $Result.DefaultSelection<Prisma.$FolioTransaction
  */
 export type Payment = $Result.DefaultSelection<Prisma.$PaymentPayload>
 /**
+ * Model PaymentRefund
+ * 
+ */
+export type PaymentRefund = $Result.DefaultSelection<Prisma.$PaymentRefundPayload>
+/**
  * Model RestaurantOrder
  * 
  */
@@ -149,6 +154,23 @@ export namespace $Enums {
 };
 
 export type ReservationAuditAction = (typeof ReservationAuditAction)[keyof typeof ReservationAuditAction]
+
+
+export const PaymentRefundStatus: {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED'
+};
+
+export type PaymentRefundStatus = (typeof PaymentRefundStatus)[keyof typeof PaymentRefundStatus]
+
+
+export const RestaurantSettlementMethod: {
+  DIRECT_PAYMENT: 'DIRECT_PAYMENT',
+  ROOM_CHARGE: 'ROOM_CHARGE'
+};
+
+export type RestaurantSettlementMethod = (typeof RestaurantSettlementMethod)[keyof typeof RestaurantSettlementMethod]
 
 
 export const Gender: {
@@ -267,6 +289,15 @@ export const FolioTransactionType: {
 export type FolioTransactionType = (typeof FolioTransactionType)[keyof typeof FolioTransactionType]
 
 
+export const PaymentStatus: {
+  COMPLETED: 'COMPLETED',
+  REFUNDED: 'REFUNDED',
+  PARTIALLY_REFUNDED: 'PARTIALLY_REFUNDED'
+};
+
+export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
+
+
 export const PaymentMethod: {
   CASH: 'CASH',
   CARD: 'CARD',
@@ -286,24 +317,26 @@ export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod]
 
 export const RestaurantOrderStatus: {
   PENDING: 'PENDING',
-  CONFIRMED: 'CONFIRMED',
   PREPARING: 'PREPARING',
   READY: 'READY',
   SERVED: 'SERVED',
+  COMPLETED: 'COMPLETED',
   CANCELLED: 'CANCELLED'
 };
 
 export type RestaurantOrderStatus = (typeof RestaurantOrderStatus)[keyof typeof RestaurantOrderStatus]
 
 
-export const RestaurantBillingStatus: {
-  UNBILLED: 'UNBILLED',
-  CHARGED_TO_ROOM: 'CHARGED_TO_ROOM',
+export const RestaurantPaymentStatus: {
+  UNPAID: 'UNPAID',
+  PARTIALLY_PAID: 'PARTIALLY_PAID',
   PAID: 'PAID',
-  REFUNDED: 'REFUNDED'
+  ROOM_CHARGED: 'ROOM_CHARGED',
+  REFUNDED: 'REFUNDED',
+  PARTIALLY_REFUNDED: 'PARTIALLY_REFUNDED'
 };
 
-export type RestaurantBillingStatus = (typeof RestaurantBillingStatus)[keyof typeof RestaurantBillingStatus]
+export type RestaurantPaymentStatus = (typeof RestaurantPaymentStatus)[keyof typeof RestaurantPaymentStatus]
 
 
 export const RoleName: {
@@ -338,6 +371,14 @@ export type Currency = (typeof Currency)[keyof typeof Currency]
 export type ReservationAuditAction = $Enums.ReservationAuditAction
 
 export const ReservationAuditAction: typeof $Enums.ReservationAuditAction
+
+export type PaymentRefundStatus = $Enums.PaymentRefundStatus
+
+export const PaymentRefundStatus: typeof $Enums.PaymentRefundStatus
+
+export type RestaurantSettlementMethod = $Enums.RestaurantSettlementMethod
+
+export const RestaurantSettlementMethod: typeof $Enums.RestaurantSettlementMethod
 
 export type Gender = $Enums.Gender
 
@@ -375,6 +416,10 @@ export type FolioTransactionType = $Enums.FolioTransactionType
 
 export const FolioTransactionType: typeof $Enums.FolioTransactionType
 
+export type PaymentStatus = $Enums.PaymentStatus
+
+export const PaymentStatus: typeof $Enums.PaymentStatus
+
 export type PaymentMethod = $Enums.PaymentMethod
 
 export const PaymentMethod: typeof $Enums.PaymentMethod
@@ -383,9 +428,9 @@ export type RestaurantOrderStatus = $Enums.RestaurantOrderStatus
 
 export const RestaurantOrderStatus: typeof $Enums.RestaurantOrderStatus
 
-export type RestaurantBillingStatus = $Enums.RestaurantBillingStatus
+export type RestaurantPaymentStatus = $Enums.RestaurantPaymentStatus
 
-export const RestaurantBillingStatus: typeof $Enums.RestaurantBillingStatus
+export const RestaurantPaymentStatus: typeof $Enums.RestaurantPaymentStatus
 
 export type RoleName = $Enums.RoleName
 
@@ -669,6 +714,16 @@ export class PrismaClient<
     * ```
     */
   get payment(): Prisma.PaymentDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.paymentRefund`: Exposes CRUD operations for the **PaymentRefund** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PaymentRefunds
+    * const paymentRefunds = await prisma.paymentRefund.findMany()
+    * ```
+    */
+  get paymentRefund(): Prisma.PaymentRefundDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.restaurantOrder`: Exposes CRUD operations for the **RestaurantOrder** model.
@@ -1221,6 +1276,7 @@ export namespace Prisma {
     Folio: 'Folio',
     FolioTransaction: 'FolioTransaction',
     Payment: 'Payment',
+    PaymentRefund: 'PaymentRefund',
     RestaurantOrder: 'RestaurantOrder',
     RestaurantOrderItem: 'RestaurantOrderItem',
     MenuItem: 'MenuItem',
@@ -1245,7 +1301,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "guest" | "guestAddress" | "guestDocument" | "guestEmergencyContact" | "guestPaymentMethod" | "roomType" | "ratePlan" | "room" | "roomRate" | "reservation" | "reservationAudit" | "folio" | "folioTransaction" | "payment" | "restaurantOrder" | "restaurantOrderItem" | "menuItem" | "maintenance" | "company" | "role" | "userRole" | "permission" | "rolePermission"
+      modelProps: "user" | "guest" | "guestAddress" | "guestDocument" | "guestEmergencyContact" | "guestPaymentMethod" | "roomType" | "ratePlan" | "room" | "roomRate" | "reservation" | "reservationAudit" | "folio" | "folioTransaction" | "payment" | "paymentRefund" | "restaurantOrder" | "restaurantOrderItem" | "menuItem" | "maintenance" | "company" | "role" | "userRole" | "permission" | "rolePermission"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2359,6 +2415,80 @@ export namespace Prisma {
           }
         }
       }
+      PaymentRefund: {
+        payload: Prisma.$PaymentRefundPayload<ExtArgs>
+        fields: Prisma.PaymentRefundFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PaymentRefundFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentRefundPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PaymentRefundFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentRefundPayload>
+          }
+          findFirst: {
+            args: Prisma.PaymentRefundFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentRefundPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PaymentRefundFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentRefundPayload>
+          }
+          findMany: {
+            args: Prisma.PaymentRefundFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentRefundPayload>[]
+          }
+          create: {
+            args: Prisma.PaymentRefundCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentRefundPayload>
+          }
+          createMany: {
+            args: Prisma.PaymentRefundCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PaymentRefundCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentRefundPayload>[]
+          }
+          delete: {
+            args: Prisma.PaymentRefundDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentRefundPayload>
+          }
+          update: {
+            args: Prisma.PaymentRefundUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentRefundPayload>
+          }
+          deleteMany: {
+            args: Prisma.PaymentRefundDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PaymentRefundUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PaymentRefundUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentRefundPayload>[]
+          }
+          upsert: {
+            args: Prisma.PaymentRefundUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentRefundPayload>
+          }
+          aggregate: {
+            args: Prisma.PaymentRefundAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePaymentRefund>
+          }
+          groupBy: {
+            args: Prisma.PaymentRefundGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PaymentRefundGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PaymentRefundCountArgs<ExtArgs>
+            result: $Utils.Optional<PaymentRefundCountAggregateOutputType> | number
+          }
+        }
+      }
       RestaurantOrder: {
         payload: Prisma.$RestaurantOrderPayload<ExtArgs>
         fields: Prisma.RestaurantOrderFieldRefs
@@ -3163,6 +3293,7 @@ export namespace Prisma {
     folio?: FolioOmit
     folioTransaction?: FolioTransactionOmit
     payment?: PaymentOmit
+    paymentRefund?: PaymentRefundOmit
     restaurantOrder?: RestaurantOrderOmit
     restaurantOrderItem?: RestaurantOrderItemOmit
     menuItem?: MenuItemOmit
@@ -3577,15 +3708,48 @@ export namespace Prisma {
 
 
   /**
+   * Count Type PaymentCountOutputType
+   */
+
+  export type PaymentCountOutputType = {
+    refunds: number
+  }
+
+  export type PaymentCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    refunds?: boolean | PaymentCountOutputTypeCountRefundsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PaymentCountOutputType without action
+   */
+  export type PaymentCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentCountOutputType
+     */
+    select?: PaymentCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PaymentCountOutputType without action
+   */
+  export type PaymentCountOutputTypeCountRefundsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PaymentRefundWhereInput
+  }
+
+
+  /**
    * Count Type RestaurantOrderCountOutputType
    */
 
   export type RestaurantOrderCountOutputType = {
     items: number
+    payments: number
   }
 
   export type RestaurantOrderCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     items?: boolean | RestaurantOrderCountOutputTypeCountItemsArgs
+    payments?: boolean | RestaurantOrderCountOutputTypeCountPaymentsArgs
   }
 
   // Custom InputTypes
@@ -3604,6 +3768,13 @@ export namespace Prisma {
    */
   export type RestaurantOrderCountOutputTypeCountItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: RestaurantOrderItemWhereInput
+  }
+
+  /**
+   * RestaurantOrderCountOutputType without action
+   */
+  export type RestaurantOrderCountOutputTypeCountPaymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PaymentWhereInput
   }
 
 
@@ -20385,30 +20556,44 @@ export namespace Prisma {
 
   export type PaymentAvgAggregateOutputType = {
     amount: Decimal | null
+    refundedAmount: Decimal | null
   }
 
   export type PaymentSumAggregateOutputType = {
     amount: Decimal | null
+    refundedAmount: Decimal | null
   }
 
   export type PaymentMinAggregateOutputType = {
     id: string | null
     folioId: string | null
+    restaurantOrderId: string | null
     amount: Decimal | null
+    refundedAmount: Decimal | null
+    status: $Enums.PaymentStatus | null
+    reference: string | null
     method: $Enums.PaymentMethod | null
   }
 
   export type PaymentMaxAggregateOutputType = {
     id: string | null
     folioId: string | null
+    restaurantOrderId: string | null
     amount: Decimal | null
+    refundedAmount: Decimal | null
+    status: $Enums.PaymentStatus | null
+    reference: string | null
     method: $Enums.PaymentMethod | null
   }
 
   export type PaymentCountAggregateOutputType = {
     id: number
     folioId: number
+    restaurantOrderId: number
     amount: number
+    refundedAmount: number
+    status: number
+    reference: number
     method: number
     _all: number
   }
@@ -20416,30 +20601,44 @@ export namespace Prisma {
 
   export type PaymentAvgAggregateInputType = {
     amount?: true
+    refundedAmount?: true
   }
 
   export type PaymentSumAggregateInputType = {
     amount?: true
+    refundedAmount?: true
   }
 
   export type PaymentMinAggregateInputType = {
     id?: true
     folioId?: true
+    restaurantOrderId?: true
     amount?: true
+    refundedAmount?: true
+    status?: true
+    reference?: true
     method?: true
   }
 
   export type PaymentMaxAggregateInputType = {
     id?: true
     folioId?: true
+    restaurantOrderId?: true
     amount?: true
+    refundedAmount?: true
+    status?: true
+    reference?: true
     method?: true
   }
 
   export type PaymentCountAggregateInputType = {
     id?: true
     folioId?: true
+    restaurantOrderId?: true
     amount?: true
+    refundedAmount?: true
+    status?: true
+    reference?: true
     method?: true
     _all?: true
   }
@@ -20532,8 +20731,12 @@ export namespace Prisma {
 
   export type PaymentGroupByOutputType = {
     id: string
-    folioId: string
+    folioId: string | null
+    restaurantOrderId: string | null
     amount: Decimal
+    refundedAmount: Decimal
+    status: $Enums.PaymentStatus
+    reference: string | null
     method: $Enums.PaymentMethod
     _count: PaymentCountAggregateOutputType | null
     _avg: PaymentAvgAggregateOutputType | null
@@ -20559,54 +20762,86 @@ export namespace Prisma {
   export type PaymentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     folioId?: boolean
+    restaurantOrderId?: boolean
     amount?: boolean
+    refundedAmount?: boolean
+    status?: boolean
+    reference?: boolean
     method?: boolean
-    folio?: boolean | FolioDefaultArgs<ExtArgs>
+    folio?: boolean | Payment$folioArgs<ExtArgs>
+    restaurantOrder?: boolean | Payment$restaurantOrderArgs<ExtArgs>
+    refunds?: boolean | Payment$refundsArgs<ExtArgs>
+    _count?: boolean | PaymentCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["payment"]>
 
   export type PaymentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     folioId?: boolean
+    restaurantOrderId?: boolean
     amount?: boolean
+    refundedAmount?: boolean
+    status?: boolean
+    reference?: boolean
     method?: boolean
-    folio?: boolean | FolioDefaultArgs<ExtArgs>
+    folio?: boolean | Payment$folioArgs<ExtArgs>
+    restaurantOrder?: boolean | Payment$restaurantOrderArgs<ExtArgs>
   }, ExtArgs["result"]["payment"]>
 
   export type PaymentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     folioId?: boolean
+    restaurantOrderId?: boolean
     amount?: boolean
+    refundedAmount?: boolean
+    status?: boolean
+    reference?: boolean
     method?: boolean
-    folio?: boolean | FolioDefaultArgs<ExtArgs>
+    folio?: boolean | Payment$folioArgs<ExtArgs>
+    restaurantOrder?: boolean | Payment$restaurantOrderArgs<ExtArgs>
   }, ExtArgs["result"]["payment"]>
 
   export type PaymentSelectScalar = {
     id?: boolean
     folioId?: boolean
+    restaurantOrderId?: boolean
     amount?: boolean
+    refundedAmount?: boolean
+    status?: boolean
+    reference?: boolean
     method?: boolean
   }
 
-  export type PaymentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "folioId" | "amount" | "method", ExtArgs["result"]["payment"]>
+  export type PaymentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "folioId" | "restaurantOrderId" | "amount" | "refundedAmount" | "status" | "reference" | "method", ExtArgs["result"]["payment"]>
   export type PaymentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    folio?: boolean | FolioDefaultArgs<ExtArgs>
+    folio?: boolean | Payment$folioArgs<ExtArgs>
+    restaurantOrder?: boolean | Payment$restaurantOrderArgs<ExtArgs>
+    refunds?: boolean | Payment$refundsArgs<ExtArgs>
+    _count?: boolean | PaymentCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PaymentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    folio?: boolean | FolioDefaultArgs<ExtArgs>
+    folio?: boolean | Payment$folioArgs<ExtArgs>
+    restaurantOrder?: boolean | Payment$restaurantOrderArgs<ExtArgs>
   }
   export type PaymentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    folio?: boolean | FolioDefaultArgs<ExtArgs>
+    folio?: boolean | Payment$folioArgs<ExtArgs>
+    restaurantOrder?: boolean | Payment$restaurantOrderArgs<ExtArgs>
   }
 
   export type $PaymentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Payment"
     objects: {
-      folio: Prisma.$FolioPayload<ExtArgs>
+      folio: Prisma.$FolioPayload<ExtArgs> | null
+      restaurantOrder: Prisma.$RestaurantOrderPayload<ExtArgs> | null
+      refunds: Prisma.$PaymentRefundPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      folioId: string
+      folioId: string | null
+      restaurantOrderId: string | null
       amount: Prisma.Decimal
+      refundedAmount: Prisma.Decimal
+      status: $Enums.PaymentStatus
+      reference: string | null
       method: $Enums.PaymentMethod
     }, ExtArgs["result"]["payment"]>
     composites: {}
@@ -21002,7 +21237,9 @@ export namespace Prisma {
    */
   export interface Prisma__PaymentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    folio<T extends FolioDefaultArgs<ExtArgs> = {}>(args?: Subset<T, FolioDefaultArgs<ExtArgs>>): Prisma__FolioClient<$Result.GetResult<Prisma.$FolioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    folio<T extends Payment$folioArgs<ExtArgs> = {}>(args?: Subset<T, Payment$folioArgs<ExtArgs>>): Prisma__FolioClient<$Result.GetResult<Prisma.$FolioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    restaurantOrder<T extends Payment$restaurantOrderArgs<ExtArgs> = {}>(args?: Subset<T, Payment$restaurantOrderArgs<ExtArgs>>): Prisma__RestaurantOrderClient<$Result.GetResult<Prisma.$RestaurantOrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    refunds<T extends Payment$refundsArgs<ExtArgs> = {}>(args?: Subset<T, Payment$refundsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentRefundPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -21034,7 +21271,11 @@ export namespace Prisma {
   interface PaymentFieldRefs {
     readonly id: FieldRef<"Payment", 'String'>
     readonly folioId: FieldRef<"Payment", 'String'>
+    readonly restaurantOrderId: FieldRef<"Payment", 'String'>
     readonly amount: FieldRef<"Payment", 'Decimal'>
+    readonly refundedAmount: FieldRef<"Payment", 'Decimal'>
+    readonly status: FieldRef<"Payment", 'PaymentStatus'>
+    readonly reference: FieldRef<"Payment", 'String'>
     readonly method: FieldRef<"Payment", 'PaymentMethod'>
   }
     
@@ -21437,6 +21678,68 @@ export namespace Prisma {
   }
 
   /**
+   * Payment.folio
+   */
+  export type Payment$folioArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Folio
+     */
+    select?: FolioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Folio
+     */
+    omit?: FolioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FolioInclude<ExtArgs> | null
+    where?: FolioWhereInput
+  }
+
+  /**
+   * Payment.restaurantOrder
+   */
+  export type Payment$restaurantOrderArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RestaurantOrder
+     */
+    select?: RestaurantOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RestaurantOrder
+     */
+    omit?: RestaurantOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RestaurantOrderInclude<ExtArgs> | null
+    where?: RestaurantOrderWhereInput
+  }
+
+  /**
+   * Payment.refunds
+   */
+  export type Payment$refundsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentRefund
+     */
+    select?: PaymentRefundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentRefund
+     */
+    omit?: PaymentRefundOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentRefundInclude<ExtArgs> | null
+    where?: PaymentRefundWhereInput
+    orderBy?: PaymentRefundOrderByWithRelationInput | PaymentRefundOrderByWithRelationInput[]
+    cursor?: PaymentRefundWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PaymentRefundScalarFieldEnum | PaymentRefundScalarFieldEnum[]
+  }
+
+  /**
    * Payment without action
    */
   export type PaymentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -21452,6 +21755,1142 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: PaymentInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PaymentRefund
+   */
+
+  export type AggregatePaymentRefund = {
+    _count: PaymentRefundCountAggregateOutputType | null
+    _avg: PaymentRefundAvgAggregateOutputType | null
+    _sum: PaymentRefundSumAggregateOutputType | null
+    _min: PaymentRefundMinAggregateOutputType | null
+    _max: PaymentRefundMaxAggregateOutputType | null
+  }
+
+  export type PaymentRefundAvgAggregateOutputType = {
+    amount: Decimal | null
+  }
+
+  export type PaymentRefundSumAggregateOutputType = {
+    amount: Decimal | null
+  }
+
+  export type PaymentRefundMinAggregateOutputType = {
+    id: string | null
+    paymentId: string | null
+    amount: Decimal | null
+    status: $Enums.PaymentRefundStatus | null
+    reason: string | null
+    providerReference: string | null
+    createdAt: Date | null
+    completedAt: Date | null
+  }
+
+  export type PaymentRefundMaxAggregateOutputType = {
+    id: string | null
+    paymentId: string | null
+    amount: Decimal | null
+    status: $Enums.PaymentRefundStatus | null
+    reason: string | null
+    providerReference: string | null
+    createdAt: Date | null
+    completedAt: Date | null
+  }
+
+  export type PaymentRefundCountAggregateOutputType = {
+    id: number
+    paymentId: number
+    amount: number
+    status: number
+    reason: number
+    providerReference: number
+    createdAt: number
+    completedAt: number
+    _all: number
+  }
+
+
+  export type PaymentRefundAvgAggregateInputType = {
+    amount?: true
+  }
+
+  export type PaymentRefundSumAggregateInputType = {
+    amount?: true
+  }
+
+  export type PaymentRefundMinAggregateInputType = {
+    id?: true
+    paymentId?: true
+    amount?: true
+    status?: true
+    reason?: true
+    providerReference?: true
+    createdAt?: true
+    completedAt?: true
+  }
+
+  export type PaymentRefundMaxAggregateInputType = {
+    id?: true
+    paymentId?: true
+    amount?: true
+    status?: true
+    reason?: true
+    providerReference?: true
+    createdAt?: true
+    completedAt?: true
+  }
+
+  export type PaymentRefundCountAggregateInputType = {
+    id?: true
+    paymentId?: true
+    amount?: true
+    status?: true
+    reason?: true
+    providerReference?: true
+    createdAt?: true
+    completedAt?: true
+    _all?: true
+  }
+
+  export type PaymentRefundAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PaymentRefund to aggregate.
+     */
+    where?: PaymentRefundWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PaymentRefunds to fetch.
+     */
+    orderBy?: PaymentRefundOrderByWithRelationInput | PaymentRefundOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PaymentRefundWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PaymentRefunds from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PaymentRefunds.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PaymentRefunds
+    **/
+    _count?: true | PaymentRefundCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PaymentRefundAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PaymentRefundSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PaymentRefundMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PaymentRefundMaxAggregateInputType
+  }
+
+  export type GetPaymentRefundAggregateType<T extends PaymentRefundAggregateArgs> = {
+        [P in keyof T & keyof AggregatePaymentRefund]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePaymentRefund[P]>
+      : GetScalarType<T[P], AggregatePaymentRefund[P]>
+  }
+
+
+
+
+  export type PaymentRefundGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PaymentRefundWhereInput
+    orderBy?: PaymentRefundOrderByWithAggregationInput | PaymentRefundOrderByWithAggregationInput[]
+    by: PaymentRefundScalarFieldEnum[] | PaymentRefundScalarFieldEnum
+    having?: PaymentRefundScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PaymentRefundCountAggregateInputType | true
+    _avg?: PaymentRefundAvgAggregateInputType
+    _sum?: PaymentRefundSumAggregateInputType
+    _min?: PaymentRefundMinAggregateInputType
+    _max?: PaymentRefundMaxAggregateInputType
+  }
+
+  export type PaymentRefundGroupByOutputType = {
+    id: string
+    paymentId: string
+    amount: Decimal
+    status: $Enums.PaymentRefundStatus
+    reason: string | null
+    providerReference: string | null
+    createdAt: Date
+    completedAt: Date | null
+    _count: PaymentRefundCountAggregateOutputType | null
+    _avg: PaymentRefundAvgAggregateOutputType | null
+    _sum: PaymentRefundSumAggregateOutputType | null
+    _min: PaymentRefundMinAggregateOutputType | null
+    _max: PaymentRefundMaxAggregateOutputType | null
+  }
+
+  type GetPaymentRefundGroupByPayload<T extends PaymentRefundGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PaymentRefundGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PaymentRefundGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PaymentRefundGroupByOutputType[P]>
+            : GetScalarType<T[P], PaymentRefundGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PaymentRefundSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    paymentId?: boolean
+    amount?: boolean
+    status?: boolean
+    reason?: boolean
+    providerReference?: boolean
+    createdAt?: boolean
+    completedAt?: boolean
+    payment?: boolean | PaymentDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["paymentRefund"]>
+
+  export type PaymentRefundSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    paymentId?: boolean
+    amount?: boolean
+    status?: boolean
+    reason?: boolean
+    providerReference?: boolean
+    createdAt?: boolean
+    completedAt?: boolean
+    payment?: boolean | PaymentDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["paymentRefund"]>
+
+  export type PaymentRefundSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    paymentId?: boolean
+    amount?: boolean
+    status?: boolean
+    reason?: boolean
+    providerReference?: boolean
+    createdAt?: boolean
+    completedAt?: boolean
+    payment?: boolean | PaymentDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["paymentRefund"]>
+
+  export type PaymentRefundSelectScalar = {
+    id?: boolean
+    paymentId?: boolean
+    amount?: boolean
+    status?: boolean
+    reason?: boolean
+    providerReference?: boolean
+    createdAt?: boolean
+    completedAt?: boolean
+  }
+
+  export type PaymentRefundOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "paymentId" | "amount" | "status" | "reason" | "providerReference" | "createdAt" | "completedAt", ExtArgs["result"]["paymentRefund"]>
+  export type PaymentRefundInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    payment?: boolean | PaymentDefaultArgs<ExtArgs>
+  }
+  export type PaymentRefundIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    payment?: boolean | PaymentDefaultArgs<ExtArgs>
+  }
+  export type PaymentRefundIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    payment?: boolean | PaymentDefaultArgs<ExtArgs>
+  }
+
+  export type $PaymentRefundPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PaymentRefund"
+    objects: {
+      payment: Prisma.$PaymentPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      paymentId: string
+      amount: Prisma.Decimal
+      status: $Enums.PaymentRefundStatus
+      reason: string | null
+      providerReference: string | null
+      createdAt: Date
+      completedAt: Date | null
+    }, ExtArgs["result"]["paymentRefund"]>
+    composites: {}
+  }
+
+  type PaymentRefundGetPayload<S extends boolean | null | undefined | PaymentRefundDefaultArgs> = $Result.GetResult<Prisma.$PaymentRefundPayload, S>
+
+  type PaymentRefundCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PaymentRefundFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PaymentRefundCountAggregateInputType | true
+    }
+
+  export interface PaymentRefundDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PaymentRefund'], meta: { name: 'PaymentRefund' } }
+    /**
+     * Find zero or one PaymentRefund that matches the filter.
+     * @param {PaymentRefundFindUniqueArgs} args - Arguments to find a PaymentRefund
+     * @example
+     * // Get one PaymentRefund
+     * const paymentRefund = await prisma.paymentRefund.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PaymentRefundFindUniqueArgs>(args: SelectSubset<T, PaymentRefundFindUniqueArgs<ExtArgs>>): Prisma__PaymentRefundClient<$Result.GetResult<Prisma.$PaymentRefundPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PaymentRefund that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PaymentRefundFindUniqueOrThrowArgs} args - Arguments to find a PaymentRefund
+     * @example
+     * // Get one PaymentRefund
+     * const paymentRefund = await prisma.paymentRefund.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PaymentRefundFindUniqueOrThrowArgs>(args: SelectSubset<T, PaymentRefundFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PaymentRefundClient<$Result.GetResult<Prisma.$PaymentRefundPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PaymentRefund that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentRefundFindFirstArgs} args - Arguments to find a PaymentRefund
+     * @example
+     * // Get one PaymentRefund
+     * const paymentRefund = await prisma.paymentRefund.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PaymentRefundFindFirstArgs>(args?: SelectSubset<T, PaymentRefundFindFirstArgs<ExtArgs>>): Prisma__PaymentRefundClient<$Result.GetResult<Prisma.$PaymentRefundPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PaymentRefund that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentRefundFindFirstOrThrowArgs} args - Arguments to find a PaymentRefund
+     * @example
+     * // Get one PaymentRefund
+     * const paymentRefund = await prisma.paymentRefund.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PaymentRefundFindFirstOrThrowArgs>(args?: SelectSubset<T, PaymentRefundFindFirstOrThrowArgs<ExtArgs>>): Prisma__PaymentRefundClient<$Result.GetResult<Prisma.$PaymentRefundPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PaymentRefunds that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentRefundFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PaymentRefunds
+     * const paymentRefunds = await prisma.paymentRefund.findMany()
+     * 
+     * // Get first 10 PaymentRefunds
+     * const paymentRefunds = await prisma.paymentRefund.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const paymentRefundWithIdOnly = await prisma.paymentRefund.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PaymentRefundFindManyArgs>(args?: SelectSubset<T, PaymentRefundFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentRefundPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PaymentRefund.
+     * @param {PaymentRefundCreateArgs} args - Arguments to create a PaymentRefund.
+     * @example
+     * // Create one PaymentRefund
+     * const PaymentRefund = await prisma.paymentRefund.create({
+     *   data: {
+     *     // ... data to create a PaymentRefund
+     *   }
+     * })
+     * 
+     */
+    create<T extends PaymentRefundCreateArgs>(args: SelectSubset<T, PaymentRefundCreateArgs<ExtArgs>>): Prisma__PaymentRefundClient<$Result.GetResult<Prisma.$PaymentRefundPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PaymentRefunds.
+     * @param {PaymentRefundCreateManyArgs} args - Arguments to create many PaymentRefunds.
+     * @example
+     * // Create many PaymentRefunds
+     * const paymentRefund = await prisma.paymentRefund.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PaymentRefundCreateManyArgs>(args?: SelectSubset<T, PaymentRefundCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PaymentRefunds and returns the data saved in the database.
+     * @param {PaymentRefundCreateManyAndReturnArgs} args - Arguments to create many PaymentRefunds.
+     * @example
+     * // Create many PaymentRefunds
+     * const paymentRefund = await prisma.paymentRefund.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PaymentRefunds and only return the `id`
+     * const paymentRefundWithIdOnly = await prisma.paymentRefund.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PaymentRefundCreateManyAndReturnArgs>(args?: SelectSubset<T, PaymentRefundCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentRefundPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PaymentRefund.
+     * @param {PaymentRefundDeleteArgs} args - Arguments to delete one PaymentRefund.
+     * @example
+     * // Delete one PaymentRefund
+     * const PaymentRefund = await prisma.paymentRefund.delete({
+     *   where: {
+     *     // ... filter to delete one PaymentRefund
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PaymentRefundDeleteArgs>(args: SelectSubset<T, PaymentRefundDeleteArgs<ExtArgs>>): Prisma__PaymentRefundClient<$Result.GetResult<Prisma.$PaymentRefundPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PaymentRefund.
+     * @param {PaymentRefundUpdateArgs} args - Arguments to update one PaymentRefund.
+     * @example
+     * // Update one PaymentRefund
+     * const paymentRefund = await prisma.paymentRefund.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PaymentRefundUpdateArgs>(args: SelectSubset<T, PaymentRefundUpdateArgs<ExtArgs>>): Prisma__PaymentRefundClient<$Result.GetResult<Prisma.$PaymentRefundPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PaymentRefunds.
+     * @param {PaymentRefundDeleteManyArgs} args - Arguments to filter PaymentRefunds to delete.
+     * @example
+     * // Delete a few PaymentRefunds
+     * const { count } = await prisma.paymentRefund.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PaymentRefundDeleteManyArgs>(args?: SelectSubset<T, PaymentRefundDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PaymentRefunds.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentRefundUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PaymentRefunds
+     * const paymentRefund = await prisma.paymentRefund.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PaymentRefundUpdateManyArgs>(args: SelectSubset<T, PaymentRefundUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PaymentRefunds and returns the data updated in the database.
+     * @param {PaymentRefundUpdateManyAndReturnArgs} args - Arguments to update many PaymentRefunds.
+     * @example
+     * // Update many PaymentRefunds
+     * const paymentRefund = await prisma.paymentRefund.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PaymentRefunds and only return the `id`
+     * const paymentRefundWithIdOnly = await prisma.paymentRefund.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PaymentRefundUpdateManyAndReturnArgs>(args: SelectSubset<T, PaymentRefundUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentRefundPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PaymentRefund.
+     * @param {PaymentRefundUpsertArgs} args - Arguments to update or create a PaymentRefund.
+     * @example
+     * // Update or create a PaymentRefund
+     * const paymentRefund = await prisma.paymentRefund.upsert({
+     *   create: {
+     *     // ... data to create a PaymentRefund
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PaymentRefund we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PaymentRefundUpsertArgs>(args: SelectSubset<T, PaymentRefundUpsertArgs<ExtArgs>>): Prisma__PaymentRefundClient<$Result.GetResult<Prisma.$PaymentRefundPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PaymentRefunds.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentRefundCountArgs} args - Arguments to filter PaymentRefunds to count.
+     * @example
+     * // Count the number of PaymentRefunds
+     * const count = await prisma.paymentRefund.count({
+     *   where: {
+     *     // ... the filter for the PaymentRefunds we want to count
+     *   }
+     * })
+    **/
+    count<T extends PaymentRefundCountArgs>(
+      args?: Subset<T, PaymentRefundCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PaymentRefundCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PaymentRefund.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentRefundAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PaymentRefundAggregateArgs>(args: Subset<T, PaymentRefundAggregateArgs>): Prisma.PrismaPromise<GetPaymentRefundAggregateType<T>>
+
+    /**
+     * Group by PaymentRefund.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentRefundGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PaymentRefundGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PaymentRefundGroupByArgs['orderBy'] }
+        : { orderBy?: PaymentRefundGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PaymentRefundGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPaymentRefundGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PaymentRefund model
+   */
+  readonly fields: PaymentRefundFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PaymentRefund.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PaymentRefundClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    payment<T extends PaymentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PaymentDefaultArgs<ExtArgs>>): Prisma__PaymentClient<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PaymentRefund model
+   */
+  interface PaymentRefundFieldRefs {
+    readonly id: FieldRef<"PaymentRefund", 'String'>
+    readonly paymentId: FieldRef<"PaymentRefund", 'String'>
+    readonly amount: FieldRef<"PaymentRefund", 'Decimal'>
+    readonly status: FieldRef<"PaymentRefund", 'PaymentRefundStatus'>
+    readonly reason: FieldRef<"PaymentRefund", 'String'>
+    readonly providerReference: FieldRef<"PaymentRefund", 'String'>
+    readonly createdAt: FieldRef<"PaymentRefund", 'DateTime'>
+    readonly completedAt: FieldRef<"PaymentRefund", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PaymentRefund findUnique
+   */
+  export type PaymentRefundFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentRefund
+     */
+    select?: PaymentRefundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentRefund
+     */
+    omit?: PaymentRefundOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentRefundInclude<ExtArgs> | null
+    /**
+     * Filter, which PaymentRefund to fetch.
+     */
+    where: PaymentRefundWhereUniqueInput
+  }
+
+  /**
+   * PaymentRefund findUniqueOrThrow
+   */
+  export type PaymentRefundFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentRefund
+     */
+    select?: PaymentRefundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentRefund
+     */
+    omit?: PaymentRefundOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentRefundInclude<ExtArgs> | null
+    /**
+     * Filter, which PaymentRefund to fetch.
+     */
+    where: PaymentRefundWhereUniqueInput
+  }
+
+  /**
+   * PaymentRefund findFirst
+   */
+  export type PaymentRefundFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentRefund
+     */
+    select?: PaymentRefundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentRefund
+     */
+    omit?: PaymentRefundOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentRefundInclude<ExtArgs> | null
+    /**
+     * Filter, which PaymentRefund to fetch.
+     */
+    where?: PaymentRefundWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PaymentRefunds to fetch.
+     */
+    orderBy?: PaymentRefundOrderByWithRelationInput | PaymentRefundOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PaymentRefunds.
+     */
+    cursor?: PaymentRefundWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PaymentRefunds from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PaymentRefunds.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PaymentRefunds.
+     */
+    distinct?: PaymentRefundScalarFieldEnum | PaymentRefundScalarFieldEnum[]
+  }
+
+  /**
+   * PaymentRefund findFirstOrThrow
+   */
+  export type PaymentRefundFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentRefund
+     */
+    select?: PaymentRefundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentRefund
+     */
+    omit?: PaymentRefundOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentRefundInclude<ExtArgs> | null
+    /**
+     * Filter, which PaymentRefund to fetch.
+     */
+    where?: PaymentRefundWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PaymentRefunds to fetch.
+     */
+    orderBy?: PaymentRefundOrderByWithRelationInput | PaymentRefundOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PaymentRefunds.
+     */
+    cursor?: PaymentRefundWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PaymentRefunds from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PaymentRefunds.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PaymentRefunds.
+     */
+    distinct?: PaymentRefundScalarFieldEnum | PaymentRefundScalarFieldEnum[]
+  }
+
+  /**
+   * PaymentRefund findMany
+   */
+  export type PaymentRefundFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentRefund
+     */
+    select?: PaymentRefundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentRefund
+     */
+    omit?: PaymentRefundOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentRefundInclude<ExtArgs> | null
+    /**
+     * Filter, which PaymentRefunds to fetch.
+     */
+    where?: PaymentRefundWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PaymentRefunds to fetch.
+     */
+    orderBy?: PaymentRefundOrderByWithRelationInput | PaymentRefundOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PaymentRefunds.
+     */
+    cursor?: PaymentRefundWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PaymentRefunds from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PaymentRefunds.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PaymentRefunds.
+     */
+    distinct?: PaymentRefundScalarFieldEnum | PaymentRefundScalarFieldEnum[]
+  }
+
+  /**
+   * PaymentRefund create
+   */
+  export type PaymentRefundCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentRefund
+     */
+    select?: PaymentRefundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentRefund
+     */
+    omit?: PaymentRefundOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentRefundInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PaymentRefund.
+     */
+    data: XOR<PaymentRefundCreateInput, PaymentRefundUncheckedCreateInput>
+  }
+
+  /**
+   * PaymentRefund createMany
+   */
+  export type PaymentRefundCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PaymentRefunds.
+     */
+    data: PaymentRefundCreateManyInput | PaymentRefundCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PaymentRefund createManyAndReturn
+   */
+  export type PaymentRefundCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentRefund
+     */
+    select?: PaymentRefundSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentRefund
+     */
+    omit?: PaymentRefundOmit<ExtArgs> | null
+    /**
+     * The data used to create many PaymentRefunds.
+     */
+    data: PaymentRefundCreateManyInput | PaymentRefundCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentRefundIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PaymentRefund update
+   */
+  export type PaymentRefundUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentRefund
+     */
+    select?: PaymentRefundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentRefund
+     */
+    omit?: PaymentRefundOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentRefundInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PaymentRefund.
+     */
+    data: XOR<PaymentRefundUpdateInput, PaymentRefundUncheckedUpdateInput>
+    /**
+     * Choose, which PaymentRefund to update.
+     */
+    where: PaymentRefundWhereUniqueInput
+  }
+
+  /**
+   * PaymentRefund updateMany
+   */
+  export type PaymentRefundUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PaymentRefunds.
+     */
+    data: XOR<PaymentRefundUpdateManyMutationInput, PaymentRefundUncheckedUpdateManyInput>
+    /**
+     * Filter which PaymentRefunds to update
+     */
+    where?: PaymentRefundWhereInput
+    /**
+     * Limit how many PaymentRefunds to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PaymentRefund updateManyAndReturn
+   */
+  export type PaymentRefundUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentRefund
+     */
+    select?: PaymentRefundSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentRefund
+     */
+    omit?: PaymentRefundOmit<ExtArgs> | null
+    /**
+     * The data used to update PaymentRefunds.
+     */
+    data: XOR<PaymentRefundUpdateManyMutationInput, PaymentRefundUncheckedUpdateManyInput>
+    /**
+     * Filter which PaymentRefunds to update
+     */
+    where?: PaymentRefundWhereInput
+    /**
+     * Limit how many PaymentRefunds to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentRefundIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PaymentRefund upsert
+   */
+  export type PaymentRefundUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentRefund
+     */
+    select?: PaymentRefundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentRefund
+     */
+    omit?: PaymentRefundOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentRefundInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PaymentRefund to update in case it exists.
+     */
+    where: PaymentRefundWhereUniqueInput
+    /**
+     * In case the PaymentRefund found by the `where` argument doesn't exist, create a new PaymentRefund with this data.
+     */
+    create: XOR<PaymentRefundCreateInput, PaymentRefundUncheckedCreateInput>
+    /**
+     * In case the PaymentRefund was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PaymentRefundUpdateInput, PaymentRefundUncheckedUpdateInput>
+  }
+
+  /**
+   * PaymentRefund delete
+   */
+  export type PaymentRefundDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentRefund
+     */
+    select?: PaymentRefundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentRefund
+     */
+    omit?: PaymentRefundOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentRefundInclude<ExtArgs> | null
+    /**
+     * Filter which PaymentRefund to delete.
+     */
+    where: PaymentRefundWhereUniqueInput
+  }
+
+  /**
+   * PaymentRefund deleteMany
+   */
+  export type PaymentRefundDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PaymentRefunds to delete
+     */
+    where?: PaymentRefundWhereInput
+    /**
+     * Limit how many PaymentRefunds to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PaymentRefund without action
+   */
+  export type PaymentRefundDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentRefund
+     */
+    select?: PaymentRefundSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaymentRefund
+     */
+    omit?: PaymentRefundOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentRefundInclude<ExtArgs> | null
   }
 
 
@@ -21486,9 +22925,16 @@ export namespace Prisma {
     roomNumber: string | null
     waiterId: string | null
     status: $Enums.RestaurantOrderStatus | null
+    paymentStatus: $Enums.RestaurantPaymentStatus | null
+    settlementMethod: $Enums.RestaurantSettlementMethod | null
     subtotal: Decimal | null
     tax: Decimal | null
     total: Decimal | null
+    cancelledAt: Date | null
+    cancelledById: string | null
+    cancellationReason: string | null
+    completedAt: Date | null
+    completedById: string | null
     createdAt: Date | null
   }
 
@@ -21499,9 +22945,16 @@ export namespace Prisma {
     roomNumber: string | null
     waiterId: string | null
     status: $Enums.RestaurantOrderStatus | null
+    paymentStatus: $Enums.RestaurantPaymentStatus | null
+    settlementMethod: $Enums.RestaurantSettlementMethod | null
     subtotal: Decimal | null
     tax: Decimal | null
     total: Decimal | null
+    cancelledAt: Date | null
+    cancelledById: string | null
+    cancellationReason: string | null
+    completedAt: Date | null
+    completedById: string | null
     createdAt: Date | null
   }
 
@@ -21512,9 +22965,16 @@ export namespace Prisma {
     roomNumber: number
     waiterId: number
     status: number
+    paymentStatus: number
+    settlementMethod: number
     subtotal: number
     tax: number
     total: number
+    cancelledAt: number
+    cancelledById: number
+    cancellationReason: number
+    completedAt: number
+    completedById: number
     createdAt: number
     _all: number
   }
@@ -21539,9 +22999,16 @@ export namespace Prisma {
     roomNumber?: true
     waiterId?: true
     status?: true
+    paymentStatus?: true
+    settlementMethod?: true
     subtotal?: true
     tax?: true
     total?: true
+    cancelledAt?: true
+    cancelledById?: true
+    cancellationReason?: true
+    completedAt?: true
+    completedById?: true
     createdAt?: true
   }
 
@@ -21552,9 +23019,16 @@ export namespace Prisma {
     roomNumber?: true
     waiterId?: true
     status?: true
+    paymentStatus?: true
+    settlementMethod?: true
     subtotal?: true
     tax?: true
     total?: true
+    cancelledAt?: true
+    cancelledById?: true
+    cancellationReason?: true
+    completedAt?: true
+    completedById?: true
     createdAt?: true
   }
 
@@ -21565,9 +23039,16 @@ export namespace Prisma {
     roomNumber?: true
     waiterId?: true
     status?: true
+    paymentStatus?: true
+    settlementMethod?: true
     subtotal?: true
     tax?: true
     total?: true
+    cancelledAt?: true
+    cancelledById?: true
+    cancellationReason?: true
+    completedAt?: true
+    completedById?: true
     createdAt?: true
     _all?: true
   }
@@ -21665,9 +23146,16 @@ export namespace Prisma {
     roomNumber: string | null
     waiterId: string
     status: $Enums.RestaurantOrderStatus
+    paymentStatus: $Enums.RestaurantPaymentStatus
+    settlementMethod: $Enums.RestaurantSettlementMethod | null
     subtotal: Decimal
     tax: Decimal
     total: Decimal
+    cancelledAt: Date | null
+    cancelledById: string | null
+    cancellationReason: string | null
+    completedAt: Date | null
+    completedById: string | null
     createdAt: Date
     _count: RestaurantOrderCountAggregateOutputType | null
     _avg: RestaurantOrderAvgAggregateOutputType | null
@@ -21697,13 +23185,21 @@ export namespace Prisma {
     roomNumber?: boolean
     waiterId?: boolean
     status?: boolean
+    paymentStatus?: boolean
+    settlementMethod?: boolean
     subtotal?: boolean
     tax?: boolean
     total?: boolean
+    cancelledAt?: boolean
+    cancelledById?: boolean
+    cancellationReason?: boolean
+    completedAt?: boolean
+    completedById?: boolean
     createdAt?: boolean
     reservation?: boolean | RestaurantOrder$reservationArgs<ExtArgs>
     guest?: boolean | RestaurantOrder$guestArgs<ExtArgs>
     items?: boolean | RestaurantOrder$itemsArgs<ExtArgs>
+    payments?: boolean | RestaurantOrder$paymentsArgs<ExtArgs>
     _count?: boolean | RestaurantOrderCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["restaurantOrder"]>
 
@@ -21714,9 +23210,16 @@ export namespace Prisma {
     roomNumber?: boolean
     waiterId?: boolean
     status?: boolean
+    paymentStatus?: boolean
+    settlementMethod?: boolean
     subtotal?: boolean
     tax?: boolean
     total?: boolean
+    cancelledAt?: boolean
+    cancelledById?: boolean
+    cancellationReason?: boolean
+    completedAt?: boolean
+    completedById?: boolean
     createdAt?: boolean
     reservation?: boolean | RestaurantOrder$reservationArgs<ExtArgs>
     guest?: boolean | RestaurantOrder$guestArgs<ExtArgs>
@@ -21729,9 +23232,16 @@ export namespace Prisma {
     roomNumber?: boolean
     waiterId?: boolean
     status?: boolean
+    paymentStatus?: boolean
+    settlementMethod?: boolean
     subtotal?: boolean
     tax?: boolean
     total?: boolean
+    cancelledAt?: boolean
+    cancelledById?: boolean
+    cancellationReason?: boolean
+    completedAt?: boolean
+    completedById?: boolean
     createdAt?: boolean
     reservation?: boolean | RestaurantOrder$reservationArgs<ExtArgs>
     guest?: boolean | RestaurantOrder$guestArgs<ExtArgs>
@@ -21744,17 +23254,25 @@ export namespace Prisma {
     roomNumber?: boolean
     waiterId?: boolean
     status?: boolean
+    paymentStatus?: boolean
+    settlementMethod?: boolean
     subtotal?: boolean
     tax?: boolean
     total?: boolean
+    cancelledAt?: boolean
+    cancelledById?: boolean
+    cancellationReason?: boolean
+    completedAt?: boolean
+    completedById?: boolean
     createdAt?: boolean
   }
 
-  export type RestaurantOrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "reservationId" | "guestId" | "roomNumber" | "waiterId" | "status" | "subtotal" | "tax" | "total" | "createdAt", ExtArgs["result"]["restaurantOrder"]>
+  export type RestaurantOrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "reservationId" | "guestId" | "roomNumber" | "waiterId" | "status" | "paymentStatus" | "settlementMethod" | "subtotal" | "tax" | "total" | "cancelledAt" | "cancelledById" | "cancellationReason" | "completedAt" | "completedById" | "createdAt", ExtArgs["result"]["restaurantOrder"]>
   export type RestaurantOrderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     reservation?: boolean | RestaurantOrder$reservationArgs<ExtArgs>
     guest?: boolean | RestaurantOrder$guestArgs<ExtArgs>
     items?: boolean | RestaurantOrder$itemsArgs<ExtArgs>
+    payments?: boolean | RestaurantOrder$paymentsArgs<ExtArgs>
     _count?: boolean | RestaurantOrderCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type RestaurantOrderIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -21772,6 +23290,7 @@ export namespace Prisma {
       reservation: Prisma.$ReservationPayload<ExtArgs> | null
       guest: Prisma.$GuestPayload<ExtArgs> | null
       items: Prisma.$RestaurantOrderItemPayload<ExtArgs>[]
+      payments: Prisma.$PaymentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -21780,9 +23299,16 @@ export namespace Prisma {
       roomNumber: string | null
       waiterId: string
       status: $Enums.RestaurantOrderStatus
+      paymentStatus: $Enums.RestaurantPaymentStatus
+      settlementMethod: $Enums.RestaurantSettlementMethod | null
       subtotal: Prisma.Decimal
       tax: Prisma.Decimal
       total: Prisma.Decimal
+      cancelledAt: Date | null
+      cancelledById: string | null
+      cancellationReason: string | null
+      completedAt: Date | null
+      completedById: string | null
       createdAt: Date
     }, ExtArgs["result"]["restaurantOrder"]>
     composites: {}
@@ -22181,6 +23707,7 @@ export namespace Prisma {
     reservation<T extends RestaurantOrder$reservationArgs<ExtArgs> = {}>(args?: Subset<T, RestaurantOrder$reservationArgs<ExtArgs>>): Prisma__ReservationClient<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     guest<T extends RestaurantOrder$guestArgs<ExtArgs> = {}>(args?: Subset<T, RestaurantOrder$guestArgs<ExtArgs>>): Prisma__GuestClient<$Result.GetResult<Prisma.$GuestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     items<T extends RestaurantOrder$itemsArgs<ExtArgs> = {}>(args?: Subset<T, RestaurantOrder$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RestaurantOrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    payments<T extends RestaurantOrder$paymentsArgs<ExtArgs> = {}>(args?: Subset<T, RestaurantOrder$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -22216,9 +23743,16 @@ export namespace Prisma {
     readonly roomNumber: FieldRef<"RestaurantOrder", 'String'>
     readonly waiterId: FieldRef<"RestaurantOrder", 'String'>
     readonly status: FieldRef<"RestaurantOrder", 'RestaurantOrderStatus'>
+    readonly paymentStatus: FieldRef<"RestaurantOrder", 'RestaurantPaymentStatus'>
+    readonly settlementMethod: FieldRef<"RestaurantOrder", 'RestaurantSettlementMethod'>
     readonly subtotal: FieldRef<"RestaurantOrder", 'Decimal'>
     readonly tax: FieldRef<"RestaurantOrder", 'Decimal'>
     readonly total: FieldRef<"RestaurantOrder", 'Decimal'>
+    readonly cancelledAt: FieldRef<"RestaurantOrder", 'DateTime'>
+    readonly cancelledById: FieldRef<"RestaurantOrder", 'String'>
+    readonly cancellationReason: FieldRef<"RestaurantOrder", 'String'>
+    readonly completedAt: FieldRef<"RestaurantOrder", 'DateTime'>
+    readonly completedById: FieldRef<"RestaurantOrder", 'String'>
     readonly createdAt: FieldRef<"RestaurantOrder", 'DateTime'>
   }
     
@@ -22680,6 +24214,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: RestaurantOrderItemScalarFieldEnum | RestaurantOrderItemScalarFieldEnum[]
+  }
+
+  /**
+   * RestaurantOrder.payments
+   */
+  export type RestaurantOrder$paymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Payment
+     */
+    select?: PaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Payment
+     */
+    omit?: PaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentInclude<ExtArgs> | null
+    where?: PaymentWhereInput
+    orderBy?: PaymentOrderByWithRelationInput | PaymentOrderByWithRelationInput[]
+    cursor?: PaymentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PaymentScalarFieldEnum | PaymentScalarFieldEnum[]
   }
 
   /**
@@ -23833,45 +25391,69 @@ export namespace Prisma {
 
   export type AggregateMenuItem = {
     _count: MenuItemCountAggregateOutputType | null
+    _avg: MenuItemAvgAggregateOutputType | null
+    _sum: MenuItemSumAggregateOutputType | null
     _min: MenuItemMinAggregateOutputType | null
     _max: MenuItemMaxAggregateOutputType | null
+  }
+
+  export type MenuItemAvgAggregateOutputType = {
+    price: Decimal | null
+  }
+
+  export type MenuItemSumAggregateOutputType = {
+    price: Decimal | null
   }
 
   export type MenuItemMinAggregateOutputType = {
     id: string | null
     name: string | null
+    price: Decimal | null
     description: string | null
   }
 
   export type MenuItemMaxAggregateOutputType = {
     id: string | null
     name: string | null
+    price: Decimal | null
     description: string | null
   }
 
   export type MenuItemCountAggregateOutputType = {
     id: number
     name: number
+    price: number
     description: number
     _all: number
   }
 
 
+  export type MenuItemAvgAggregateInputType = {
+    price?: true
+  }
+
+  export type MenuItemSumAggregateInputType = {
+    price?: true
+  }
+
   export type MenuItemMinAggregateInputType = {
     id?: true
     name?: true
+    price?: true
     description?: true
   }
 
   export type MenuItemMaxAggregateInputType = {
     id?: true
     name?: true
+    price?: true
     description?: true
   }
 
   export type MenuItemCountAggregateInputType = {
     id?: true
     name?: true
+    price?: true
     description?: true
     _all?: true
   }
@@ -23914,6 +25496,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: MenuItemAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: MenuItemSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: MenuItemMinAggregateInputType
@@ -23944,6 +25538,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: MenuItemCountAggregateInputType | true
+    _avg?: MenuItemAvgAggregateInputType
+    _sum?: MenuItemSumAggregateInputType
     _min?: MenuItemMinAggregateInputType
     _max?: MenuItemMaxAggregateInputType
   }
@@ -23951,8 +25547,11 @@ export namespace Prisma {
   export type MenuItemGroupByOutputType = {
     id: string
     name: string
+    price: Decimal
     description: string | null
     _count: MenuItemCountAggregateOutputType | null
+    _avg: MenuItemAvgAggregateOutputType | null
+    _sum: MenuItemSumAggregateOutputType | null
     _min: MenuItemMinAggregateOutputType | null
     _max: MenuItemMaxAggregateOutputType | null
   }
@@ -23974,6 +25573,7 @@ export namespace Prisma {
   export type MenuItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    price?: boolean
     description?: boolean
     orderItems?: boolean | MenuItem$orderItemsArgs<ExtArgs>
     _count?: boolean | MenuItemCountOutputTypeDefaultArgs<ExtArgs>
@@ -23982,22 +25582,25 @@ export namespace Prisma {
   export type MenuItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    price?: boolean
     description?: boolean
   }, ExtArgs["result"]["menuItem"]>
 
   export type MenuItemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    price?: boolean
     description?: boolean
   }, ExtArgs["result"]["menuItem"]>
 
   export type MenuItemSelectScalar = {
     id?: boolean
     name?: boolean
+    price?: boolean
     description?: boolean
   }
 
-  export type MenuItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description", ExtArgs["result"]["menuItem"]>
+  export type MenuItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "price" | "description", ExtArgs["result"]["menuItem"]>
   export type MenuItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     orderItems?: boolean | MenuItem$orderItemsArgs<ExtArgs>
     _count?: boolean | MenuItemCountOutputTypeDefaultArgs<ExtArgs>
@@ -24013,6 +25616,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
+      price: Prisma.Decimal
       description: string | null
     }, ExtArgs["result"]["menuItem"]>
     composites: {}
@@ -24440,6 +26044,7 @@ export namespace Prisma {
   interface MenuItemFieldRefs {
     readonly id: FieldRef<"MenuItem", 'String'>
     readonly name: FieldRef<"MenuItem", 'String'>
+    readonly price: FieldRef<"MenuItem", 'Decimal'>
     readonly description: FieldRef<"MenuItem", 'String'>
   }
     
@@ -31489,11 +33094,29 @@ export namespace Prisma {
   export const PaymentScalarFieldEnum: {
     id: 'id',
     folioId: 'folioId',
+    restaurantOrderId: 'restaurantOrderId',
     amount: 'amount',
+    refundedAmount: 'refundedAmount',
+    status: 'status',
+    reference: 'reference',
     method: 'method'
   };
 
   export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
+
+
+  export const PaymentRefundScalarFieldEnum: {
+    id: 'id',
+    paymentId: 'paymentId',
+    amount: 'amount',
+    status: 'status',
+    reason: 'reason',
+    providerReference: 'providerReference',
+    createdAt: 'createdAt',
+    completedAt: 'completedAt'
+  };
+
+  export type PaymentRefundScalarFieldEnum = (typeof PaymentRefundScalarFieldEnum)[keyof typeof PaymentRefundScalarFieldEnum]
 
 
   export const RestaurantOrderScalarFieldEnum: {
@@ -31503,9 +33126,16 @@ export namespace Prisma {
     roomNumber: 'roomNumber',
     waiterId: 'waiterId',
     status: 'status',
+    paymentStatus: 'paymentStatus',
+    settlementMethod: 'settlementMethod',
     subtotal: 'subtotal',
     tax: 'tax',
     total: 'total',
+    cancelledAt: 'cancelledAt',
+    cancelledById: 'cancelledById',
+    cancellationReason: 'cancellationReason',
+    completedAt: 'completedAt',
+    completedById: 'completedById',
     createdAt: 'createdAt'
   };
 
@@ -31527,6 +33157,7 @@ export namespace Prisma {
   export const MenuItemScalarFieldEnum: {
     id: 'id',
     name: 'name',
+    price: 'price',
     description: 'description'
   };
 
@@ -31856,6 +33487,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'PaymentStatus'
+   */
+  export type EnumPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'PaymentStatus[]'
+   */
+  export type ListEnumPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentStatus[]'>
+    
+
+
+  /**
    * Reference to a field of type 'PaymentMethod'
    */
   export type EnumPaymentMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentMethod'>
@@ -31870,6 +33515,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'PaymentRefundStatus'
+   */
+  export type EnumPaymentRefundStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentRefundStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'PaymentRefundStatus[]'
+   */
+  export type ListEnumPaymentRefundStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentRefundStatus[]'>
+    
+
+
+  /**
    * Reference to a field of type 'RestaurantOrderStatus'
    */
   export type EnumRestaurantOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RestaurantOrderStatus'>
@@ -31880,6 +33539,34 @@ export namespace Prisma {
    * Reference to a field of type 'RestaurantOrderStatus[]'
    */
   export type ListEnumRestaurantOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RestaurantOrderStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'RestaurantPaymentStatus'
+   */
+  export type EnumRestaurantPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RestaurantPaymentStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'RestaurantPaymentStatus[]'
+   */
+  export type ListEnumRestaurantPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RestaurantPaymentStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'RestaurantSettlementMethod'
+   */
+  export type EnumRestaurantSettlementMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RestaurantSettlementMethod'>
+    
+
+
+  /**
+   * Reference to a field of type 'RestaurantSettlementMethod[]'
+   */
+  export type ListEnumRestaurantSettlementMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RestaurantSettlementMethod[]'>
     
 
 
@@ -33132,18 +34819,30 @@ export namespace Prisma {
     OR?: PaymentWhereInput[]
     NOT?: PaymentWhereInput | PaymentWhereInput[]
     id?: StringFilter<"Payment"> | string
-    folioId?: StringFilter<"Payment"> | string
+    folioId?: StringNullableFilter<"Payment"> | string | null
+    restaurantOrderId?: StringNullableFilter<"Payment"> | string | null
     amount?: DecimalFilter<"Payment"> | Decimal | DecimalJsLike | number | string
+    refundedAmount?: DecimalFilter<"Payment"> | Decimal | DecimalJsLike | number | string
+    status?: EnumPaymentStatusFilter<"Payment"> | $Enums.PaymentStatus
+    reference?: StringNullableFilter<"Payment"> | string | null
     method?: EnumPaymentMethodFilter<"Payment"> | $Enums.PaymentMethod
-    folio?: XOR<FolioScalarRelationFilter, FolioWhereInput>
+    folio?: XOR<FolioNullableScalarRelationFilter, FolioWhereInput> | null
+    restaurantOrder?: XOR<RestaurantOrderNullableScalarRelationFilter, RestaurantOrderWhereInput> | null
+    refunds?: PaymentRefundListRelationFilter
   }
 
   export type PaymentOrderByWithRelationInput = {
     id?: SortOrder
-    folioId?: SortOrder
+    folioId?: SortOrderInput | SortOrder
+    restaurantOrderId?: SortOrderInput | SortOrder
     amount?: SortOrder
+    refundedAmount?: SortOrder
+    status?: SortOrder
+    reference?: SortOrderInput | SortOrder
     method?: SortOrder
     folio?: FolioOrderByWithRelationInput
+    restaurantOrder?: RestaurantOrderOrderByWithRelationInput
+    refunds?: PaymentRefundOrderByRelationAggregateInput
   }
 
   export type PaymentWhereUniqueInput = Prisma.AtLeast<{
@@ -33151,16 +34850,26 @@ export namespace Prisma {
     AND?: PaymentWhereInput | PaymentWhereInput[]
     OR?: PaymentWhereInput[]
     NOT?: PaymentWhereInput | PaymentWhereInput[]
-    folioId?: StringFilter<"Payment"> | string
+    folioId?: StringNullableFilter<"Payment"> | string | null
+    restaurantOrderId?: StringNullableFilter<"Payment"> | string | null
     amount?: DecimalFilter<"Payment"> | Decimal | DecimalJsLike | number | string
+    refundedAmount?: DecimalFilter<"Payment"> | Decimal | DecimalJsLike | number | string
+    status?: EnumPaymentStatusFilter<"Payment"> | $Enums.PaymentStatus
+    reference?: StringNullableFilter<"Payment"> | string | null
     method?: EnumPaymentMethodFilter<"Payment"> | $Enums.PaymentMethod
-    folio?: XOR<FolioScalarRelationFilter, FolioWhereInput>
+    folio?: XOR<FolioNullableScalarRelationFilter, FolioWhereInput> | null
+    restaurantOrder?: XOR<RestaurantOrderNullableScalarRelationFilter, RestaurantOrderWhereInput> | null
+    refunds?: PaymentRefundListRelationFilter
   }, "id">
 
   export type PaymentOrderByWithAggregationInput = {
     id?: SortOrder
-    folioId?: SortOrder
+    folioId?: SortOrderInput | SortOrder
+    restaurantOrderId?: SortOrderInput | SortOrder
     amount?: SortOrder
+    refundedAmount?: SortOrder
+    status?: SortOrder
+    reference?: SortOrderInput | SortOrder
     method?: SortOrder
     _count?: PaymentCountOrderByAggregateInput
     _avg?: PaymentAvgOrderByAggregateInput
@@ -33174,9 +34883,85 @@ export namespace Prisma {
     OR?: PaymentScalarWhereWithAggregatesInput[]
     NOT?: PaymentScalarWhereWithAggregatesInput | PaymentScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Payment"> | string
-    folioId?: StringWithAggregatesFilter<"Payment"> | string
+    folioId?: StringNullableWithAggregatesFilter<"Payment"> | string | null
+    restaurantOrderId?: StringNullableWithAggregatesFilter<"Payment"> | string | null
     amount?: DecimalWithAggregatesFilter<"Payment"> | Decimal | DecimalJsLike | number | string
+    refundedAmount?: DecimalWithAggregatesFilter<"Payment"> | Decimal | DecimalJsLike | number | string
+    status?: EnumPaymentStatusWithAggregatesFilter<"Payment"> | $Enums.PaymentStatus
+    reference?: StringNullableWithAggregatesFilter<"Payment"> | string | null
     method?: EnumPaymentMethodWithAggregatesFilter<"Payment"> | $Enums.PaymentMethod
+  }
+
+  export type PaymentRefundWhereInput = {
+    AND?: PaymentRefundWhereInput | PaymentRefundWhereInput[]
+    OR?: PaymentRefundWhereInput[]
+    NOT?: PaymentRefundWhereInput | PaymentRefundWhereInput[]
+    id?: StringFilter<"PaymentRefund"> | string
+    paymentId?: StringFilter<"PaymentRefund"> | string
+    amount?: DecimalFilter<"PaymentRefund"> | Decimal | DecimalJsLike | number | string
+    status?: EnumPaymentRefundStatusFilter<"PaymentRefund"> | $Enums.PaymentRefundStatus
+    reason?: StringNullableFilter<"PaymentRefund"> | string | null
+    providerReference?: StringNullableFilter<"PaymentRefund"> | string | null
+    createdAt?: DateTimeFilter<"PaymentRefund"> | Date | string
+    completedAt?: DateTimeNullableFilter<"PaymentRefund"> | Date | string | null
+    payment?: XOR<PaymentScalarRelationFilter, PaymentWhereInput>
+  }
+
+  export type PaymentRefundOrderByWithRelationInput = {
+    id?: SortOrder
+    paymentId?: SortOrder
+    amount?: SortOrder
+    status?: SortOrder
+    reason?: SortOrderInput | SortOrder
+    providerReference?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    completedAt?: SortOrderInput | SortOrder
+    payment?: PaymentOrderByWithRelationInput
+  }
+
+  export type PaymentRefundWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: PaymentRefundWhereInput | PaymentRefundWhereInput[]
+    OR?: PaymentRefundWhereInput[]
+    NOT?: PaymentRefundWhereInput | PaymentRefundWhereInput[]
+    paymentId?: StringFilter<"PaymentRefund"> | string
+    amount?: DecimalFilter<"PaymentRefund"> | Decimal | DecimalJsLike | number | string
+    status?: EnumPaymentRefundStatusFilter<"PaymentRefund"> | $Enums.PaymentRefundStatus
+    reason?: StringNullableFilter<"PaymentRefund"> | string | null
+    providerReference?: StringNullableFilter<"PaymentRefund"> | string | null
+    createdAt?: DateTimeFilter<"PaymentRefund"> | Date | string
+    completedAt?: DateTimeNullableFilter<"PaymentRefund"> | Date | string | null
+    payment?: XOR<PaymentScalarRelationFilter, PaymentWhereInput>
+  }, "id">
+
+  export type PaymentRefundOrderByWithAggregationInput = {
+    id?: SortOrder
+    paymentId?: SortOrder
+    amount?: SortOrder
+    status?: SortOrder
+    reason?: SortOrderInput | SortOrder
+    providerReference?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    completedAt?: SortOrderInput | SortOrder
+    _count?: PaymentRefundCountOrderByAggregateInput
+    _avg?: PaymentRefundAvgOrderByAggregateInput
+    _max?: PaymentRefundMaxOrderByAggregateInput
+    _min?: PaymentRefundMinOrderByAggregateInput
+    _sum?: PaymentRefundSumOrderByAggregateInput
+  }
+
+  export type PaymentRefundScalarWhereWithAggregatesInput = {
+    AND?: PaymentRefundScalarWhereWithAggregatesInput | PaymentRefundScalarWhereWithAggregatesInput[]
+    OR?: PaymentRefundScalarWhereWithAggregatesInput[]
+    NOT?: PaymentRefundScalarWhereWithAggregatesInput | PaymentRefundScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PaymentRefund"> | string
+    paymentId?: StringWithAggregatesFilter<"PaymentRefund"> | string
+    amount?: DecimalWithAggregatesFilter<"PaymentRefund"> | Decimal | DecimalJsLike | number | string
+    status?: EnumPaymentRefundStatusWithAggregatesFilter<"PaymentRefund"> | $Enums.PaymentRefundStatus
+    reason?: StringNullableWithAggregatesFilter<"PaymentRefund"> | string | null
+    providerReference?: StringNullableWithAggregatesFilter<"PaymentRefund"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"PaymentRefund"> | Date | string
+    completedAt?: DateTimeNullableWithAggregatesFilter<"PaymentRefund"> | Date | string | null
   }
 
   export type RestaurantOrderWhereInput = {
@@ -33189,13 +34974,21 @@ export namespace Prisma {
     roomNumber?: StringNullableFilter<"RestaurantOrder"> | string | null
     waiterId?: StringFilter<"RestaurantOrder"> | string
     status?: EnumRestaurantOrderStatusFilter<"RestaurantOrder"> | $Enums.RestaurantOrderStatus
+    paymentStatus?: EnumRestaurantPaymentStatusFilter<"RestaurantOrder"> | $Enums.RestaurantPaymentStatus
+    settlementMethod?: EnumRestaurantSettlementMethodNullableFilter<"RestaurantOrder"> | $Enums.RestaurantSettlementMethod | null
     subtotal?: DecimalFilter<"RestaurantOrder"> | Decimal | DecimalJsLike | number | string
     tax?: DecimalFilter<"RestaurantOrder"> | Decimal | DecimalJsLike | number | string
     total?: DecimalFilter<"RestaurantOrder"> | Decimal | DecimalJsLike | number | string
+    cancelledAt?: DateTimeNullableFilter<"RestaurantOrder"> | Date | string | null
+    cancelledById?: StringNullableFilter<"RestaurantOrder"> | string | null
+    cancellationReason?: StringNullableFilter<"RestaurantOrder"> | string | null
+    completedAt?: DateTimeNullableFilter<"RestaurantOrder"> | Date | string | null
+    completedById?: StringNullableFilter<"RestaurantOrder"> | string | null
     createdAt?: DateTimeFilter<"RestaurantOrder"> | Date | string
     reservation?: XOR<ReservationNullableScalarRelationFilter, ReservationWhereInput> | null
     guest?: XOR<GuestNullableScalarRelationFilter, GuestWhereInput> | null
     items?: RestaurantOrderItemListRelationFilter
+    payments?: PaymentListRelationFilter
   }
 
   export type RestaurantOrderOrderByWithRelationInput = {
@@ -33205,13 +34998,21 @@ export namespace Prisma {
     roomNumber?: SortOrderInput | SortOrder
     waiterId?: SortOrder
     status?: SortOrder
+    paymentStatus?: SortOrder
+    settlementMethod?: SortOrderInput | SortOrder
     subtotal?: SortOrder
     tax?: SortOrder
     total?: SortOrder
+    cancelledAt?: SortOrderInput | SortOrder
+    cancelledById?: SortOrderInput | SortOrder
+    cancellationReason?: SortOrderInput | SortOrder
+    completedAt?: SortOrderInput | SortOrder
+    completedById?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     reservation?: ReservationOrderByWithRelationInput
     guest?: GuestOrderByWithRelationInput
     items?: RestaurantOrderItemOrderByRelationAggregateInput
+    payments?: PaymentOrderByRelationAggregateInput
   }
 
   export type RestaurantOrderWhereUniqueInput = Prisma.AtLeast<{
@@ -33224,13 +35025,21 @@ export namespace Prisma {
     roomNumber?: StringNullableFilter<"RestaurantOrder"> | string | null
     waiterId?: StringFilter<"RestaurantOrder"> | string
     status?: EnumRestaurantOrderStatusFilter<"RestaurantOrder"> | $Enums.RestaurantOrderStatus
+    paymentStatus?: EnumRestaurantPaymentStatusFilter<"RestaurantOrder"> | $Enums.RestaurantPaymentStatus
+    settlementMethod?: EnumRestaurantSettlementMethodNullableFilter<"RestaurantOrder"> | $Enums.RestaurantSettlementMethod | null
     subtotal?: DecimalFilter<"RestaurantOrder"> | Decimal | DecimalJsLike | number | string
     tax?: DecimalFilter<"RestaurantOrder"> | Decimal | DecimalJsLike | number | string
     total?: DecimalFilter<"RestaurantOrder"> | Decimal | DecimalJsLike | number | string
+    cancelledAt?: DateTimeNullableFilter<"RestaurantOrder"> | Date | string | null
+    cancelledById?: StringNullableFilter<"RestaurantOrder"> | string | null
+    cancellationReason?: StringNullableFilter<"RestaurantOrder"> | string | null
+    completedAt?: DateTimeNullableFilter<"RestaurantOrder"> | Date | string | null
+    completedById?: StringNullableFilter<"RestaurantOrder"> | string | null
     createdAt?: DateTimeFilter<"RestaurantOrder"> | Date | string
     reservation?: XOR<ReservationNullableScalarRelationFilter, ReservationWhereInput> | null
     guest?: XOR<GuestNullableScalarRelationFilter, GuestWhereInput> | null
     items?: RestaurantOrderItemListRelationFilter
+    payments?: PaymentListRelationFilter
   }, "id">
 
   export type RestaurantOrderOrderByWithAggregationInput = {
@@ -33240,9 +35049,16 @@ export namespace Prisma {
     roomNumber?: SortOrderInput | SortOrder
     waiterId?: SortOrder
     status?: SortOrder
+    paymentStatus?: SortOrder
+    settlementMethod?: SortOrderInput | SortOrder
     subtotal?: SortOrder
     tax?: SortOrder
     total?: SortOrder
+    cancelledAt?: SortOrderInput | SortOrder
+    cancelledById?: SortOrderInput | SortOrder
+    cancellationReason?: SortOrderInput | SortOrder
+    completedAt?: SortOrderInput | SortOrder
+    completedById?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: RestaurantOrderCountOrderByAggregateInput
     _avg?: RestaurantOrderAvgOrderByAggregateInput
@@ -33261,9 +35077,16 @@ export namespace Prisma {
     roomNumber?: StringNullableWithAggregatesFilter<"RestaurantOrder"> | string | null
     waiterId?: StringWithAggregatesFilter<"RestaurantOrder"> | string
     status?: EnumRestaurantOrderStatusWithAggregatesFilter<"RestaurantOrder"> | $Enums.RestaurantOrderStatus
+    paymentStatus?: EnumRestaurantPaymentStatusWithAggregatesFilter<"RestaurantOrder"> | $Enums.RestaurantPaymentStatus
+    settlementMethod?: EnumRestaurantSettlementMethodNullableWithAggregatesFilter<"RestaurantOrder"> | $Enums.RestaurantSettlementMethod | null
     subtotal?: DecimalWithAggregatesFilter<"RestaurantOrder"> | Decimal | DecimalJsLike | number | string
     tax?: DecimalWithAggregatesFilter<"RestaurantOrder"> | Decimal | DecimalJsLike | number | string
     total?: DecimalWithAggregatesFilter<"RestaurantOrder"> | Decimal | DecimalJsLike | number | string
+    cancelledAt?: DateTimeNullableWithAggregatesFilter<"RestaurantOrder"> | Date | string | null
+    cancelledById?: StringNullableWithAggregatesFilter<"RestaurantOrder"> | string | null
+    cancellationReason?: StringNullableWithAggregatesFilter<"RestaurantOrder"> | string | null
+    completedAt?: DateTimeNullableWithAggregatesFilter<"RestaurantOrder"> | Date | string | null
+    completedById?: StringNullableWithAggregatesFilter<"RestaurantOrder"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"RestaurantOrder"> | Date | string
   }
 
@@ -33338,6 +35161,7 @@ export namespace Prisma {
     NOT?: MenuItemWhereInput | MenuItemWhereInput[]
     id?: StringFilter<"MenuItem"> | string
     name?: StringFilter<"MenuItem"> | string
+    price?: DecimalFilter<"MenuItem"> | Decimal | DecimalJsLike | number | string
     description?: StringNullableFilter<"MenuItem"> | string | null
     orderItems?: RestaurantOrderItemListRelationFilter
   }
@@ -33345,6 +35169,7 @@ export namespace Prisma {
   export type MenuItemOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    price?: SortOrder
     description?: SortOrderInput | SortOrder
     orderItems?: RestaurantOrderItemOrderByRelationAggregateInput
   }
@@ -33355,6 +35180,7 @@ export namespace Prisma {
     OR?: MenuItemWhereInput[]
     NOT?: MenuItemWhereInput | MenuItemWhereInput[]
     name?: StringFilter<"MenuItem"> | string
+    price?: DecimalFilter<"MenuItem"> | Decimal | DecimalJsLike | number | string
     description?: StringNullableFilter<"MenuItem"> | string | null
     orderItems?: RestaurantOrderItemListRelationFilter
   }, "id">
@@ -33362,10 +35188,13 @@ export namespace Prisma {
   export type MenuItemOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    price?: SortOrder
     description?: SortOrderInput | SortOrder
     _count?: MenuItemCountOrderByAggregateInput
+    _avg?: MenuItemAvgOrderByAggregateInput
     _max?: MenuItemMaxOrderByAggregateInput
     _min?: MenuItemMinOrderByAggregateInput
+    _sum?: MenuItemSumOrderByAggregateInput
   }
 
   export type MenuItemScalarWhereWithAggregatesInput = {
@@ -33374,6 +35203,7 @@ export namespace Prisma {
     NOT?: MenuItemScalarWhereWithAggregatesInput | MenuItemScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"MenuItem"> | string
     name?: StringWithAggregatesFilter<"MenuItem"> | string
+    price?: DecimalWithAggregatesFilter<"MenuItem"> | Decimal | DecimalJsLike | number | string
     description?: StringNullableWithAggregatesFilter<"MenuItem"> | string | null
   }
 
@@ -35053,49 +36883,156 @@ export namespace Prisma {
   export type PaymentCreateInput = {
     id?: string
     amount: Decimal | DecimalJsLike | number | string
+    refundedAmount?: Decimal | DecimalJsLike | number | string
+    status?: $Enums.PaymentStatus
+    reference?: string | null
     method: $Enums.PaymentMethod
-    folio: FolioCreateNestedOneWithoutPaymentsInput
+    folio?: FolioCreateNestedOneWithoutPaymentsInput
+    restaurantOrder?: RestaurantOrderCreateNestedOneWithoutPaymentsInput
+    refunds?: PaymentRefundCreateNestedManyWithoutPaymentInput
   }
 
   export type PaymentUncheckedCreateInput = {
     id?: string
-    folioId: string
+    folioId?: string | null
+    restaurantOrderId?: string | null
     amount: Decimal | DecimalJsLike | number | string
+    refundedAmount?: Decimal | DecimalJsLike | number | string
+    status?: $Enums.PaymentStatus
+    reference?: string | null
     method: $Enums.PaymentMethod
+    refunds?: PaymentRefundUncheckedCreateNestedManyWithoutPaymentInput
   }
 
   export type PaymentUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    refundedAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
-    folio?: FolioUpdateOneRequiredWithoutPaymentsNestedInput
+    folio?: FolioUpdateOneWithoutPaymentsNestedInput
+    restaurantOrder?: RestaurantOrderUpdateOneWithoutPaymentsNestedInput
+    refunds?: PaymentRefundUpdateManyWithoutPaymentNestedInput
   }
 
   export type PaymentUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    folioId?: StringFieldUpdateOperationsInput | string
+    folioId?: NullableStringFieldUpdateOperationsInput | string | null
+    restaurantOrderId?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    refundedAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    refunds?: PaymentRefundUncheckedUpdateManyWithoutPaymentNestedInput
   }
 
   export type PaymentCreateManyInput = {
     id?: string
-    folioId: string
+    folioId?: string | null
+    restaurantOrderId?: string | null
     amount: Decimal | DecimalJsLike | number | string
+    refundedAmount?: Decimal | DecimalJsLike | number | string
+    status?: $Enums.PaymentStatus
+    reference?: string | null
     method: $Enums.PaymentMethod
   }
 
   export type PaymentUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    refundedAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   }
 
   export type PaymentUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    folioId?: StringFieldUpdateOperationsInput | string
+    folioId?: NullableStringFieldUpdateOperationsInput | string | null
+    restaurantOrderId?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    refundedAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+  }
+
+  export type PaymentRefundCreateInput = {
+    id?: string
+    amount: Decimal | DecimalJsLike | number | string
+    status?: $Enums.PaymentRefundStatus
+    reason?: string | null
+    providerReference?: string | null
+    createdAt?: Date | string
+    completedAt?: Date | string | null
+    payment: PaymentCreateNestedOneWithoutRefundsInput
+  }
+
+  export type PaymentRefundUncheckedCreateInput = {
+    id?: string
+    paymentId: string
+    amount: Decimal | DecimalJsLike | number | string
+    status?: $Enums.PaymentRefundStatus
+    reason?: string | null
+    providerReference?: string | null
+    createdAt?: Date | string
+    completedAt?: Date | string | null
+  }
+
+  export type PaymentRefundUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumPaymentRefundStatusFieldUpdateOperationsInput | $Enums.PaymentRefundStatus
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    providerReference?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    payment?: PaymentUpdateOneRequiredWithoutRefundsNestedInput
+  }
+
+  export type PaymentRefundUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    paymentId?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumPaymentRefundStatusFieldUpdateOperationsInput | $Enums.PaymentRefundStatus
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    providerReference?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type PaymentRefundCreateManyInput = {
+    id?: string
+    paymentId: string
+    amount: Decimal | DecimalJsLike | number | string
+    status?: $Enums.PaymentRefundStatus
+    reason?: string | null
+    providerReference?: string | null
+    createdAt?: Date | string
+    completedAt?: Date | string | null
+  }
+
+  export type PaymentRefundUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumPaymentRefundStatusFieldUpdateOperationsInput | $Enums.PaymentRefundStatus
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    providerReference?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type PaymentRefundUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    paymentId?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumPaymentRefundStatusFieldUpdateOperationsInput | $Enums.PaymentRefundStatus
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    providerReference?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type RestaurantOrderCreateInput = {
@@ -35103,13 +37040,21 @@ export namespace Prisma {
     roomNumber?: string | null
     waiterId: string
     status: $Enums.RestaurantOrderStatus
+    paymentStatus?: $Enums.RestaurantPaymentStatus
+    settlementMethod?: $Enums.RestaurantSettlementMethod | null
     subtotal: Decimal | DecimalJsLike | number | string
     tax: Decimal | DecimalJsLike | number | string
     total: Decimal | DecimalJsLike | number | string
+    cancelledAt?: Date | string | null
+    cancelledById?: string | null
+    cancellationReason?: string | null
+    completedAt?: Date | string | null
+    completedById?: string | null
     createdAt?: Date | string
     reservation?: ReservationCreateNestedOneWithoutRestaurantOrdersInput
     guest?: GuestCreateNestedOneWithoutRestaurantOrdersInput
     items?: RestaurantOrderItemCreateNestedManyWithoutOrderInput
+    payments?: PaymentCreateNestedManyWithoutRestaurantOrderInput
   }
 
   export type RestaurantOrderUncheckedCreateInput = {
@@ -35119,11 +37064,19 @@ export namespace Prisma {
     roomNumber?: string | null
     waiterId: string
     status: $Enums.RestaurantOrderStatus
+    paymentStatus?: $Enums.RestaurantPaymentStatus
+    settlementMethod?: $Enums.RestaurantSettlementMethod | null
     subtotal: Decimal | DecimalJsLike | number | string
     tax: Decimal | DecimalJsLike | number | string
     total: Decimal | DecimalJsLike | number | string
+    cancelledAt?: Date | string | null
+    cancelledById?: string | null
+    cancellationReason?: string | null
+    completedAt?: Date | string | null
+    completedById?: string | null
     createdAt?: Date | string
     items?: RestaurantOrderItemUncheckedCreateNestedManyWithoutOrderInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutRestaurantOrderInput
   }
 
   export type RestaurantOrderUpdateInput = {
@@ -35131,13 +37084,21 @@ export namespace Prisma {
     roomNumber?: NullableStringFieldUpdateOperationsInput | string | null
     waiterId?: StringFieldUpdateOperationsInput | string
     status?: EnumRestaurantOrderStatusFieldUpdateOperationsInput | $Enums.RestaurantOrderStatus
+    paymentStatus?: EnumRestaurantPaymentStatusFieldUpdateOperationsInput | $Enums.RestaurantPaymentStatus
+    settlementMethod?: NullableEnumRestaurantSettlementMethodFieldUpdateOperationsInput | $Enums.RestaurantSettlementMethod | null
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reservation?: ReservationUpdateOneWithoutRestaurantOrdersNestedInput
     guest?: GuestUpdateOneWithoutRestaurantOrdersNestedInput
     items?: RestaurantOrderItemUpdateManyWithoutOrderNestedInput
+    payments?: PaymentUpdateManyWithoutRestaurantOrderNestedInput
   }
 
   export type RestaurantOrderUncheckedUpdateInput = {
@@ -35147,11 +37108,19 @@ export namespace Prisma {
     roomNumber?: NullableStringFieldUpdateOperationsInput | string | null
     waiterId?: StringFieldUpdateOperationsInput | string
     status?: EnumRestaurantOrderStatusFieldUpdateOperationsInput | $Enums.RestaurantOrderStatus
+    paymentStatus?: EnumRestaurantPaymentStatusFieldUpdateOperationsInput | $Enums.RestaurantPaymentStatus
+    settlementMethod?: NullableEnumRestaurantSettlementMethodFieldUpdateOperationsInput | $Enums.RestaurantSettlementMethod | null
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: RestaurantOrderItemUncheckedUpdateManyWithoutOrderNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutRestaurantOrderNestedInput
   }
 
   export type RestaurantOrderCreateManyInput = {
@@ -35161,9 +37130,16 @@ export namespace Prisma {
     roomNumber?: string | null
     waiterId: string
     status: $Enums.RestaurantOrderStatus
+    paymentStatus?: $Enums.RestaurantPaymentStatus
+    settlementMethod?: $Enums.RestaurantSettlementMethod | null
     subtotal: Decimal | DecimalJsLike | number | string
     tax: Decimal | DecimalJsLike | number | string
     total: Decimal | DecimalJsLike | number | string
+    cancelledAt?: Date | string | null
+    cancelledById?: string | null
+    cancellationReason?: string | null
+    completedAt?: Date | string | null
+    completedById?: string | null
     createdAt?: Date | string
   }
 
@@ -35172,9 +37148,16 @@ export namespace Prisma {
     roomNumber?: NullableStringFieldUpdateOperationsInput | string | null
     waiterId?: StringFieldUpdateOperationsInput | string
     status?: EnumRestaurantOrderStatusFieldUpdateOperationsInput | $Enums.RestaurantOrderStatus
+    paymentStatus?: EnumRestaurantPaymentStatusFieldUpdateOperationsInput | $Enums.RestaurantPaymentStatus
+    settlementMethod?: NullableEnumRestaurantSettlementMethodFieldUpdateOperationsInput | $Enums.RestaurantSettlementMethod | null
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -35185,9 +37168,16 @@ export namespace Prisma {
     roomNumber?: NullableStringFieldUpdateOperationsInput | string | null
     waiterId?: StringFieldUpdateOperationsInput | string
     status?: EnumRestaurantOrderStatusFieldUpdateOperationsInput | $Enums.RestaurantOrderStatus
+    paymentStatus?: EnumRestaurantPaymentStatusFieldUpdateOperationsInput | $Enums.RestaurantPaymentStatus
+    settlementMethod?: NullableEnumRestaurantSettlementMethodFieldUpdateOperationsInput | $Enums.RestaurantSettlementMethod | null
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -35255,6 +37245,7 @@ export namespace Prisma {
   export type MenuItemCreateInput = {
     id?: string
     name: string
+    price: Decimal | DecimalJsLike | number | string
     description?: string | null
     orderItems?: RestaurantOrderItemCreateNestedManyWithoutMenuItemInput
   }
@@ -35262,6 +37253,7 @@ export namespace Prisma {
   export type MenuItemUncheckedCreateInput = {
     id?: string
     name: string
+    price: Decimal | DecimalJsLike | number | string
     description?: string | null
     orderItems?: RestaurantOrderItemUncheckedCreateNestedManyWithoutMenuItemInput
   }
@@ -35269,6 +37261,7 @@ export namespace Prisma {
   export type MenuItemUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     orderItems?: RestaurantOrderItemUpdateManyWithoutMenuItemNestedInput
   }
@@ -35276,6 +37269,7 @@ export namespace Prisma {
   export type MenuItemUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     orderItems?: RestaurantOrderItemUncheckedUpdateManyWithoutMenuItemNestedInput
   }
@@ -35283,18 +37277,21 @@ export namespace Prisma {
   export type MenuItemCreateManyInput = {
     id?: string
     name: string
+    price: Decimal | DecimalJsLike | number | string
     description?: string | null
   }
 
   export type MenuItemUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MenuItemUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -36864,6 +38861,13 @@ export namespace Prisma {
     _max?: NestedEnumFolioTransactionTypeFilter<$PrismaModel>
   }
 
+  export type EnumPaymentStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentStatus | EnumPaymentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentStatus[] | ListEnumPaymentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentStatus[] | ListEnumPaymentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentStatusFilter<$PrismaModel> | $Enums.PaymentStatus
+  }
+
   export type EnumPaymentMethodFilter<$PrismaModel = never> = {
     equals?: $Enums.PaymentMethod | EnumPaymentMethodFieldRefInput<$PrismaModel>
     in?: $Enums.PaymentMethod[] | ListEnumPaymentMethodFieldRefInput<$PrismaModel>
@@ -36871,33 +38875,72 @@ export namespace Prisma {
     not?: NestedEnumPaymentMethodFilter<$PrismaModel> | $Enums.PaymentMethod
   }
 
+  export type RestaurantOrderNullableScalarRelationFilter = {
+    is?: RestaurantOrderWhereInput | null
+    isNot?: RestaurantOrderWhereInput | null
+  }
+
+  export type PaymentRefundListRelationFilter = {
+    every?: PaymentRefundWhereInput
+    some?: PaymentRefundWhereInput
+    none?: PaymentRefundWhereInput
+  }
+
+  export type PaymentRefundOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type PaymentCountOrderByAggregateInput = {
     id?: SortOrder
     folioId?: SortOrder
+    restaurantOrderId?: SortOrder
     amount?: SortOrder
+    refundedAmount?: SortOrder
+    status?: SortOrder
+    reference?: SortOrder
     method?: SortOrder
   }
 
   export type PaymentAvgOrderByAggregateInput = {
     amount?: SortOrder
+    refundedAmount?: SortOrder
   }
 
   export type PaymentMaxOrderByAggregateInput = {
     id?: SortOrder
     folioId?: SortOrder
+    restaurantOrderId?: SortOrder
     amount?: SortOrder
+    refundedAmount?: SortOrder
+    status?: SortOrder
+    reference?: SortOrder
     method?: SortOrder
   }
 
   export type PaymentMinOrderByAggregateInput = {
     id?: SortOrder
     folioId?: SortOrder
+    restaurantOrderId?: SortOrder
     amount?: SortOrder
+    refundedAmount?: SortOrder
+    status?: SortOrder
+    reference?: SortOrder
     method?: SortOrder
   }
 
   export type PaymentSumOrderByAggregateInput = {
     amount?: SortOrder
+    refundedAmount?: SortOrder
+  }
+
+  export type EnumPaymentStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentStatus | EnumPaymentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentStatus[] | ListEnumPaymentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentStatus[] | ListEnumPaymentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentStatusWithAggregatesFilter<$PrismaModel> | $Enums.PaymentStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPaymentStatusFilter<$PrismaModel>
+    _max?: NestedEnumPaymentStatusFilter<$PrismaModel>
   }
 
   export type EnumPaymentMethodWithAggregatesFilter<$PrismaModel = never> = {
@@ -36910,11 +38953,88 @@ export namespace Prisma {
     _max?: NestedEnumPaymentMethodFilter<$PrismaModel>
   }
 
+  export type EnumPaymentRefundStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentRefundStatus | EnumPaymentRefundStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentRefundStatus[] | ListEnumPaymentRefundStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentRefundStatus[] | ListEnumPaymentRefundStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentRefundStatusFilter<$PrismaModel> | $Enums.PaymentRefundStatus
+  }
+
+  export type PaymentScalarRelationFilter = {
+    is?: PaymentWhereInput
+    isNot?: PaymentWhereInput
+  }
+
+  export type PaymentRefundCountOrderByAggregateInput = {
+    id?: SortOrder
+    paymentId?: SortOrder
+    amount?: SortOrder
+    status?: SortOrder
+    reason?: SortOrder
+    providerReference?: SortOrder
+    createdAt?: SortOrder
+    completedAt?: SortOrder
+  }
+
+  export type PaymentRefundAvgOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type PaymentRefundMaxOrderByAggregateInput = {
+    id?: SortOrder
+    paymentId?: SortOrder
+    amount?: SortOrder
+    status?: SortOrder
+    reason?: SortOrder
+    providerReference?: SortOrder
+    createdAt?: SortOrder
+    completedAt?: SortOrder
+  }
+
+  export type PaymentRefundMinOrderByAggregateInput = {
+    id?: SortOrder
+    paymentId?: SortOrder
+    amount?: SortOrder
+    status?: SortOrder
+    reason?: SortOrder
+    providerReference?: SortOrder
+    createdAt?: SortOrder
+    completedAt?: SortOrder
+  }
+
+  export type PaymentRefundSumOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type EnumPaymentRefundStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentRefundStatus | EnumPaymentRefundStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentRefundStatus[] | ListEnumPaymentRefundStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentRefundStatus[] | ListEnumPaymentRefundStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentRefundStatusWithAggregatesFilter<$PrismaModel> | $Enums.PaymentRefundStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPaymentRefundStatusFilter<$PrismaModel>
+    _max?: NestedEnumPaymentRefundStatusFilter<$PrismaModel>
+  }
+
   export type EnumRestaurantOrderStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.RestaurantOrderStatus | EnumRestaurantOrderStatusFieldRefInput<$PrismaModel>
     in?: $Enums.RestaurantOrderStatus[] | ListEnumRestaurantOrderStatusFieldRefInput<$PrismaModel>
     notIn?: $Enums.RestaurantOrderStatus[] | ListEnumRestaurantOrderStatusFieldRefInput<$PrismaModel>
     not?: NestedEnumRestaurantOrderStatusFilter<$PrismaModel> | $Enums.RestaurantOrderStatus
+  }
+
+  export type EnumRestaurantPaymentStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.RestaurantPaymentStatus | EnumRestaurantPaymentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.RestaurantPaymentStatus[] | ListEnumRestaurantPaymentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RestaurantPaymentStatus[] | ListEnumRestaurantPaymentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumRestaurantPaymentStatusFilter<$PrismaModel> | $Enums.RestaurantPaymentStatus
+  }
+
+  export type EnumRestaurantSettlementMethodNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.RestaurantSettlementMethod | EnumRestaurantSettlementMethodFieldRefInput<$PrismaModel> | null
+    in?: $Enums.RestaurantSettlementMethod[] | ListEnumRestaurantSettlementMethodFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.RestaurantSettlementMethod[] | ListEnumRestaurantSettlementMethodFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumRestaurantSettlementMethodNullableFilter<$PrismaModel> | $Enums.RestaurantSettlementMethod | null
   }
 
   export type ReservationNullableScalarRelationFilter = {
@@ -36944,9 +39064,16 @@ export namespace Prisma {
     roomNumber?: SortOrder
     waiterId?: SortOrder
     status?: SortOrder
+    paymentStatus?: SortOrder
+    settlementMethod?: SortOrder
     subtotal?: SortOrder
     tax?: SortOrder
     total?: SortOrder
+    cancelledAt?: SortOrder
+    cancelledById?: SortOrder
+    cancellationReason?: SortOrder
+    completedAt?: SortOrder
+    completedById?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -36963,9 +39090,16 @@ export namespace Prisma {
     roomNumber?: SortOrder
     waiterId?: SortOrder
     status?: SortOrder
+    paymentStatus?: SortOrder
+    settlementMethod?: SortOrder
     subtotal?: SortOrder
     tax?: SortOrder
     total?: SortOrder
+    cancelledAt?: SortOrder
+    cancelledById?: SortOrder
+    cancellationReason?: SortOrder
+    completedAt?: SortOrder
+    completedById?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -36976,9 +39110,16 @@ export namespace Prisma {
     roomNumber?: SortOrder
     waiterId?: SortOrder
     status?: SortOrder
+    paymentStatus?: SortOrder
+    settlementMethod?: SortOrder
     subtotal?: SortOrder
     tax?: SortOrder
     total?: SortOrder
+    cancelledAt?: SortOrder
+    cancelledById?: SortOrder
+    cancellationReason?: SortOrder
+    completedAt?: SortOrder
+    completedById?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -36996,6 +39137,26 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumRestaurantOrderStatusFilter<$PrismaModel>
     _max?: NestedEnumRestaurantOrderStatusFilter<$PrismaModel>
+  }
+
+  export type EnumRestaurantPaymentStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.RestaurantPaymentStatus | EnumRestaurantPaymentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.RestaurantPaymentStatus[] | ListEnumRestaurantPaymentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RestaurantPaymentStatus[] | ListEnumRestaurantPaymentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumRestaurantPaymentStatusWithAggregatesFilter<$PrismaModel> | $Enums.RestaurantPaymentStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRestaurantPaymentStatusFilter<$PrismaModel>
+    _max?: NestedEnumRestaurantPaymentStatusFilter<$PrismaModel>
+  }
+
+  export type EnumRestaurantSettlementMethodNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.RestaurantSettlementMethod | EnumRestaurantSettlementMethodFieldRefInput<$PrismaModel> | null
+    in?: $Enums.RestaurantSettlementMethod[] | ListEnumRestaurantSettlementMethodFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.RestaurantSettlementMethod[] | ListEnumRestaurantSettlementMethodFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumRestaurantSettlementMethodNullableWithAggregatesFilter<$PrismaModel> | $Enums.RestaurantSettlementMethod | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumRestaurantSettlementMethodNullableFilter<$PrismaModel>
+    _max?: NestedEnumRestaurantSettlementMethodNullableFilter<$PrismaModel>
   }
 
   export type RestaurantOrderScalarRelationFilter = {
@@ -37050,19 +39211,30 @@ export namespace Prisma {
   export type MenuItemCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    price?: SortOrder
     description?: SortOrder
+  }
+
+  export type MenuItemAvgOrderByAggregateInput = {
+    price?: SortOrder
   }
 
   export type MenuItemMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    price?: SortOrder
     description?: SortOrder
   }
 
   export type MenuItemMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    price?: SortOrder
     description?: SortOrder
+  }
+
+  export type MenuItemSumOrderByAggregateInput = {
+    price?: SortOrder
   }
 
   export type MaintenanceCountOrderByAggregateInput = {
@@ -38292,16 +40464,98 @@ export namespace Prisma {
     connect?: FolioWhereUniqueInput
   }
 
+  export type RestaurantOrderCreateNestedOneWithoutPaymentsInput = {
+    create?: XOR<RestaurantOrderCreateWithoutPaymentsInput, RestaurantOrderUncheckedCreateWithoutPaymentsInput>
+    connectOrCreate?: RestaurantOrderCreateOrConnectWithoutPaymentsInput
+    connect?: RestaurantOrderWhereUniqueInput
+  }
+
+  export type PaymentRefundCreateNestedManyWithoutPaymentInput = {
+    create?: XOR<PaymentRefundCreateWithoutPaymentInput, PaymentRefundUncheckedCreateWithoutPaymentInput> | PaymentRefundCreateWithoutPaymentInput[] | PaymentRefundUncheckedCreateWithoutPaymentInput[]
+    connectOrCreate?: PaymentRefundCreateOrConnectWithoutPaymentInput | PaymentRefundCreateOrConnectWithoutPaymentInput[]
+    createMany?: PaymentRefundCreateManyPaymentInputEnvelope
+    connect?: PaymentRefundWhereUniqueInput | PaymentRefundWhereUniqueInput[]
+  }
+
+  export type PaymentRefundUncheckedCreateNestedManyWithoutPaymentInput = {
+    create?: XOR<PaymentRefundCreateWithoutPaymentInput, PaymentRefundUncheckedCreateWithoutPaymentInput> | PaymentRefundCreateWithoutPaymentInput[] | PaymentRefundUncheckedCreateWithoutPaymentInput[]
+    connectOrCreate?: PaymentRefundCreateOrConnectWithoutPaymentInput | PaymentRefundCreateOrConnectWithoutPaymentInput[]
+    createMany?: PaymentRefundCreateManyPaymentInputEnvelope
+    connect?: PaymentRefundWhereUniqueInput | PaymentRefundWhereUniqueInput[]
+  }
+
+  export type EnumPaymentStatusFieldUpdateOperationsInput = {
+    set?: $Enums.PaymentStatus
+  }
+
   export type EnumPaymentMethodFieldUpdateOperationsInput = {
     set?: $Enums.PaymentMethod
   }
 
-  export type FolioUpdateOneRequiredWithoutPaymentsNestedInput = {
+  export type FolioUpdateOneWithoutPaymentsNestedInput = {
     create?: XOR<FolioCreateWithoutPaymentsInput, FolioUncheckedCreateWithoutPaymentsInput>
     connectOrCreate?: FolioCreateOrConnectWithoutPaymentsInput
     upsert?: FolioUpsertWithoutPaymentsInput
+    disconnect?: FolioWhereInput | boolean
+    delete?: FolioWhereInput | boolean
     connect?: FolioWhereUniqueInput
     update?: XOR<XOR<FolioUpdateToOneWithWhereWithoutPaymentsInput, FolioUpdateWithoutPaymentsInput>, FolioUncheckedUpdateWithoutPaymentsInput>
+  }
+
+  export type RestaurantOrderUpdateOneWithoutPaymentsNestedInput = {
+    create?: XOR<RestaurantOrderCreateWithoutPaymentsInput, RestaurantOrderUncheckedCreateWithoutPaymentsInput>
+    connectOrCreate?: RestaurantOrderCreateOrConnectWithoutPaymentsInput
+    upsert?: RestaurantOrderUpsertWithoutPaymentsInput
+    disconnect?: RestaurantOrderWhereInput | boolean
+    delete?: RestaurantOrderWhereInput | boolean
+    connect?: RestaurantOrderWhereUniqueInput
+    update?: XOR<XOR<RestaurantOrderUpdateToOneWithWhereWithoutPaymentsInput, RestaurantOrderUpdateWithoutPaymentsInput>, RestaurantOrderUncheckedUpdateWithoutPaymentsInput>
+  }
+
+  export type PaymentRefundUpdateManyWithoutPaymentNestedInput = {
+    create?: XOR<PaymentRefundCreateWithoutPaymentInput, PaymentRefundUncheckedCreateWithoutPaymentInput> | PaymentRefundCreateWithoutPaymentInput[] | PaymentRefundUncheckedCreateWithoutPaymentInput[]
+    connectOrCreate?: PaymentRefundCreateOrConnectWithoutPaymentInput | PaymentRefundCreateOrConnectWithoutPaymentInput[]
+    upsert?: PaymentRefundUpsertWithWhereUniqueWithoutPaymentInput | PaymentRefundUpsertWithWhereUniqueWithoutPaymentInput[]
+    createMany?: PaymentRefundCreateManyPaymentInputEnvelope
+    set?: PaymentRefundWhereUniqueInput | PaymentRefundWhereUniqueInput[]
+    disconnect?: PaymentRefundWhereUniqueInput | PaymentRefundWhereUniqueInput[]
+    delete?: PaymentRefundWhereUniqueInput | PaymentRefundWhereUniqueInput[]
+    connect?: PaymentRefundWhereUniqueInput | PaymentRefundWhereUniqueInput[]
+    update?: PaymentRefundUpdateWithWhereUniqueWithoutPaymentInput | PaymentRefundUpdateWithWhereUniqueWithoutPaymentInput[]
+    updateMany?: PaymentRefundUpdateManyWithWhereWithoutPaymentInput | PaymentRefundUpdateManyWithWhereWithoutPaymentInput[]
+    deleteMany?: PaymentRefundScalarWhereInput | PaymentRefundScalarWhereInput[]
+  }
+
+  export type PaymentRefundUncheckedUpdateManyWithoutPaymentNestedInput = {
+    create?: XOR<PaymentRefundCreateWithoutPaymentInput, PaymentRefundUncheckedCreateWithoutPaymentInput> | PaymentRefundCreateWithoutPaymentInput[] | PaymentRefundUncheckedCreateWithoutPaymentInput[]
+    connectOrCreate?: PaymentRefundCreateOrConnectWithoutPaymentInput | PaymentRefundCreateOrConnectWithoutPaymentInput[]
+    upsert?: PaymentRefundUpsertWithWhereUniqueWithoutPaymentInput | PaymentRefundUpsertWithWhereUniqueWithoutPaymentInput[]
+    createMany?: PaymentRefundCreateManyPaymentInputEnvelope
+    set?: PaymentRefundWhereUniqueInput | PaymentRefundWhereUniqueInput[]
+    disconnect?: PaymentRefundWhereUniqueInput | PaymentRefundWhereUniqueInput[]
+    delete?: PaymentRefundWhereUniqueInput | PaymentRefundWhereUniqueInput[]
+    connect?: PaymentRefundWhereUniqueInput | PaymentRefundWhereUniqueInput[]
+    update?: PaymentRefundUpdateWithWhereUniqueWithoutPaymentInput | PaymentRefundUpdateWithWhereUniqueWithoutPaymentInput[]
+    updateMany?: PaymentRefundUpdateManyWithWhereWithoutPaymentInput | PaymentRefundUpdateManyWithWhereWithoutPaymentInput[]
+    deleteMany?: PaymentRefundScalarWhereInput | PaymentRefundScalarWhereInput[]
+  }
+
+  export type PaymentCreateNestedOneWithoutRefundsInput = {
+    create?: XOR<PaymentCreateWithoutRefundsInput, PaymentUncheckedCreateWithoutRefundsInput>
+    connectOrCreate?: PaymentCreateOrConnectWithoutRefundsInput
+    connect?: PaymentWhereUniqueInput
+  }
+
+  export type EnumPaymentRefundStatusFieldUpdateOperationsInput = {
+    set?: $Enums.PaymentRefundStatus
+  }
+
+  export type PaymentUpdateOneRequiredWithoutRefundsNestedInput = {
+    create?: XOR<PaymentCreateWithoutRefundsInput, PaymentUncheckedCreateWithoutRefundsInput>
+    connectOrCreate?: PaymentCreateOrConnectWithoutRefundsInput
+    upsert?: PaymentUpsertWithoutRefundsInput
+    connect?: PaymentWhereUniqueInput
+    update?: XOR<XOR<PaymentUpdateToOneWithWhereWithoutRefundsInput, PaymentUpdateWithoutRefundsInput>, PaymentUncheckedUpdateWithoutRefundsInput>
   }
 
   export type ReservationCreateNestedOneWithoutRestaurantOrdersInput = {
@@ -38323,6 +40577,13 @@ export namespace Prisma {
     connect?: RestaurantOrderItemWhereUniqueInput | RestaurantOrderItemWhereUniqueInput[]
   }
 
+  export type PaymentCreateNestedManyWithoutRestaurantOrderInput = {
+    create?: XOR<PaymentCreateWithoutRestaurantOrderInput, PaymentUncheckedCreateWithoutRestaurantOrderInput> | PaymentCreateWithoutRestaurantOrderInput[] | PaymentUncheckedCreateWithoutRestaurantOrderInput[]
+    connectOrCreate?: PaymentCreateOrConnectWithoutRestaurantOrderInput | PaymentCreateOrConnectWithoutRestaurantOrderInput[]
+    createMany?: PaymentCreateManyRestaurantOrderInputEnvelope
+    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+  }
+
   export type RestaurantOrderItemUncheckedCreateNestedManyWithoutOrderInput = {
     create?: XOR<RestaurantOrderItemCreateWithoutOrderInput, RestaurantOrderItemUncheckedCreateWithoutOrderInput> | RestaurantOrderItemCreateWithoutOrderInput[] | RestaurantOrderItemUncheckedCreateWithoutOrderInput[]
     connectOrCreate?: RestaurantOrderItemCreateOrConnectWithoutOrderInput | RestaurantOrderItemCreateOrConnectWithoutOrderInput[]
@@ -38330,8 +40591,23 @@ export namespace Prisma {
     connect?: RestaurantOrderItemWhereUniqueInput | RestaurantOrderItemWhereUniqueInput[]
   }
 
+  export type PaymentUncheckedCreateNestedManyWithoutRestaurantOrderInput = {
+    create?: XOR<PaymentCreateWithoutRestaurantOrderInput, PaymentUncheckedCreateWithoutRestaurantOrderInput> | PaymentCreateWithoutRestaurantOrderInput[] | PaymentUncheckedCreateWithoutRestaurantOrderInput[]
+    connectOrCreate?: PaymentCreateOrConnectWithoutRestaurantOrderInput | PaymentCreateOrConnectWithoutRestaurantOrderInput[]
+    createMany?: PaymentCreateManyRestaurantOrderInputEnvelope
+    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+  }
+
   export type EnumRestaurantOrderStatusFieldUpdateOperationsInput = {
     set?: $Enums.RestaurantOrderStatus
+  }
+
+  export type EnumRestaurantPaymentStatusFieldUpdateOperationsInput = {
+    set?: $Enums.RestaurantPaymentStatus
+  }
+
+  export type NullableEnumRestaurantSettlementMethodFieldUpdateOperationsInput = {
+    set?: $Enums.RestaurantSettlementMethod | null
   }
 
   export type ReservationUpdateOneWithoutRestaurantOrdersNestedInput = {
@@ -38368,6 +40644,20 @@ export namespace Prisma {
     deleteMany?: RestaurantOrderItemScalarWhereInput | RestaurantOrderItemScalarWhereInput[]
   }
 
+  export type PaymentUpdateManyWithoutRestaurantOrderNestedInput = {
+    create?: XOR<PaymentCreateWithoutRestaurantOrderInput, PaymentUncheckedCreateWithoutRestaurantOrderInput> | PaymentCreateWithoutRestaurantOrderInput[] | PaymentUncheckedCreateWithoutRestaurantOrderInput[]
+    connectOrCreate?: PaymentCreateOrConnectWithoutRestaurantOrderInput | PaymentCreateOrConnectWithoutRestaurantOrderInput[]
+    upsert?: PaymentUpsertWithWhereUniqueWithoutRestaurantOrderInput | PaymentUpsertWithWhereUniqueWithoutRestaurantOrderInput[]
+    createMany?: PaymentCreateManyRestaurantOrderInputEnvelope
+    set?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    disconnect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    delete?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    update?: PaymentUpdateWithWhereUniqueWithoutRestaurantOrderInput | PaymentUpdateWithWhereUniqueWithoutRestaurantOrderInput[]
+    updateMany?: PaymentUpdateManyWithWhereWithoutRestaurantOrderInput | PaymentUpdateManyWithWhereWithoutRestaurantOrderInput[]
+    deleteMany?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
+  }
+
   export type RestaurantOrderItemUncheckedUpdateManyWithoutOrderNestedInput = {
     create?: XOR<RestaurantOrderItemCreateWithoutOrderInput, RestaurantOrderItemUncheckedCreateWithoutOrderInput> | RestaurantOrderItemCreateWithoutOrderInput[] | RestaurantOrderItemUncheckedCreateWithoutOrderInput[]
     connectOrCreate?: RestaurantOrderItemCreateOrConnectWithoutOrderInput | RestaurantOrderItemCreateOrConnectWithoutOrderInput[]
@@ -38380,6 +40670,20 @@ export namespace Prisma {
     update?: RestaurantOrderItemUpdateWithWhereUniqueWithoutOrderInput | RestaurantOrderItemUpdateWithWhereUniqueWithoutOrderInput[]
     updateMany?: RestaurantOrderItemUpdateManyWithWhereWithoutOrderInput | RestaurantOrderItemUpdateManyWithWhereWithoutOrderInput[]
     deleteMany?: RestaurantOrderItemScalarWhereInput | RestaurantOrderItemScalarWhereInput[]
+  }
+
+  export type PaymentUncheckedUpdateManyWithoutRestaurantOrderNestedInput = {
+    create?: XOR<PaymentCreateWithoutRestaurantOrderInput, PaymentUncheckedCreateWithoutRestaurantOrderInput> | PaymentCreateWithoutRestaurantOrderInput[] | PaymentUncheckedCreateWithoutRestaurantOrderInput[]
+    connectOrCreate?: PaymentCreateOrConnectWithoutRestaurantOrderInput | PaymentCreateOrConnectWithoutRestaurantOrderInput[]
+    upsert?: PaymentUpsertWithWhereUniqueWithoutRestaurantOrderInput | PaymentUpsertWithWhereUniqueWithoutRestaurantOrderInput[]
+    createMany?: PaymentCreateManyRestaurantOrderInputEnvelope
+    set?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    disconnect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    delete?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    update?: PaymentUpdateWithWhereUniqueWithoutRestaurantOrderInput | PaymentUpdateWithWhereUniqueWithoutRestaurantOrderInput[]
+    updateMany?: PaymentUpdateManyWithWhereWithoutRestaurantOrderInput | PaymentUpdateManyWithWhereWithoutRestaurantOrderInput[]
+    deleteMany?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
   }
 
   export type RestaurantOrderCreateNestedOneWithoutItemsInput = {
@@ -39142,11 +41446,28 @@ export namespace Prisma {
     _max?: NestedEnumFolioTransactionTypeFilter<$PrismaModel>
   }
 
+  export type NestedEnumPaymentStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentStatus | EnumPaymentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentStatus[] | ListEnumPaymentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentStatus[] | ListEnumPaymentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentStatusFilter<$PrismaModel> | $Enums.PaymentStatus
+  }
+
   export type NestedEnumPaymentMethodFilter<$PrismaModel = never> = {
     equals?: $Enums.PaymentMethod | EnumPaymentMethodFieldRefInput<$PrismaModel>
     in?: $Enums.PaymentMethod[] | ListEnumPaymentMethodFieldRefInput<$PrismaModel>
     notIn?: $Enums.PaymentMethod[] | ListEnumPaymentMethodFieldRefInput<$PrismaModel>
     not?: NestedEnumPaymentMethodFilter<$PrismaModel> | $Enums.PaymentMethod
+  }
+
+  export type NestedEnumPaymentStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentStatus | EnumPaymentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentStatus[] | ListEnumPaymentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentStatus[] | ListEnumPaymentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentStatusWithAggregatesFilter<$PrismaModel> | $Enums.PaymentStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPaymentStatusFilter<$PrismaModel>
+    _max?: NestedEnumPaymentStatusFilter<$PrismaModel>
   }
 
   export type NestedEnumPaymentMethodWithAggregatesFilter<$PrismaModel = never> = {
@@ -39159,11 +41480,42 @@ export namespace Prisma {
     _max?: NestedEnumPaymentMethodFilter<$PrismaModel>
   }
 
+  export type NestedEnumPaymentRefundStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentRefundStatus | EnumPaymentRefundStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentRefundStatus[] | ListEnumPaymentRefundStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentRefundStatus[] | ListEnumPaymentRefundStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentRefundStatusFilter<$PrismaModel> | $Enums.PaymentRefundStatus
+  }
+
+  export type NestedEnumPaymentRefundStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentRefundStatus | EnumPaymentRefundStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentRefundStatus[] | ListEnumPaymentRefundStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PaymentRefundStatus[] | ListEnumPaymentRefundStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumPaymentRefundStatusWithAggregatesFilter<$PrismaModel> | $Enums.PaymentRefundStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPaymentRefundStatusFilter<$PrismaModel>
+    _max?: NestedEnumPaymentRefundStatusFilter<$PrismaModel>
+  }
+
   export type NestedEnumRestaurantOrderStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.RestaurantOrderStatus | EnumRestaurantOrderStatusFieldRefInput<$PrismaModel>
     in?: $Enums.RestaurantOrderStatus[] | ListEnumRestaurantOrderStatusFieldRefInput<$PrismaModel>
     notIn?: $Enums.RestaurantOrderStatus[] | ListEnumRestaurantOrderStatusFieldRefInput<$PrismaModel>
     not?: NestedEnumRestaurantOrderStatusFilter<$PrismaModel> | $Enums.RestaurantOrderStatus
+  }
+
+  export type NestedEnumRestaurantPaymentStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.RestaurantPaymentStatus | EnumRestaurantPaymentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.RestaurantPaymentStatus[] | ListEnumRestaurantPaymentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RestaurantPaymentStatus[] | ListEnumRestaurantPaymentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumRestaurantPaymentStatusFilter<$PrismaModel> | $Enums.RestaurantPaymentStatus
+  }
+
+  export type NestedEnumRestaurantSettlementMethodNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.RestaurantSettlementMethod | EnumRestaurantSettlementMethodFieldRefInput<$PrismaModel> | null
+    in?: $Enums.RestaurantSettlementMethod[] | ListEnumRestaurantSettlementMethodFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.RestaurantSettlementMethod[] | ListEnumRestaurantSettlementMethodFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumRestaurantSettlementMethodNullableFilter<$PrismaModel> | $Enums.RestaurantSettlementMethod | null
   }
 
   export type NestedEnumRestaurantOrderStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -39174,6 +41526,26 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumRestaurantOrderStatusFilter<$PrismaModel>
     _max?: NestedEnumRestaurantOrderStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumRestaurantPaymentStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.RestaurantPaymentStatus | EnumRestaurantPaymentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.RestaurantPaymentStatus[] | ListEnumRestaurantPaymentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.RestaurantPaymentStatus[] | ListEnumRestaurantPaymentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumRestaurantPaymentStatusWithAggregatesFilter<$PrismaModel> | $Enums.RestaurantPaymentStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumRestaurantPaymentStatusFilter<$PrismaModel>
+    _max?: NestedEnumRestaurantPaymentStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumRestaurantSettlementMethodNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.RestaurantSettlementMethod | EnumRestaurantSettlementMethodFieldRefInput<$PrismaModel> | null
+    in?: $Enums.RestaurantSettlementMethod[] | ListEnumRestaurantSettlementMethodFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.RestaurantSettlementMethod[] | ListEnumRestaurantSettlementMethodFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumRestaurantSettlementMethodNullableWithAggregatesFilter<$PrismaModel> | $Enums.RestaurantSettlementMethod | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumRestaurantSettlementMethodNullableFilter<$PrismaModel>
+    _max?: NestedEnumRestaurantSettlementMethodNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumRoleNameFilter<$PrismaModel = never> = {
@@ -39443,12 +41815,20 @@ export namespace Prisma {
     roomNumber?: string | null
     waiterId: string
     status: $Enums.RestaurantOrderStatus
+    paymentStatus?: $Enums.RestaurantPaymentStatus
+    settlementMethod?: $Enums.RestaurantSettlementMethod | null
     subtotal: Decimal | DecimalJsLike | number | string
     tax: Decimal | DecimalJsLike | number | string
     total: Decimal | DecimalJsLike | number | string
+    cancelledAt?: Date | string | null
+    cancelledById?: string | null
+    cancellationReason?: string | null
+    completedAt?: Date | string | null
+    completedById?: string | null
     createdAt?: Date | string
     reservation?: ReservationCreateNestedOneWithoutRestaurantOrdersInput
     items?: RestaurantOrderItemCreateNestedManyWithoutOrderInput
+    payments?: PaymentCreateNestedManyWithoutRestaurantOrderInput
   }
 
   export type RestaurantOrderUncheckedCreateWithoutGuestInput = {
@@ -39457,11 +41837,19 @@ export namespace Prisma {
     roomNumber?: string | null
     waiterId: string
     status: $Enums.RestaurantOrderStatus
+    paymentStatus?: $Enums.RestaurantPaymentStatus
+    settlementMethod?: $Enums.RestaurantSettlementMethod | null
     subtotal: Decimal | DecimalJsLike | number | string
     tax: Decimal | DecimalJsLike | number | string
     total: Decimal | DecimalJsLike | number | string
+    cancelledAt?: Date | string | null
+    cancelledById?: string | null
+    cancellationReason?: string | null
+    completedAt?: Date | string | null
+    completedById?: string | null
     createdAt?: Date | string
     items?: RestaurantOrderItemUncheckedCreateNestedManyWithoutOrderInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutRestaurantOrderInput
   }
 
   export type RestaurantOrderCreateOrConnectWithoutGuestInput = {
@@ -39688,9 +42076,16 @@ export namespace Prisma {
     roomNumber?: StringNullableFilter<"RestaurantOrder"> | string | null
     waiterId?: StringFilter<"RestaurantOrder"> | string
     status?: EnumRestaurantOrderStatusFilter<"RestaurantOrder"> | $Enums.RestaurantOrderStatus
+    paymentStatus?: EnumRestaurantPaymentStatusFilter<"RestaurantOrder"> | $Enums.RestaurantPaymentStatus
+    settlementMethod?: EnumRestaurantSettlementMethodNullableFilter<"RestaurantOrder"> | $Enums.RestaurantSettlementMethod | null
     subtotal?: DecimalFilter<"RestaurantOrder"> | Decimal | DecimalJsLike | number | string
     tax?: DecimalFilter<"RestaurantOrder"> | Decimal | DecimalJsLike | number | string
     total?: DecimalFilter<"RestaurantOrder"> | Decimal | DecimalJsLike | number | string
+    cancelledAt?: DateTimeNullableFilter<"RestaurantOrder"> | Date | string | null
+    cancelledById?: StringNullableFilter<"RestaurantOrder"> | string | null
+    cancellationReason?: StringNullableFilter<"RestaurantOrder"> | string | null
+    completedAt?: DateTimeNullableFilter<"RestaurantOrder"> | Date | string | null
+    completedById?: StringNullableFilter<"RestaurantOrder"> | string | null
     createdAt?: DateTimeFilter<"RestaurantOrder"> | Date | string
   }
 
@@ -40976,12 +43371,20 @@ export namespace Prisma {
     roomNumber?: string | null
     waiterId: string
     status: $Enums.RestaurantOrderStatus
+    paymentStatus?: $Enums.RestaurantPaymentStatus
+    settlementMethod?: $Enums.RestaurantSettlementMethod | null
     subtotal: Decimal | DecimalJsLike | number | string
     tax: Decimal | DecimalJsLike | number | string
     total: Decimal | DecimalJsLike | number | string
+    cancelledAt?: Date | string | null
+    cancelledById?: string | null
+    cancellationReason?: string | null
+    completedAt?: Date | string | null
+    completedById?: string | null
     createdAt?: Date | string
     guest?: GuestCreateNestedOneWithoutRestaurantOrdersInput
     items?: RestaurantOrderItemCreateNestedManyWithoutOrderInput
+    payments?: PaymentCreateNestedManyWithoutRestaurantOrderInput
   }
 
   export type RestaurantOrderUncheckedCreateWithoutReservationInput = {
@@ -40990,11 +43393,19 @@ export namespace Prisma {
     roomNumber?: string | null
     waiterId: string
     status: $Enums.RestaurantOrderStatus
+    paymentStatus?: $Enums.RestaurantPaymentStatus
+    settlementMethod?: $Enums.RestaurantSettlementMethod | null
     subtotal: Decimal | DecimalJsLike | number | string
     tax: Decimal | DecimalJsLike | number | string
     total: Decimal | DecimalJsLike | number | string
+    cancelledAt?: Date | string | null
+    cancelledById?: string | null
+    cancellationReason?: string | null
+    completedAt?: Date | string | null
+    completedById?: string | null
     createdAt?: Date | string
     items?: RestaurantOrderItemUncheckedCreateNestedManyWithoutOrderInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutRestaurantOrderInput
   }
 
   export type RestaurantOrderCreateOrConnectWithoutReservationInput = {
@@ -41411,13 +43822,23 @@ export namespace Prisma {
   export type PaymentCreateWithoutFolioInput = {
     id?: string
     amount: Decimal | DecimalJsLike | number | string
+    refundedAmount?: Decimal | DecimalJsLike | number | string
+    status?: $Enums.PaymentStatus
+    reference?: string | null
     method: $Enums.PaymentMethod
+    restaurantOrder?: RestaurantOrderCreateNestedOneWithoutPaymentsInput
+    refunds?: PaymentRefundCreateNestedManyWithoutPaymentInput
   }
 
   export type PaymentUncheckedCreateWithoutFolioInput = {
     id?: string
+    restaurantOrderId?: string | null
     amount: Decimal | DecimalJsLike | number | string
+    refundedAmount?: Decimal | DecimalJsLike | number | string
+    status?: $Enums.PaymentStatus
+    reference?: string | null
     method: $Enums.PaymentMethod
+    refunds?: PaymentRefundUncheckedCreateNestedManyWithoutPaymentInput
   }
 
   export type PaymentCreateOrConnectWithoutFolioInput = {
@@ -41541,8 +43962,12 @@ export namespace Prisma {
     OR?: PaymentScalarWhereInput[]
     NOT?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
     id?: StringFilter<"Payment"> | string
-    folioId?: StringFilter<"Payment"> | string
+    folioId?: StringNullableFilter<"Payment"> | string | null
+    restaurantOrderId?: StringNullableFilter<"Payment"> | string | null
     amount?: DecimalFilter<"Payment"> | Decimal | DecimalJsLike | number | string
+    refundedAmount?: DecimalFilter<"Payment"> | Decimal | DecimalJsLike | number | string
+    status?: EnumPaymentStatusFilter<"Payment"> | $Enums.PaymentStatus
+    reference?: StringNullableFilter<"Payment"> | string | null
     method?: EnumPaymentMethodFilter<"Payment"> | $Enums.PaymentMethod
   }
 
@@ -41603,6 +44028,83 @@ export namespace Prisma {
     create: XOR<FolioCreateWithoutPaymentsInput, FolioUncheckedCreateWithoutPaymentsInput>
   }
 
+  export type RestaurantOrderCreateWithoutPaymentsInput = {
+    id?: string
+    roomNumber?: string | null
+    waiterId: string
+    status: $Enums.RestaurantOrderStatus
+    paymentStatus?: $Enums.RestaurantPaymentStatus
+    settlementMethod?: $Enums.RestaurantSettlementMethod | null
+    subtotal: Decimal | DecimalJsLike | number | string
+    tax: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    cancelledAt?: Date | string | null
+    cancelledById?: string | null
+    cancellationReason?: string | null
+    completedAt?: Date | string | null
+    completedById?: string | null
+    createdAt?: Date | string
+    reservation?: ReservationCreateNestedOneWithoutRestaurantOrdersInput
+    guest?: GuestCreateNestedOneWithoutRestaurantOrdersInput
+    items?: RestaurantOrderItemCreateNestedManyWithoutOrderInput
+  }
+
+  export type RestaurantOrderUncheckedCreateWithoutPaymentsInput = {
+    id?: string
+    reservationId?: string | null
+    guestId?: string | null
+    roomNumber?: string | null
+    waiterId: string
+    status: $Enums.RestaurantOrderStatus
+    paymentStatus?: $Enums.RestaurantPaymentStatus
+    settlementMethod?: $Enums.RestaurantSettlementMethod | null
+    subtotal: Decimal | DecimalJsLike | number | string
+    tax: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    cancelledAt?: Date | string | null
+    cancelledById?: string | null
+    cancellationReason?: string | null
+    completedAt?: Date | string | null
+    completedById?: string | null
+    createdAt?: Date | string
+    items?: RestaurantOrderItemUncheckedCreateNestedManyWithoutOrderInput
+  }
+
+  export type RestaurantOrderCreateOrConnectWithoutPaymentsInput = {
+    where: RestaurantOrderWhereUniqueInput
+    create: XOR<RestaurantOrderCreateWithoutPaymentsInput, RestaurantOrderUncheckedCreateWithoutPaymentsInput>
+  }
+
+  export type PaymentRefundCreateWithoutPaymentInput = {
+    id?: string
+    amount: Decimal | DecimalJsLike | number | string
+    status?: $Enums.PaymentRefundStatus
+    reason?: string | null
+    providerReference?: string | null
+    createdAt?: Date | string
+    completedAt?: Date | string | null
+  }
+
+  export type PaymentRefundUncheckedCreateWithoutPaymentInput = {
+    id?: string
+    amount: Decimal | DecimalJsLike | number | string
+    status?: $Enums.PaymentRefundStatus
+    reason?: string | null
+    providerReference?: string | null
+    createdAt?: Date | string
+    completedAt?: Date | string | null
+  }
+
+  export type PaymentRefundCreateOrConnectWithoutPaymentInput = {
+    where: PaymentRefundWhereUniqueInput
+    create: XOR<PaymentRefundCreateWithoutPaymentInput, PaymentRefundUncheckedCreateWithoutPaymentInput>
+  }
+
+  export type PaymentRefundCreateManyPaymentInputEnvelope = {
+    data: PaymentRefundCreateManyPaymentInput | PaymentRefundCreateManyPaymentInput[]
+    skipDuplicates?: boolean
+  }
+
   export type FolioUpsertWithoutPaymentsInput = {
     update: XOR<FolioUpdateWithoutPaymentsInput, FolioUncheckedUpdateWithoutPaymentsInput>
     create: XOR<FolioCreateWithoutPaymentsInput, FolioUncheckedCreateWithoutPaymentsInput>
@@ -41624,6 +44126,149 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     reservationId?: StringFieldUpdateOperationsInput | string
     transactions?: FolioTransactionUncheckedUpdateManyWithoutFolioNestedInput
+  }
+
+  export type RestaurantOrderUpsertWithoutPaymentsInput = {
+    update: XOR<RestaurantOrderUpdateWithoutPaymentsInput, RestaurantOrderUncheckedUpdateWithoutPaymentsInput>
+    create: XOR<RestaurantOrderCreateWithoutPaymentsInput, RestaurantOrderUncheckedCreateWithoutPaymentsInput>
+    where?: RestaurantOrderWhereInput
+  }
+
+  export type RestaurantOrderUpdateToOneWithWhereWithoutPaymentsInput = {
+    where?: RestaurantOrderWhereInput
+    data: XOR<RestaurantOrderUpdateWithoutPaymentsInput, RestaurantOrderUncheckedUpdateWithoutPaymentsInput>
+  }
+
+  export type RestaurantOrderUpdateWithoutPaymentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roomNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    waiterId?: StringFieldUpdateOperationsInput | string
+    status?: EnumRestaurantOrderStatusFieldUpdateOperationsInput | $Enums.RestaurantOrderStatus
+    paymentStatus?: EnumRestaurantPaymentStatusFieldUpdateOperationsInput | $Enums.RestaurantPaymentStatus
+    settlementMethod?: NullableEnumRestaurantSettlementMethodFieldUpdateOperationsInput | $Enums.RestaurantSettlementMethod | null
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reservation?: ReservationUpdateOneWithoutRestaurantOrdersNestedInput
+    guest?: GuestUpdateOneWithoutRestaurantOrdersNestedInput
+    items?: RestaurantOrderItemUpdateManyWithoutOrderNestedInput
+  }
+
+  export type RestaurantOrderUncheckedUpdateWithoutPaymentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reservationId?: NullableStringFieldUpdateOperationsInput | string | null
+    guestId?: NullableStringFieldUpdateOperationsInput | string | null
+    roomNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    waiterId?: StringFieldUpdateOperationsInput | string
+    status?: EnumRestaurantOrderStatusFieldUpdateOperationsInput | $Enums.RestaurantOrderStatus
+    paymentStatus?: EnumRestaurantPaymentStatusFieldUpdateOperationsInput | $Enums.RestaurantPaymentStatus
+    settlementMethod?: NullableEnumRestaurantSettlementMethodFieldUpdateOperationsInput | $Enums.RestaurantSettlementMethod | null
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: RestaurantOrderItemUncheckedUpdateManyWithoutOrderNestedInput
+  }
+
+  export type PaymentRefundUpsertWithWhereUniqueWithoutPaymentInput = {
+    where: PaymentRefundWhereUniqueInput
+    update: XOR<PaymentRefundUpdateWithoutPaymentInput, PaymentRefundUncheckedUpdateWithoutPaymentInput>
+    create: XOR<PaymentRefundCreateWithoutPaymentInput, PaymentRefundUncheckedCreateWithoutPaymentInput>
+  }
+
+  export type PaymentRefundUpdateWithWhereUniqueWithoutPaymentInput = {
+    where: PaymentRefundWhereUniqueInput
+    data: XOR<PaymentRefundUpdateWithoutPaymentInput, PaymentRefundUncheckedUpdateWithoutPaymentInput>
+  }
+
+  export type PaymentRefundUpdateManyWithWhereWithoutPaymentInput = {
+    where: PaymentRefundScalarWhereInput
+    data: XOR<PaymentRefundUpdateManyMutationInput, PaymentRefundUncheckedUpdateManyWithoutPaymentInput>
+  }
+
+  export type PaymentRefundScalarWhereInput = {
+    AND?: PaymentRefundScalarWhereInput | PaymentRefundScalarWhereInput[]
+    OR?: PaymentRefundScalarWhereInput[]
+    NOT?: PaymentRefundScalarWhereInput | PaymentRefundScalarWhereInput[]
+    id?: StringFilter<"PaymentRefund"> | string
+    paymentId?: StringFilter<"PaymentRefund"> | string
+    amount?: DecimalFilter<"PaymentRefund"> | Decimal | DecimalJsLike | number | string
+    status?: EnumPaymentRefundStatusFilter<"PaymentRefund"> | $Enums.PaymentRefundStatus
+    reason?: StringNullableFilter<"PaymentRefund"> | string | null
+    providerReference?: StringNullableFilter<"PaymentRefund"> | string | null
+    createdAt?: DateTimeFilter<"PaymentRefund"> | Date | string
+    completedAt?: DateTimeNullableFilter<"PaymentRefund"> | Date | string | null
+  }
+
+  export type PaymentCreateWithoutRefundsInput = {
+    id?: string
+    amount: Decimal | DecimalJsLike | number | string
+    refundedAmount?: Decimal | DecimalJsLike | number | string
+    status?: $Enums.PaymentStatus
+    reference?: string | null
+    method: $Enums.PaymentMethod
+    folio?: FolioCreateNestedOneWithoutPaymentsInput
+    restaurantOrder?: RestaurantOrderCreateNestedOneWithoutPaymentsInput
+  }
+
+  export type PaymentUncheckedCreateWithoutRefundsInput = {
+    id?: string
+    folioId?: string | null
+    restaurantOrderId?: string | null
+    amount: Decimal | DecimalJsLike | number | string
+    refundedAmount?: Decimal | DecimalJsLike | number | string
+    status?: $Enums.PaymentStatus
+    reference?: string | null
+    method: $Enums.PaymentMethod
+  }
+
+  export type PaymentCreateOrConnectWithoutRefundsInput = {
+    where: PaymentWhereUniqueInput
+    create: XOR<PaymentCreateWithoutRefundsInput, PaymentUncheckedCreateWithoutRefundsInput>
+  }
+
+  export type PaymentUpsertWithoutRefundsInput = {
+    update: XOR<PaymentUpdateWithoutRefundsInput, PaymentUncheckedUpdateWithoutRefundsInput>
+    create: XOR<PaymentCreateWithoutRefundsInput, PaymentUncheckedCreateWithoutRefundsInput>
+    where?: PaymentWhereInput
+  }
+
+  export type PaymentUpdateToOneWithWhereWithoutRefundsInput = {
+    where?: PaymentWhereInput
+    data: XOR<PaymentUpdateWithoutRefundsInput, PaymentUncheckedUpdateWithoutRefundsInput>
+  }
+
+  export type PaymentUpdateWithoutRefundsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    refundedAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    folio?: FolioUpdateOneWithoutPaymentsNestedInput
+    restaurantOrder?: RestaurantOrderUpdateOneWithoutPaymentsNestedInput
+  }
+
+  export type PaymentUncheckedUpdateWithoutRefundsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    folioId?: NullableStringFieldUpdateOperationsInput | string | null
+    restaurantOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    refundedAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   }
 
   export type ReservationCreateWithoutRestaurantOrdersInput = {
@@ -41769,6 +44414,38 @@ export namespace Prisma {
 
   export type RestaurantOrderItemCreateManyOrderInputEnvelope = {
     data: RestaurantOrderItemCreateManyOrderInput | RestaurantOrderItemCreateManyOrderInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PaymentCreateWithoutRestaurantOrderInput = {
+    id?: string
+    amount: Decimal | DecimalJsLike | number | string
+    refundedAmount?: Decimal | DecimalJsLike | number | string
+    status?: $Enums.PaymentStatus
+    reference?: string | null
+    method: $Enums.PaymentMethod
+    folio?: FolioCreateNestedOneWithoutPaymentsInput
+    refunds?: PaymentRefundCreateNestedManyWithoutPaymentInput
+  }
+
+  export type PaymentUncheckedCreateWithoutRestaurantOrderInput = {
+    id?: string
+    folioId?: string | null
+    amount: Decimal | DecimalJsLike | number | string
+    refundedAmount?: Decimal | DecimalJsLike | number | string
+    status?: $Enums.PaymentStatus
+    reference?: string | null
+    method: $Enums.PaymentMethod
+    refunds?: PaymentRefundUncheckedCreateNestedManyWithoutPaymentInput
+  }
+
+  export type PaymentCreateOrConnectWithoutRestaurantOrderInput = {
+    where: PaymentWhereUniqueInput
+    create: XOR<PaymentCreateWithoutRestaurantOrderInput, PaymentUncheckedCreateWithoutRestaurantOrderInput>
+  }
+
+  export type PaymentCreateManyRestaurantOrderInputEnvelope = {
+    data: PaymentCreateManyRestaurantOrderInput | PaymentCreateManyRestaurantOrderInput[]
     skipDuplicates?: boolean
   }
 
@@ -41932,17 +44609,41 @@ export namespace Prisma {
     total?: DecimalFilter<"RestaurantOrderItem"> | Decimal | DecimalJsLike | number | string
   }
 
+  export type PaymentUpsertWithWhereUniqueWithoutRestaurantOrderInput = {
+    where: PaymentWhereUniqueInput
+    update: XOR<PaymentUpdateWithoutRestaurantOrderInput, PaymentUncheckedUpdateWithoutRestaurantOrderInput>
+    create: XOR<PaymentCreateWithoutRestaurantOrderInput, PaymentUncheckedCreateWithoutRestaurantOrderInput>
+  }
+
+  export type PaymentUpdateWithWhereUniqueWithoutRestaurantOrderInput = {
+    where: PaymentWhereUniqueInput
+    data: XOR<PaymentUpdateWithoutRestaurantOrderInput, PaymentUncheckedUpdateWithoutRestaurantOrderInput>
+  }
+
+  export type PaymentUpdateManyWithWhereWithoutRestaurantOrderInput = {
+    where: PaymentScalarWhereInput
+    data: XOR<PaymentUpdateManyMutationInput, PaymentUncheckedUpdateManyWithoutRestaurantOrderInput>
+  }
+
   export type RestaurantOrderCreateWithoutItemsInput = {
     id?: string
     roomNumber?: string | null
     waiterId: string
     status: $Enums.RestaurantOrderStatus
+    paymentStatus?: $Enums.RestaurantPaymentStatus
+    settlementMethod?: $Enums.RestaurantSettlementMethod | null
     subtotal: Decimal | DecimalJsLike | number | string
     tax: Decimal | DecimalJsLike | number | string
     total: Decimal | DecimalJsLike | number | string
+    cancelledAt?: Date | string | null
+    cancelledById?: string | null
+    cancellationReason?: string | null
+    completedAt?: Date | string | null
+    completedById?: string | null
     createdAt?: Date | string
     reservation?: ReservationCreateNestedOneWithoutRestaurantOrdersInput
     guest?: GuestCreateNestedOneWithoutRestaurantOrdersInput
+    payments?: PaymentCreateNestedManyWithoutRestaurantOrderInput
   }
 
   export type RestaurantOrderUncheckedCreateWithoutItemsInput = {
@@ -41952,10 +44653,18 @@ export namespace Prisma {
     roomNumber?: string | null
     waiterId: string
     status: $Enums.RestaurantOrderStatus
+    paymentStatus?: $Enums.RestaurantPaymentStatus
+    settlementMethod?: $Enums.RestaurantSettlementMethod | null
     subtotal: Decimal | DecimalJsLike | number | string
     tax: Decimal | DecimalJsLike | number | string
     total: Decimal | DecimalJsLike | number | string
+    cancelledAt?: Date | string | null
+    cancelledById?: string | null
+    cancellationReason?: string | null
+    completedAt?: Date | string | null
+    completedById?: string | null
     createdAt?: Date | string
+    payments?: PaymentUncheckedCreateNestedManyWithoutRestaurantOrderInput
   }
 
   export type RestaurantOrderCreateOrConnectWithoutItemsInput = {
@@ -41966,12 +44675,14 @@ export namespace Prisma {
   export type MenuItemCreateWithoutOrderItemsInput = {
     id?: string
     name: string
+    price: Decimal | DecimalJsLike | number | string
     description?: string | null
   }
 
   export type MenuItemUncheckedCreateWithoutOrderItemsInput = {
     id?: string
     name: string
+    price: Decimal | DecimalJsLike | number | string
     description?: string | null
   }
 
@@ -41996,12 +44707,20 @@ export namespace Prisma {
     roomNumber?: NullableStringFieldUpdateOperationsInput | string | null
     waiterId?: StringFieldUpdateOperationsInput | string
     status?: EnumRestaurantOrderStatusFieldUpdateOperationsInput | $Enums.RestaurantOrderStatus
+    paymentStatus?: EnumRestaurantPaymentStatusFieldUpdateOperationsInput | $Enums.RestaurantPaymentStatus
+    settlementMethod?: NullableEnumRestaurantSettlementMethodFieldUpdateOperationsInput | $Enums.RestaurantSettlementMethod | null
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reservation?: ReservationUpdateOneWithoutRestaurantOrdersNestedInput
     guest?: GuestUpdateOneWithoutRestaurantOrdersNestedInput
+    payments?: PaymentUpdateManyWithoutRestaurantOrderNestedInput
   }
 
   export type RestaurantOrderUncheckedUpdateWithoutItemsInput = {
@@ -42011,10 +44730,18 @@ export namespace Prisma {
     roomNumber?: NullableStringFieldUpdateOperationsInput | string | null
     waiterId?: StringFieldUpdateOperationsInput | string
     status?: EnumRestaurantOrderStatusFieldUpdateOperationsInput | $Enums.RestaurantOrderStatus
+    paymentStatus?: EnumRestaurantPaymentStatusFieldUpdateOperationsInput | $Enums.RestaurantPaymentStatus
+    settlementMethod?: NullableEnumRestaurantSettlementMethodFieldUpdateOperationsInput | $Enums.RestaurantSettlementMethod | null
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    payments?: PaymentUncheckedUpdateManyWithoutRestaurantOrderNestedInput
   }
 
   export type MenuItemUpsertWithoutOrderItemsInput = {
@@ -42031,12 +44758,14 @@ export namespace Prisma {
   export type MenuItemUpdateWithoutOrderItemsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MenuItemUncheckedUpdateWithoutOrderItemsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -42716,9 +45445,16 @@ export namespace Prisma {
     roomNumber?: string | null
     waiterId: string
     status: $Enums.RestaurantOrderStatus
+    paymentStatus?: $Enums.RestaurantPaymentStatus
+    settlementMethod?: $Enums.RestaurantSettlementMethod | null
     subtotal: Decimal | DecimalJsLike | number | string
     tax: Decimal | DecimalJsLike | number | string
     total: Decimal | DecimalJsLike | number | string
+    cancelledAt?: Date | string | null
+    cancelledById?: string | null
+    cancellationReason?: string | null
+    completedAt?: Date | string | null
+    completedById?: string | null
     createdAt?: Date | string
   }
 
@@ -42940,12 +45676,20 @@ export namespace Prisma {
     roomNumber?: NullableStringFieldUpdateOperationsInput | string | null
     waiterId?: StringFieldUpdateOperationsInput | string
     status?: EnumRestaurantOrderStatusFieldUpdateOperationsInput | $Enums.RestaurantOrderStatus
+    paymentStatus?: EnumRestaurantPaymentStatusFieldUpdateOperationsInput | $Enums.RestaurantPaymentStatus
+    settlementMethod?: NullableEnumRestaurantSettlementMethodFieldUpdateOperationsInput | $Enums.RestaurantSettlementMethod | null
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reservation?: ReservationUpdateOneWithoutRestaurantOrdersNestedInput
     items?: RestaurantOrderItemUpdateManyWithoutOrderNestedInput
+    payments?: PaymentUpdateManyWithoutRestaurantOrderNestedInput
   }
 
   export type RestaurantOrderUncheckedUpdateWithoutGuestInput = {
@@ -42954,11 +45698,19 @@ export namespace Prisma {
     roomNumber?: NullableStringFieldUpdateOperationsInput | string | null
     waiterId?: StringFieldUpdateOperationsInput | string
     status?: EnumRestaurantOrderStatusFieldUpdateOperationsInput | $Enums.RestaurantOrderStatus
+    paymentStatus?: EnumRestaurantPaymentStatusFieldUpdateOperationsInput | $Enums.RestaurantPaymentStatus
+    settlementMethod?: NullableEnumRestaurantSettlementMethodFieldUpdateOperationsInput | $Enums.RestaurantSettlementMethod | null
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: RestaurantOrderItemUncheckedUpdateManyWithoutOrderNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutRestaurantOrderNestedInput
   }
 
   export type RestaurantOrderUncheckedUpdateManyWithoutGuestInput = {
@@ -42967,9 +45719,16 @@ export namespace Prisma {
     roomNumber?: NullableStringFieldUpdateOperationsInput | string | null
     waiterId?: StringFieldUpdateOperationsInput | string
     status?: EnumRestaurantOrderStatusFieldUpdateOperationsInput | $Enums.RestaurantOrderStatus
+    paymentStatus?: EnumRestaurantPaymentStatusFieldUpdateOperationsInput | $Enums.RestaurantPaymentStatus
+    settlementMethod?: NullableEnumRestaurantSettlementMethodFieldUpdateOperationsInput | $Enums.RestaurantSettlementMethod | null
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -43329,9 +46088,16 @@ export namespace Prisma {
     roomNumber?: string | null
     waiterId: string
     status: $Enums.RestaurantOrderStatus
+    paymentStatus?: $Enums.RestaurantPaymentStatus
+    settlementMethod?: $Enums.RestaurantSettlementMethod | null
     subtotal: Decimal | DecimalJsLike | number | string
     tax: Decimal | DecimalJsLike | number | string
     total: Decimal | DecimalJsLike | number | string
+    cancelledAt?: Date | string | null
+    cancelledById?: string | null
+    cancellationReason?: string | null
+    completedAt?: Date | string | null
+    completedById?: string | null
     createdAt?: Date | string
   }
 
@@ -43370,12 +46136,20 @@ export namespace Prisma {
     roomNumber?: NullableStringFieldUpdateOperationsInput | string | null
     waiterId?: StringFieldUpdateOperationsInput | string
     status?: EnumRestaurantOrderStatusFieldUpdateOperationsInput | $Enums.RestaurantOrderStatus
+    paymentStatus?: EnumRestaurantPaymentStatusFieldUpdateOperationsInput | $Enums.RestaurantPaymentStatus
+    settlementMethod?: NullableEnumRestaurantSettlementMethodFieldUpdateOperationsInput | $Enums.RestaurantSettlementMethod | null
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     guest?: GuestUpdateOneWithoutRestaurantOrdersNestedInput
     items?: RestaurantOrderItemUpdateManyWithoutOrderNestedInput
+    payments?: PaymentUpdateManyWithoutRestaurantOrderNestedInput
   }
 
   export type RestaurantOrderUncheckedUpdateWithoutReservationInput = {
@@ -43384,11 +46158,19 @@ export namespace Prisma {
     roomNumber?: NullableStringFieldUpdateOperationsInput | string | null
     waiterId?: StringFieldUpdateOperationsInput | string
     status?: EnumRestaurantOrderStatusFieldUpdateOperationsInput | $Enums.RestaurantOrderStatus
+    paymentStatus?: EnumRestaurantPaymentStatusFieldUpdateOperationsInput | $Enums.RestaurantPaymentStatus
+    settlementMethod?: NullableEnumRestaurantSettlementMethodFieldUpdateOperationsInput | $Enums.RestaurantSettlementMethod | null
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: RestaurantOrderItemUncheckedUpdateManyWithoutOrderNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutRestaurantOrderNestedInput
   }
 
   export type RestaurantOrderUncheckedUpdateManyWithoutReservationInput = {
@@ -43397,9 +46179,16 @@ export namespace Prisma {
     roomNumber?: NullableStringFieldUpdateOperationsInput | string | null
     waiterId?: StringFieldUpdateOperationsInput | string
     status?: EnumRestaurantOrderStatusFieldUpdateOperationsInput | $Enums.RestaurantOrderStatus
+    paymentStatus?: EnumRestaurantPaymentStatusFieldUpdateOperationsInput | $Enums.RestaurantPaymentStatus
+    settlementMethod?: NullableEnumRestaurantSettlementMethodFieldUpdateOperationsInput | $Enums.RestaurantSettlementMethod | null
     subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -43412,7 +46201,11 @@ export namespace Prisma {
 
   export type PaymentCreateManyFolioInput = {
     id?: string
+    restaurantOrderId?: string | null
     amount: Decimal | DecimalJsLike | number | string
+    refundedAmount?: Decimal | DecimalJsLike | number | string
+    status?: $Enums.PaymentStatus
+    reference?: string | null
     method: $Enums.PaymentMethod
   }
 
@@ -43440,19 +46233,73 @@ export namespace Prisma {
   export type PaymentUpdateWithoutFolioInput = {
     id?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    refundedAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    restaurantOrder?: RestaurantOrderUpdateOneWithoutPaymentsNestedInput
+    refunds?: PaymentRefundUpdateManyWithoutPaymentNestedInput
   }
 
   export type PaymentUncheckedUpdateWithoutFolioInput = {
     id?: StringFieldUpdateOperationsInput | string
+    restaurantOrderId?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    refundedAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    refunds?: PaymentRefundUncheckedUpdateManyWithoutPaymentNestedInput
   }
 
   export type PaymentUncheckedUpdateManyWithoutFolioInput = {
     id?: StringFieldUpdateOperationsInput | string
+    restaurantOrderId?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    refundedAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+  }
+
+  export type PaymentRefundCreateManyPaymentInput = {
+    id?: string
+    amount: Decimal | DecimalJsLike | number | string
+    status?: $Enums.PaymentRefundStatus
+    reason?: string | null
+    providerReference?: string | null
+    createdAt?: Date | string
+    completedAt?: Date | string | null
+  }
+
+  export type PaymentRefundUpdateWithoutPaymentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumPaymentRefundStatusFieldUpdateOperationsInput | $Enums.PaymentRefundStatus
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    providerReference?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type PaymentRefundUncheckedUpdateWithoutPaymentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumPaymentRefundStatusFieldUpdateOperationsInput | $Enums.PaymentRefundStatus
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    providerReference?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type PaymentRefundUncheckedUpdateManyWithoutPaymentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumPaymentRefundStatusFieldUpdateOperationsInput | $Enums.PaymentRefundStatus
+    reason?: NullableStringFieldUpdateOperationsInput | string | null
+    providerReference?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type RestaurantOrderItemCreateManyOrderInput = {
@@ -43461,6 +46308,16 @@ export namespace Prisma {
     quantity: number
     price: Decimal | DecimalJsLike | number | string
     total: Decimal | DecimalJsLike | number | string
+  }
+
+  export type PaymentCreateManyRestaurantOrderInput = {
+    id?: string
+    folioId?: string | null
+    amount: Decimal | DecimalJsLike | number | string
+    refundedAmount?: Decimal | DecimalJsLike | number | string
+    status?: $Enums.PaymentStatus
+    reference?: string | null
+    method: $Enums.PaymentMethod
   }
 
   export type RestaurantOrderItemUpdateWithoutOrderInput = {
@@ -43485,6 +46342,38 @@ export namespace Prisma {
     quantity?: IntFieldUpdateOperationsInput | number
     price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+  }
+
+  export type PaymentUpdateWithoutRestaurantOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    refundedAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    folio?: FolioUpdateOneWithoutPaymentsNestedInput
+    refunds?: PaymentRefundUpdateManyWithoutPaymentNestedInput
+  }
+
+  export type PaymentUncheckedUpdateWithoutRestaurantOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    folioId?: NullableStringFieldUpdateOperationsInput | string | null
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    refundedAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    refunds?: PaymentRefundUncheckedUpdateManyWithoutPaymentNestedInput
+  }
+
+  export type PaymentUncheckedUpdateManyWithoutRestaurantOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    folioId?: NullableStringFieldUpdateOperationsInput | string | null
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    refundedAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
   }
 
   export type RestaurantOrderItemCreateManyMenuItemInput = {

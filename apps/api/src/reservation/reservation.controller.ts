@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
   Req,
+  Query,
 } from '@nestjs/common';
 import { ReservationService } from './reservation.service';
 import { CreateReservationDto } from './dto/create-reservation.dto';
@@ -18,6 +19,7 @@ import { Roles } from '../common/decorators/roles.decorator';
 import { RoleName } from '../../generated/prisma';
 import { CancelReservationDto } from './dto/cancel-reservation.dto';
 import { ChangeReservationRoomDto } from './dto/change-reservation-room.dto';
+import { GetReservationsDto } from './dto/get-reservations.dto';
 
 @UseGuards(JwtGuard, RolesGuard)
 @Roles(RoleName.SUPER_ADMIN, RoleName.ADMIN, RoleName.USER)
@@ -72,8 +74,8 @@ export class ReservationController {
     return this.reservationService.changeRoom(id, dto, req.user?.id);
   }
   @Get()
-  findAll() {
-    return this.reservationService.findAll();
+  findAll(@Query() query: GetReservationsDto) {
+    return this.reservationService.findAll(query);
   }
 
   @Get(':id')

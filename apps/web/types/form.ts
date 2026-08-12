@@ -18,7 +18,10 @@ export type FieldConfig = {
     | "radio"
     | "file"
     | "date"
-    | "number";
+    | "number"
+    | "array"
+    | "searchable-select"
+    | "multi-select";
 
   placeholder?: string;
 
@@ -34,9 +37,15 @@ export type FieldConfig = {
 
   oneThirdWidth?: boolean;
 
+  fields?: FieldConfig[];
+  min?: number;
+  max?: number;
+
   multiple?: boolean;
   accept?: string;
   maxFiles?: number;
+
+  disabled?: boolean;
 };
 
 export type FormConfig = {

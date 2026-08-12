@@ -16,6 +16,7 @@ import {
   ReservationStatus,
 } from '../../generated/prisma';
 import { ChangeReservationRoomDto } from './dto/change-reservation-room.dto';
+import { GetReservationsDto } from './dto/get-reservations.dto';
 
 type ReservationWithFolio = Prisma.ReservationGetPayload<{
   include: {
@@ -113,8 +114,45 @@ export class ReservationService {
     });
   }
 
-  findAll() {
-    return this.prismaService.reservation.findMany();
+  async findAll(query: GetReservationsDto) {
+    const { page = 1, limit = 1000, search } = query;
+
+    const skip = (page - 1) * limit;
+
+    let where: any = {};
+
+    if (search) {
+      where.OR = [];
+    }
+
+    const [reservations, total] = await this.prismaService.$transaction([
+      this.prismaService.reservation.findMany({
+        where: {
+          ...where,
+        },
+        skip,
+        take: +limit,
+        orderBy: { createdAt: 'desc' },
+
+        select: {
+          id: true,
+          guest: true,
+          room: true,
+        },
+      }),
+
+      this.prismaService.reservation.count({ where }),
+    ]);
+
+    return {
+      data: reservations,
+      meta: {
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit),
+      },
+    };
   }
 
   findOne(id: string) {

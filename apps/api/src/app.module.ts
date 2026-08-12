@@ -18,6 +18,8 @@ import { RoomModule } from './room/room.module';
 import { ReservationModule } from './reservation/reservation.module';
 import { FolioModule } from './folio/folio.module';
 import { FoliotransactionModule } from './foliotransaction/foliotransaction.module';
+import { MenuModule } from './menu/menu.module';
+import { RestaurantorderModule } from './restaurantorder/restaurantorder.module';
 
 @Module({
   imports: [
@@ -41,6 +43,8 @@ import { FoliotransactionModule } from './foliotransaction/foliotransaction.modu
     ReservationModule,
     FolioModule,
     FoliotransactionModule,
+    MenuModule,
+    RestaurantorderModule,
   ],
   controllers: [AppController],
   providers: [AppService],
