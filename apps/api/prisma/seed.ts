@@ -1,46 +1,112 @@
 import { RoleName } from '../generated/prisma';
 import { PrismaService } from '../src/prisma/prisma.service';
 import * as argon2 from 'argon2';
+
 import { PERMISSIONS } from '../src/constants/permission.constant';
 import { ROLE_PERMISSIONS } from '../src/constants/role_permission.constant';
 
 const prisma = new PrismaService();
 
 async function main() {
-  const superAdminPassword = await argon2.hash(
-    process.env.SUPER_ADMIN_PASSWORD!,
-  );
+  console.log('Starting PMS database seed...');
+
+  /**
+   * ---------------------------------------------------------
+   * 1. Create system roles
+   * ---------------------------------------------------------
+   */
 
   const roles = Object.values(RoleName);
-  const permissions = Object.values(PERMISSIONS);
 
   await prisma.role.createMany({
-    data: roles.map((role) => ({ name: role })),
+    data: roles.map((name) => ({
+      name,
+    })),
     skipDuplicates: true,
   });
 
-  console.log(`Created/updated roles`);
+  console.log(`✓ Created/verified ${roles.length} roles`);
+
+  /**
+   * ---------------------------------------------------------
+   * 2. Create system permissions
+   * ---------------------------------------------------------
+   *
+   * Permissions are immutable system records.
+   *
+   * SUPER_ADMIN does NOT need a permission record such as "*".
+   * SUPER_ADMIN is handled specially by the authorization layer.
+   */
+
+  const permissions = Object.values(PERMISSIONS);
 
   await prisma.permission.createMany({
-    data: permissions.map((permission) => ({ name: permission })),
+    data: permissions.map((name) => ({
+      name,
+    })),
     skipDuplicates: true,
   });
 
-  console.log(`Created/updated permissions`);
+  console.log(`✓ Created/verified ${permissions.length} permissions`);
 
-  for (const [roleName, permissions] of Object.entries(ROLE_PERMISSIONS)) {
+  /**
+   * ---------------------------------------------------------
+   * 3. Create RolePermission relationships
+   * ---------------------------------------------------------
+   *
+   * SUPER_ADMIN intentionally has no RolePermission records.
+   *
+   * The authorization service should treat:
+   *
+   *     SUPER_ADMIN === access to every permission
+   *
+   * This means adding a new permission later automatically gives
+   * SUPER_ADMIN access without needing to update this table.
+   */
+
+  for (const [roleName, permissionNames] of Object.entries(ROLE_PERMISSIONS)) {
     const role = await prisma.role.findUnique({
-      where: { name: roleName as any },
+      where: {
+        name: roleName as RoleName,
+      },
     });
 
-    if (!role) continue;
+    if (!role) {
+      console.warn(`⚠ Role not found: ${roleName}`);
+      continue;
+    }
 
-    for (const permissionName of permissions) {
+    // SUPER_ADMIN has implicit access to every permission.
+    if (role.name === RoleName.SUPER_ADMIN) {
+      console.log(
+        `✓ Skipping permission relationships for ${RoleName.SUPER_ADMIN}`,
+      );
+
+      continue;
+    }
+
+    for (const permissionName of permissionNames) {
+      /**
+       * This protects the seed if '*' is accidentally included
+       * in ROLE_PERMISSIONS.
+       */
+      if (permissionName === '*') {
+        continue;
+      }
+
       const permission = await prisma.permission.findUnique({
-        where: { name: permissionName },
+        where: {
+          name: permissionName,
+        },
       });
 
-      if (!permission) continue;
+      if (!permission) {
+        console.warn(
+          `⚠ Permission not found: ${permissionName} for role ${roleName}`,
+        );
+
+        continue;
+      }
 
       await prisma.rolePermission.upsert({
         where: {
@@ -49,77 +115,124 @@ async function main() {
             permissionId: permission.id,
           },
         },
+
         update: {},
+
         create: {
           roleId: role.id,
           permissionId: permission.id,
         },
       });
     }
+
+    console.log(`✓ Synced permissions for ${roleName}`);
   }
-  console.log(`Created/updated roles permssions relationship`);
+
+  console.log('✓ Role-permission relationships synchronized');
+
+  /**
+   * ---------------------------------------------------------
+   * 4. Create / update Super Admin user
+   * ---------------------------------------------------------
+   */
+
+  const superAdminEmail = process.env.SUPER_ADMIN_EMAIL;
+  const superAdminName = process.env.SUPER_ADMIN_NAME;
+  const superAdminPassword = process.env.SUPER_ADMIN_PASSWORD;
+
+  if (!superAdminEmail) {
+    throw new Error('SUPER_ADMIN_EMAIL environment variable is required');
+  }
+
+  if (!superAdminName) {
+    throw new Error('SUPER_ADMIN_NAME environment variable is required');
+  }
+
+  if (!superAdminPassword) {
+    throw new Error('SUPER_ADMIN_PASSWORD environment variable is required');
+  }
+
+  const hashedPassword = await argon2.hash(superAdminPassword);
 
   const superAdmin = await prisma.user.upsert({
-    where: { email: process.env.SUPER_ADMIN_EMAIL! },
-    update: {
-      fullname: process.env.SUPER_ADMIN_NAME!,
-      password: superAdminPassword,
+    where: {
+      email: superAdminEmail,
     },
+
+    update: {
+      fullname: superAdminName,
+      password: hashedPassword,
+    },
+
     create: {
-      email: process.env.SUPER_ADMIN_EMAIL!,
-      fullname: process.env.SUPER_ADMIN_NAME!,
-      password: superAdminPassword,
+      email: superAdminEmail,
+      fullname: superAdminName,
+      password: hashedPassword,
     },
   });
-  console.log(`Created/updated super admin user with id: ${superAdmin.id}`);
+
+  console.log(`✓ Created/updated super admin user: ${superAdmin.id}`);
+
+  /**
+   * ---------------------------------------------------------
+   * 5. Find SUPER_ADMIN role
+   * ---------------------------------------------------------
+   */
 
   const superAdminRole = await prisma.role.findUnique({
-    where: { name: RoleName.SUPER_ADMIN },
+    where: {
+      name: RoleName.SUPER_ADMIN,
+    },
   });
-  console.log(`Fetched super admin role with id: ${superAdmin!.id}`);
+
+  if (!superAdminRole) {
+    throw new Error(`${RoleName.SUPER_ADMIN} role was not found`);
+  }
+
+  /**
+   * ---------------------------------------------------------
+   * 6. Assign SUPER_ADMIN role to the seed user
+   * ---------------------------------------------------------
+   */
 
   await prisma.userRole.upsert({
     where: {
       userId_roleId: {
         userId: superAdmin.id,
-        roleId: superAdminRole!.id,
+        roleId: superAdminRole.id,
       },
     },
+
     update: {},
+
     create: {
       userId: superAdmin.id,
-      roleId: superAdminRole!.id,
+      roleId: superAdminRole.id,
     },
   });
-  console.log('Linked super admin user with super admin role');
 
-  const userRole = await prisma.role.findUnique({
-    where: { name: RoleName.USER },
-  });
-  console.log(`Fetched user role with id: ${userRole!.id}`);
+  console.log(`✓ Linked ${superAdminEmail} to ${RoleName.SUPER_ADMIN}`);
 
-  await prisma.userRole.upsert({
-    where: {
-      userId_roleId: {
-        userId: superAdmin.id,
-        roleId: userRole!.id,
-      },
-    },
-    update: {},
-    create: {
-      userId: superAdmin.id,
-      roleId: userRole!.id,
-    },
-  });
-  console.log('Linked super admin user with user role');
+  /**
+   * ---------------------------------------------------------
+   * 7. Finished
+   * ---------------------------------------------------------
+   */
+
+  console.log('');
+  console.log('======================================');
+  console.log(' PMS database seed completed');
+  console.log('======================================');
 }
 
 main()
-  .then(async () => {
-    await prisma.$disconnect();
-  })
-  .catch(async (e) => {
-    console.error(e);
-    await prisma.$disconnect();
+  .catch((error) => {
+    console.error('');
+    console.error('❌ PMS database seed failed');
+    console.error(error);
+
     process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
   });

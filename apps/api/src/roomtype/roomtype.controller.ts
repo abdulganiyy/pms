@@ -19,7 +19,7 @@ import { UpdateRoomTypeDto } from './dto/update-roomtype.dto';
 import { GetRoomTypesDto } from './dto/get-roomtypes.dto';
 
 @UseGuards(JwtGuard, RolesGuard)
-@Roles(RoleName.SUPER_ADMIN, RoleName.ADMIN)
+@Roles(RoleName.SUPER_ADMIN, RoleName.OWNER, RoleName.FRONT_DESK_MANAGER)
 @Controller('roomtype')
 export class RoomtypeController {
   constructor(private readonly roomtypeService: RoomtypeService) {}

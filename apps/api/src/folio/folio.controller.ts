@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { FolioService } from './folio.service';
 import { CreateFolioDto } from './dto/create-folio.dto';
@@ -16,9 +17,10 @@ import { JwtGuard } from '../common/guards/jwt.guard';
 import { RolesGuard } from '../common/guards/roles.guard';
 import { Roles } from '../common/decorators/roles.decorator';
 import { RoleName } from '../../generated/prisma';
+import { GetFoliosDto } from './dto/get-folios.dto';
 
 @UseGuards(JwtGuard, RolesGuard)
-@Roles(RoleName.SUPER_ADMIN, RoleName.ADMIN, RoleName.USER)
+@Roles(RoleName.SUPER_ADMIN, RoleName.OWNER, RoleName.FRONT_DESK_MANAGER)
 @Controller('folio')
 export class FolioController {
   constructor(private readonly folioService: FolioService) {}
@@ -37,8 +39,8 @@ export class FolioController {
   }
 
   @Get()
-  findAll() {
-    return this.folioService.findAll();
+  findAll(@Query() query: GetFoliosDto) {
+    return this.folioService.findAll(query);
   }
 
   @Get(':id')

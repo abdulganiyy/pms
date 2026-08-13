@@ -20,7 +20,7 @@ import { PayRestaurantOrderDto } from './dto/pay-restaurantorder.dto';
 import { RefundRestaurantOrderDto } from './dto/refund-restaurantorder.dto';
 
 @UseGuards(JwtGuard, RolesGuard)
-@Roles(RoleName.SUPER_ADMIN, RoleName.ADMIN, RoleName.USER)
+@Roles(RoleName.SUPER_ADMIN, RoleName.OWNER, RoleName.FRONT_DESK_MANAGER)
 @Controller('restaurantorder')
 export class RestaurantorderController {
   constructor(

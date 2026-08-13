@@ -5,6 +5,8 @@ import { PaymentQueue } from './payment.queue';
 import { PaymentWorker } from './payment.worker';
 import { BullModule } from '@nestjs/bullmq';
 import { PAYMENT_QUEUE } from './payment.constants';
+import { PaymentController } from './payment.controller';
+import { PaymentService } from './payment.service';
 
 @Module({
   imports: [
@@ -12,11 +14,12 @@ import { PAYMENT_QUEUE } from './payment.constants';
       name: PAYMENT_QUEUE,
     }),
   ],
-  controllers: [],
+  controllers: [PaymentController],
   providers: [
     { provide: PaymentProvider, useClass: PaystackService },
     PaymentQueue,
     PaymentWorker,
+    PaymentService,
   ],
   exports: [PaymentProvider, PaymentQueue],
 })

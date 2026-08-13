@@ -3,6 +3,7 @@ import { CreateRoomDto } from './dto/create-room.dto';
 import { UpdateRoomDto } from './dto/update-room.dto';
 import { PrismaService } from '../prisma/prisma.service';
 import { GetRoomsDto } from './dto/get-rooms.dto';
+import { RoomStatus } from '../../generated/prisma';
 
 @Injectable()
 export class RoomService {
@@ -10,7 +11,7 @@ export class RoomService {
 
   create(createRoomDto: CreateRoomDto) {
     return this.prismaService.room.create({
-      data: createRoomDto,
+      data: { ...createRoomDto, status: RoomStatus.AVAILABLE },
     });
   }
 

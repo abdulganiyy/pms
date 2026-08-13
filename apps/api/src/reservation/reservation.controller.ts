@@ -22,7 +22,7 @@ import { ChangeReservationRoomDto } from './dto/change-reservation-room.dto';
 import { GetReservationsDto } from './dto/get-reservations.dto';
 
 @UseGuards(JwtGuard, RolesGuard)
-@Roles(RoleName.SUPER_ADMIN, RoleName.ADMIN, RoleName.USER)
+@Roles(RoleName.SUPER_ADMIN, RoleName.OWNER, RoleName.FRONT_DESK_MANAGER)
 @Controller('reservation')
 export class ReservationController {
   constructor(private readonly reservationService: ReservationService) {}

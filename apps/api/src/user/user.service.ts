@@ -3,6 +3,7 @@ import {
   BadRequestException,
   InternalServerErrorException,
   ConflictException,
+  NotFoundException,
 } from '@nestjs/common';
 import * as argon2 from 'argon2';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -11,6 +12,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { GetUsersDto } from './dto/get-users.dto';
 import { Prisma, PrismaClient } from '@prisma/client/extension';
 import * as crypto from 'crypto';
+import { RoleName } from '../../generated/prisma';
 
 type PrismaExecutor = PrismaClient | Prisma.TransactionClient;
 
@@ -85,7 +87,7 @@ export class UserService {
   private async getDefaultRoleId(tx: Prisma.TransactionClient) {
     const role = await tx.role.findUnique({
       where: {
-        name: 'USER',
+        name: 'FRONT_DESK_AGENT',
       },
     });
 
@@ -247,6 +249,242 @@ export class UserService {
     const { password: _, ...safeUser } = updatedUser;
 
     return safeUser;
+  }
+
+  /**
+   * ---------------------------------------------------------
+   * GET USER ROLES
+   * ---------------------------------------------------------
+   *
+   * GET /users/:id/roles
+   */
+  async getRoles(userId: string) {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+    });
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    const userRoles = await this.prisma.userRole.findMany({
+      where: {
+        userId,
+      },
+
+      include: {
+        role: true,
+      },
+
+      orderBy: {
+        role: {
+          name: 'asc',
+        },
+      },
+    });
+
+    return userRoles.map(({ role }) => ({
+      id: role.id,
+      name: role.name,
+      isSystem: true,
+    }));
+  }
+
+  /**
+   * ---------------------------------------------------------
+   * UPDATE USER ROLES
+   * ---------------------------------------------------------
+   *
+   * PATCH /users/:id/roles
+   *
+   * Replaces the complete role set.
+   */
+  async updateRoles(userId: string, roleIds: string[]) {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+    });
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    const uniqueRoleIds = [...new Set(roleIds)];
+
+    /**
+     * Resolve submitted roles.
+     */
+    const roles = await this.prisma.role.findMany({
+      where: {
+        id: {
+          in: uniqueRoleIds,
+        },
+      },
+    });
+
+    /**
+     * Check for invalid role IDs.
+     */
+    if (roles.length !== uniqueRoleIds.length) {
+      const existingRoleIds = new Set(roles.map((role) => role.id));
+
+      const invalidRoleIds = uniqueRoleIds.filter(
+        (id) => !existingRoleIds.has(id),
+      );
+
+      throw new BadRequestException({
+        message: 'Invalid roles',
+        roleIds: invalidRoleIds,
+      });
+    }
+
+    /**
+     * IMPORTANT:
+     *
+     * Do not allow removing the SUPER_ADMIN role from
+     * the only super admin account if your application
+     * requires at least one super administrator.
+     *
+     * This check can be enabled below once you establish
+     * your "minimum one super admin" policy.
+     */
+
+    await this.prisma.$transaction(async (tx) => {
+      /**
+       * Remove existing role assignments.
+       */
+      await tx.userRole.deleteMany({
+        where: {
+          userId,
+        },
+      });
+
+      /**
+       * Add the new role assignments.
+       */
+      if (uniqueRoleIds.length > 0) {
+        await tx.userRole.createMany({
+          data: uniqueRoleIds.map((roleId) => ({
+            userId,
+            roleId,
+          })),
+
+          skipDuplicates: true,
+        });
+      }
+    });
+
+    return this.getRoles(userId);
+  }
+
+  /**
+   * ---------------------------------------------------------
+   * ADD ONE ROLE
+   * ---------------------------------------------------------
+   *
+   * Useful if you need a simple "Assign role" operation.
+   */
+  async addRole(userId: string, roleId: string) {
+    const [user, role] = await Promise.all([
+      this.prisma.user.findUnique({
+        where: {
+          id: userId,
+        },
+      }),
+
+      this.prisma.role.findUnique({
+        where: {
+          id: roleId,
+        },
+      }),
+    ]);
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    if (!role) {
+      throw new NotFoundException('Role not found');
+    }
+
+    await this.prisma.userRole.upsert({
+      where: {
+        userId_roleId: {
+          userId,
+          roleId,
+        },
+      },
+
+      update: {},
+
+      create: {
+        userId,
+        roleId,
+      },
+    });
+
+    return this.getRoles(userId);
+  }
+
+  /**
+   * ---------------------------------------------------------
+   * REMOVE ONE ROLE
+   * ---------------------------------------------------------
+   */
+  async removeRole(userId: string, roleId: string) {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+    });
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    const role = await this.prisma.role.findUnique({
+      where: {
+        id: roleId,
+      },
+    });
+
+    if (!role) {
+      throw new NotFoundException('Role not found');
+    }
+
+    /**
+     * Prevent accidental removal of the last
+     * SUPER_ADMIN.
+     */
+    if (role.name === RoleName.SUPER_ADMIN) {
+      const superAdminCount = await this.prisma.userRole.count({
+        where: {
+          role: {
+            name: RoleName.SUPER_ADMIN,
+          },
+        },
+      });
+
+      if (superAdminCount <= 1) {
+        throw new BadRequestException(
+          'Cannot remove the SUPER_ADMIN role from the last super administrator',
+        );
+      }
+    }
+
+    await this.prisma.userRole.delete({
+      where: {
+        userId_roleId: {
+          userId,
+          roleId,
+        },
+      },
+    });
+
+    return this.getRoles(userId);
   }
 
   softdelete(id: string) {

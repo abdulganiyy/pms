@@ -24,7 +24,7 @@ import { GetGuestsDto } from './dto/get-guests.dto';
 
 @Controller('guest')
 @UseGuards(JwtGuard, RolesGuard)
-@Roles(RoleName.SUPER_ADMIN, RoleName.USER)
+@Roles(RoleName.SUPER_ADMIN, RoleName.FRONT_DESK_MANAGER)
 export class GuestController {
   constructor(private readonly guestService: GuestService) {}
 

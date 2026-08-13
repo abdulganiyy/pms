@@ -19,7 +19,7 @@ import { UpdateRoomRateDto } from './dto/update-roomrate.dto';
 import { GetRoomRatesDto } from './dto/get-roomrates.dto';
 
 @UseGuards(JwtGuard, RolesGuard)
-@Roles(RoleName.SUPER_ADMIN, RoleName.ADMIN)
+@Roles(RoleName.SUPER_ADMIN, RoleName.OWNER, RoleName.FRONT_DESK_MANAGER)
 @Controller('roomrate')
 export class RoomrateController {
   constructor(private readonly roomrateService: RoomrateService) {}

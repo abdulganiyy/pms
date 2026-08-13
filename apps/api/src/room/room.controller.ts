@@ -19,7 +19,7 @@ import { RoomService } from './room.service';
 import { GetRoomsDto } from './dto/get-rooms.dto';
 
 @UseGuards(JwtGuard, RolesGuard)
-@Roles(RoleName.SUPER_ADMIN, RoleName.ADMIN)
+@Roles(RoleName.SUPER_ADMIN, RoleName.OWNER, RoleName.FRONT_DESK_MANAGER)
 @Controller('room')
 export class RoomController {
   constructor(private readonly roomService: RoomService) {}

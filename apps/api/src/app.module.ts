@@ -20,6 +20,11 @@ import { FolioModule } from './folio/folio.module';
 import { FoliotransactionModule } from './foliotransaction/foliotransaction.module';
 import { MenuModule } from './menu/menu.module';
 import { RestaurantorderModule } from './restaurantorder/restaurantorder.module';
+import { DashboardModule } from './dashboard/dashboard.module';
+import { HousekeepingService } from './housekeeping/housekeeping.service';
+import { MaintenanceService } from './maintenance/maintenance.service';
+import { RoleModule } from './role/role.module';
+import { PermissionModule } from './permission/permission.module';
 
 @Module({
   imports: [
@@ -45,8 +50,11 @@ import { RestaurantorderModule } from './restaurantorder/restaurantorder.module'
     FoliotransactionModule,
     MenuModule,
     RestaurantorderModule,
+    DashboardModule,
+    RoleModule,
+    PermissionModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, HousekeepingService, MaintenanceService],
 })
 export class AppModule {}

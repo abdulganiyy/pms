@@ -10,6 +10,7 @@ import {
   FolioTransactionType,
   Prisma,
   Reservation,
+  RoomStatus,
 } from '../../generated/prisma';
 import {
   ReservationAuditAction,
@@ -305,6 +306,13 @@ export class ReservationService {
         },
       });
 
+      await tx.room.update({
+        where: { id: reservation.room.id },
+        data: {
+          status: RoomStatus.OCCUPIED,
+        },
+      });
+
       await this.postRoomCharge(tx, reservation);
 
       await tx.reservationAudit.create({
@@ -335,6 +343,9 @@ export class ReservationService {
     return this.prismaService.$transaction(async (tx) => {
       const reservation = await tx.reservation.findUnique({
         where: { id },
+        include: {
+          room: true,
+        },
       });
 
       if (!reservation) {
@@ -356,6 +367,13 @@ export class ReservationService {
           status: ReservationStatus.CHECKED_OUT,
 
           checkedOutAt: now,
+        },
+      });
+
+      await tx.room.update({
+        where: { id: reservation.room.id },
+        data: {
+          status: RoomStatus.DIRTY,
         },
       });
 

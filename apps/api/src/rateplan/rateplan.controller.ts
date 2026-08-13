@@ -19,7 +19,7 @@ import { RateplanService } from './rateplan.service';
 import { GetRatePlansDto } from './dto/get-rateplans.dto';
 
 @UseGuards(JwtGuard, RolesGuard)
-@Roles(RoleName.SUPER_ADMIN, RoleName.ADMIN)
+@Roles(RoleName.SUPER_ADMIN, RoleName.OWNER, RoleName.FRONT_DESK_MANAGER)
 @Controller('rateplan')
 export class RateplanController {
   constructor(private readonly rateplanService: RateplanService) {}

@@ -78,11 +78,17 @@ export const sidebarConfig: SidebarItem[] = [
   {
     label: "Other",
     children: [
+      // {
+      //   icon: MessageCircleMore,
+      //   label: "Customer Review",
+      //   href: "/dashboard/review",
+      //   permission: "review.view",
+      // },
       {
         icon: MessageCircleMore,
-        label: "Customer Review",
-        href: "/dashboard/review",
-        permission: "review.view",
+        label: "Settings",
+        href: "/dashboard/setting",
+        permission: "setting.view",
       },
       {
         icon: Info,

@@ -5,7 +5,8 @@ export type StatusType =
   | "restaurant"
   | "userStatus"
   | "role"
-  | "reservationType";
+  | "reservationType"
+  | "folio";
 
 type StatusConfig = {
   label: string;
@@ -185,6 +186,97 @@ export const statusConfig: Record<StatusType, Record<string, StatusConfig>> = {
     GROUP: {
       label: "Group",
       className: "bg-blue-100 text-blue-800",
+    },
+  },
+  folio: {
+    ROOM_CHARGE: {
+      label: "Room Charge",
+      className: "bg-blue-100 text-blue-800",
+    },
+
+    RESTAURANT_CHARGE: {
+      label: "Restaurant",
+      className: "bg-orange-100 text-orange-800",
+    },
+
+    ROOM_SERVICE_CHARGE: {
+      label: "Room Service",
+      className: "bg-orange-100 text-orange-800",
+    },
+
+    LAUNDRY_CHARGE: {
+      label: "Laundry",
+      className: "bg-purple-100 text-purple-800",
+    },
+
+    SPA_CHARGE: {
+      label: "Spa",
+      className: "bg-pink-100 text-pink-800",
+    },
+
+    GYM_CHARGE: {
+      label: "Gym",
+      className: "bg-green-100 text-green-800",
+    },
+
+    MINIBAR_CHARGE: {
+      label: "Minibar",
+      className: "bg-yellow-100 text-yellow-800",
+    },
+
+    TRANSPORT_CHARGE: {
+      label: "Transport",
+      className: "bg-indigo-100 text-indigo-800",
+    },
+
+    PARKING_CHARGE: {
+      label: "Parking",
+      className: "bg-slate-100 text-slate-800",
+    },
+
+    TELEPHONE_CHARGE: {
+      label: "Telephone",
+      className: "bg-cyan-100 text-cyan-800",
+    },
+
+    CONFERENCE_CHARGE: {
+      label: "Conference",
+      className: "bg-violet-100 text-violet-800",
+    },
+
+    EXTRA_BED_CHARGE: {
+      label: "Extra Bed",
+      className: "bg-teal-100 text-teal-800",
+    },
+
+    TAX: {
+      label: "Tax",
+      className: "bg-slate-100 text-slate-800",
+    },
+
+    SERVICE_CHARGE: {
+      label: "Service Charge",
+      className: "bg-amber-100 text-amber-800",
+    },
+
+    DISCOUNT: {
+      label: "Discount",
+      className: "bg-emerald-100 text-emerald-800",
+    },
+
+    ADJUSTMENT: {
+      label: "Adjustment",
+      className: "bg-gray-100 text-gray-800",
+    },
+
+    REFUND: {
+      label: "Refund",
+      className: "bg-red-100 text-red-800",
+    },
+
+    PAYMENT: {
+      label: "Payment",
+      className: "bg-green-100 text-green-800",
     },
   },
 };

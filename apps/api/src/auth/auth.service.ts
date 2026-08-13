@@ -63,7 +63,7 @@ export class AuthService {
       sub: user!.id,
       email: user!.email as string,
       roles,
-      permissions,
+      permissions: roles.includes('SUPER_ADMIN') ? ['*'] : permissions,
       fullname: user!.fullname,
     });
 
@@ -72,7 +72,7 @@ export class AuthService {
         fullname: user!.fullname,
         email: user!.email,
         roles,
-        permissions,
+        permissions: roles.includes('SUPER_ADMIN') ? ['*'] : permissions,
       },
       accessToken,
     };
@@ -105,7 +105,7 @@ export class AuthService {
       sub: user.id,
       email: user.email as string,
       roles,
-      permissions,
+      permissions: roles.includes('SUPER_ADMIN') ? ['*'] : permissions,
       fullname: user.fullname,
     });
 
@@ -114,7 +114,7 @@ export class AuthService {
         fullname: user.fullname,
         email: user.email,
         roles,
-        permissions,
+        permissions: roles.includes('SUPER_ADMIN') ? ['*'] : permissions,
       },
       accessToken,
     };
@@ -278,7 +278,7 @@ export class AuthService {
       fullname: user?.fullname,
       profileImage: user?.profileImage,
       roles,
-      permissions,
+      permissions: roles.includes('SUPER_ADMIN') ? ['*'] : permissions,
     };
   }
 }
