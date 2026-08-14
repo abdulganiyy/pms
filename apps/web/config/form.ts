@@ -72,6 +72,7 @@ export const createNewGuestFieldConfig: FieldConfig[] = [
     name: "dateOfBirth",
     label: "Date of Birth",
     type: "date",
+    captionLayout: true,
   },
   {
     name: "nationality",

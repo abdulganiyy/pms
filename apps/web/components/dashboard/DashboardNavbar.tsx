@@ -1,19 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import {
-  Bell,
-  Menu,
-  Search,
-  Settings,
-  User,
-  LogOut,
-  CreditCard,
-  Shield,
-  ChevronDown,
-} from "lucide-react";
-
-import { format } from "date-fns";
+import { Bell, Menu, Search, User, LogOut, ChevronDown } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 

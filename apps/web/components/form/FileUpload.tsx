@@ -167,7 +167,7 @@ export function FileUpload({
       >
         <UploadCloud className="mb-2 h-6 w-6" />
 
-        <p>Upload images</p>
+        <p>Upload files</p>
 
         <input
           ref={inputRef}

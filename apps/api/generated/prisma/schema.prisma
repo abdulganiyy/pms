@@ -355,6 +355,8 @@ model FolioTransaction {
   amount Decimal
 
   description String
+
+  createdAt DateTime @default(now())
 }
 
 model Payment {
@@ -379,6 +381,8 @@ model Payment {
   method PaymentMethod
 
   refunds PaymentRefund[]
+
+  createdAt DateTime @default(now())
 }
 
 enum PaymentRefundStatus {

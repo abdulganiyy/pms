@@ -175,3 +175,77 @@ export type RestaurantOrder = {
 
   createdAt: string;
 };
+
+export interface DashboardArrival {
+  id: string;
+  guest: any;
+  room?: any;
+  roomType?: string;
+  checkIn?: string;
+  status: string;
+}
+
+export interface DashboardDeparture {
+  id: string;
+  guest: any;
+  room?: any;
+  checkOut?: string;
+  status: string;
+}
+
+export interface DashboardPayment {
+  id: string;
+  guest: any;
+  folio: any;
+  invoiceNumber?: string;
+  method?: string;
+  amount: number;
+  status: string;
+}
+
+export interface DashboardSummary {
+  stats: {
+    occupancy: number;
+    arrivals: number;
+    departures: number;
+    occupiedRooms: number;
+    totalRooms: number;
+    revenue?: number;
+  };
+
+  roomStatus: {
+    available: number;
+    occupied: number;
+    dirty: number;
+    maintenance: number;
+    outOfOrder: number;
+  };
+
+  recentArrivals?: DashboardArrival[];
+
+  recentDepartures?: DashboardDeparture[];
+
+  revenue?: {
+    total: number;
+    room: number;
+    restaurant: number;
+    services: number;
+  };
+
+  occupancy?: {
+    date: string;
+    percentage: number;
+  }[];
+
+  alerts?: {
+    housekeeping: number;
+    maintenance: number;
+    pendingPayments: number;
+  };
+
+  recentPayments?: DashboardPayment[];
+}
+
+interface DashboardContentProps {
+  data: DashboardSummary;
+}

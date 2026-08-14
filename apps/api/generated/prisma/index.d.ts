@@ -19489,6 +19489,7 @@ export namespace Prisma {
     type: $Enums.FolioTransactionType | null
     amount: Decimal | null
     description: string | null
+    createdAt: Date | null
   }
 
   export type FolioTransactionMaxAggregateOutputType = {
@@ -19497,6 +19498,7 @@ export namespace Prisma {
     type: $Enums.FolioTransactionType | null
     amount: Decimal | null
     description: string | null
+    createdAt: Date | null
   }
 
   export type FolioTransactionCountAggregateOutputType = {
@@ -19505,6 +19507,7 @@ export namespace Prisma {
     type: number
     amount: number
     description: number
+    createdAt: number
     _all: number
   }
 
@@ -19523,6 +19526,7 @@ export namespace Prisma {
     type?: true
     amount?: true
     description?: true
+    createdAt?: true
   }
 
   export type FolioTransactionMaxAggregateInputType = {
@@ -19531,6 +19535,7 @@ export namespace Prisma {
     type?: true
     amount?: true
     description?: true
+    createdAt?: true
   }
 
   export type FolioTransactionCountAggregateInputType = {
@@ -19539,6 +19544,7 @@ export namespace Prisma {
     type?: true
     amount?: true
     description?: true
+    createdAt?: true
     _all?: true
   }
 
@@ -19634,6 +19640,7 @@ export namespace Prisma {
     type: $Enums.FolioTransactionType
     amount: Decimal
     description: string
+    createdAt: Date
     _count: FolioTransactionCountAggregateOutputType | null
     _avg: FolioTransactionAvgAggregateOutputType | null
     _sum: FolioTransactionSumAggregateOutputType | null
@@ -19661,6 +19668,7 @@ export namespace Prisma {
     type?: boolean
     amount?: boolean
     description?: boolean
+    createdAt?: boolean
     folio?: boolean | FolioDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["folioTransaction"]>
 
@@ -19670,6 +19678,7 @@ export namespace Prisma {
     type?: boolean
     amount?: boolean
     description?: boolean
+    createdAt?: boolean
     folio?: boolean | FolioDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["folioTransaction"]>
 
@@ -19679,6 +19688,7 @@ export namespace Prisma {
     type?: boolean
     amount?: boolean
     description?: boolean
+    createdAt?: boolean
     folio?: boolean | FolioDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["folioTransaction"]>
 
@@ -19688,9 +19698,10 @@ export namespace Prisma {
     type?: boolean
     amount?: boolean
     description?: boolean
+    createdAt?: boolean
   }
 
-  export type FolioTransactionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "folioId" | "type" | "amount" | "description", ExtArgs["result"]["folioTransaction"]>
+  export type FolioTransactionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "folioId" | "type" | "amount" | "description" | "createdAt", ExtArgs["result"]["folioTransaction"]>
   export type FolioTransactionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     folio?: boolean | FolioDefaultArgs<ExtArgs>
   }
@@ -19712,6 +19723,7 @@ export namespace Prisma {
       type: $Enums.FolioTransactionType
       amount: Prisma.Decimal
       description: string
+      createdAt: Date
     }, ExtArgs["result"]["folioTransaction"]>
     composites: {}
   }
@@ -20141,6 +20153,7 @@ export namespace Prisma {
     readonly type: FieldRef<"FolioTransaction", 'FolioTransactionType'>
     readonly amount: FieldRef<"FolioTransaction", 'Decimal'>
     readonly description: FieldRef<"FolioTransaction", 'String'>
+    readonly createdAt: FieldRef<"FolioTransaction", 'DateTime'>
   }
     
 
@@ -20591,6 +20604,7 @@ export namespace Prisma {
     status: $Enums.PaymentStatus | null
     reference: string | null
     method: $Enums.PaymentMethod | null
+    createdAt: Date | null
   }
 
   export type PaymentMaxAggregateOutputType = {
@@ -20602,6 +20616,7 @@ export namespace Prisma {
     status: $Enums.PaymentStatus | null
     reference: string | null
     method: $Enums.PaymentMethod | null
+    createdAt: Date | null
   }
 
   export type PaymentCountAggregateOutputType = {
@@ -20613,6 +20628,7 @@ export namespace Prisma {
     status: number
     reference: number
     method: number
+    createdAt: number
     _all: number
   }
 
@@ -20636,6 +20652,7 @@ export namespace Prisma {
     status?: true
     reference?: true
     method?: true
+    createdAt?: true
   }
 
   export type PaymentMaxAggregateInputType = {
@@ -20647,6 +20664,7 @@ export namespace Prisma {
     status?: true
     reference?: true
     method?: true
+    createdAt?: true
   }
 
   export type PaymentCountAggregateInputType = {
@@ -20658,6 +20676,7 @@ export namespace Prisma {
     status?: true
     reference?: true
     method?: true
+    createdAt?: true
     _all?: true
   }
 
@@ -20756,6 +20775,7 @@ export namespace Prisma {
     status: $Enums.PaymentStatus
     reference: string | null
     method: $Enums.PaymentMethod
+    createdAt: Date
     _count: PaymentCountAggregateOutputType | null
     _avg: PaymentAvgAggregateOutputType | null
     _sum: PaymentSumAggregateOutputType | null
@@ -20786,6 +20806,7 @@ export namespace Prisma {
     status?: boolean
     reference?: boolean
     method?: boolean
+    createdAt?: boolean
     folio?: boolean | Payment$folioArgs<ExtArgs>
     restaurantOrder?: boolean | Payment$restaurantOrderArgs<ExtArgs>
     refunds?: boolean | Payment$refundsArgs<ExtArgs>
@@ -20801,6 +20822,7 @@ export namespace Prisma {
     status?: boolean
     reference?: boolean
     method?: boolean
+    createdAt?: boolean
     folio?: boolean | Payment$folioArgs<ExtArgs>
     restaurantOrder?: boolean | Payment$restaurantOrderArgs<ExtArgs>
   }, ExtArgs["result"]["payment"]>
@@ -20814,6 +20836,7 @@ export namespace Prisma {
     status?: boolean
     reference?: boolean
     method?: boolean
+    createdAt?: boolean
     folio?: boolean | Payment$folioArgs<ExtArgs>
     restaurantOrder?: boolean | Payment$restaurantOrderArgs<ExtArgs>
   }, ExtArgs["result"]["payment"]>
@@ -20827,9 +20850,10 @@ export namespace Prisma {
     status?: boolean
     reference?: boolean
     method?: boolean
+    createdAt?: boolean
   }
 
-  export type PaymentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "folioId" | "restaurantOrderId" | "amount" | "refundedAmount" | "status" | "reference" | "method", ExtArgs["result"]["payment"]>
+  export type PaymentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "folioId" | "restaurantOrderId" | "amount" | "refundedAmount" | "status" | "reference" | "method" | "createdAt", ExtArgs["result"]["payment"]>
   export type PaymentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     folio?: boolean | Payment$folioArgs<ExtArgs>
     restaurantOrder?: boolean | Payment$restaurantOrderArgs<ExtArgs>
@@ -20861,6 +20885,7 @@ export namespace Prisma {
       status: $Enums.PaymentStatus
       reference: string | null
       method: $Enums.PaymentMethod
+      createdAt: Date
     }, ExtArgs["result"]["payment"]>
     composites: {}
   }
@@ -21295,6 +21320,7 @@ export namespace Prisma {
     readonly status: FieldRef<"Payment", 'PaymentStatus'>
     readonly reference: FieldRef<"Payment", 'String'>
     readonly method: FieldRef<"Payment", 'PaymentMethod'>
+    readonly createdAt: FieldRef<"Payment", 'DateTime'>
   }
     
 
@@ -33103,7 +33129,8 @@ export namespace Prisma {
     folioId: 'folioId',
     type: 'type',
     amount: 'amount',
-    description: 'description'
+    description: 'description',
+    createdAt: 'createdAt'
   };
 
   export type FolioTransactionScalarFieldEnum = (typeof FolioTransactionScalarFieldEnum)[keyof typeof FolioTransactionScalarFieldEnum]
@@ -33117,7 +33144,8 @@ export namespace Prisma {
     refundedAmount: 'refundedAmount',
     status: 'status',
     reference: 'reference',
-    method: 'method'
+    method: 'method',
+    createdAt: 'createdAt'
   };
 
   export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
@@ -34784,6 +34812,7 @@ export namespace Prisma {
     type?: EnumFolioTransactionTypeFilter<"FolioTransaction"> | $Enums.FolioTransactionType
     amount?: DecimalFilter<"FolioTransaction"> | Decimal | DecimalJsLike | number | string
     description?: StringFilter<"FolioTransaction"> | string
+    createdAt?: DateTimeFilter<"FolioTransaction"> | Date | string
     folio?: XOR<FolioScalarRelationFilter, FolioWhereInput>
   }
 
@@ -34793,6 +34822,7 @@ export namespace Prisma {
     type?: SortOrder
     amount?: SortOrder
     description?: SortOrder
+    createdAt?: SortOrder
     folio?: FolioOrderByWithRelationInput
   }
 
@@ -34805,6 +34835,7 @@ export namespace Prisma {
     type?: EnumFolioTransactionTypeFilter<"FolioTransaction"> | $Enums.FolioTransactionType
     amount?: DecimalFilter<"FolioTransaction"> | Decimal | DecimalJsLike | number | string
     description?: StringFilter<"FolioTransaction"> | string
+    createdAt?: DateTimeFilter<"FolioTransaction"> | Date | string
     folio?: XOR<FolioScalarRelationFilter, FolioWhereInput>
   }, "id">
 
@@ -34814,6 +34845,7 @@ export namespace Prisma {
     type?: SortOrder
     amount?: SortOrder
     description?: SortOrder
+    createdAt?: SortOrder
     _count?: FolioTransactionCountOrderByAggregateInput
     _avg?: FolioTransactionAvgOrderByAggregateInput
     _max?: FolioTransactionMaxOrderByAggregateInput
@@ -34830,6 +34862,7 @@ export namespace Prisma {
     type?: EnumFolioTransactionTypeWithAggregatesFilter<"FolioTransaction"> | $Enums.FolioTransactionType
     amount?: DecimalWithAggregatesFilter<"FolioTransaction"> | Decimal | DecimalJsLike | number | string
     description?: StringWithAggregatesFilter<"FolioTransaction"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"FolioTransaction"> | Date | string
   }
 
   export type PaymentWhereInput = {
@@ -34844,6 +34877,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFilter<"Payment"> | $Enums.PaymentStatus
     reference?: StringNullableFilter<"Payment"> | string | null
     method?: EnumPaymentMethodFilter<"Payment"> | $Enums.PaymentMethod
+    createdAt?: DateTimeFilter<"Payment"> | Date | string
     folio?: XOR<FolioNullableScalarRelationFilter, FolioWhereInput> | null
     restaurantOrder?: XOR<RestaurantOrderNullableScalarRelationFilter, RestaurantOrderWhereInput> | null
     refunds?: PaymentRefundListRelationFilter
@@ -34858,6 +34892,7 @@ export namespace Prisma {
     status?: SortOrder
     reference?: SortOrderInput | SortOrder
     method?: SortOrder
+    createdAt?: SortOrder
     folio?: FolioOrderByWithRelationInput
     restaurantOrder?: RestaurantOrderOrderByWithRelationInput
     refunds?: PaymentRefundOrderByRelationAggregateInput
@@ -34875,6 +34910,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFilter<"Payment"> | $Enums.PaymentStatus
     reference?: StringNullableFilter<"Payment"> | string | null
     method?: EnumPaymentMethodFilter<"Payment"> | $Enums.PaymentMethod
+    createdAt?: DateTimeFilter<"Payment"> | Date | string
     folio?: XOR<FolioNullableScalarRelationFilter, FolioWhereInput> | null
     restaurantOrder?: XOR<RestaurantOrderNullableScalarRelationFilter, RestaurantOrderWhereInput> | null
     refunds?: PaymentRefundListRelationFilter
@@ -34889,6 +34925,7 @@ export namespace Prisma {
     status?: SortOrder
     reference?: SortOrderInput | SortOrder
     method?: SortOrder
+    createdAt?: SortOrder
     _count?: PaymentCountOrderByAggregateInput
     _avg?: PaymentAvgOrderByAggregateInput
     _max?: PaymentMaxOrderByAggregateInput
@@ -34908,6 +34945,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusWithAggregatesFilter<"Payment"> | $Enums.PaymentStatus
     reference?: StringNullableWithAggregatesFilter<"Payment"> | string | null
     method?: EnumPaymentMethodWithAggregatesFilter<"Payment"> | $Enums.PaymentMethod
+    createdAt?: DateTimeWithAggregatesFilter<"Payment"> | Date | string
   }
 
   export type PaymentRefundWhereInput = {
@@ -36848,6 +36886,7 @@ export namespace Prisma {
     type: $Enums.FolioTransactionType
     amount: Decimal | DecimalJsLike | number | string
     description: string
+    createdAt?: Date | string
     folio: FolioCreateNestedOneWithoutTransactionsInput
   }
 
@@ -36857,6 +36896,7 @@ export namespace Prisma {
     type: $Enums.FolioTransactionType
     amount: Decimal | DecimalJsLike | number | string
     description: string
+    createdAt?: Date | string
   }
 
   export type FolioTransactionUpdateInput = {
@@ -36864,6 +36904,7 @@ export namespace Prisma {
     type?: EnumFolioTransactionTypeFieldUpdateOperationsInput | $Enums.FolioTransactionType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     folio?: FolioUpdateOneRequiredWithoutTransactionsNestedInput
   }
 
@@ -36873,6 +36914,7 @@ export namespace Prisma {
     type?: EnumFolioTransactionTypeFieldUpdateOperationsInput | $Enums.FolioTransactionType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type FolioTransactionCreateManyInput = {
@@ -36881,6 +36923,7 @@ export namespace Prisma {
     type: $Enums.FolioTransactionType
     amount: Decimal | DecimalJsLike | number | string
     description: string
+    createdAt?: Date | string
   }
 
   export type FolioTransactionUpdateManyMutationInput = {
@@ -36888,6 +36931,7 @@ export namespace Prisma {
     type?: EnumFolioTransactionTypeFieldUpdateOperationsInput | $Enums.FolioTransactionType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type FolioTransactionUncheckedUpdateManyInput = {
@@ -36896,6 +36940,7 @@ export namespace Prisma {
     type?: EnumFolioTransactionTypeFieldUpdateOperationsInput | $Enums.FolioTransactionType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PaymentCreateInput = {
@@ -36905,6 +36950,7 @@ export namespace Prisma {
     status?: $Enums.PaymentStatus
     reference?: string | null
     method: $Enums.PaymentMethod
+    createdAt?: Date | string
     folio?: FolioCreateNestedOneWithoutPaymentsInput
     restaurantOrder?: RestaurantOrderCreateNestedOneWithoutPaymentsInput
     refunds?: PaymentRefundCreateNestedManyWithoutPaymentInput
@@ -36919,6 +36965,7 @@ export namespace Prisma {
     status?: $Enums.PaymentStatus
     reference?: string | null
     method: $Enums.PaymentMethod
+    createdAt?: Date | string
     refunds?: PaymentRefundUncheckedCreateNestedManyWithoutPaymentInput
   }
 
@@ -36929,6 +36976,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     reference?: NullableStringFieldUpdateOperationsInput | string | null
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     folio?: FolioUpdateOneWithoutPaymentsNestedInput
     restaurantOrder?: RestaurantOrderUpdateOneWithoutPaymentsNestedInput
     refunds?: PaymentRefundUpdateManyWithoutPaymentNestedInput
@@ -36943,6 +36991,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     reference?: NullableStringFieldUpdateOperationsInput | string | null
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     refunds?: PaymentRefundUncheckedUpdateManyWithoutPaymentNestedInput
   }
 
@@ -36955,6 +37004,7 @@ export namespace Prisma {
     status?: $Enums.PaymentStatus
     reference?: string | null
     method: $Enums.PaymentMethod
+    createdAt?: Date | string
   }
 
   export type PaymentUpdateManyMutationInput = {
@@ -36964,6 +37014,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     reference?: NullableStringFieldUpdateOperationsInput | string | null
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PaymentUncheckedUpdateManyInput = {
@@ -36975,6 +37026,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     reference?: NullableStringFieldUpdateOperationsInput | string | null
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PaymentRefundCreateInput = {
@@ -38843,6 +38895,7 @@ export namespace Prisma {
     type?: SortOrder
     amount?: SortOrder
     description?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type FolioTransactionAvgOrderByAggregateInput = {
@@ -38855,6 +38908,7 @@ export namespace Prisma {
     type?: SortOrder
     amount?: SortOrder
     description?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type FolioTransactionMinOrderByAggregateInput = {
@@ -38863,6 +38917,7 @@ export namespace Prisma {
     type?: SortOrder
     amount?: SortOrder
     description?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type FolioTransactionSumOrderByAggregateInput = {
@@ -38917,6 +38972,7 @@ export namespace Prisma {
     status?: SortOrder
     reference?: SortOrder
     method?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type PaymentAvgOrderByAggregateInput = {
@@ -38933,6 +38989,7 @@ export namespace Prisma {
     status?: SortOrder
     reference?: SortOrder
     method?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type PaymentMinOrderByAggregateInput = {
@@ -38944,6 +39001,7 @@ export namespace Prisma {
     status?: SortOrder
     reference?: SortOrder
     method?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type PaymentSumOrderByAggregateInput = {
@@ -43818,6 +43876,7 @@ export namespace Prisma {
     type: $Enums.FolioTransactionType
     amount: Decimal | DecimalJsLike | number | string
     description: string
+    createdAt?: Date | string
   }
 
   export type FolioTransactionUncheckedCreateWithoutFolioInput = {
@@ -43825,6 +43884,7 @@ export namespace Prisma {
     type: $Enums.FolioTransactionType
     amount: Decimal | DecimalJsLike | number | string
     description: string
+    createdAt?: Date | string
   }
 
   export type FolioTransactionCreateOrConnectWithoutFolioInput = {
@@ -43844,6 +43904,7 @@ export namespace Prisma {
     status?: $Enums.PaymentStatus
     reference?: string | null
     method: $Enums.PaymentMethod
+    createdAt?: Date | string
     restaurantOrder?: RestaurantOrderCreateNestedOneWithoutPaymentsInput
     refunds?: PaymentRefundCreateNestedManyWithoutPaymentInput
   }
@@ -43856,6 +43917,7 @@ export namespace Prisma {
     status?: $Enums.PaymentStatus
     reference?: string | null
     method: $Enums.PaymentMethod
+    createdAt?: Date | string
     refunds?: PaymentRefundUncheckedCreateNestedManyWithoutPaymentInput
   }
 
@@ -43957,6 +44019,7 @@ export namespace Prisma {
     type?: EnumFolioTransactionTypeFilter<"FolioTransaction"> | $Enums.FolioTransactionType
     amount?: DecimalFilter<"FolioTransaction"> | Decimal | DecimalJsLike | number | string
     description?: StringFilter<"FolioTransaction"> | string
+    createdAt?: DateTimeFilter<"FolioTransaction"> | Date | string
   }
 
   export type PaymentUpsertWithWhereUniqueWithoutFolioInput = {
@@ -43987,6 +44050,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFilter<"Payment"> | $Enums.PaymentStatus
     reference?: StringNullableFilter<"Payment"> | string | null
     method?: EnumPaymentMethodFilter<"Payment"> | $Enums.PaymentMethod
+    createdAt?: DateTimeFilter<"Payment"> | Date | string
   }
 
   export type FolioCreateWithoutTransactionsInput = {
@@ -44236,6 +44300,7 @@ export namespace Prisma {
     status?: $Enums.PaymentStatus
     reference?: string | null
     method: $Enums.PaymentMethod
+    createdAt?: Date | string
     folio?: FolioCreateNestedOneWithoutPaymentsInput
     restaurantOrder?: RestaurantOrderCreateNestedOneWithoutPaymentsInput
   }
@@ -44249,6 +44314,7 @@ export namespace Prisma {
     status?: $Enums.PaymentStatus
     reference?: string | null
     method: $Enums.PaymentMethod
+    createdAt?: Date | string
   }
 
   export type PaymentCreateOrConnectWithoutRefundsInput = {
@@ -44274,6 +44340,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     reference?: NullableStringFieldUpdateOperationsInput | string | null
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     folio?: FolioUpdateOneWithoutPaymentsNestedInput
     restaurantOrder?: RestaurantOrderUpdateOneWithoutPaymentsNestedInput
   }
@@ -44287,6 +44354,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     reference?: NullableStringFieldUpdateOperationsInput | string | null
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ReservationCreateWithoutRestaurantOrdersInput = {
@@ -44442,6 +44510,7 @@ export namespace Prisma {
     status?: $Enums.PaymentStatus
     reference?: string | null
     method: $Enums.PaymentMethod
+    createdAt?: Date | string
     folio?: FolioCreateNestedOneWithoutPaymentsInput
     refunds?: PaymentRefundCreateNestedManyWithoutPaymentInput
   }
@@ -44454,6 +44523,7 @@ export namespace Prisma {
     status?: $Enums.PaymentStatus
     reference?: string | null
     method: $Enums.PaymentMethod
+    createdAt?: Date | string
     refunds?: PaymentRefundUncheckedCreateNestedManyWithoutPaymentInput
   }
 
@@ -46215,6 +46285,7 @@ export namespace Prisma {
     type: $Enums.FolioTransactionType
     amount: Decimal | DecimalJsLike | number | string
     description: string
+    createdAt?: Date | string
   }
 
   export type PaymentCreateManyFolioInput = {
@@ -46225,6 +46296,7 @@ export namespace Prisma {
     status?: $Enums.PaymentStatus
     reference?: string | null
     method: $Enums.PaymentMethod
+    createdAt?: Date | string
   }
 
   export type FolioTransactionUpdateWithoutFolioInput = {
@@ -46232,6 +46304,7 @@ export namespace Prisma {
     type?: EnumFolioTransactionTypeFieldUpdateOperationsInput | $Enums.FolioTransactionType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type FolioTransactionUncheckedUpdateWithoutFolioInput = {
@@ -46239,6 +46312,7 @@ export namespace Prisma {
     type?: EnumFolioTransactionTypeFieldUpdateOperationsInput | $Enums.FolioTransactionType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type FolioTransactionUncheckedUpdateManyWithoutFolioInput = {
@@ -46246,6 +46320,7 @@ export namespace Prisma {
     type?: EnumFolioTransactionTypeFieldUpdateOperationsInput | $Enums.FolioTransactionType
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PaymentUpdateWithoutFolioInput = {
@@ -46255,6 +46330,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     reference?: NullableStringFieldUpdateOperationsInput | string | null
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     restaurantOrder?: RestaurantOrderUpdateOneWithoutPaymentsNestedInput
     refunds?: PaymentRefundUpdateManyWithoutPaymentNestedInput
   }
@@ -46267,6 +46343,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     reference?: NullableStringFieldUpdateOperationsInput | string | null
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     refunds?: PaymentRefundUncheckedUpdateManyWithoutPaymentNestedInput
   }
 
@@ -46278,6 +46355,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     reference?: NullableStringFieldUpdateOperationsInput | string | null
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PaymentRefundCreateManyPaymentInput = {
@@ -46336,6 +46414,7 @@ export namespace Prisma {
     status?: $Enums.PaymentStatus
     reference?: string | null
     method: $Enums.PaymentMethod
+    createdAt?: Date | string
   }
 
   export type RestaurantOrderItemUpdateWithoutOrderInput = {
@@ -46369,6 +46448,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     reference?: NullableStringFieldUpdateOperationsInput | string | null
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     folio?: FolioUpdateOneWithoutPaymentsNestedInput
     refunds?: PaymentRefundUpdateManyWithoutPaymentNestedInput
   }
@@ -46381,6 +46461,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     reference?: NullableStringFieldUpdateOperationsInput | string | null
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     refunds?: PaymentRefundUncheckedUpdateManyWithoutPaymentNestedInput
   }
 
@@ -46392,6 +46473,7 @@ export namespace Prisma {
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     reference?: NullableStringFieldUpdateOperationsInput | string | null
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RestaurantOrderItemCreateManyMenuItemInput = {

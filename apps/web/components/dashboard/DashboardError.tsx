@@ -15,7 +15,7 @@ export function DashboardError({ error, onRetry }: DashboardErrorProps) {
 
   return (
     <div className="min-h-screen bg-slate-50 p-6">
-      <div className="mx-auto flex min-h-[70vh] max-w-[700px] items-center justify-center">
+      <div className="mx-auto flex min-h-[70vh] max-w-175 items-center justify-center">
         <div className="w-full rounded-xl border bg-white p-8 text-center shadow-sm">
           {/* Icon */}
           <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-red-100">
@@ -36,7 +36,7 @@ export function DashboardError({ error, onRetry }: DashboardErrorProps) {
           {/* Error message - useful during development */}
           {process.env.NODE_ENV === "development" && (
             <div className="mt-4 rounded-lg bg-slate-50 p-3 text-left">
-              <p className="break-words font-mono text-xs text-slate-600">
+              <p className="wrap-break-word font-mono text-xs text-slate-600">
                 {message}
               </p>
             </div>

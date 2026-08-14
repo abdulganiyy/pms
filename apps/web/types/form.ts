@@ -46,6 +46,8 @@ export type FieldConfig = {
   maxFiles?: number;
 
   disabled?: boolean;
+
+  captionLayout?: boolean;
 };
 
 export type FormConfig = {

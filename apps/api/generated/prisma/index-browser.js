@@ -304,7 +304,8 @@ exports.Prisma.FolioTransactionScalarFieldEnum = {
   folioId: 'folioId',
   type: 'type',
   amount: 'amount',
-  description: 'description'
+  description: 'description',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.PaymentScalarFieldEnum = {
@@ -315,7 +316,8 @@ exports.Prisma.PaymentScalarFieldEnum = {
   refundedAmount: 'refundedAmount',
   status: 'status',
   reference: 'reference',
-  method: 'method'
+  method: 'method',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.PaymentRefundScalarFieldEnum = {

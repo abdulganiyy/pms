@@ -18,6 +18,7 @@ interface DatePickerProps {
   placeholder?: string;
   id?: string;
   disabled?: boolean;
+  captionLayout?: boolean;
 }
 
 export function DatePicker({
@@ -27,6 +28,7 @@ export function DatePicker({
   placeholder = "Pick a date",
   id,
   disabled,
+  captionLayout,
 }: DatePickerProps) {
   return (
     <Field>
@@ -52,6 +54,7 @@ export function DatePicker({
             selected={value}
             onSelect={onChange}
             defaultMonth={value}
+            captionLayout={captionLayout ? "dropdown" : undefined}
           />
         </PopoverContent>
       </Popover>

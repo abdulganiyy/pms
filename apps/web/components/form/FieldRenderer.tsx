@@ -151,7 +151,11 @@ export default function FieldRenderer({ field }: Props) {
           )}
 
           {field.type == "date" && (
-            <DatePicker value={rhField.value} onChange={rhField.onChange} />
+            <DatePicker
+              value={rhField.value}
+              onChange={rhField.onChange}
+              captionLayout={field.captionLayout}
+            />
           )}
 
           {field.type === "array" && (
