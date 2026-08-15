@@ -367,14 +367,6 @@ exports.Prisma.MenuItemScalarFieldEnum = {
   description: 'description'
 };
 
-exports.Prisma.MaintenanceScalarFieldEnum = {
-  id: 'id',
-  roomId: 'roomId',
-  startDate: 'startDate',
-  endDate: 'endDate',
-  reason: 'reason'
-};
-
 exports.Prisma.CompanyScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -406,6 +398,32 @@ exports.Prisma.PermissionScalarFieldEnum = {
 exports.Prisma.RolePermissionScalarFieldEnum = {
   roleId: 'roleId',
   permissionId: 'permissionId'
+};
+
+exports.Prisma.HousekeepingTaskScalarFieldEnum = {
+  id: 'id',
+  roomId: 'roomId',
+  assignedToId: 'assignedToId',
+  status: 'status',
+  notes: 'notes',
+  startedAt: 'startedAt',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MaintenanceScalarFieldEnum = {
+  id: 'id',
+  roomId: 'roomId',
+  reportedById: 'reportedById',
+  assignedToId: 'assignedToId',
+  title: 'title',
+  description: 'description',
+  status: 'status',
+  priority: 'priority',
+  resolvedAt: 'resolvedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -605,6 +623,25 @@ exports.RoleName = exports.$Enums.RoleName = {
   AUDITOR: 'AUDITOR'
 };
 
+exports.HousekeepingStatus = exports.$Enums.HousekeepingStatus = {
+  PENDING: 'PENDING',
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED'
+};
+
+exports.MaintenanceStatus = exports.$Enums.MaintenanceStatus = {
+  REPORTED: 'REPORTED',
+  IN_PROGRESS: 'IN_PROGRESS',
+  RESOLVED: 'RESOLVED'
+};
+
+exports.MaintenancePriority = exports.$Enums.MaintenancePriority = {
+  LOW: 'LOW',
+  NORMAL: 'NORMAL',
+  HIGH: 'HIGH',
+  URGENT: 'URGENT'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Guest: 'Guest',
@@ -625,12 +662,13 @@ exports.Prisma.ModelName = {
   RestaurantOrder: 'RestaurantOrder',
   RestaurantOrderItem: 'RestaurantOrderItem',
   MenuItem: 'MenuItem',
-  Maintenance: 'Maintenance',
   Company: 'Company',
   Role: 'Role',
   UserRole: 'UserRole',
   Permission: 'Permission',
-  RolePermission: 'RolePermission'
+  RolePermission: 'RolePermission',
+  HousekeepingTask: 'HousekeepingTask',
+  Maintenance: 'Maintenance'
 };
 
 /**

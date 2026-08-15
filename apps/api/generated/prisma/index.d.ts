@@ -109,11 +109,6 @@ export type RestaurantOrderItem = $Result.DefaultSelection<Prisma.$RestaurantOrd
  */
 export type MenuItem = $Result.DefaultSelection<Prisma.$MenuItemPayload>
 /**
- * Model Maintenance
- * 
- */
-export type Maintenance = $Result.DefaultSelection<Prisma.$MaintenancePayload>
-/**
  * Model Company
  * 
  */
@@ -138,6 +133,16 @@ export type Permission = $Result.DefaultSelection<Prisma.$PermissionPayload>
  * 
  */
 export type RolePermission = $Result.DefaultSelection<Prisma.$RolePermissionPayload>
+/**
+ * Model HousekeepingTask
+ * 
+ */
+export type HousekeepingTask = $Result.DefaultSelection<Prisma.$HousekeepingTaskPayload>
+/**
+ * Model Maintenance
+ * 
+ */
+export type Maintenance = $Result.DefaultSelection<Prisma.$MaintenancePayload>
 
 /**
  * Enums
@@ -384,6 +389,34 @@ export const Currency: {
 
 export type Currency = (typeof Currency)[keyof typeof Currency]
 
+
+export const HousekeepingStatus: {
+  PENDING: 'PENDING',
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED'
+};
+
+export type HousekeepingStatus = (typeof HousekeepingStatus)[keyof typeof HousekeepingStatus]
+
+
+export const MaintenanceStatus: {
+  REPORTED: 'REPORTED',
+  IN_PROGRESS: 'IN_PROGRESS',
+  RESOLVED: 'RESOLVED'
+};
+
+export type MaintenanceStatus = (typeof MaintenanceStatus)[keyof typeof MaintenanceStatus]
+
+
+export const MaintenancePriority: {
+  LOW: 'LOW',
+  NORMAL: 'NORMAL',
+  HIGH: 'HIGH',
+  URGENT: 'URGENT'
+};
+
+export type MaintenancePriority = (typeof MaintenancePriority)[keyof typeof MaintenancePriority]
+
 }
 
 export type ReservationAuditAction = $Enums.ReservationAuditAction
@@ -461,6 +494,18 @@ export const UserStatus: typeof $Enums.UserStatus
 export type Currency = $Enums.Currency
 
 export const Currency: typeof $Enums.Currency
+
+export type HousekeepingStatus = $Enums.HousekeepingStatus
+
+export const HousekeepingStatus: typeof $Enums.HousekeepingStatus
+
+export type MaintenanceStatus = $Enums.MaintenanceStatus
+
+export const MaintenanceStatus: typeof $Enums.MaintenanceStatus
+
+export type MaintenancePriority = $Enums.MaintenancePriority
+
+export const MaintenancePriority: typeof $Enums.MaintenancePriority
 
 /**
  * ##  Prisma Client ʲˢ
@@ -774,16 +819,6 @@ export class PrismaClient<
   get menuItem(): Prisma.MenuItemDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.maintenance`: Exposes CRUD operations for the **Maintenance** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Maintenances
-    * const maintenances = await prisma.maintenance.findMany()
-    * ```
-    */
-  get maintenance(): Prisma.MaintenanceDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.company`: Exposes CRUD operations for the **Company** model.
     * Example usage:
     * ```ts
@@ -832,6 +867,26 @@ export class PrismaClient<
     * ```
     */
   get rolePermission(): Prisma.RolePermissionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.housekeepingTask`: Exposes CRUD operations for the **HousekeepingTask** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more HousekeepingTasks
+    * const housekeepingTasks = await prisma.housekeepingTask.findMany()
+    * ```
+    */
+  get housekeepingTask(): Prisma.HousekeepingTaskDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.maintenance`: Exposes CRUD operations for the **Maintenance** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Maintenances
+    * const maintenances = await prisma.maintenance.findMany()
+    * ```
+    */
+  get maintenance(): Prisma.MaintenanceDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1298,12 +1353,13 @@ export namespace Prisma {
     RestaurantOrder: 'RestaurantOrder',
     RestaurantOrderItem: 'RestaurantOrderItem',
     MenuItem: 'MenuItem',
-    Maintenance: 'Maintenance',
     Company: 'Company',
     Role: 'Role',
     UserRole: 'UserRole',
     Permission: 'Permission',
-    RolePermission: 'RolePermission'
+    RolePermission: 'RolePermission',
+    HousekeepingTask: 'HousekeepingTask',
+    Maintenance: 'Maintenance'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1319,7 +1375,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "guest" | "guestAddress" | "guestDocument" | "guestEmergencyContact" | "guestPaymentMethod" | "roomType" | "ratePlan" | "room" | "roomRate" | "reservation" | "reservationAudit" | "folio" | "folioTransaction" | "payment" | "paymentRefund" | "restaurantOrder" | "restaurantOrderItem" | "menuItem" | "maintenance" | "company" | "role" | "userRole" | "permission" | "rolePermission"
+      modelProps: "user" | "guest" | "guestAddress" | "guestDocument" | "guestEmergencyContact" | "guestPaymentMethod" | "roomType" | "ratePlan" | "room" | "roomRate" | "reservation" | "reservationAudit" | "folio" | "folioTransaction" | "payment" | "paymentRefund" | "restaurantOrder" | "restaurantOrderItem" | "menuItem" | "company" | "role" | "userRole" | "permission" | "rolePermission" | "housekeepingTask" | "maintenance"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2729,80 +2785,6 @@ export namespace Prisma {
           }
         }
       }
-      Maintenance: {
-        payload: Prisma.$MaintenancePayload<ExtArgs>
-        fields: Prisma.MaintenanceFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.MaintenanceFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MaintenancePayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.MaintenanceFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MaintenancePayload>
-          }
-          findFirst: {
-            args: Prisma.MaintenanceFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MaintenancePayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.MaintenanceFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MaintenancePayload>
-          }
-          findMany: {
-            args: Prisma.MaintenanceFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MaintenancePayload>[]
-          }
-          create: {
-            args: Prisma.MaintenanceCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MaintenancePayload>
-          }
-          createMany: {
-            args: Prisma.MaintenanceCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.MaintenanceCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MaintenancePayload>[]
-          }
-          delete: {
-            args: Prisma.MaintenanceDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MaintenancePayload>
-          }
-          update: {
-            args: Prisma.MaintenanceUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MaintenancePayload>
-          }
-          deleteMany: {
-            args: Prisma.MaintenanceDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.MaintenanceUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.MaintenanceUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MaintenancePayload>[]
-          }
-          upsert: {
-            args: Prisma.MaintenanceUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$MaintenancePayload>
-          }
-          aggregate: {
-            args: Prisma.MaintenanceAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateMaintenance>
-          }
-          groupBy: {
-            args: Prisma.MaintenanceGroupByArgs<ExtArgs>
-            result: $Utils.Optional<MaintenanceGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.MaintenanceCountArgs<ExtArgs>
-            result: $Utils.Optional<MaintenanceCountAggregateOutputType> | number
-          }
-        }
-      }
       Company: {
         payload: Prisma.$CompanyPayload<ExtArgs>
         fields: Prisma.CompanyFieldRefs
@@ -3173,6 +3155,154 @@ export namespace Prisma {
           }
         }
       }
+      HousekeepingTask: {
+        payload: Prisma.$HousekeepingTaskPayload<ExtArgs>
+        fields: Prisma.HousekeepingTaskFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.HousekeepingTaskFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HousekeepingTaskPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.HousekeepingTaskFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HousekeepingTaskPayload>
+          }
+          findFirst: {
+            args: Prisma.HousekeepingTaskFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HousekeepingTaskPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.HousekeepingTaskFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HousekeepingTaskPayload>
+          }
+          findMany: {
+            args: Prisma.HousekeepingTaskFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HousekeepingTaskPayload>[]
+          }
+          create: {
+            args: Prisma.HousekeepingTaskCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HousekeepingTaskPayload>
+          }
+          createMany: {
+            args: Prisma.HousekeepingTaskCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.HousekeepingTaskCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HousekeepingTaskPayload>[]
+          }
+          delete: {
+            args: Prisma.HousekeepingTaskDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HousekeepingTaskPayload>
+          }
+          update: {
+            args: Prisma.HousekeepingTaskUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HousekeepingTaskPayload>
+          }
+          deleteMany: {
+            args: Prisma.HousekeepingTaskDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.HousekeepingTaskUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.HousekeepingTaskUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HousekeepingTaskPayload>[]
+          }
+          upsert: {
+            args: Prisma.HousekeepingTaskUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$HousekeepingTaskPayload>
+          }
+          aggregate: {
+            args: Prisma.HousekeepingTaskAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateHousekeepingTask>
+          }
+          groupBy: {
+            args: Prisma.HousekeepingTaskGroupByArgs<ExtArgs>
+            result: $Utils.Optional<HousekeepingTaskGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.HousekeepingTaskCountArgs<ExtArgs>
+            result: $Utils.Optional<HousekeepingTaskCountAggregateOutputType> | number
+          }
+        }
+      }
+      Maintenance: {
+        payload: Prisma.$MaintenancePayload<ExtArgs>
+        fields: Prisma.MaintenanceFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MaintenanceFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MaintenancePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MaintenanceFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MaintenancePayload>
+          }
+          findFirst: {
+            args: Prisma.MaintenanceFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MaintenancePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MaintenanceFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MaintenancePayload>
+          }
+          findMany: {
+            args: Prisma.MaintenanceFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MaintenancePayload>[]
+          }
+          create: {
+            args: Prisma.MaintenanceCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MaintenancePayload>
+          }
+          createMany: {
+            args: Prisma.MaintenanceCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MaintenanceCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MaintenancePayload>[]
+          }
+          delete: {
+            args: Prisma.MaintenanceDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MaintenancePayload>
+          }
+          update: {
+            args: Prisma.MaintenanceUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MaintenancePayload>
+          }
+          deleteMany: {
+            args: Prisma.MaintenanceDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MaintenanceUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MaintenanceUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MaintenancePayload>[]
+          }
+          upsert: {
+            args: Prisma.MaintenanceUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MaintenancePayload>
+          }
+          aggregate: {
+            args: Prisma.MaintenanceAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMaintenance>
+          }
+          groupBy: {
+            args: Prisma.MaintenanceGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MaintenanceGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MaintenanceCountArgs<ExtArgs>
+            result: $Utils.Optional<MaintenanceCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -3315,12 +3445,13 @@ export namespace Prisma {
     restaurantOrder?: RestaurantOrderOmit
     restaurantOrderItem?: RestaurantOrderItemOmit
     menuItem?: MenuItemOmit
-    maintenance?: MaintenanceOmit
     company?: CompanyOmit
     role?: RoleOmit
     userRole?: UserRoleOmit
     permission?: PermissionOmit
     rolePermission?: RolePermissionOmit
+    housekeepingTask?: HousekeepingTaskOmit
+    maintenance?: MaintenanceOmit
   }
 
   /* Types for Logging */
@@ -3402,10 +3533,16 @@ export namespace Prisma {
 
   export type UserCountOutputType = {
     userRoles: number
+    housekeepingAssignments: number
+    maintenanceReports: number
+    maintenanceAssignments: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     userRoles?: boolean | UserCountOutputTypeCountUserRolesArgs
+    housekeepingAssignments?: boolean | UserCountOutputTypeCountHousekeepingAssignmentsArgs
+    maintenanceReports?: boolean | UserCountOutputTypeCountMaintenanceReportsArgs
+    maintenanceAssignments?: boolean | UserCountOutputTypeCountMaintenanceAssignmentsArgs
   }
 
   // Custom InputTypes
@@ -3424,6 +3561,27 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountUserRolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserRoleWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountHousekeepingAssignmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HousekeepingTaskWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountMaintenanceReportsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MaintenanceWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountMaintenanceAssignmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MaintenanceWhereInput
   }
 
 
@@ -3581,11 +3739,13 @@ export namespace Prisma {
   export type RoomCountOutputType = {
     reservations: number
     maintenance: number
+    housekeepingTasks: number
   }
 
   export type RoomCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     reservations?: boolean | RoomCountOutputTypeCountReservationsArgs
     maintenance?: boolean | RoomCountOutputTypeCountMaintenanceArgs
+    housekeepingTasks?: boolean | RoomCountOutputTypeCountHousekeepingTasksArgs
   }
 
   // Custom InputTypes
@@ -3611,6 +3771,13 @@ export namespace Prisma {
    */
   export type RoomCountOutputTypeCountMaintenanceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MaintenanceWhereInput
+  }
+
+  /**
+   * RoomCountOutputType without action
+   */
+  export type RoomCountOutputTypeCountHousekeepingTasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HousekeepingTaskWhereInput
   }
 
 
@@ -4234,6 +4401,9 @@ export namespace Prisma {
     deleted?: boolean
     deletedAt?: boolean
     userRoles?: boolean | User$userRolesArgs<ExtArgs>
+    housekeepingAssignments?: boolean | User$housekeepingAssignmentsArgs<ExtArgs>
+    maintenanceReports?: boolean | User$maintenanceReportsArgs<ExtArgs>
+    maintenanceAssignments?: boolean | User$maintenanceAssignmentsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -4315,6 +4485,9 @@ export namespace Prisma {
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "phone" | "fullname" | "password" | "emailVerified" | "emailOtpHash" | "emailOtpExpiresAt" | "otp" | "otpExpiresAt" | "resetPasswordToken" | "resetPasswordExpiresAt" | "profileImage" | "pin" | "status" | "phoneVerified" | "paystackCustomerId" | "lastLogin" | "createdAt" | "updatedAt" | "deleted" | "deletedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     userRoles?: boolean | User$userRolesArgs<ExtArgs>
+    housekeepingAssignments?: boolean | User$housekeepingAssignmentsArgs<ExtArgs>
+    maintenanceReports?: boolean | User$maintenanceReportsArgs<ExtArgs>
+    maintenanceAssignments?: boolean | User$maintenanceAssignmentsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -4324,6 +4497,9 @@ export namespace Prisma {
     name: "User"
     objects: {
       userRoles: Prisma.$UserRolePayload<ExtArgs>[]
+      housekeepingAssignments: Prisma.$HousekeepingTaskPayload<ExtArgs>[]
+      maintenanceReports: Prisma.$MaintenancePayload<ExtArgs>[]
+      maintenanceAssignments: Prisma.$MaintenancePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4743,6 +4919,9 @@ export namespace Prisma {
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     userRoles<T extends User$userRolesArgs<ExtArgs> = {}>(args?: Subset<T, User$userRolesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    housekeepingAssignments<T extends User$housekeepingAssignmentsArgs<ExtArgs> = {}>(args?: Subset<T, User$housekeepingAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HousekeepingTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    maintenanceReports<T extends User$maintenanceReportsArgs<ExtArgs> = {}>(args?: Subset<T, User$maintenanceReportsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MaintenancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    maintenanceAssignments<T extends User$maintenanceAssignmentsArgs<ExtArgs> = {}>(args?: Subset<T, User$maintenanceAssignmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MaintenancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5208,6 +5387,78 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: UserRoleScalarFieldEnum | UserRoleScalarFieldEnum[]
+  }
+
+  /**
+   * User.housekeepingAssignments
+   */
+  export type User$housekeepingAssignmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HousekeepingTask
+     */
+    select?: HousekeepingTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HousekeepingTask
+     */
+    omit?: HousekeepingTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HousekeepingTaskInclude<ExtArgs> | null
+    where?: HousekeepingTaskWhereInput
+    orderBy?: HousekeepingTaskOrderByWithRelationInput | HousekeepingTaskOrderByWithRelationInput[]
+    cursor?: HousekeepingTaskWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: HousekeepingTaskScalarFieldEnum | HousekeepingTaskScalarFieldEnum[]
+  }
+
+  /**
+   * User.maintenanceReports
+   */
+  export type User$maintenanceReportsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Maintenance
+     */
+    select?: MaintenanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Maintenance
+     */
+    omit?: MaintenanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MaintenanceInclude<ExtArgs> | null
+    where?: MaintenanceWhereInput
+    orderBy?: MaintenanceOrderByWithRelationInput | MaintenanceOrderByWithRelationInput[]
+    cursor?: MaintenanceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MaintenanceScalarFieldEnum | MaintenanceScalarFieldEnum[]
+  }
+
+  /**
+   * User.maintenanceAssignments
+   */
+  export type User$maintenanceAssignmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Maintenance
+     */
+    select?: MaintenanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Maintenance
+     */
+    omit?: MaintenanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MaintenanceInclude<ExtArgs> | null
+    where?: MaintenanceWhereInput
+    orderBy?: MaintenanceOrderByWithRelationInput | MaintenanceOrderByWithRelationInput[]
+    cursor?: MaintenanceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MaintenanceScalarFieldEnum | MaintenanceScalarFieldEnum[]
   }
 
   /**
@@ -13737,6 +13988,7 @@ export namespace Prisma {
     roomType?: boolean | RoomTypeDefaultArgs<ExtArgs>
     reservations?: boolean | Room$reservationsArgs<ExtArgs>
     maintenance?: boolean | Room$maintenanceArgs<ExtArgs>
+    housekeepingTasks?: boolean | Room$housekeepingTasksArgs<ExtArgs>
     _count?: boolean | RoomCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["room"]>
 
@@ -13771,6 +14023,7 @@ export namespace Prisma {
     roomType?: boolean | RoomTypeDefaultArgs<ExtArgs>
     reservations?: boolean | Room$reservationsArgs<ExtArgs>
     maintenance?: boolean | Room$maintenanceArgs<ExtArgs>
+    housekeepingTasks?: boolean | Room$housekeepingTasksArgs<ExtArgs>
     _count?: boolean | RoomCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type RoomIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -13786,6 +14039,7 @@ export namespace Prisma {
       roomType: Prisma.$RoomTypePayload<ExtArgs>
       reservations: Prisma.$ReservationPayload<ExtArgs>[]
       maintenance: Prisma.$MaintenancePayload<ExtArgs>[]
+      housekeepingTasks: Prisma.$HousekeepingTaskPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -14190,6 +14444,7 @@ export namespace Prisma {
     roomType<T extends RoomTypeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RoomTypeDefaultArgs<ExtArgs>>): Prisma__RoomTypeClient<$Result.GetResult<Prisma.$RoomTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     reservations<T extends Room$reservationsArgs<ExtArgs> = {}>(args?: Subset<T, Room$reservationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     maintenance<T extends Room$maintenanceArgs<ExtArgs> = {}>(args?: Subset<T, Room$maintenanceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MaintenancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    housekeepingTasks<T extends Room$housekeepingTasksArgs<ExtArgs> = {}>(args?: Subset<T, Room$housekeepingTasksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HousekeepingTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -14670,6 +14925,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: MaintenanceScalarFieldEnum | MaintenanceScalarFieldEnum[]
+  }
+
+  /**
+   * Room.housekeepingTasks
+   */
+  export type Room$housekeepingTasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HousekeepingTask
+     */
+    select?: HousekeepingTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HousekeepingTask
+     */
+    omit?: HousekeepingTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HousekeepingTaskInclude<ExtArgs> | null
+    where?: HousekeepingTaskWhereInput
+    orderBy?: HousekeepingTaskOrderByWithRelationInput | HousekeepingTaskOrderByWithRelationInput[]
+    cursor?: HousekeepingTaskWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: HousekeepingTaskScalarFieldEnum | HousekeepingTaskScalarFieldEnum[]
   }
 
   /**
@@ -26526,1069 +26805,6 @@ export namespace Prisma {
 
 
   /**
-   * Model Maintenance
-   */
-
-  export type AggregateMaintenance = {
-    _count: MaintenanceCountAggregateOutputType | null
-    _min: MaintenanceMinAggregateOutputType | null
-    _max: MaintenanceMaxAggregateOutputType | null
-  }
-
-  export type MaintenanceMinAggregateOutputType = {
-    id: string | null
-    roomId: string | null
-    startDate: Date | null
-    endDate: Date | null
-    reason: string | null
-  }
-
-  export type MaintenanceMaxAggregateOutputType = {
-    id: string | null
-    roomId: string | null
-    startDate: Date | null
-    endDate: Date | null
-    reason: string | null
-  }
-
-  export type MaintenanceCountAggregateOutputType = {
-    id: number
-    roomId: number
-    startDate: number
-    endDate: number
-    reason: number
-    _all: number
-  }
-
-
-  export type MaintenanceMinAggregateInputType = {
-    id?: true
-    roomId?: true
-    startDate?: true
-    endDate?: true
-    reason?: true
-  }
-
-  export type MaintenanceMaxAggregateInputType = {
-    id?: true
-    roomId?: true
-    startDate?: true
-    endDate?: true
-    reason?: true
-  }
-
-  export type MaintenanceCountAggregateInputType = {
-    id?: true
-    roomId?: true
-    startDate?: true
-    endDate?: true
-    reason?: true
-    _all?: true
-  }
-
-  export type MaintenanceAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Maintenance to aggregate.
-     */
-    where?: MaintenanceWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Maintenances to fetch.
-     */
-    orderBy?: MaintenanceOrderByWithRelationInput | MaintenanceOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: MaintenanceWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Maintenances from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Maintenances.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Maintenances
-    **/
-    _count?: true | MaintenanceCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: MaintenanceMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: MaintenanceMaxAggregateInputType
-  }
-
-  export type GetMaintenanceAggregateType<T extends MaintenanceAggregateArgs> = {
-        [P in keyof T & keyof AggregateMaintenance]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateMaintenance[P]>
-      : GetScalarType<T[P], AggregateMaintenance[P]>
-  }
-
-
-
-
-  export type MaintenanceGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: MaintenanceWhereInput
-    orderBy?: MaintenanceOrderByWithAggregationInput | MaintenanceOrderByWithAggregationInput[]
-    by: MaintenanceScalarFieldEnum[] | MaintenanceScalarFieldEnum
-    having?: MaintenanceScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: MaintenanceCountAggregateInputType | true
-    _min?: MaintenanceMinAggregateInputType
-    _max?: MaintenanceMaxAggregateInputType
-  }
-
-  export type MaintenanceGroupByOutputType = {
-    id: string
-    roomId: string
-    startDate: Date
-    endDate: Date
-    reason: string
-    _count: MaintenanceCountAggregateOutputType | null
-    _min: MaintenanceMinAggregateOutputType | null
-    _max: MaintenanceMaxAggregateOutputType | null
-  }
-
-  type GetMaintenanceGroupByPayload<T extends MaintenanceGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<MaintenanceGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof MaintenanceGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], MaintenanceGroupByOutputType[P]>
-            : GetScalarType<T[P], MaintenanceGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type MaintenanceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    roomId?: boolean
-    startDate?: boolean
-    endDate?: boolean
-    reason?: boolean
-    room?: boolean | RoomDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["maintenance"]>
-
-  export type MaintenanceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    roomId?: boolean
-    startDate?: boolean
-    endDate?: boolean
-    reason?: boolean
-    room?: boolean | RoomDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["maintenance"]>
-
-  export type MaintenanceSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    roomId?: boolean
-    startDate?: boolean
-    endDate?: boolean
-    reason?: boolean
-    room?: boolean | RoomDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["maintenance"]>
-
-  export type MaintenanceSelectScalar = {
-    id?: boolean
-    roomId?: boolean
-    startDate?: boolean
-    endDate?: boolean
-    reason?: boolean
-  }
-
-  export type MaintenanceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "roomId" | "startDate" | "endDate" | "reason", ExtArgs["result"]["maintenance"]>
-  export type MaintenanceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    room?: boolean | RoomDefaultArgs<ExtArgs>
-  }
-  export type MaintenanceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    room?: boolean | RoomDefaultArgs<ExtArgs>
-  }
-  export type MaintenanceIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    room?: boolean | RoomDefaultArgs<ExtArgs>
-  }
-
-  export type $MaintenancePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Maintenance"
-    objects: {
-      room: Prisma.$RoomPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      roomId: string
-      startDate: Date
-      endDate: Date
-      reason: string
-    }, ExtArgs["result"]["maintenance"]>
-    composites: {}
-  }
-
-  type MaintenanceGetPayload<S extends boolean | null | undefined | MaintenanceDefaultArgs> = $Result.GetResult<Prisma.$MaintenancePayload, S>
-
-  type MaintenanceCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<MaintenanceFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: MaintenanceCountAggregateInputType | true
-    }
-
-  export interface MaintenanceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Maintenance'], meta: { name: 'Maintenance' } }
-    /**
-     * Find zero or one Maintenance that matches the filter.
-     * @param {MaintenanceFindUniqueArgs} args - Arguments to find a Maintenance
-     * @example
-     * // Get one Maintenance
-     * const maintenance = await prisma.maintenance.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends MaintenanceFindUniqueArgs>(args: SelectSubset<T, MaintenanceFindUniqueArgs<ExtArgs>>): Prisma__MaintenanceClient<$Result.GetResult<Prisma.$MaintenancePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Maintenance that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {MaintenanceFindUniqueOrThrowArgs} args - Arguments to find a Maintenance
-     * @example
-     * // Get one Maintenance
-     * const maintenance = await prisma.maintenance.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends MaintenanceFindUniqueOrThrowArgs>(args: SelectSubset<T, MaintenanceFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MaintenanceClient<$Result.GetResult<Prisma.$MaintenancePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Maintenance that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MaintenanceFindFirstArgs} args - Arguments to find a Maintenance
-     * @example
-     * // Get one Maintenance
-     * const maintenance = await prisma.maintenance.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends MaintenanceFindFirstArgs>(args?: SelectSubset<T, MaintenanceFindFirstArgs<ExtArgs>>): Prisma__MaintenanceClient<$Result.GetResult<Prisma.$MaintenancePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Maintenance that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MaintenanceFindFirstOrThrowArgs} args - Arguments to find a Maintenance
-     * @example
-     * // Get one Maintenance
-     * const maintenance = await prisma.maintenance.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends MaintenanceFindFirstOrThrowArgs>(args?: SelectSubset<T, MaintenanceFindFirstOrThrowArgs<ExtArgs>>): Prisma__MaintenanceClient<$Result.GetResult<Prisma.$MaintenancePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Maintenances that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MaintenanceFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Maintenances
-     * const maintenances = await prisma.maintenance.findMany()
-     * 
-     * // Get first 10 Maintenances
-     * const maintenances = await prisma.maintenance.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const maintenanceWithIdOnly = await prisma.maintenance.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends MaintenanceFindManyArgs>(args?: SelectSubset<T, MaintenanceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MaintenancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Maintenance.
-     * @param {MaintenanceCreateArgs} args - Arguments to create a Maintenance.
-     * @example
-     * // Create one Maintenance
-     * const Maintenance = await prisma.maintenance.create({
-     *   data: {
-     *     // ... data to create a Maintenance
-     *   }
-     * })
-     * 
-     */
-    create<T extends MaintenanceCreateArgs>(args: SelectSubset<T, MaintenanceCreateArgs<ExtArgs>>): Prisma__MaintenanceClient<$Result.GetResult<Prisma.$MaintenancePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Maintenances.
-     * @param {MaintenanceCreateManyArgs} args - Arguments to create many Maintenances.
-     * @example
-     * // Create many Maintenances
-     * const maintenance = await prisma.maintenance.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends MaintenanceCreateManyArgs>(args?: SelectSubset<T, MaintenanceCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Maintenances and returns the data saved in the database.
-     * @param {MaintenanceCreateManyAndReturnArgs} args - Arguments to create many Maintenances.
-     * @example
-     * // Create many Maintenances
-     * const maintenance = await prisma.maintenance.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Maintenances and only return the `id`
-     * const maintenanceWithIdOnly = await prisma.maintenance.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends MaintenanceCreateManyAndReturnArgs>(args?: SelectSubset<T, MaintenanceCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MaintenancePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Maintenance.
-     * @param {MaintenanceDeleteArgs} args - Arguments to delete one Maintenance.
-     * @example
-     * // Delete one Maintenance
-     * const Maintenance = await prisma.maintenance.delete({
-     *   where: {
-     *     // ... filter to delete one Maintenance
-     *   }
-     * })
-     * 
-     */
-    delete<T extends MaintenanceDeleteArgs>(args: SelectSubset<T, MaintenanceDeleteArgs<ExtArgs>>): Prisma__MaintenanceClient<$Result.GetResult<Prisma.$MaintenancePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Maintenance.
-     * @param {MaintenanceUpdateArgs} args - Arguments to update one Maintenance.
-     * @example
-     * // Update one Maintenance
-     * const maintenance = await prisma.maintenance.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends MaintenanceUpdateArgs>(args: SelectSubset<T, MaintenanceUpdateArgs<ExtArgs>>): Prisma__MaintenanceClient<$Result.GetResult<Prisma.$MaintenancePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Maintenances.
-     * @param {MaintenanceDeleteManyArgs} args - Arguments to filter Maintenances to delete.
-     * @example
-     * // Delete a few Maintenances
-     * const { count } = await prisma.maintenance.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends MaintenanceDeleteManyArgs>(args?: SelectSubset<T, MaintenanceDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Maintenances.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MaintenanceUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Maintenances
-     * const maintenance = await prisma.maintenance.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends MaintenanceUpdateManyArgs>(args: SelectSubset<T, MaintenanceUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Maintenances and returns the data updated in the database.
-     * @param {MaintenanceUpdateManyAndReturnArgs} args - Arguments to update many Maintenances.
-     * @example
-     * // Update many Maintenances
-     * const maintenance = await prisma.maintenance.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Maintenances and only return the `id`
-     * const maintenanceWithIdOnly = await prisma.maintenance.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends MaintenanceUpdateManyAndReturnArgs>(args: SelectSubset<T, MaintenanceUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MaintenancePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Maintenance.
-     * @param {MaintenanceUpsertArgs} args - Arguments to update or create a Maintenance.
-     * @example
-     * // Update or create a Maintenance
-     * const maintenance = await prisma.maintenance.upsert({
-     *   create: {
-     *     // ... data to create a Maintenance
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Maintenance we want to update
-     *   }
-     * })
-     */
-    upsert<T extends MaintenanceUpsertArgs>(args: SelectSubset<T, MaintenanceUpsertArgs<ExtArgs>>): Prisma__MaintenanceClient<$Result.GetResult<Prisma.$MaintenancePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Maintenances.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MaintenanceCountArgs} args - Arguments to filter Maintenances to count.
-     * @example
-     * // Count the number of Maintenances
-     * const count = await prisma.maintenance.count({
-     *   where: {
-     *     // ... the filter for the Maintenances we want to count
-     *   }
-     * })
-    **/
-    count<T extends MaintenanceCountArgs>(
-      args?: Subset<T, MaintenanceCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], MaintenanceCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Maintenance.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MaintenanceAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends MaintenanceAggregateArgs>(args: Subset<T, MaintenanceAggregateArgs>): Prisma.PrismaPromise<GetMaintenanceAggregateType<T>>
-
-    /**
-     * Group by Maintenance.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {MaintenanceGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends MaintenanceGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: MaintenanceGroupByArgs['orderBy'] }
-        : { orderBy?: MaintenanceGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, MaintenanceGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMaintenanceGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Maintenance model
-   */
-  readonly fields: MaintenanceFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Maintenance.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__MaintenanceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    room<T extends RoomDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RoomDefaultArgs<ExtArgs>>): Prisma__RoomClient<$Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Maintenance model
-   */
-  interface MaintenanceFieldRefs {
-    readonly id: FieldRef<"Maintenance", 'String'>
-    readonly roomId: FieldRef<"Maintenance", 'String'>
-    readonly startDate: FieldRef<"Maintenance", 'DateTime'>
-    readonly endDate: FieldRef<"Maintenance", 'DateTime'>
-    readonly reason: FieldRef<"Maintenance", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Maintenance findUnique
-   */
-  export type MaintenanceFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Maintenance
-     */
-    select?: MaintenanceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Maintenance
-     */
-    omit?: MaintenanceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MaintenanceInclude<ExtArgs> | null
-    /**
-     * Filter, which Maintenance to fetch.
-     */
-    where: MaintenanceWhereUniqueInput
-  }
-
-  /**
-   * Maintenance findUniqueOrThrow
-   */
-  export type MaintenanceFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Maintenance
-     */
-    select?: MaintenanceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Maintenance
-     */
-    omit?: MaintenanceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MaintenanceInclude<ExtArgs> | null
-    /**
-     * Filter, which Maintenance to fetch.
-     */
-    where: MaintenanceWhereUniqueInput
-  }
-
-  /**
-   * Maintenance findFirst
-   */
-  export type MaintenanceFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Maintenance
-     */
-    select?: MaintenanceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Maintenance
-     */
-    omit?: MaintenanceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MaintenanceInclude<ExtArgs> | null
-    /**
-     * Filter, which Maintenance to fetch.
-     */
-    where?: MaintenanceWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Maintenances to fetch.
-     */
-    orderBy?: MaintenanceOrderByWithRelationInput | MaintenanceOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Maintenances.
-     */
-    cursor?: MaintenanceWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Maintenances from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Maintenances.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Maintenances.
-     */
-    distinct?: MaintenanceScalarFieldEnum | MaintenanceScalarFieldEnum[]
-  }
-
-  /**
-   * Maintenance findFirstOrThrow
-   */
-  export type MaintenanceFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Maintenance
-     */
-    select?: MaintenanceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Maintenance
-     */
-    omit?: MaintenanceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MaintenanceInclude<ExtArgs> | null
-    /**
-     * Filter, which Maintenance to fetch.
-     */
-    where?: MaintenanceWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Maintenances to fetch.
-     */
-    orderBy?: MaintenanceOrderByWithRelationInput | MaintenanceOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Maintenances.
-     */
-    cursor?: MaintenanceWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Maintenances from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Maintenances.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Maintenances.
-     */
-    distinct?: MaintenanceScalarFieldEnum | MaintenanceScalarFieldEnum[]
-  }
-
-  /**
-   * Maintenance findMany
-   */
-  export type MaintenanceFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Maintenance
-     */
-    select?: MaintenanceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Maintenance
-     */
-    omit?: MaintenanceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MaintenanceInclude<ExtArgs> | null
-    /**
-     * Filter, which Maintenances to fetch.
-     */
-    where?: MaintenanceWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Maintenances to fetch.
-     */
-    orderBy?: MaintenanceOrderByWithRelationInput | MaintenanceOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Maintenances.
-     */
-    cursor?: MaintenanceWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Maintenances from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Maintenances.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Maintenances.
-     */
-    distinct?: MaintenanceScalarFieldEnum | MaintenanceScalarFieldEnum[]
-  }
-
-  /**
-   * Maintenance create
-   */
-  export type MaintenanceCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Maintenance
-     */
-    select?: MaintenanceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Maintenance
-     */
-    omit?: MaintenanceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MaintenanceInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Maintenance.
-     */
-    data: XOR<MaintenanceCreateInput, MaintenanceUncheckedCreateInput>
-  }
-
-  /**
-   * Maintenance createMany
-   */
-  export type MaintenanceCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Maintenances.
-     */
-    data: MaintenanceCreateManyInput | MaintenanceCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Maintenance createManyAndReturn
-   */
-  export type MaintenanceCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Maintenance
-     */
-    select?: MaintenanceSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Maintenance
-     */
-    omit?: MaintenanceOmit<ExtArgs> | null
-    /**
-     * The data used to create many Maintenances.
-     */
-    data: MaintenanceCreateManyInput | MaintenanceCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MaintenanceIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Maintenance update
-   */
-  export type MaintenanceUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Maintenance
-     */
-    select?: MaintenanceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Maintenance
-     */
-    omit?: MaintenanceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MaintenanceInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Maintenance.
-     */
-    data: XOR<MaintenanceUpdateInput, MaintenanceUncheckedUpdateInput>
-    /**
-     * Choose, which Maintenance to update.
-     */
-    where: MaintenanceWhereUniqueInput
-  }
-
-  /**
-   * Maintenance updateMany
-   */
-  export type MaintenanceUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Maintenances.
-     */
-    data: XOR<MaintenanceUpdateManyMutationInput, MaintenanceUncheckedUpdateManyInput>
-    /**
-     * Filter which Maintenances to update
-     */
-    where?: MaintenanceWhereInput
-    /**
-     * Limit how many Maintenances to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Maintenance updateManyAndReturn
-   */
-  export type MaintenanceUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Maintenance
-     */
-    select?: MaintenanceSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Maintenance
-     */
-    omit?: MaintenanceOmit<ExtArgs> | null
-    /**
-     * The data used to update Maintenances.
-     */
-    data: XOR<MaintenanceUpdateManyMutationInput, MaintenanceUncheckedUpdateManyInput>
-    /**
-     * Filter which Maintenances to update
-     */
-    where?: MaintenanceWhereInput
-    /**
-     * Limit how many Maintenances to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MaintenanceIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Maintenance upsert
-   */
-  export type MaintenanceUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Maintenance
-     */
-    select?: MaintenanceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Maintenance
-     */
-    omit?: MaintenanceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MaintenanceInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Maintenance to update in case it exists.
-     */
-    where: MaintenanceWhereUniqueInput
-    /**
-     * In case the Maintenance found by the `where` argument doesn't exist, create a new Maintenance with this data.
-     */
-    create: XOR<MaintenanceCreateInput, MaintenanceUncheckedCreateInput>
-    /**
-     * In case the Maintenance was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<MaintenanceUpdateInput, MaintenanceUncheckedUpdateInput>
-  }
-
-  /**
-   * Maintenance delete
-   */
-  export type MaintenanceDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Maintenance
-     */
-    select?: MaintenanceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Maintenance
-     */
-    omit?: MaintenanceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MaintenanceInclude<ExtArgs> | null
-    /**
-     * Filter which Maintenance to delete.
-     */
-    where: MaintenanceWhereUniqueInput
-  }
-
-  /**
-   * Maintenance deleteMany
-   */
-  export type MaintenanceDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Maintenances to delete
-     */
-    where?: MaintenanceWhereInput
-    /**
-     * Limit how many Maintenances to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Maintenance without action
-   */
-  export type MaintenanceDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Maintenance
-     */
-    select?: MaintenanceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Maintenance
-     */
-    omit?: MaintenanceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MaintenanceInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model Company
    */
 
@@ -32893,6 +32109,2362 @@ export namespace Prisma {
 
 
   /**
+   * Model HousekeepingTask
+   */
+
+  export type AggregateHousekeepingTask = {
+    _count: HousekeepingTaskCountAggregateOutputType | null
+    _min: HousekeepingTaskMinAggregateOutputType | null
+    _max: HousekeepingTaskMaxAggregateOutputType | null
+  }
+
+  export type HousekeepingTaskMinAggregateOutputType = {
+    id: string | null
+    roomId: string | null
+    assignedToId: string | null
+    status: $Enums.HousekeepingStatus | null
+    notes: string | null
+    startedAt: Date | null
+    completedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type HousekeepingTaskMaxAggregateOutputType = {
+    id: string | null
+    roomId: string | null
+    assignedToId: string | null
+    status: $Enums.HousekeepingStatus | null
+    notes: string | null
+    startedAt: Date | null
+    completedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type HousekeepingTaskCountAggregateOutputType = {
+    id: number
+    roomId: number
+    assignedToId: number
+    status: number
+    notes: number
+    startedAt: number
+    completedAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type HousekeepingTaskMinAggregateInputType = {
+    id?: true
+    roomId?: true
+    assignedToId?: true
+    status?: true
+    notes?: true
+    startedAt?: true
+    completedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type HousekeepingTaskMaxAggregateInputType = {
+    id?: true
+    roomId?: true
+    assignedToId?: true
+    status?: true
+    notes?: true
+    startedAt?: true
+    completedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type HousekeepingTaskCountAggregateInputType = {
+    id?: true
+    roomId?: true
+    assignedToId?: true
+    status?: true
+    notes?: true
+    startedAt?: true
+    completedAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type HousekeepingTaskAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which HousekeepingTask to aggregate.
+     */
+    where?: HousekeepingTaskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HousekeepingTasks to fetch.
+     */
+    orderBy?: HousekeepingTaskOrderByWithRelationInput | HousekeepingTaskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: HousekeepingTaskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HousekeepingTasks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HousekeepingTasks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned HousekeepingTasks
+    **/
+    _count?: true | HousekeepingTaskCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: HousekeepingTaskMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: HousekeepingTaskMaxAggregateInputType
+  }
+
+  export type GetHousekeepingTaskAggregateType<T extends HousekeepingTaskAggregateArgs> = {
+        [P in keyof T & keyof AggregateHousekeepingTask]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateHousekeepingTask[P]>
+      : GetScalarType<T[P], AggregateHousekeepingTask[P]>
+  }
+
+
+
+
+  export type HousekeepingTaskGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: HousekeepingTaskWhereInput
+    orderBy?: HousekeepingTaskOrderByWithAggregationInput | HousekeepingTaskOrderByWithAggregationInput[]
+    by: HousekeepingTaskScalarFieldEnum[] | HousekeepingTaskScalarFieldEnum
+    having?: HousekeepingTaskScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: HousekeepingTaskCountAggregateInputType | true
+    _min?: HousekeepingTaskMinAggregateInputType
+    _max?: HousekeepingTaskMaxAggregateInputType
+  }
+
+  export type HousekeepingTaskGroupByOutputType = {
+    id: string
+    roomId: string
+    assignedToId: string | null
+    status: $Enums.HousekeepingStatus
+    notes: string | null
+    startedAt: Date | null
+    completedAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: HousekeepingTaskCountAggregateOutputType | null
+    _min: HousekeepingTaskMinAggregateOutputType | null
+    _max: HousekeepingTaskMaxAggregateOutputType | null
+  }
+
+  type GetHousekeepingTaskGroupByPayload<T extends HousekeepingTaskGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<HousekeepingTaskGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof HousekeepingTaskGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], HousekeepingTaskGroupByOutputType[P]>
+            : GetScalarType<T[P], HousekeepingTaskGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type HousekeepingTaskSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    roomId?: boolean
+    assignedToId?: boolean
+    status?: boolean
+    notes?: boolean
+    startedAt?: boolean
+    completedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    room?: boolean | RoomDefaultArgs<ExtArgs>
+    assignedTo?: boolean | HousekeepingTask$assignedToArgs<ExtArgs>
+  }, ExtArgs["result"]["housekeepingTask"]>
+
+  export type HousekeepingTaskSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    roomId?: boolean
+    assignedToId?: boolean
+    status?: boolean
+    notes?: boolean
+    startedAt?: boolean
+    completedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    room?: boolean | RoomDefaultArgs<ExtArgs>
+    assignedTo?: boolean | HousekeepingTask$assignedToArgs<ExtArgs>
+  }, ExtArgs["result"]["housekeepingTask"]>
+
+  export type HousekeepingTaskSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    roomId?: boolean
+    assignedToId?: boolean
+    status?: boolean
+    notes?: boolean
+    startedAt?: boolean
+    completedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    room?: boolean | RoomDefaultArgs<ExtArgs>
+    assignedTo?: boolean | HousekeepingTask$assignedToArgs<ExtArgs>
+  }, ExtArgs["result"]["housekeepingTask"]>
+
+  export type HousekeepingTaskSelectScalar = {
+    id?: boolean
+    roomId?: boolean
+    assignedToId?: boolean
+    status?: boolean
+    notes?: boolean
+    startedAt?: boolean
+    completedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type HousekeepingTaskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "roomId" | "assignedToId" | "status" | "notes" | "startedAt" | "completedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["housekeepingTask"]>
+  export type HousekeepingTaskInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    room?: boolean | RoomDefaultArgs<ExtArgs>
+    assignedTo?: boolean | HousekeepingTask$assignedToArgs<ExtArgs>
+  }
+  export type HousekeepingTaskIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    room?: boolean | RoomDefaultArgs<ExtArgs>
+    assignedTo?: boolean | HousekeepingTask$assignedToArgs<ExtArgs>
+  }
+  export type HousekeepingTaskIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    room?: boolean | RoomDefaultArgs<ExtArgs>
+    assignedTo?: boolean | HousekeepingTask$assignedToArgs<ExtArgs>
+  }
+
+  export type $HousekeepingTaskPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "HousekeepingTask"
+    objects: {
+      room: Prisma.$RoomPayload<ExtArgs>
+      assignedTo: Prisma.$UserPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      roomId: string
+      assignedToId: string | null
+      status: $Enums.HousekeepingStatus
+      notes: string | null
+      startedAt: Date | null
+      completedAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["housekeepingTask"]>
+    composites: {}
+  }
+
+  type HousekeepingTaskGetPayload<S extends boolean | null | undefined | HousekeepingTaskDefaultArgs> = $Result.GetResult<Prisma.$HousekeepingTaskPayload, S>
+
+  type HousekeepingTaskCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<HousekeepingTaskFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: HousekeepingTaskCountAggregateInputType | true
+    }
+
+  export interface HousekeepingTaskDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['HousekeepingTask'], meta: { name: 'HousekeepingTask' } }
+    /**
+     * Find zero or one HousekeepingTask that matches the filter.
+     * @param {HousekeepingTaskFindUniqueArgs} args - Arguments to find a HousekeepingTask
+     * @example
+     * // Get one HousekeepingTask
+     * const housekeepingTask = await prisma.housekeepingTask.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends HousekeepingTaskFindUniqueArgs>(args: SelectSubset<T, HousekeepingTaskFindUniqueArgs<ExtArgs>>): Prisma__HousekeepingTaskClient<$Result.GetResult<Prisma.$HousekeepingTaskPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one HousekeepingTask that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {HousekeepingTaskFindUniqueOrThrowArgs} args - Arguments to find a HousekeepingTask
+     * @example
+     * // Get one HousekeepingTask
+     * const housekeepingTask = await prisma.housekeepingTask.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends HousekeepingTaskFindUniqueOrThrowArgs>(args: SelectSubset<T, HousekeepingTaskFindUniqueOrThrowArgs<ExtArgs>>): Prisma__HousekeepingTaskClient<$Result.GetResult<Prisma.$HousekeepingTaskPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first HousekeepingTask that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HousekeepingTaskFindFirstArgs} args - Arguments to find a HousekeepingTask
+     * @example
+     * // Get one HousekeepingTask
+     * const housekeepingTask = await prisma.housekeepingTask.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends HousekeepingTaskFindFirstArgs>(args?: SelectSubset<T, HousekeepingTaskFindFirstArgs<ExtArgs>>): Prisma__HousekeepingTaskClient<$Result.GetResult<Prisma.$HousekeepingTaskPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first HousekeepingTask that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HousekeepingTaskFindFirstOrThrowArgs} args - Arguments to find a HousekeepingTask
+     * @example
+     * // Get one HousekeepingTask
+     * const housekeepingTask = await prisma.housekeepingTask.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends HousekeepingTaskFindFirstOrThrowArgs>(args?: SelectSubset<T, HousekeepingTaskFindFirstOrThrowArgs<ExtArgs>>): Prisma__HousekeepingTaskClient<$Result.GetResult<Prisma.$HousekeepingTaskPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more HousekeepingTasks that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HousekeepingTaskFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all HousekeepingTasks
+     * const housekeepingTasks = await prisma.housekeepingTask.findMany()
+     * 
+     * // Get first 10 HousekeepingTasks
+     * const housekeepingTasks = await prisma.housekeepingTask.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const housekeepingTaskWithIdOnly = await prisma.housekeepingTask.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends HousekeepingTaskFindManyArgs>(args?: SelectSubset<T, HousekeepingTaskFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HousekeepingTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a HousekeepingTask.
+     * @param {HousekeepingTaskCreateArgs} args - Arguments to create a HousekeepingTask.
+     * @example
+     * // Create one HousekeepingTask
+     * const HousekeepingTask = await prisma.housekeepingTask.create({
+     *   data: {
+     *     // ... data to create a HousekeepingTask
+     *   }
+     * })
+     * 
+     */
+    create<T extends HousekeepingTaskCreateArgs>(args: SelectSubset<T, HousekeepingTaskCreateArgs<ExtArgs>>): Prisma__HousekeepingTaskClient<$Result.GetResult<Prisma.$HousekeepingTaskPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many HousekeepingTasks.
+     * @param {HousekeepingTaskCreateManyArgs} args - Arguments to create many HousekeepingTasks.
+     * @example
+     * // Create many HousekeepingTasks
+     * const housekeepingTask = await prisma.housekeepingTask.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends HousekeepingTaskCreateManyArgs>(args?: SelectSubset<T, HousekeepingTaskCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many HousekeepingTasks and returns the data saved in the database.
+     * @param {HousekeepingTaskCreateManyAndReturnArgs} args - Arguments to create many HousekeepingTasks.
+     * @example
+     * // Create many HousekeepingTasks
+     * const housekeepingTask = await prisma.housekeepingTask.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many HousekeepingTasks and only return the `id`
+     * const housekeepingTaskWithIdOnly = await prisma.housekeepingTask.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends HousekeepingTaskCreateManyAndReturnArgs>(args?: SelectSubset<T, HousekeepingTaskCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HousekeepingTaskPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a HousekeepingTask.
+     * @param {HousekeepingTaskDeleteArgs} args - Arguments to delete one HousekeepingTask.
+     * @example
+     * // Delete one HousekeepingTask
+     * const HousekeepingTask = await prisma.housekeepingTask.delete({
+     *   where: {
+     *     // ... filter to delete one HousekeepingTask
+     *   }
+     * })
+     * 
+     */
+    delete<T extends HousekeepingTaskDeleteArgs>(args: SelectSubset<T, HousekeepingTaskDeleteArgs<ExtArgs>>): Prisma__HousekeepingTaskClient<$Result.GetResult<Prisma.$HousekeepingTaskPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one HousekeepingTask.
+     * @param {HousekeepingTaskUpdateArgs} args - Arguments to update one HousekeepingTask.
+     * @example
+     * // Update one HousekeepingTask
+     * const housekeepingTask = await prisma.housekeepingTask.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends HousekeepingTaskUpdateArgs>(args: SelectSubset<T, HousekeepingTaskUpdateArgs<ExtArgs>>): Prisma__HousekeepingTaskClient<$Result.GetResult<Prisma.$HousekeepingTaskPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more HousekeepingTasks.
+     * @param {HousekeepingTaskDeleteManyArgs} args - Arguments to filter HousekeepingTasks to delete.
+     * @example
+     * // Delete a few HousekeepingTasks
+     * const { count } = await prisma.housekeepingTask.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends HousekeepingTaskDeleteManyArgs>(args?: SelectSubset<T, HousekeepingTaskDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more HousekeepingTasks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HousekeepingTaskUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many HousekeepingTasks
+     * const housekeepingTask = await prisma.housekeepingTask.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends HousekeepingTaskUpdateManyArgs>(args: SelectSubset<T, HousekeepingTaskUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more HousekeepingTasks and returns the data updated in the database.
+     * @param {HousekeepingTaskUpdateManyAndReturnArgs} args - Arguments to update many HousekeepingTasks.
+     * @example
+     * // Update many HousekeepingTasks
+     * const housekeepingTask = await prisma.housekeepingTask.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more HousekeepingTasks and only return the `id`
+     * const housekeepingTaskWithIdOnly = await prisma.housekeepingTask.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends HousekeepingTaskUpdateManyAndReturnArgs>(args: SelectSubset<T, HousekeepingTaskUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HousekeepingTaskPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one HousekeepingTask.
+     * @param {HousekeepingTaskUpsertArgs} args - Arguments to update or create a HousekeepingTask.
+     * @example
+     * // Update or create a HousekeepingTask
+     * const housekeepingTask = await prisma.housekeepingTask.upsert({
+     *   create: {
+     *     // ... data to create a HousekeepingTask
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the HousekeepingTask we want to update
+     *   }
+     * })
+     */
+    upsert<T extends HousekeepingTaskUpsertArgs>(args: SelectSubset<T, HousekeepingTaskUpsertArgs<ExtArgs>>): Prisma__HousekeepingTaskClient<$Result.GetResult<Prisma.$HousekeepingTaskPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of HousekeepingTasks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HousekeepingTaskCountArgs} args - Arguments to filter HousekeepingTasks to count.
+     * @example
+     * // Count the number of HousekeepingTasks
+     * const count = await prisma.housekeepingTask.count({
+     *   where: {
+     *     // ... the filter for the HousekeepingTasks we want to count
+     *   }
+     * })
+    **/
+    count<T extends HousekeepingTaskCountArgs>(
+      args?: Subset<T, HousekeepingTaskCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], HousekeepingTaskCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a HousekeepingTask.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HousekeepingTaskAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends HousekeepingTaskAggregateArgs>(args: Subset<T, HousekeepingTaskAggregateArgs>): Prisma.PrismaPromise<GetHousekeepingTaskAggregateType<T>>
+
+    /**
+     * Group by HousekeepingTask.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {HousekeepingTaskGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends HousekeepingTaskGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: HousekeepingTaskGroupByArgs['orderBy'] }
+        : { orderBy?: HousekeepingTaskGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, HousekeepingTaskGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetHousekeepingTaskGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the HousekeepingTask model
+   */
+  readonly fields: HousekeepingTaskFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for HousekeepingTask.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__HousekeepingTaskClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    room<T extends RoomDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RoomDefaultArgs<ExtArgs>>): Prisma__RoomClient<$Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    assignedTo<T extends HousekeepingTask$assignedToArgs<ExtArgs> = {}>(args?: Subset<T, HousekeepingTask$assignedToArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the HousekeepingTask model
+   */
+  interface HousekeepingTaskFieldRefs {
+    readonly id: FieldRef<"HousekeepingTask", 'String'>
+    readonly roomId: FieldRef<"HousekeepingTask", 'String'>
+    readonly assignedToId: FieldRef<"HousekeepingTask", 'String'>
+    readonly status: FieldRef<"HousekeepingTask", 'HousekeepingStatus'>
+    readonly notes: FieldRef<"HousekeepingTask", 'String'>
+    readonly startedAt: FieldRef<"HousekeepingTask", 'DateTime'>
+    readonly completedAt: FieldRef<"HousekeepingTask", 'DateTime'>
+    readonly createdAt: FieldRef<"HousekeepingTask", 'DateTime'>
+    readonly updatedAt: FieldRef<"HousekeepingTask", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * HousekeepingTask findUnique
+   */
+  export type HousekeepingTaskFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HousekeepingTask
+     */
+    select?: HousekeepingTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HousekeepingTask
+     */
+    omit?: HousekeepingTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HousekeepingTaskInclude<ExtArgs> | null
+    /**
+     * Filter, which HousekeepingTask to fetch.
+     */
+    where: HousekeepingTaskWhereUniqueInput
+  }
+
+  /**
+   * HousekeepingTask findUniqueOrThrow
+   */
+  export type HousekeepingTaskFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HousekeepingTask
+     */
+    select?: HousekeepingTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HousekeepingTask
+     */
+    omit?: HousekeepingTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HousekeepingTaskInclude<ExtArgs> | null
+    /**
+     * Filter, which HousekeepingTask to fetch.
+     */
+    where: HousekeepingTaskWhereUniqueInput
+  }
+
+  /**
+   * HousekeepingTask findFirst
+   */
+  export type HousekeepingTaskFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HousekeepingTask
+     */
+    select?: HousekeepingTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HousekeepingTask
+     */
+    omit?: HousekeepingTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HousekeepingTaskInclude<ExtArgs> | null
+    /**
+     * Filter, which HousekeepingTask to fetch.
+     */
+    where?: HousekeepingTaskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HousekeepingTasks to fetch.
+     */
+    orderBy?: HousekeepingTaskOrderByWithRelationInput | HousekeepingTaskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for HousekeepingTasks.
+     */
+    cursor?: HousekeepingTaskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HousekeepingTasks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HousekeepingTasks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of HousekeepingTasks.
+     */
+    distinct?: HousekeepingTaskScalarFieldEnum | HousekeepingTaskScalarFieldEnum[]
+  }
+
+  /**
+   * HousekeepingTask findFirstOrThrow
+   */
+  export type HousekeepingTaskFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HousekeepingTask
+     */
+    select?: HousekeepingTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HousekeepingTask
+     */
+    omit?: HousekeepingTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HousekeepingTaskInclude<ExtArgs> | null
+    /**
+     * Filter, which HousekeepingTask to fetch.
+     */
+    where?: HousekeepingTaskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HousekeepingTasks to fetch.
+     */
+    orderBy?: HousekeepingTaskOrderByWithRelationInput | HousekeepingTaskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for HousekeepingTasks.
+     */
+    cursor?: HousekeepingTaskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HousekeepingTasks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HousekeepingTasks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of HousekeepingTasks.
+     */
+    distinct?: HousekeepingTaskScalarFieldEnum | HousekeepingTaskScalarFieldEnum[]
+  }
+
+  /**
+   * HousekeepingTask findMany
+   */
+  export type HousekeepingTaskFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HousekeepingTask
+     */
+    select?: HousekeepingTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HousekeepingTask
+     */
+    omit?: HousekeepingTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HousekeepingTaskInclude<ExtArgs> | null
+    /**
+     * Filter, which HousekeepingTasks to fetch.
+     */
+    where?: HousekeepingTaskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of HousekeepingTasks to fetch.
+     */
+    orderBy?: HousekeepingTaskOrderByWithRelationInput | HousekeepingTaskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing HousekeepingTasks.
+     */
+    cursor?: HousekeepingTaskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` HousekeepingTasks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` HousekeepingTasks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of HousekeepingTasks.
+     */
+    distinct?: HousekeepingTaskScalarFieldEnum | HousekeepingTaskScalarFieldEnum[]
+  }
+
+  /**
+   * HousekeepingTask create
+   */
+  export type HousekeepingTaskCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HousekeepingTask
+     */
+    select?: HousekeepingTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HousekeepingTask
+     */
+    omit?: HousekeepingTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HousekeepingTaskInclude<ExtArgs> | null
+    /**
+     * The data needed to create a HousekeepingTask.
+     */
+    data: XOR<HousekeepingTaskCreateInput, HousekeepingTaskUncheckedCreateInput>
+  }
+
+  /**
+   * HousekeepingTask createMany
+   */
+  export type HousekeepingTaskCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many HousekeepingTasks.
+     */
+    data: HousekeepingTaskCreateManyInput | HousekeepingTaskCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * HousekeepingTask createManyAndReturn
+   */
+  export type HousekeepingTaskCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HousekeepingTask
+     */
+    select?: HousekeepingTaskSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the HousekeepingTask
+     */
+    omit?: HousekeepingTaskOmit<ExtArgs> | null
+    /**
+     * The data used to create many HousekeepingTasks.
+     */
+    data: HousekeepingTaskCreateManyInput | HousekeepingTaskCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HousekeepingTaskIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * HousekeepingTask update
+   */
+  export type HousekeepingTaskUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HousekeepingTask
+     */
+    select?: HousekeepingTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HousekeepingTask
+     */
+    omit?: HousekeepingTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HousekeepingTaskInclude<ExtArgs> | null
+    /**
+     * The data needed to update a HousekeepingTask.
+     */
+    data: XOR<HousekeepingTaskUpdateInput, HousekeepingTaskUncheckedUpdateInput>
+    /**
+     * Choose, which HousekeepingTask to update.
+     */
+    where: HousekeepingTaskWhereUniqueInput
+  }
+
+  /**
+   * HousekeepingTask updateMany
+   */
+  export type HousekeepingTaskUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update HousekeepingTasks.
+     */
+    data: XOR<HousekeepingTaskUpdateManyMutationInput, HousekeepingTaskUncheckedUpdateManyInput>
+    /**
+     * Filter which HousekeepingTasks to update
+     */
+    where?: HousekeepingTaskWhereInput
+    /**
+     * Limit how many HousekeepingTasks to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * HousekeepingTask updateManyAndReturn
+   */
+  export type HousekeepingTaskUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HousekeepingTask
+     */
+    select?: HousekeepingTaskSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the HousekeepingTask
+     */
+    omit?: HousekeepingTaskOmit<ExtArgs> | null
+    /**
+     * The data used to update HousekeepingTasks.
+     */
+    data: XOR<HousekeepingTaskUpdateManyMutationInput, HousekeepingTaskUncheckedUpdateManyInput>
+    /**
+     * Filter which HousekeepingTasks to update
+     */
+    where?: HousekeepingTaskWhereInput
+    /**
+     * Limit how many HousekeepingTasks to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HousekeepingTaskIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * HousekeepingTask upsert
+   */
+  export type HousekeepingTaskUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HousekeepingTask
+     */
+    select?: HousekeepingTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HousekeepingTask
+     */
+    omit?: HousekeepingTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HousekeepingTaskInclude<ExtArgs> | null
+    /**
+     * The filter to search for the HousekeepingTask to update in case it exists.
+     */
+    where: HousekeepingTaskWhereUniqueInput
+    /**
+     * In case the HousekeepingTask found by the `where` argument doesn't exist, create a new HousekeepingTask with this data.
+     */
+    create: XOR<HousekeepingTaskCreateInput, HousekeepingTaskUncheckedCreateInput>
+    /**
+     * In case the HousekeepingTask was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<HousekeepingTaskUpdateInput, HousekeepingTaskUncheckedUpdateInput>
+  }
+
+  /**
+   * HousekeepingTask delete
+   */
+  export type HousekeepingTaskDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HousekeepingTask
+     */
+    select?: HousekeepingTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HousekeepingTask
+     */
+    omit?: HousekeepingTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HousekeepingTaskInclude<ExtArgs> | null
+    /**
+     * Filter which HousekeepingTask to delete.
+     */
+    where: HousekeepingTaskWhereUniqueInput
+  }
+
+  /**
+   * HousekeepingTask deleteMany
+   */
+  export type HousekeepingTaskDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which HousekeepingTasks to delete
+     */
+    where?: HousekeepingTaskWhereInput
+    /**
+     * Limit how many HousekeepingTasks to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * HousekeepingTask.assignedTo
+   */
+  export type HousekeepingTask$assignedToArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * HousekeepingTask without action
+   */
+  export type HousekeepingTaskDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HousekeepingTask
+     */
+    select?: HousekeepingTaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the HousekeepingTask
+     */
+    omit?: HousekeepingTaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: HousekeepingTaskInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Maintenance
+   */
+
+  export type AggregateMaintenance = {
+    _count: MaintenanceCountAggregateOutputType | null
+    _min: MaintenanceMinAggregateOutputType | null
+    _max: MaintenanceMaxAggregateOutputType | null
+  }
+
+  export type MaintenanceMinAggregateOutputType = {
+    id: string | null
+    roomId: string | null
+    reportedById: string | null
+    assignedToId: string | null
+    title: string | null
+    description: string | null
+    status: $Enums.MaintenanceStatus | null
+    priority: $Enums.MaintenancePriority | null
+    resolvedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type MaintenanceMaxAggregateOutputType = {
+    id: string | null
+    roomId: string | null
+    reportedById: string | null
+    assignedToId: string | null
+    title: string | null
+    description: string | null
+    status: $Enums.MaintenanceStatus | null
+    priority: $Enums.MaintenancePriority | null
+    resolvedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type MaintenanceCountAggregateOutputType = {
+    id: number
+    roomId: number
+    reportedById: number
+    assignedToId: number
+    title: number
+    description: number
+    status: number
+    priority: number
+    resolvedAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type MaintenanceMinAggregateInputType = {
+    id?: true
+    roomId?: true
+    reportedById?: true
+    assignedToId?: true
+    title?: true
+    description?: true
+    status?: true
+    priority?: true
+    resolvedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type MaintenanceMaxAggregateInputType = {
+    id?: true
+    roomId?: true
+    reportedById?: true
+    assignedToId?: true
+    title?: true
+    description?: true
+    status?: true
+    priority?: true
+    resolvedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type MaintenanceCountAggregateInputType = {
+    id?: true
+    roomId?: true
+    reportedById?: true
+    assignedToId?: true
+    title?: true
+    description?: true
+    status?: true
+    priority?: true
+    resolvedAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type MaintenanceAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Maintenance to aggregate.
+     */
+    where?: MaintenanceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Maintenances to fetch.
+     */
+    orderBy?: MaintenanceOrderByWithRelationInput | MaintenanceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MaintenanceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Maintenances from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Maintenances.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Maintenances
+    **/
+    _count?: true | MaintenanceCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MaintenanceMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MaintenanceMaxAggregateInputType
+  }
+
+  export type GetMaintenanceAggregateType<T extends MaintenanceAggregateArgs> = {
+        [P in keyof T & keyof AggregateMaintenance]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMaintenance[P]>
+      : GetScalarType<T[P], AggregateMaintenance[P]>
+  }
+
+
+
+
+  export type MaintenanceGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MaintenanceWhereInput
+    orderBy?: MaintenanceOrderByWithAggregationInput | MaintenanceOrderByWithAggregationInput[]
+    by: MaintenanceScalarFieldEnum[] | MaintenanceScalarFieldEnum
+    having?: MaintenanceScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MaintenanceCountAggregateInputType | true
+    _min?: MaintenanceMinAggregateInputType
+    _max?: MaintenanceMaxAggregateInputType
+  }
+
+  export type MaintenanceGroupByOutputType = {
+    id: string
+    roomId: string | null
+    reportedById: string | null
+    assignedToId: string | null
+    title: string
+    description: string
+    status: $Enums.MaintenanceStatus
+    priority: $Enums.MaintenancePriority
+    resolvedAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: MaintenanceCountAggregateOutputType | null
+    _min: MaintenanceMinAggregateOutputType | null
+    _max: MaintenanceMaxAggregateOutputType | null
+  }
+
+  type GetMaintenanceGroupByPayload<T extends MaintenanceGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MaintenanceGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MaintenanceGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MaintenanceGroupByOutputType[P]>
+            : GetScalarType<T[P], MaintenanceGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MaintenanceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    roomId?: boolean
+    reportedById?: boolean
+    assignedToId?: boolean
+    title?: boolean
+    description?: boolean
+    status?: boolean
+    priority?: boolean
+    resolvedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    room?: boolean | Maintenance$roomArgs<ExtArgs>
+    reportedBy?: boolean | Maintenance$reportedByArgs<ExtArgs>
+    assignedTo?: boolean | Maintenance$assignedToArgs<ExtArgs>
+  }, ExtArgs["result"]["maintenance"]>
+
+  export type MaintenanceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    roomId?: boolean
+    reportedById?: boolean
+    assignedToId?: boolean
+    title?: boolean
+    description?: boolean
+    status?: boolean
+    priority?: boolean
+    resolvedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    room?: boolean | Maintenance$roomArgs<ExtArgs>
+    reportedBy?: boolean | Maintenance$reportedByArgs<ExtArgs>
+    assignedTo?: boolean | Maintenance$assignedToArgs<ExtArgs>
+  }, ExtArgs["result"]["maintenance"]>
+
+  export type MaintenanceSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    roomId?: boolean
+    reportedById?: boolean
+    assignedToId?: boolean
+    title?: boolean
+    description?: boolean
+    status?: boolean
+    priority?: boolean
+    resolvedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    room?: boolean | Maintenance$roomArgs<ExtArgs>
+    reportedBy?: boolean | Maintenance$reportedByArgs<ExtArgs>
+    assignedTo?: boolean | Maintenance$assignedToArgs<ExtArgs>
+  }, ExtArgs["result"]["maintenance"]>
+
+  export type MaintenanceSelectScalar = {
+    id?: boolean
+    roomId?: boolean
+    reportedById?: boolean
+    assignedToId?: boolean
+    title?: boolean
+    description?: boolean
+    status?: boolean
+    priority?: boolean
+    resolvedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type MaintenanceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "roomId" | "reportedById" | "assignedToId" | "title" | "description" | "status" | "priority" | "resolvedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["maintenance"]>
+  export type MaintenanceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    room?: boolean | Maintenance$roomArgs<ExtArgs>
+    reportedBy?: boolean | Maintenance$reportedByArgs<ExtArgs>
+    assignedTo?: boolean | Maintenance$assignedToArgs<ExtArgs>
+  }
+  export type MaintenanceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    room?: boolean | Maintenance$roomArgs<ExtArgs>
+    reportedBy?: boolean | Maintenance$reportedByArgs<ExtArgs>
+    assignedTo?: boolean | Maintenance$assignedToArgs<ExtArgs>
+  }
+  export type MaintenanceIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    room?: boolean | Maintenance$roomArgs<ExtArgs>
+    reportedBy?: boolean | Maintenance$reportedByArgs<ExtArgs>
+    assignedTo?: boolean | Maintenance$assignedToArgs<ExtArgs>
+  }
+
+  export type $MaintenancePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Maintenance"
+    objects: {
+      room: Prisma.$RoomPayload<ExtArgs> | null
+      reportedBy: Prisma.$UserPayload<ExtArgs> | null
+      assignedTo: Prisma.$UserPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      roomId: string | null
+      reportedById: string | null
+      assignedToId: string | null
+      title: string
+      description: string
+      status: $Enums.MaintenanceStatus
+      priority: $Enums.MaintenancePriority
+      resolvedAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["maintenance"]>
+    composites: {}
+  }
+
+  type MaintenanceGetPayload<S extends boolean | null | undefined | MaintenanceDefaultArgs> = $Result.GetResult<Prisma.$MaintenancePayload, S>
+
+  type MaintenanceCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MaintenanceFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MaintenanceCountAggregateInputType | true
+    }
+
+  export interface MaintenanceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Maintenance'], meta: { name: 'Maintenance' } }
+    /**
+     * Find zero or one Maintenance that matches the filter.
+     * @param {MaintenanceFindUniqueArgs} args - Arguments to find a Maintenance
+     * @example
+     * // Get one Maintenance
+     * const maintenance = await prisma.maintenance.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MaintenanceFindUniqueArgs>(args: SelectSubset<T, MaintenanceFindUniqueArgs<ExtArgs>>): Prisma__MaintenanceClient<$Result.GetResult<Prisma.$MaintenancePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Maintenance that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MaintenanceFindUniqueOrThrowArgs} args - Arguments to find a Maintenance
+     * @example
+     * // Get one Maintenance
+     * const maintenance = await prisma.maintenance.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MaintenanceFindUniqueOrThrowArgs>(args: SelectSubset<T, MaintenanceFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MaintenanceClient<$Result.GetResult<Prisma.$MaintenancePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Maintenance that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MaintenanceFindFirstArgs} args - Arguments to find a Maintenance
+     * @example
+     * // Get one Maintenance
+     * const maintenance = await prisma.maintenance.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MaintenanceFindFirstArgs>(args?: SelectSubset<T, MaintenanceFindFirstArgs<ExtArgs>>): Prisma__MaintenanceClient<$Result.GetResult<Prisma.$MaintenancePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Maintenance that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MaintenanceFindFirstOrThrowArgs} args - Arguments to find a Maintenance
+     * @example
+     * // Get one Maintenance
+     * const maintenance = await prisma.maintenance.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MaintenanceFindFirstOrThrowArgs>(args?: SelectSubset<T, MaintenanceFindFirstOrThrowArgs<ExtArgs>>): Prisma__MaintenanceClient<$Result.GetResult<Prisma.$MaintenancePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Maintenances that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MaintenanceFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Maintenances
+     * const maintenances = await prisma.maintenance.findMany()
+     * 
+     * // Get first 10 Maintenances
+     * const maintenances = await prisma.maintenance.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const maintenanceWithIdOnly = await prisma.maintenance.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MaintenanceFindManyArgs>(args?: SelectSubset<T, MaintenanceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MaintenancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Maintenance.
+     * @param {MaintenanceCreateArgs} args - Arguments to create a Maintenance.
+     * @example
+     * // Create one Maintenance
+     * const Maintenance = await prisma.maintenance.create({
+     *   data: {
+     *     // ... data to create a Maintenance
+     *   }
+     * })
+     * 
+     */
+    create<T extends MaintenanceCreateArgs>(args: SelectSubset<T, MaintenanceCreateArgs<ExtArgs>>): Prisma__MaintenanceClient<$Result.GetResult<Prisma.$MaintenancePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Maintenances.
+     * @param {MaintenanceCreateManyArgs} args - Arguments to create many Maintenances.
+     * @example
+     * // Create many Maintenances
+     * const maintenance = await prisma.maintenance.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MaintenanceCreateManyArgs>(args?: SelectSubset<T, MaintenanceCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Maintenances and returns the data saved in the database.
+     * @param {MaintenanceCreateManyAndReturnArgs} args - Arguments to create many Maintenances.
+     * @example
+     * // Create many Maintenances
+     * const maintenance = await prisma.maintenance.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Maintenances and only return the `id`
+     * const maintenanceWithIdOnly = await prisma.maintenance.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MaintenanceCreateManyAndReturnArgs>(args?: SelectSubset<T, MaintenanceCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MaintenancePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Maintenance.
+     * @param {MaintenanceDeleteArgs} args - Arguments to delete one Maintenance.
+     * @example
+     * // Delete one Maintenance
+     * const Maintenance = await prisma.maintenance.delete({
+     *   where: {
+     *     // ... filter to delete one Maintenance
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MaintenanceDeleteArgs>(args: SelectSubset<T, MaintenanceDeleteArgs<ExtArgs>>): Prisma__MaintenanceClient<$Result.GetResult<Prisma.$MaintenancePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Maintenance.
+     * @param {MaintenanceUpdateArgs} args - Arguments to update one Maintenance.
+     * @example
+     * // Update one Maintenance
+     * const maintenance = await prisma.maintenance.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MaintenanceUpdateArgs>(args: SelectSubset<T, MaintenanceUpdateArgs<ExtArgs>>): Prisma__MaintenanceClient<$Result.GetResult<Prisma.$MaintenancePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Maintenances.
+     * @param {MaintenanceDeleteManyArgs} args - Arguments to filter Maintenances to delete.
+     * @example
+     * // Delete a few Maintenances
+     * const { count } = await prisma.maintenance.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MaintenanceDeleteManyArgs>(args?: SelectSubset<T, MaintenanceDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Maintenances.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MaintenanceUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Maintenances
+     * const maintenance = await prisma.maintenance.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MaintenanceUpdateManyArgs>(args: SelectSubset<T, MaintenanceUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Maintenances and returns the data updated in the database.
+     * @param {MaintenanceUpdateManyAndReturnArgs} args - Arguments to update many Maintenances.
+     * @example
+     * // Update many Maintenances
+     * const maintenance = await prisma.maintenance.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Maintenances and only return the `id`
+     * const maintenanceWithIdOnly = await prisma.maintenance.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MaintenanceUpdateManyAndReturnArgs>(args: SelectSubset<T, MaintenanceUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MaintenancePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Maintenance.
+     * @param {MaintenanceUpsertArgs} args - Arguments to update or create a Maintenance.
+     * @example
+     * // Update or create a Maintenance
+     * const maintenance = await prisma.maintenance.upsert({
+     *   create: {
+     *     // ... data to create a Maintenance
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Maintenance we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MaintenanceUpsertArgs>(args: SelectSubset<T, MaintenanceUpsertArgs<ExtArgs>>): Prisma__MaintenanceClient<$Result.GetResult<Prisma.$MaintenancePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Maintenances.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MaintenanceCountArgs} args - Arguments to filter Maintenances to count.
+     * @example
+     * // Count the number of Maintenances
+     * const count = await prisma.maintenance.count({
+     *   where: {
+     *     // ... the filter for the Maintenances we want to count
+     *   }
+     * })
+    **/
+    count<T extends MaintenanceCountArgs>(
+      args?: Subset<T, MaintenanceCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MaintenanceCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Maintenance.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MaintenanceAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MaintenanceAggregateArgs>(args: Subset<T, MaintenanceAggregateArgs>): Prisma.PrismaPromise<GetMaintenanceAggregateType<T>>
+
+    /**
+     * Group by Maintenance.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MaintenanceGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MaintenanceGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MaintenanceGroupByArgs['orderBy'] }
+        : { orderBy?: MaintenanceGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MaintenanceGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMaintenanceGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Maintenance model
+   */
+  readonly fields: MaintenanceFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Maintenance.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MaintenanceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    room<T extends Maintenance$roomArgs<ExtArgs> = {}>(args?: Subset<T, Maintenance$roomArgs<ExtArgs>>): Prisma__RoomClient<$Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    reportedBy<T extends Maintenance$reportedByArgs<ExtArgs> = {}>(args?: Subset<T, Maintenance$reportedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    assignedTo<T extends Maintenance$assignedToArgs<ExtArgs> = {}>(args?: Subset<T, Maintenance$assignedToArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Maintenance model
+   */
+  interface MaintenanceFieldRefs {
+    readonly id: FieldRef<"Maintenance", 'String'>
+    readonly roomId: FieldRef<"Maintenance", 'String'>
+    readonly reportedById: FieldRef<"Maintenance", 'String'>
+    readonly assignedToId: FieldRef<"Maintenance", 'String'>
+    readonly title: FieldRef<"Maintenance", 'String'>
+    readonly description: FieldRef<"Maintenance", 'String'>
+    readonly status: FieldRef<"Maintenance", 'MaintenanceStatus'>
+    readonly priority: FieldRef<"Maintenance", 'MaintenancePriority'>
+    readonly resolvedAt: FieldRef<"Maintenance", 'DateTime'>
+    readonly createdAt: FieldRef<"Maintenance", 'DateTime'>
+    readonly updatedAt: FieldRef<"Maintenance", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Maintenance findUnique
+   */
+  export type MaintenanceFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Maintenance
+     */
+    select?: MaintenanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Maintenance
+     */
+    omit?: MaintenanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MaintenanceInclude<ExtArgs> | null
+    /**
+     * Filter, which Maintenance to fetch.
+     */
+    where: MaintenanceWhereUniqueInput
+  }
+
+  /**
+   * Maintenance findUniqueOrThrow
+   */
+  export type MaintenanceFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Maintenance
+     */
+    select?: MaintenanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Maintenance
+     */
+    omit?: MaintenanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MaintenanceInclude<ExtArgs> | null
+    /**
+     * Filter, which Maintenance to fetch.
+     */
+    where: MaintenanceWhereUniqueInput
+  }
+
+  /**
+   * Maintenance findFirst
+   */
+  export type MaintenanceFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Maintenance
+     */
+    select?: MaintenanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Maintenance
+     */
+    omit?: MaintenanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MaintenanceInclude<ExtArgs> | null
+    /**
+     * Filter, which Maintenance to fetch.
+     */
+    where?: MaintenanceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Maintenances to fetch.
+     */
+    orderBy?: MaintenanceOrderByWithRelationInput | MaintenanceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Maintenances.
+     */
+    cursor?: MaintenanceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Maintenances from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Maintenances.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Maintenances.
+     */
+    distinct?: MaintenanceScalarFieldEnum | MaintenanceScalarFieldEnum[]
+  }
+
+  /**
+   * Maintenance findFirstOrThrow
+   */
+  export type MaintenanceFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Maintenance
+     */
+    select?: MaintenanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Maintenance
+     */
+    omit?: MaintenanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MaintenanceInclude<ExtArgs> | null
+    /**
+     * Filter, which Maintenance to fetch.
+     */
+    where?: MaintenanceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Maintenances to fetch.
+     */
+    orderBy?: MaintenanceOrderByWithRelationInput | MaintenanceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Maintenances.
+     */
+    cursor?: MaintenanceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Maintenances from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Maintenances.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Maintenances.
+     */
+    distinct?: MaintenanceScalarFieldEnum | MaintenanceScalarFieldEnum[]
+  }
+
+  /**
+   * Maintenance findMany
+   */
+  export type MaintenanceFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Maintenance
+     */
+    select?: MaintenanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Maintenance
+     */
+    omit?: MaintenanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MaintenanceInclude<ExtArgs> | null
+    /**
+     * Filter, which Maintenances to fetch.
+     */
+    where?: MaintenanceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Maintenances to fetch.
+     */
+    orderBy?: MaintenanceOrderByWithRelationInput | MaintenanceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Maintenances.
+     */
+    cursor?: MaintenanceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Maintenances from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Maintenances.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Maintenances.
+     */
+    distinct?: MaintenanceScalarFieldEnum | MaintenanceScalarFieldEnum[]
+  }
+
+  /**
+   * Maintenance create
+   */
+  export type MaintenanceCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Maintenance
+     */
+    select?: MaintenanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Maintenance
+     */
+    omit?: MaintenanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MaintenanceInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Maintenance.
+     */
+    data: XOR<MaintenanceCreateInput, MaintenanceUncheckedCreateInput>
+  }
+
+  /**
+   * Maintenance createMany
+   */
+  export type MaintenanceCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Maintenances.
+     */
+    data: MaintenanceCreateManyInput | MaintenanceCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Maintenance createManyAndReturn
+   */
+  export type MaintenanceCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Maintenance
+     */
+    select?: MaintenanceSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Maintenance
+     */
+    omit?: MaintenanceOmit<ExtArgs> | null
+    /**
+     * The data used to create many Maintenances.
+     */
+    data: MaintenanceCreateManyInput | MaintenanceCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MaintenanceIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Maintenance update
+   */
+  export type MaintenanceUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Maintenance
+     */
+    select?: MaintenanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Maintenance
+     */
+    omit?: MaintenanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MaintenanceInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Maintenance.
+     */
+    data: XOR<MaintenanceUpdateInput, MaintenanceUncheckedUpdateInput>
+    /**
+     * Choose, which Maintenance to update.
+     */
+    where: MaintenanceWhereUniqueInput
+  }
+
+  /**
+   * Maintenance updateMany
+   */
+  export type MaintenanceUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Maintenances.
+     */
+    data: XOR<MaintenanceUpdateManyMutationInput, MaintenanceUncheckedUpdateManyInput>
+    /**
+     * Filter which Maintenances to update
+     */
+    where?: MaintenanceWhereInput
+    /**
+     * Limit how many Maintenances to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Maintenance updateManyAndReturn
+   */
+  export type MaintenanceUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Maintenance
+     */
+    select?: MaintenanceSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Maintenance
+     */
+    omit?: MaintenanceOmit<ExtArgs> | null
+    /**
+     * The data used to update Maintenances.
+     */
+    data: XOR<MaintenanceUpdateManyMutationInput, MaintenanceUncheckedUpdateManyInput>
+    /**
+     * Filter which Maintenances to update
+     */
+    where?: MaintenanceWhereInput
+    /**
+     * Limit how many Maintenances to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MaintenanceIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Maintenance upsert
+   */
+  export type MaintenanceUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Maintenance
+     */
+    select?: MaintenanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Maintenance
+     */
+    omit?: MaintenanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MaintenanceInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Maintenance to update in case it exists.
+     */
+    where: MaintenanceWhereUniqueInput
+    /**
+     * In case the Maintenance found by the `where` argument doesn't exist, create a new Maintenance with this data.
+     */
+    create: XOR<MaintenanceCreateInput, MaintenanceUncheckedCreateInput>
+    /**
+     * In case the Maintenance was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MaintenanceUpdateInput, MaintenanceUncheckedUpdateInput>
+  }
+
+  /**
+   * Maintenance delete
+   */
+  export type MaintenanceDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Maintenance
+     */
+    select?: MaintenanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Maintenance
+     */
+    omit?: MaintenanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MaintenanceInclude<ExtArgs> | null
+    /**
+     * Filter which Maintenance to delete.
+     */
+    where: MaintenanceWhereUniqueInput
+  }
+
+  /**
+   * Maintenance deleteMany
+   */
+  export type MaintenanceDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Maintenances to delete
+     */
+    where?: MaintenanceWhereInput
+    /**
+     * Limit how many Maintenances to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Maintenance.room
+   */
+  export type Maintenance$roomArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Room
+     */
+    select?: RoomSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Room
+     */
+    omit?: RoomOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoomInclude<ExtArgs> | null
+    where?: RoomWhereInput
+  }
+
+  /**
+   * Maintenance.reportedBy
+   */
+  export type Maintenance$reportedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * Maintenance.assignedTo
+   */
+  export type Maintenance$assignedToArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * Maintenance without action
+   */
+  export type MaintenanceDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Maintenance
+     */
+    select?: MaintenanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Maintenance
+     */
+    omit?: MaintenanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MaintenanceInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -33210,17 +34782,6 @@ export namespace Prisma {
   export type MenuItemScalarFieldEnum = (typeof MenuItemScalarFieldEnum)[keyof typeof MenuItemScalarFieldEnum]
 
 
-  export const MaintenanceScalarFieldEnum: {
-    id: 'id',
-    roomId: 'roomId',
-    startDate: 'startDate',
-    endDate: 'endDate',
-    reason: 'reason'
-  };
-
-  export type MaintenanceScalarFieldEnum = (typeof MaintenanceScalarFieldEnum)[keyof typeof MaintenanceScalarFieldEnum]
-
-
   export const CompanyScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -33267,6 +34828,38 @@ export namespace Prisma {
   };
 
   export type RolePermissionScalarFieldEnum = (typeof RolePermissionScalarFieldEnum)[keyof typeof RolePermissionScalarFieldEnum]
+
+
+  export const HousekeepingTaskScalarFieldEnum: {
+    id: 'id',
+    roomId: 'roomId',
+    assignedToId: 'assignedToId',
+    status: 'status',
+    notes: 'notes',
+    startedAt: 'startedAt',
+    completedAt: 'completedAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type HousekeepingTaskScalarFieldEnum = (typeof HousekeepingTaskScalarFieldEnum)[keyof typeof HousekeepingTaskScalarFieldEnum]
+
+
+  export const MaintenanceScalarFieldEnum: {
+    id: 'id',
+    roomId: 'roomId',
+    reportedById: 'reportedById',
+    assignedToId: 'assignedToId',
+    title: 'title',
+    description: 'description',
+    status: 'status',
+    priority: 'priority',
+    resolvedAt: 'resolvedAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type MaintenanceScalarFieldEnum = (typeof MaintenanceScalarFieldEnum)[keyof typeof MaintenanceScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -33631,6 +35224,48 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'HousekeepingStatus'
+   */
+  export type EnumHousekeepingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HousekeepingStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'HousekeepingStatus[]'
+   */
+  export type ListEnumHousekeepingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'HousekeepingStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'MaintenanceStatus'
+   */
+  export type EnumMaintenanceStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MaintenanceStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'MaintenanceStatus[]'
+   */
+  export type ListEnumMaintenanceStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MaintenanceStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'MaintenancePriority'
+   */
+  export type EnumMaintenancePriorityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MaintenancePriority'>
+    
+
+
+  /**
+   * Reference to a field of type 'MaintenancePriority[]'
+   */
+  export type ListEnumMaintenancePriorityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MaintenancePriority[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -33674,6 +35309,9 @@ export namespace Prisma {
     deleted?: BoolFilter<"User"> | boolean
     deletedAt?: DateTimeNullableFilter<"User"> | Date | string | null
     userRoles?: UserRoleListRelationFilter
+    housekeepingAssignments?: HousekeepingTaskListRelationFilter
+    maintenanceReports?: MaintenanceListRelationFilter
+    maintenanceAssignments?: MaintenanceListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -33700,6 +35338,9 @@ export namespace Prisma {
     deleted?: SortOrder
     deletedAt?: SortOrderInput | SortOrder
     userRoles?: UserRoleOrderByRelationAggregateInput
+    housekeepingAssignments?: HousekeepingTaskOrderByRelationAggregateInput
+    maintenanceReports?: MaintenanceOrderByRelationAggregateInput
+    maintenanceAssignments?: MaintenanceOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -33729,6 +35370,9 @@ export namespace Prisma {
     deleted?: BoolFilter<"User"> | boolean
     deletedAt?: DateTimeNullableFilter<"User"> | Date | string | null
     userRoles?: UserRoleListRelationFilter
+    housekeepingAssignments?: HousekeepingTaskListRelationFilter
+    maintenanceReports?: MaintenanceListRelationFilter
+    maintenanceAssignments?: MaintenanceListRelationFilter
   }, "id" | "email" | "phone" | "password">
 
   export type UserOrderByWithAggregationInput = {
@@ -34406,6 +36050,7 @@ export namespace Prisma {
     roomType?: XOR<RoomTypeScalarRelationFilter, RoomTypeWhereInput>
     reservations?: ReservationListRelationFilter
     maintenance?: MaintenanceListRelationFilter
+    housekeepingTasks?: HousekeepingTaskListRelationFilter
   }
 
   export type RoomOrderByWithRelationInput = {
@@ -34417,6 +36062,7 @@ export namespace Prisma {
     roomType?: RoomTypeOrderByWithRelationInput
     reservations?: ReservationOrderByRelationAggregateInput
     maintenance?: MaintenanceOrderByRelationAggregateInput
+    housekeepingTasks?: HousekeepingTaskOrderByRelationAggregateInput
   }
 
   export type RoomWhereUniqueInput = Prisma.AtLeast<{
@@ -34431,6 +36077,7 @@ export namespace Prisma {
     roomType?: XOR<RoomTypeScalarRelationFilter, RoomTypeWhereInput>
     reservations?: ReservationListRelationFilter
     maintenance?: MaintenanceListRelationFilter
+    housekeepingTasks?: HousekeepingTaskListRelationFilter
   }, "id" | "number">
 
   export type RoomOrderByWithAggregationInput = {
@@ -35263,61 +36910,6 @@ export namespace Prisma {
     description?: StringNullableWithAggregatesFilter<"MenuItem"> | string | null
   }
 
-  export type MaintenanceWhereInput = {
-    AND?: MaintenanceWhereInput | MaintenanceWhereInput[]
-    OR?: MaintenanceWhereInput[]
-    NOT?: MaintenanceWhereInput | MaintenanceWhereInput[]
-    id?: StringFilter<"Maintenance"> | string
-    roomId?: StringFilter<"Maintenance"> | string
-    startDate?: DateTimeFilter<"Maintenance"> | Date | string
-    endDate?: DateTimeFilter<"Maintenance"> | Date | string
-    reason?: StringFilter<"Maintenance"> | string
-    room?: XOR<RoomScalarRelationFilter, RoomWhereInput>
-  }
-
-  export type MaintenanceOrderByWithRelationInput = {
-    id?: SortOrder
-    roomId?: SortOrder
-    startDate?: SortOrder
-    endDate?: SortOrder
-    reason?: SortOrder
-    room?: RoomOrderByWithRelationInput
-  }
-
-  export type MaintenanceWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: MaintenanceWhereInput | MaintenanceWhereInput[]
-    OR?: MaintenanceWhereInput[]
-    NOT?: MaintenanceWhereInput | MaintenanceWhereInput[]
-    roomId?: StringFilter<"Maintenance"> | string
-    startDate?: DateTimeFilter<"Maintenance"> | Date | string
-    endDate?: DateTimeFilter<"Maintenance"> | Date | string
-    reason?: StringFilter<"Maintenance"> | string
-    room?: XOR<RoomScalarRelationFilter, RoomWhereInput>
-  }, "id">
-
-  export type MaintenanceOrderByWithAggregationInput = {
-    id?: SortOrder
-    roomId?: SortOrder
-    startDate?: SortOrder
-    endDate?: SortOrder
-    reason?: SortOrder
-    _count?: MaintenanceCountOrderByAggregateInput
-    _max?: MaintenanceMaxOrderByAggregateInput
-    _min?: MaintenanceMinOrderByAggregateInput
-  }
-
-  export type MaintenanceScalarWhereWithAggregatesInput = {
-    AND?: MaintenanceScalarWhereWithAggregatesInput | MaintenanceScalarWhereWithAggregatesInput[]
-    OR?: MaintenanceScalarWhereWithAggregatesInput[]
-    NOT?: MaintenanceScalarWhereWithAggregatesInput | MaintenanceScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Maintenance"> | string
-    roomId?: StringWithAggregatesFilter<"Maintenance"> | string
-    startDate?: DateTimeWithAggregatesFilter<"Maintenance"> | Date | string
-    endDate?: DateTimeWithAggregatesFilter<"Maintenance"> | Date | string
-    reason?: StringWithAggregatesFilter<"Maintenance"> | string
-  }
-
   export type CompanyWhereInput = {
     AND?: CompanyWhereInput | CompanyWhereInput[]
     OR?: CompanyWhereInput[]
@@ -35569,6 +37161,175 @@ export namespace Prisma {
     permissionId?: StringWithAggregatesFilter<"RolePermission"> | string
   }
 
+  export type HousekeepingTaskWhereInput = {
+    AND?: HousekeepingTaskWhereInput | HousekeepingTaskWhereInput[]
+    OR?: HousekeepingTaskWhereInput[]
+    NOT?: HousekeepingTaskWhereInput | HousekeepingTaskWhereInput[]
+    id?: StringFilter<"HousekeepingTask"> | string
+    roomId?: StringFilter<"HousekeepingTask"> | string
+    assignedToId?: StringNullableFilter<"HousekeepingTask"> | string | null
+    status?: EnumHousekeepingStatusFilter<"HousekeepingTask"> | $Enums.HousekeepingStatus
+    notes?: StringNullableFilter<"HousekeepingTask"> | string | null
+    startedAt?: DateTimeNullableFilter<"HousekeepingTask"> | Date | string | null
+    completedAt?: DateTimeNullableFilter<"HousekeepingTask"> | Date | string | null
+    createdAt?: DateTimeFilter<"HousekeepingTask"> | Date | string
+    updatedAt?: DateTimeFilter<"HousekeepingTask"> | Date | string
+    room?: XOR<RoomScalarRelationFilter, RoomWhereInput>
+    assignedTo?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }
+
+  export type HousekeepingTaskOrderByWithRelationInput = {
+    id?: SortOrder
+    roomId?: SortOrder
+    assignedToId?: SortOrderInput | SortOrder
+    status?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    startedAt?: SortOrderInput | SortOrder
+    completedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    room?: RoomOrderByWithRelationInput
+    assignedTo?: UserOrderByWithRelationInput
+  }
+
+  export type HousekeepingTaskWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: HousekeepingTaskWhereInput | HousekeepingTaskWhereInput[]
+    OR?: HousekeepingTaskWhereInput[]
+    NOT?: HousekeepingTaskWhereInput | HousekeepingTaskWhereInput[]
+    roomId?: StringFilter<"HousekeepingTask"> | string
+    assignedToId?: StringNullableFilter<"HousekeepingTask"> | string | null
+    status?: EnumHousekeepingStatusFilter<"HousekeepingTask"> | $Enums.HousekeepingStatus
+    notes?: StringNullableFilter<"HousekeepingTask"> | string | null
+    startedAt?: DateTimeNullableFilter<"HousekeepingTask"> | Date | string | null
+    completedAt?: DateTimeNullableFilter<"HousekeepingTask"> | Date | string | null
+    createdAt?: DateTimeFilter<"HousekeepingTask"> | Date | string
+    updatedAt?: DateTimeFilter<"HousekeepingTask"> | Date | string
+    room?: XOR<RoomScalarRelationFilter, RoomWhereInput>
+    assignedTo?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }, "id">
+
+  export type HousekeepingTaskOrderByWithAggregationInput = {
+    id?: SortOrder
+    roomId?: SortOrder
+    assignedToId?: SortOrderInput | SortOrder
+    status?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    startedAt?: SortOrderInput | SortOrder
+    completedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: HousekeepingTaskCountOrderByAggregateInput
+    _max?: HousekeepingTaskMaxOrderByAggregateInput
+    _min?: HousekeepingTaskMinOrderByAggregateInput
+  }
+
+  export type HousekeepingTaskScalarWhereWithAggregatesInput = {
+    AND?: HousekeepingTaskScalarWhereWithAggregatesInput | HousekeepingTaskScalarWhereWithAggregatesInput[]
+    OR?: HousekeepingTaskScalarWhereWithAggregatesInput[]
+    NOT?: HousekeepingTaskScalarWhereWithAggregatesInput | HousekeepingTaskScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"HousekeepingTask"> | string
+    roomId?: StringWithAggregatesFilter<"HousekeepingTask"> | string
+    assignedToId?: StringNullableWithAggregatesFilter<"HousekeepingTask"> | string | null
+    status?: EnumHousekeepingStatusWithAggregatesFilter<"HousekeepingTask"> | $Enums.HousekeepingStatus
+    notes?: StringNullableWithAggregatesFilter<"HousekeepingTask"> | string | null
+    startedAt?: DateTimeNullableWithAggregatesFilter<"HousekeepingTask"> | Date | string | null
+    completedAt?: DateTimeNullableWithAggregatesFilter<"HousekeepingTask"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"HousekeepingTask"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"HousekeepingTask"> | Date | string
+  }
+
+  export type MaintenanceWhereInput = {
+    AND?: MaintenanceWhereInput | MaintenanceWhereInput[]
+    OR?: MaintenanceWhereInput[]
+    NOT?: MaintenanceWhereInput | MaintenanceWhereInput[]
+    id?: StringFilter<"Maintenance"> | string
+    roomId?: StringNullableFilter<"Maintenance"> | string | null
+    reportedById?: StringNullableFilter<"Maintenance"> | string | null
+    assignedToId?: StringNullableFilter<"Maintenance"> | string | null
+    title?: StringFilter<"Maintenance"> | string
+    description?: StringFilter<"Maintenance"> | string
+    status?: EnumMaintenanceStatusFilter<"Maintenance"> | $Enums.MaintenanceStatus
+    priority?: EnumMaintenancePriorityFilter<"Maintenance"> | $Enums.MaintenancePriority
+    resolvedAt?: DateTimeNullableFilter<"Maintenance"> | Date | string | null
+    createdAt?: DateTimeFilter<"Maintenance"> | Date | string
+    updatedAt?: DateTimeFilter<"Maintenance"> | Date | string
+    room?: XOR<RoomNullableScalarRelationFilter, RoomWhereInput> | null
+    reportedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    assignedTo?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }
+
+  export type MaintenanceOrderByWithRelationInput = {
+    id?: SortOrder
+    roomId?: SortOrderInput | SortOrder
+    reportedById?: SortOrderInput | SortOrder
+    assignedToId?: SortOrderInput | SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    priority?: SortOrder
+    resolvedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    room?: RoomOrderByWithRelationInput
+    reportedBy?: UserOrderByWithRelationInput
+    assignedTo?: UserOrderByWithRelationInput
+  }
+
+  export type MaintenanceWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: MaintenanceWhereInput | MaintenanceWhereInput[]
+    OR?: MaintenanceWhereInput[]
+    NOT?: MaintenanceWhereInput | MaintenanceWhereInput[]
+    roomId?: StringNullableFilter<"Maintenance"> | string | null
+    reportedById?: StringNullableFilter<"Maintenance"> | string | null
+    assignedToId?: StringNullableFilter<"Maintenance"> | string | null
+    title?: StringFilter<"Maintenance"> | string
+    description?: StringFilter<"Maintenance"> | string
+    status?: EnumMaintenanceStatusFilter<"Maintenance"> | $Enums.MaintenanceStatus
+    priority?: EnumMaintenancePriorityFilter<"Maintenance"> | $Enums.MaintenancePriority
+    resolvedAt?: DateTimeNullableFilter<"Maintenance"> | Date | string | null
+    createdAt?: DateTimeFilter<"Maintenance"> | Date | string
+    updatedAt?: DateTimeFilter<"Maintenance"> | Date | string
+    room?: XOR<RoomNullableScalarRelationFilter, RoomWhereInput> | null
+    reportedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    assignedTo?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }, "id">
+
+  export type MaintenanceOrderByWithAggregationInput = {
+    id?: SortOrder
+    roomId?: SortOrderInput | SortOrder
+    reportedById?: SortOrderInput | SortOrder
+    assignedToId?: SortOrderInput | SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    priority?: SortOrder
+    resolvedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: MaintenanceCountOrderByAggregateInput
+    _max?: MaintenanceMaxOrderByAggregateInput
+    _min?: MaintenanceMinOrderByAggregateInput
+  }
+
+  export type MaintenanceScalarWhereWithAggregatesInput = {
+    AND?: MaintenanceScalarWhereWithAggregatesInput | MaintenanceScalarWhereWithAggregatesInput[]
+    OR?: MaintenanceScalarWhereWithAggregatesInput[]
+    NOT?: MaintenanceScalarWhereWithAggregatesInput | MaintenanceScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Maintenance"> | string
+    roomId?: StringNullableWithAggregatesFilter<"Maintenance"> | string | null
+    reportedById?: StringNullableWithAggregatesFilter<"Maintenance"> | string | null
+    assignedToId?: StringNullableWithAggregatesFilter<"Maintenance"> | string | null
+    title?: StringWithAggregatesFilter<"Maintenance"> | string
+    description?: StringWithAggregatesFilter<"Maintenance"> | string
+    status?: EnumMaintenanceStatusWithAggregatesFilter<"Maintenance"> | $Enums.MaintenanceStatus
+    priority?: EnumMaintenancePriorityWithAggregatesFilter<"Maintenance"> | $Enums.MaintenancePriority
+    resolvedAt?: DateTimeNullableWithAggregatesFilter<"Maintenance"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Maintenance"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Maintenance"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     email: string
@@ -35593,6 +37354,9 @@ export namespace Prisma {
     deleted?: boolean
     deletedAt?: Date | string | null
     userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    housekeepingAssignments?: HousekeepingTaskCreateNestedManyWithoutAssignedToInput
+    maintenanceReports?: MaintenanceCreateNestedManyWithoutReportedByInput
+    maintenanceAssignments?: MaintenanceCreateNestedManyWithoutAssignedToInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -35619,6 +37383,9 @@ export namespace Prisma {
     deleted?: boolean
     deletedAt?: Date | string | null
     userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    housekeepingAssignments?: HousekeepingTaskUncheckedCreateNestedManyWithoutAssignedToInput
+    maintenanceReports?: MaintenanceUncheckedCreateNestedManyWithoutReportedByInput
+    maintenanceAssignments?: MaintenanceUncheckedCreateNestedManyWithoutAssignedToInput
   }
 
   export type UserUpdateInput = {
@@ -35645,6 +37412,9 @@ export namespace Prisma {
     deleted?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    housekeepingAssignments?: HousekeepingTaskUpdateManyWithoutAssignedToNestedInput
+    maintenanceReports?: MaintenanceUpdateManyWithoutReportedByNestedInput
+    maintenanceAssignments?: MaintenanceUpdateManyWithoutAssignedToNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -35671,6 +37441,9 @@ export namespace Prisma {
     deleted?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    housekeepingAssignments?: HousekeepingTaskUncheckedUpdateManyWithoutAssignedToNestedInput
+    maintenanceReports?: MaintenanceUncheckedUpdateManyWithoutReportedByNestedInput
+    maintenanceAssignments?: MaintenanceUncheckedUpdateManyWithoutAssignedToNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -36452,6 +38225,7 @@ export namespace Prisma {
     roomType: RoomTypeCreateNestedOneWithoutRoomsInput
     reservations?: ReservationCreateNestedManyWithoutRoomInput
     maintenance?: MaintenanceCreateNestedManyWithoutRoomInput
+    housekeepingTasks?: HousekeepingTaskCreateNestedManyWithoutRoomInput
   }
 
   export type RoomUncheckedCreateInput = {
@@ -36462,6 +38236,7 @@ export namespace Prisma {
     roomTypeId: string
     reservations?: ReservationUncheckedCreateNestedManyWithoutRoomInput
     maintenance?: MaintenanceUncheckedCreateNestedManyWithoutRoomInput
+    housekeepingTasks?: HousekeepingTaskUncheckedCreateNestedManyWithoutRoomInput
   }
 
   export type RoomUpdateInput = {
@@ -36472,6 +38247,7 @@ export namespace Prisma {
     roomType?: RoomTypeUpdateOneRequiredWithoutRoomsNestedInput
     reservations?: ReservationUpdateManyWithoutRoomNestedInput
     maintenance?: MaintenanceUpdateManyWithoutRoomNestedInput
+    housekeepingTasks?: HousekeepingTaskUpdateManyWithoutRoomNestedInput
   }
 
   export type RoomUncheckedUpdateInput = {
@@ -36482,6 +38258,7 @@ export namespace Prisma {
     roomTypeId?: StringFieldUpdateOperationsInput | string
     reservations?: ReservationUncheckedUpdateManyWithoutRoomNestedInput
     maintenance?: MaintenanceUncheckedUpdateManyWithoutRoomNestedInput
+    housekeepingTasks?: HousekeepingTaskUncheckedUpdateManyWithoutRoomNestedInput
   }
 
   export type RoomCreateManyInput = {
@@ -37365,61 +39142,6 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type MaintenanceCreateInput = {
-    id?: string
-    startDate: Date | string
-    endDate: Date | string
-    reason: string
-    room: RoomCreateNestedOneWithoutMaintenanceInput
-  }
-
-  export type MaintenanceUncheckedCreateInput = {
-    id?: string
-    roomId: string
-    startDate: Date | string
-    endDate: Date | string
-    reason: string
-  }
-
-  export type MaintenanceUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    reason?: StringFieldUpdateOperationsInput | string
-    room?: RoomUpdateOneRequiredWithoutMaintenanceNestedInput
-  }
-
-  export type MaintenanceUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    roomId?: StringFieldUpdateOperationsInput | string
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    reason?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type MaintenanceCreateManyInput = {
-    id?: string
-    roomId: string
-    startDate: Date | string
-    endDate: Date | string
-    reason: string
-  }
-
-  export type MaintenanceUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    reason?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type MaintenanceUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    roomId?: StringFieldUpdateOperationsInput | string
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    reason?: StringFieldUpdateOperationsInput | string
-  }
-
   export type CompanyCreateInput = {
     id?: string
     name: string
@@ -37664,6 +39386,183 @@ export namespace Prisma {
     permissionId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type HousekeepingTaskCreateInput = {
+    id?: string
+    status?: $Enums.HousekeepingStatus
+    notes?: string | null
+    startedAt?: Date | string | null
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    room: RoomCreateNestedOneWithoutHousekeepingTasksInput
+    assignedTo?: UserCreateNestedOneWithoutHousekeepingAssignmentsInput
+  }
+
+  export type HousekeepingTaskUncheckedCreateInput = {
+    id?: string
+    roomId: string
+    assignedToId?: string | null
+    status?: $Enums.HousekeepingStatus
+    notes?: string | null
+    startedAt?: Date | string | null
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type HousekeepingTaskUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumHousekeepingStatusFieldUpdateOperationsInput | $Enums.HousekeepingStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    room?: RoomUpdateOneRequiredWithoutHousekeepingTasksNestedInput
+    assignedTo?: UserUpdateOneWithoutHousekeepingAssignmentsNestedInput
+  }
+
+  export type HousekeepingTaskUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roomId?: StringFieldUpdateOperationsInput | string
+    assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumHousekeepingStatusFieldUpdateOperationsInput | $Enums.HousekeepingStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HousekeepingTaskCreateManyInput = {
+    id?: string
+    roomId: string
+    assignedToId?: string | null
+    status?: $Enums.HousekeepingStatus
+    notes?: string | null
+    startedAt?: Date | string | null
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type HousekeepingTaskUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumHousekeepingStatusFieldUpdateOperationsInput | $Enums.HousekeepingStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HousekeepingTaskUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roomId?: StringFieldUpdateOperationsInput | string
+    assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumHousekeepingStatusFieldUpdateOperationsInput | $Enums.HousekeepingStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MaintenanceCreateInput = {
+    id?: string
+    title: string
+    description: string
+    status?: $Enums.MaintenanceStatus
+    priority?: $Enums.MaintenancePriority
+    resolvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    room?: RoomCreateNestedOneWithoutMaintenanceInput
+    reportedBy?: UserCreateNestedOneWithoutMaintenanceReportsInput
+    assignedTo?: UserCreateNestedOneWithoutMaintenanceAssignmentsInput
+  }
+
+  export type MaintenanceUncheckedCreateInput = {
+    id?: string
+    roomId?: string | null
+    reportedById?: string | null
+    assignedToId?: string | null
+    title: string
+    description: string
+    status?: $Enums.MaintenanceStatus
+    priority?: $Enums.MaintenancePriority
+    resolvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MaintenanceUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumMaintenanceStatusFieldUpdateOperationsInput | $Enums.MaintenanceStatus
+    priority?: EnumMaintenancePriorityFieldUpdateOperationsInput | $Enums.MaintenancePriority
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    room?: RoomUpdateOneWithoutMaintenanceNestedInput
+    reportedBy?: UserUpdateOneWithoutMaintenanceReportsNestedInput
+    assignedTo?: UserUpdateOneWithoutMaintenanceAssignmentsNestedInput
+  }
+
+  export type MaintenanceUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roomId?: NullableStringFieldUpdateOperationsInput | string | null
+    reportedById?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumMaintenanceStatusFieldUpdateOperationsInput | $Enums.MaintenanceStatus
+    priority?: EnumMaintenancePriorityFieldUpdateOperationsInput | $Enums.MaintenancePriority
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MaintenanceCreateManyInput = {
+    id?: string
+    roomId?: string | null
+    reportedById?: string | null
+    assignedToId?: string | null
+    title: string
+    description: string
+    status?: $Enums.MaintenanceStatus
+    priority?: $Enums.MaintenancePriority
+    resolvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MaintenanceUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumMaintenanceStatusFieldUpdateOperationsInput | $Enums.MaintenanceStatus
+    priority?: EnumMaintenancePriorityFieldUpdateOperationsInput | $Enums.MaintenancePriority
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MaintenanceUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roomId?: NullableStringFieldUpdateOperationsInput | string | null
+    reportedById?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumMaintenanceStatusFieldUpdateOperationsInput | $Enums.MaintenanceStatus
+    priority?: EnumMaintenancePriorityFieldUpdateOperationsInput | $Enums.MaintenancePriority
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -37734,12 +39633,32 @@ export namespace Prisma {
     none?: UserRoleWhereInput
   }
 
+  export type HousekeepingTaskListRelationFilter = {
+    every?: HousekeepingTaskWhereInput
+    some?: HousekeepingTaskWhereInput
+    none?: HousekeepingTaskWhereInput
+  }
+
+  export type MaintenanceListRelationFilter = {
+    every?: MaintenanceWhereInput
+    some?: MaintenanceWhereInput
+    none?: MaintenanceWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
   }
 
   export type UserRoleOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type HousekeepingTaskOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MaintenanceOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -38439,16 +40358,6 @@ export namespace Prisma {
   export type RoomTypeScalarRelationFilter = {
     is?: RoomTypeWhereInput
     isNot?: RoomTypeWhereInput
-  }
-
-  export type MaintenanceListRelationFilter = {
-    every?: MaintenanceWhereInput
-    some?: MaintenanceWhereInput
-    none?: MaintenanceWhereInput
-  }
-
-  export type MaintenanceOrderByRelationAggregateInput = {
-    _count?: SortOrder
   }
 
   export type RoomCountOrderByAggregateInput = {
@@ -39313,30 +41222,6 @@ export namespace Prisma {
     price?: SortOrder
   }
 
-  export type MaintenanceCountOrderByAggregateInput = {
-    id?: SortOrder
-    roomId?: SortOrder
-    startDate?: SortOrder
-    endDate?: SortOrder
-    reason?: SortOrder
-  }
-
-  export type MaintenanceMaxOrderByAggregateInput = {
-    id?: SortOrder
-    roomId?: SortOrder
-    startDate?: SortOrder
-    endDate?: SortOrder
-    reason?: SortOrder
-  }
-
-  export type MaintenanceMinOrderByAggregateInput = {
-    id?: SortOrder
-    roomId?: SortOrder
-    startDate?: SortOrder
-    endDate?: SortOrder
-    reason?: SortOrder
-  }
-
   export type GuestListRelationFilter = {
     every?: GuestWhereInput
     some?: GuestWhereInput
@@ -39498,6 +41383,145 @@ export namespace Prisma {
     permissionId?: SortOrder
   }
 
+  export type EnumHousekeepingStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.HousekeepingStatus | EnumHousekeepingStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.HousekeepingStatus[] | ListEnumHousekeepingStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.HousekeepingStatus[] | ListEnumHousekeepingStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumHousekeepingStatusFilter<$PrismaModel> | $Enums.HousekeepingStatus
+  }
+
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
+  }
+
+  export type HousekeepingTaskCountOrderByAggregateInput = {
+    id?: SortOrder
+    roomId?: SortOrder
+    assignedToId?: SortOrder
+    status?: SortOrder
+    notes?: SortOrder
+    startedAt?: SortOrder
+    completedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type HousekeepingTaskMaxOrderByAggregateInput = {
+    id?: SortOrder
+    roomId?: SortOrder
+    assignedToId?: SortOrder
+    status?: SortOrder
+    notes?: SortOrder
+    startedAt?: SortOrder
+    completedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type HousekeepingTaskMinOrderByAggregateInput = {
+    id?: SortOrder
+    roomId?: SortOrder
+    assignedToId?: SortOrder
+    status?: SortOrder
+    notes?: SortOrder
+    startedAt?: SortOrder
+    completedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumHousekeepingStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.HousekeepingStatus | EnumHousekeepingStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.HousekeepingStatus[] | ListEnumHousekeepingStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.HousekeepingStatus[] | ListEnumHousekeepingStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumHousekeepingStatusWithAggregatesFilter<$PrismaModel> | $Enums.HousekeepingStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumHousekeepingStatusFilter<$PrismaModel>
+    _max?: NestedEnumHousekeepingStatusFilter<$PrismaModel>
+  }
+
+  export type EnumMaintenanceStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.MaintenanceStatus | EnumMaintenanceStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.MaintenanceStatus[] | ListEnumMaintenanceStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MaintenanceStatus[] | ListEnumMaintenanceStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumMaintenanceStatusFilter<$PrismaModel> | $Enums.MaintenanceStatus
+  }
+
+  export type EnumMaintenancePriorityFilter<$PrismaModel = never> = {
+    equals?: $Enums.MaintenancePriority | EnumMaintenancePriorityFieldRefInput<$PrismaModel>
+    in?: $Enums.MaintenancePriority[] | ListEnumMaintenancePriorityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MaintenancePriority[] | ListEnumMaintenancePriorityFieldRefInput<$PrismaModel>
+    not?: NestedEnumMaintenancePriorityFilter<$PrismaModel> | $Enums.MaintenancePriority
+  }
+
+  export type RoomNullableScalarRelationFilter = {
+    is?: RoomWhereInput | null
+    isNot?: RoomWhereInput | null
+  }
+
+  export type MaintenanceCountOrderByAggregateInput = {
+    id?: SortOrder
+    roomId?: SortOrder
+    reportedById?: SortOrder
+    assignedToId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    priority?: SortOrder
+    resolvedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MaintenanceMaxOrderByAggregateInput = {
+    id?: SortOrder
+    roomId?: SortOrder
+    reportedById?: SortOrder
+    assignedToId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    priority?: SortOrder
+    resolvedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type MaintenanceMinOrderByAggregateInput = {
+    id?: SortOrder
+    roomId?: SortOrder
+    reportedById?: SortOrder
+    assignedToId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    priority?: SortOrder
+    resolvedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumMaintenanceStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MaintenanceStatus | EnumMaintenanceStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.MaintenanceStatus[] | ListEnumMaintenanceStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MaintenanceStatus[] | ListEnumMaintenanceStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumMaintenanceStatusWithAggregatesFilter<$PrismaModel> | $Enums.MaintenanceStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMaintenanceStatusFilter<$PrismaModel>
+    _max?: NestedEnumMaintenanceStatusFilter<$PrismaModel>
+  }
+
+  export type EnumMaintenancePriorityWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MaintenancePriority | EnumMaintenancePriorityFieldRefInput<$PrismaModel>
+    in?: $Enums.MaintenancePriority[] | ListEnumMaintenancePriorityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MaintenancePriority[] | ListEnumMaintenancePriorityFieldRefInput<$PrismaModel>
+    not?: NestedEnumMaintenancePriorityWithAggregatesFilter<$PrismaModel> | $Enums.MaintenancePriority
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMaintenancePriorityFilter<$PrismaModel>
+    _max?: NestedEnumMaintenancePriorityFilter<$PrismaModel>
+  }
+
   export type UserRoleCreateNestedManyWithoutUserInput = {
     create?: XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput> | UserRoleCreateWithoutUserInput[] | UserRoleUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[]
@@ -39505,11 +41529,53 @@ export namespace Prisma {
     connect?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[]
   }
 
+  export type HousekeepingTaskCreateNestedManyWithoutAssignedToInput = {
+    create?: XOR<HousekeepingTaskCreateWithoutAssignedToInput, HousekeepingTaskUncheckedCreateWithoutAssignedToInput> | HousekeepingTaskCreateWithoutAssignedToInput[] | HousekeepingTaskUncheckedCreateWithoutAssignedToInput[]
+    connectOrCreate?: HousekeepingTaskCreateOrConnectWithoutAssignedToInput | HousekeepingTaskCreateOrConnectWithoutAssignedToInput[]
+    createMany?: HousekeepingTaskCreateManyAssignedToInputEnvelope
+    connect?: HousekeepingTaskWhereUniqueInput | HousekeepingTaskWhereUniqueInput[]
+  }
+
+  export type MaintenanceCreateNestedManyWithoutReportedByInput = {
+    create?: XOR<MaintenanceCreateWithoutReportedByInput, MaintenanceUncheckedCreateWithoutReportedByInput> | MaintenanceCreateWithoutReportedByInput[] | MaintenanceUncheckedCreateWithoutReportedByInput[]
+    connectOrCreate?: MaintenanceCreateOrConnectWithoutReportedByInput | MaintenanceCreateOrConnectWithoutReportedByInput[]
+    createMany?: MaintenanceCreateManyReportedByInputEnvelope
+    connect?: MaintenanceWhereUniqueInput | MaintenanceWhereUniqueInput[]
+  }
+
+  export type MaintenanceCreateNestedManyWithoutAssignedToInput = {
+    create?: XOR<MaintenanceCreateWithoutAssignedToInput, MaintenanceUncheckedCreateWithoutAssignedToInput> | MaintenanceCreateWithoutAssignedToInput[] | MaintenanceUncheckedCreateWithoutAssignedToInput[]
+    connectOrCreate?: MaintenanceCreateOrConnectWithoutAssignedToInput | MaintenanceCreateOrConnectWithoutAssignedToInput[]
+    createMany?: MaintenanceCreateManyAssignedToInputEnvelope
+    connect?: MaintenanceWhereUniqueInput | MaintenanceWhereUniqueInput[]
+  }
+
   export type UserRoleUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput> | UserRoleCreateWithoutUserInput[] | UserRoleUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[]
     createMany?: UserRoleCreateManyUserInputEnvelope
     connect?: UserRoleWhereUniqueInput | UserRoleWhereUniqueInput[]
+  }
+
+  export type HousekeepingTaskUncheckedCreateNestedManyWithoutAssignedToInput = {
+    create?: XOR<HousekeepingTaskCreateWithoutAssignedToInput, HousekeepingTaskUncheckedCreateWithoutAssignedToInput> | HousekeepingTaskCreateWithoutAssignedToInput[] | HousekeepingTaskUncheckedCreateWithoutAssignedToInput[]
+    connectOrCreate?: HousekeepingTaskCreateOrConnectWithoutAssignedToInput | HousekeepingTaskCreateOrConnectWithoutAssignedToInput[]
+    createMany?: HousekeepingTaskCreateManyAssignedToInputEnvelope
+    connect?: HousekeepingTaskWhereUniqueInput | HousekeepingTaskWhereUniqueInput[]
+  }
+
+  export type MaintenanceUncheckedCreateNestedManyWithoutReportedByInput = {
+    create?: XOR<MaintenanceCreateWithoutReportedByInput, MaintenanceUncheckedCreateWithoutReportedByInput> | MaintenanceCreateWithoutReportedByInput[] | MaintenanceUncheckedCreateWithoutReportedByInput[]
+    connectOrCreate?: MaintenanceCreateOrConnectWithoutReportedByInput | MaintenanceCreateOrConnectWithoutReportedByInput[]
+    createMany?: MaintenanceCreateManyReportedByInputEnvelope
+    connect?: MaintenanceWhereUniqueInput | MaintenanceWhereUniqueInput[]
+  }
+
+  export type MaintenanceUncheckedCreateNestedManyWithoutAssignedToInput = {
+    create?: XOR<MaintenanceCreateWithoutAssignedToInput, MaintenanceUncheckedCreateWithoutAssignedToInput> | MaintenanceCreateWithoutAssignedToInput[] | MaintenanceUncheckedCreateWithoutAssignedToInput[]
+    connectOrCreate?: MaintenanceCreateOrConnectWithoutAssignedToInput | MaintenanceCreateOrConnectWithoutAssignedToInput[]
+    createMany?: MaintenanceCreateManyAssignedToInputEnvelope
+    connect?: MaintenanceWhereUniqueInput | MaintenanceWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -39550,6 +41616,48 @@ export namespace Prisma {
     deleteMany?: UserRoleScalarWhereInput | UserRoleScalarWhereInput[]
   }
 
+  export type HousekeepingTaskUpdateManyWithoutAssignedToNestedInput = {
+    create?: XOR<HousekeepingTaskCreateWithoutAssignedToInput, HousekeepingTaskUncheckedCreateWithoutAssignedToInput> | HousekeepingTaskCreateWithoutAssignedToInput[] | HousekeepingTaskUncheckedCreateWithoutAssignedToInput[]
+    connectOrCreate?: HousekeepingTaskCreateOrConnectWithoutAssignedToInput | HousekeepingTaskCreateOrConnectWithoutAssignedToInput[]
+    upsert?: HousekeepingTaskUpsertWithWhereUniqueWithoutAssignedToInput | HousekeepingTaskUpsertWithWhereUniqueWithoutAssignedToInput[]
+    createMany?: HousekeepingTaskCreateManyAssignedToInputEnvelope
+    set?: HousekeepingTaskWhereUniqueInput | HousekeepingTaskWhereUniqueInput[]
+    disconnect?: HousekeepingTaskWhereUniqueInput | HousekeepingTaskWhereUniqueInput[]
+    delete?: HousekeepingTaskWhereUniqueInput | HousekeepingTaskWhereUniqueInput[]
+    connect?: HousekeepingTaskWhereUniqueInput | HousekeepingTaskWhereUniqueInput[]
+    update?: HousekeepingTaskUpdateWithWhereUniqueWithoutAssignedToInput | HousekeepingTaskUpdateWithWhereUniqueWithoutAssignedToInput[]
+    updateMany?: HousekeepingTaskUpdateManyWithWhereWithoutAssignedToInput | HousekeepingTaskUpdateManyWithWhereWithoutAssignedToInput[]
+    deleteMany?: HousekeepingTaskScalarWhereInput | HousekeepingTaskScalarWhereInput[]
+  }
+
+  export type MaintenanceUpdateManyWithoutReportedByNestedInput = {
+    create?: XOR<MaintenanceCreateWithoutReportedByInput, MaintenanceUncheckedCreateWithoutReportedByInput> | MaintenanceCreateWithoutReportedByInput[] | MaintenanceUncheckedCreateWithoutReportedByInput[]
+    connectOrCreate?: MaintenanceCreateOrConnectWithoutReportedByInput | MaintenanceCreateOrConnectWithoutReportedByInput[]
+    upsert?: MaintenanceUpsertWithWhereUniqueWithoutReportedByInput | MaintenanceUpsertWithWhereUniqueWithoutReportedByInput[]
+    createMany?: MaintenanceCreateManyReportedByInputEnvelope
+    set?: MaintenanceWhereUniqueInput | MaintenanceWhereUniqueInput[]
+    disconnect?: MaintenanceWhereUniqueInput | MaintenanceWhereUniqueInput[]
+    delete?: MaintenanceWhereUniqueInput | MaintenanceWhereUniqueInput[]
+    connect?: MaintenanceWhereUniqueInput | MaintenanceWhereUniqueInput[]
+    update?: MaintenanceUpdateWithWhereUniqueWithoutReportedByInput | MaintenanceUpdateWithWhereUniqueWithoutReportedByInput[]
+    updateMany?: MaintenanceUpdateManyWithWhereWithoutReportedByInput | MaintenanceUpdateManyWithWhereWithoutReportedByInput[]
+    deleteMany?: MaintenanceScalarWhereInput | MaintenanceScalarWhereInput[]
+  }
+
+  export type MaintenanceUpdateManyWithoutAssignedToNestedInput = {
+    create?: XOR<MaintenanceCreateWithoutAssignedToInput, MaintenanceUncheckedCreateWithoutAssignedToInput> | MaintenanceCreateWithoutAssignedToInput[] | MaintenanceUncheckedCreateWithoutAssignedToInput[]
+    connectOrCreate?: MaintenanceCreateOrConnectWithoutAssignedToInput | MaintenanceCreateOrConnectWithoutAssignedToInput[]
+    upsert?: MaintenanceUpsertWithWhereUniqueWithoutAssignedToInput | MaintenanceUpsertWithWhereUniqueWithoutAssignedToInput[]
+    createMany?: MaintenanceCreateManyAssignedToInputEnvelope
+    set?: MaintenanceWhereUniqueInput | MaintenanceWhereUniqueInput[]
+    disconnect?: MaintenanceWhereUniqueInput | MaintenanceWhereUniqueInput[]
+    delete?: MaintenanceWhereUniqueInput | MaintenanceWhereUniqueInput[]
+    connect?: MaintenanceWhereUniqueInput | MaintenanceWhereUniqueInput[]
+    update?: MaintenanceUpdateWithWhereUniqueWithoutAssignedToInput | MaintenanceUpdateWithWhereUniqueWithoutAssignedToInput[]
+    updateMany?: MaintenanceUpdateManyWithWhereWithoutAssignedToInput | MaintenanceUpdateManyWithWhereWithoutAssignedToInput[]
+    deleteMany?: MaintenanceScalarWhereInput | MaintenanceScalarWhereInput[]
+  }
+
   export type UserRoleUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput> | UserRoleCreateWithoutUserInput[] | UserRoleUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[]
@@ -39562,6 +41670,48 @@ export namespace Prisma {
     update?: UserRoleUpdateWithWhereUniqueWithoutUserInput | UserRoleUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: UserRoleUpdateManyWithWhereWithoutUserInput | UserRoleUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: UserRoleScalarWhereInput | UserRoleScalarWhereInput[]
+  }
+
+  export type HousekeepingTaskUncheckedUpdateManyWithoutAssignedToNestedInput = {
+    create?: XOR<HousekeepingTaskCreateWithoutAssignedToInput, HousekeepingTaskUncheckedCreateWithoutAssignedToInput> | HousekeepingTaskCreateWithoutAssignedToInput[] | HousekeepingTaskUncheckedCreateWithoutAssignedToInput[]
+    connectOrCreate?: HousekeepingTaskCreateOrConnectWithoutAssignedToInput | HousekeepingTaskCreateOrConnectWithoutAssignedToInput[]
+    upsert?: HousekeepingTaskUpsertWithWhereUniqueWithoutAssignedToInput | HousekeepingTaskUpsertWithWhereUniqueWithoutAssignedToInput[]
+    createMany?: HousekeepingTaskCreateManyAssignedToInputEnvelope
+    set?: HousekeepingTaskWhereUniqueInput | HousekeepingTaskWhereUniqueInput[]
+    disconnect?: HousekeepingTaskWhereUniqueInput | HousekeepingTaskWhereUniqueInput[]
+    delete?: HousekeepingTaskWhereUniqueInput | HousekeepingTaskWhereUniqueInput[]
+    connect?: HousekeepingTaskWhereUniqueInput | HousekeepingTaskWhereUniqueInput[]
+    update?: HousekeepingTaskUpdateWithWhereUniqueWithoutAssignedToInput | HousekeepingTaskUpdateWithWhereUniqueWithoutAssignedToInput[]
+    updateMany?: HousekeepingTaskUpdateManyWithWhereWithoutAssignedToInput | HousekeepingTaskUpdateManyWithWhereWithoutAssignedToInput[]
+    deleteMany?: HousekeepingTaskScalarWhereInput | HousekeepingTaskScalarWhereInput[]
+  }
+
+  export type MaintenanceUncheckedUpdateManyWithoutReportedByNestedInput = {
+    create?: XOR<MaintenanceCreateWithoutReportedByInput, MaintenanceUncheckedCreateWithoutReportedByInput> | MaintenanceCreateWithoutReportedByInput[] | MaintenanceUncheckedCreateWithoutReportedByInput[]
+    connectOrCreate?: MaintenanceCreateOrConnectWithoutReportedByInput | MaintenanceCreateOrConnectWithoutReportedByInput[]
+    upsert?: MaintenanceUpsertWithWhereUniqueWithoutReportedByInput | MaintenanceUpsertWithWhereUniqueWithoutReportedByInput[]
+    createMany?: MaintenanceCreateManyReportedByInputEnvelope
+    set?: MaintenanceWhereUniqueInput | MaintenanceWhereUniqueInput[]
+    disconnect?: MaintenanceWhereUniqueInput | MaintenanceWhereUniqueInput[]
+    delete?: MaintenanceWhereUniqueInput | MaintenanceWhereUniqueInput[]
+    connect?: MaintenanceWhereUniqueInput | MaintenanceWhereUniqueInput[]
+    update?: MaintenanceUpdateWithWhereUniqueWithoutReportedByInput | MaintenanceUpdateWithWhereUniqueWithoutReportedByInput[]
+    updateMany?: MaintenanceUpdateManyWithWhereWithoutReportedByInput | MaintenanceUpdateManyWithWhereWithoutReportedByInput[]
+    deleteMany?: MaintenanceScalarWhereInput | MaintenanceScalarWhereInput[]
+  }
+
+  export type MaintenanceUncheckedUpdateManyWithoutAssignedToNestedInput = {
+    create?: XOR<MaintenanceCreateWithoutAssignedToInput, MaintenanceUncheckedCreateWithoutAssignedToInput> | MaintenanceCreateWithoutAssignedToInput[] | MaintenanceUncheckedCreateWithoutAssignedToInput[]
+    connectOrCreate?: MaintenanceCreateOrConnectWithoutAssignedToInput | MaintenanceCreateOrConnectWithoutAssignedToInput[]
+    upsert?: MaintenanceUpsertWithWhereUniqueWithoutAssignedToInput | MaintenanceUpsertWithWhereUniqueWithoutAssignedToInput[]
+    createMany?: MaintenanceCreateManyAssignedToInputEnvelope
+    set?: MaintenanceWhereUniqueInput | MaintenanceWhereUniqueInput[]
+    disconnect?: MaintenanceWhereUniqueInput | MaintenanceWhereUniqueInput[]
+    delete?: MaintenanceWhereUniqueInput | MaintenanceWhereUniqueInput[]
+    connect?: MaintenanceWhereUniqueInput | MaintenanceWhereUniqueInput[]
+    update?: MaintenanceUpdateWithWhereUniqueWithoutAssignedToInput | MaintenanceUpdateWithWhereUniqueWithoutAssignedToInput[]
+    updateMany?: MaintenanceUpdateManyWithWhereWithoutAssignedToInput | MaintenanceUpdateManyWithWhereWithoutAssignedToInput[]
+    deleteMany?: MaintenanceScalarWhereInput | MaintenanceScalarWhereInput[]
   }
 
   export type ReservationCreateNestedManyWithoutGuestInput = {
@@ -40066,6 +42216,13 @@ export namespace Prisma {
     connect?: MaintenanceWhereUniqueInput | MaintenanceWhereUniqueInput[]
   }
 
+  export type HousekeepingTaskCreateNestedManyWithoutRoomInput = {
+    create?: XOR<HousekeepingTaskCreateWithoutRoomInput, HousekeepingTaskUncheckedCreateWithoutRoomInput> | HousekeepingTaskCreateWithoutRoomInput[] | HousekeepingTaskUncheckedCreateWithoutRoomInput[]
+    connectOrCreate?: HousekeepingTaskCreateOrConnectWithoutRoomInput | HousekeepingTaskCreateOrConnectWithoutRoomInput[]
+    createMany?: HousekeepingTaskCreateManyRoomInputEnvelope
+    connect?: HousekeepingTaskWhereUniqueInput | HousekeepingTaskWhereUniqueInput[]
+  }
+
   export type ReservationUncheckedCreateNestedManyWithoutRoomInput = {
     create?: XOR<ReservationCreateWithoutRoomInput, ReservationUncheckedCreateWithoutRoomInput> | ReservationCreateWithoutRoomInput[] | ReservationUncheckedCreateWithoutRoomInput[]
     connectOrCreate?: ReservationCreateOrConnectWithoutRoomInput | ReservationCreateOrConnectWithoutRoomInput[]
@@ -40078,6 +42235,13 @@ export namespace Prisma {
     connectOrCreate?: MaintenanceCreateOrConnectWithoutRoomInput | MaintenanceCreateOrConnectWithoutRoomInput[]
     createMany?: MaintenanceCreateManyRoomInputEnvelope
     connect?: MaintenanceWhereUniqueInput | MaintenanceWhereUniqueInput[]
+  }
+
+  export type HousekeepingTaskUncheckedCreateNestedManyWithoutRoomInput = {
+    create?: XOR<HousekeepingTaskCreateWithoutRoomInput, HousekeepingTaskUncheckedCreateWithoutRoomInput> | HousekeepingTaskCreateWithoutRoomInput[] | HousekeepingTaskUncheckedCreateWithoutRoomInput[]
+    connectOrCreate?: HousekeepingTaskCreateOrConnectWithoutRoomInput | HousekeepingTaskCreateOrConnectWithoutRoomInput[]
+    createMany?: HousekeepingTaskCreateManyRoomInputEnvelope
+    connect?: HousekeepingTaskWhereUniqueInput | HousekeepingTaskWhereUniqueInput[]
   }
 
   export type EnumRoomStatusFieldUpdateOperationsInput = {
@@ -40120,6 +42284,20 @@ export namespace Prisma {
     deleteMany?: MaintenanceScalarWhereInput | MaintenanceScalarWhereInput[]
   }
 
+  export type HousekeepingTaskUpdateManyWithoutRoomNestedInput = {
+    create?: XOR<HousekeepingTaskCreateWithoutRoomInput, HousekeepingTaskUncheckedCreateWithoutRoomInput> | HousekeepingTaskCreateWithoutRoomInput[] | HousekeepingTaskUncheckedCreateWithoutRoomInput[]
+    connectOrCreate?: HousekeepingTaskCreateOrConnectWithoutRoomInput | HousekeepingTaskCreateOrConnectWithoutRoomInput[]
+    upsert?: HousekeepingTaskUpsertWithWhereUniqueWithoutRoomInput | HousekeepingTaskUpsertWithWhereUniqueWithoutRoomInput[]
+    createMany?: HousekeepingTaskCreateManyRoomInputEnvelope
+    set?: HousekeepingTaskWhereUniqueInput | HousekeepingTaskWhereUniqueInput[]
+    disconnect?: HousekeepingTaskWhereUniqueInput | HousekeepingTaskWhereUniqueInput[]
+    delete?: HousekeepingTaskWhereUniqueInput | HousekeepingTaskWhereUniqueInput[]
+    connect?: HousekeepingTaskWhereUniqueInput | HousekeepingTaskWhereUniqueInput[]
+    update?: HousekeepingTaskUpdateWithWhereUniqueWithoutRoomInput | HousekeepingTaskUpdateWithWhereUniqueWithoutRoomInput[]
+    updateMany?: HousekeepingTaskUpdateManyWithWhereWithoutRoomInput | HousekeepingTaskUpdateManyWithWhereWithoutRoomInput[]
+    deleteMany?: HousekeepingTaskScalarWhereInput | HousekeepingTaskScalarWhereInput[]
+  }
+
   export type ReservationUncheckedUpdateManyWithoutRoomNestedInput = {
     create?: XOR<ReservationCreateWithoutRoomInput, ReservationUncheckedCreateWithoutRoomInput> | ReservationCreateWithoutRoomInput[] | ReservationUncheckedCreateWithoutRoomInput[]
     connectOrCreate?: ReservationCreateOrConnectWithoutRoomInput | ReservationCreateOrConnectWithoutRoomInput[]
@@ -40146,6 +42324,20 @@ export namespace Prisma {
     update?: MaintenanceUpdateWithWhereUniqueWithoutRoomInput | MaintenanceUpdateWithWhereUniqueWithoutRoomInput[]
     updateMany?: MaintenanceUpdateManyWithWhereWithoutRoomInput | MaintenanceUpdateManyWithWhereWithoutRoomInput[]
     deleteMany?: MaintenanceScalarWhereInput | MaintenanceScalarWhereInput[]
+  }
+
+  export type HousekeepingTaskUncheckedUpdateManyWithoutRoomNestedInput = {
+    create?: XOR<HousekeepingTaskCreateWithoutRoomInput, HousekeepingTaskUncheckedCreateWithoutRoomInput> | HousekeepingTaskCreateWithoutRoomInput[] | HousekeepingTaskUncheckedCreateWithoutRoomInput[]
+    connectOrCreate?: HousekeepingTaskCreateOrConnectWithoutRoomInput | HousekeepingTaskCreateOrConnectWithoutRoomInput[]
+    upsert?: HousekeepingTaskUpsertWithWhereUniqueWithoutRoomInput | HousekeepingTaskUpsertWithWhereUniqueWithoutRoomInput[]
+    createMany?: HousekeepingTaskCreateManyRoomInputEnvelope
+    set?: HousekeepingTaskWhereUniqueInput | HousekeepingTaskWhereUniqueInput[]
+    disconnect?: HousekeepingTaskWhereUniqueInput | HousekeepingTaskWhereUniqueInput[]
+    delete?: HousekeepingTaskWhereUniqueInput | HousekeepingTaskWhereUniqueInput[]
+    connect?: HousekeepingTaskWhereUniqueInput | HousekeepingTaskWhereUniqueInput[]
+    update?: HousekeepingTaskUpdateWithWhereUniqueWithoutRoomInput | HousekeepingTaskUpdateWithWhereUniqueWithoutRoomInput[]
+    updateMany?: HousekeepingTaskUpdateManyWithWhereWithoutRoomInput | HousekeepingTaskUpdateManyWithWhereWithoutRoomInput[]
+    deleteMany?: HousekeepingTaskScalarWhereInput | HousekeepingTaskScalarWhereInput[]
   }
 
   export type RoomTypeCreateNestedOneWithoutRatesInput = {
@@ -40832,20 +43024,6 @@ export namespace Prisma {
     deleteMany?: RestaurantOrderItemScalarWhereInput | RestaurantOrderItemScalarWhereInput[]
   }
 
-  export type RoomCreateNestedOneWithoutMaintenanceInput = {
-    create?: XOR<RoomCreateWithoutMaintenanceInput, RoomUncheckedCreateWithoutMaintenanceInput>
-    connectOrCreate?: RoomCreateOrConnectWithoutMaintenanceInput
-    connect?: RoomWhereUniqueInput
-  }
-
-  export type RoomUpdateOneRequiredWithoutMaintenanceNestedInput = {
-    create?: XOR<RoomCreateWithoutMaintenanceInput, RoomUncheckedCreateWithoutMaintenanceInput>
-    connectOrCreate?: RoomCreateOrConnectWithoutMaintenanceInput
-    upsert?: RoomUpsertWithoutMaintenanceInput
-    connect?: RoomWhereUniqueInput
-    update?: XOR<XOR<RoomUpdateToOneWithWhereWithoutMaintenanceInput, RoomUpdateWithoutMaintenanceInput>, RoomUncheckedUpdateWithoutMaintenanceInput>
-  }
-
   export type GuestCreateNestedManyWithoutCompanyInput = {
     create?: XOR<GuestCreateWithoutCompanyInput, GuestUncheckedCreateWithoutCompanyInput> | GuestCreateWithoutCompanyInput[] | GuestUncheckedCreateWithoutCompanyInput[]
     connectOrCreate?: GuestCreateOrConnectWithoutCompanyInput | GuestCreateOrConnectWithoutCompanyInput[]
@@ -41072,6 +43250,96 @@ export namespace Prisma {
     upsert?: RoleUpsertWithoutRolePermissionsInput
     connect?: RoleWhereUniqueInput
     update?: XOR<XOR<RoleUpdateToOneWithWhereWithoutRolePermissionsInput, RoleUpdateWithoutRolePermissionsInput>, RoleUncheckedUpdateWithoutRolePermissionsInput>
+  }
+
+  export type RoomCreateNestedOneWithoutHousekeepingTasksInput = {
+    create?: XOR<RoomCreateWithoutHousekeepingTasksInput, RoomUncheckedCreateWithoutHousekeepingTasksInput>
+    connectOrCreate?: RoomCreateOrConnectWithoutHousekeepingTasksInput
+    connect?: RoomWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutHousekeepingAssignmentsInput = {
+    create?: XOR<UserCreateWithoutHousekeepingAssignmentsInput, UserUncheckedCreateWithoutHousekeepingAssignmentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutHousekeepingAssignmentsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumHousekeepingStatusFieldUpdateOperationsInput = {
+    set?: $Enums.HousekeepingStatus
+  }
+
+  export type RoomUpdateOneRequiredWithoutHousekeepingTasksNestedInput = {
+    create?: XOR<RoomCreateWithoutHousekeepingTasksInput, RoomUncheckedCreateWithoutHousekeepingTasksInput>
+    connectOrCreate?: RoomCreateOrConnectWithoutHousekeepingTasksInput
+    upsert?: RoomUpsertWithoutHousekeepingTasksInput
+    connect?: RoomWhereUniqueInput
+    update?: XOR<XOR<RoomUpdateToOneWithWhereWithoutHousekeepingTasksInput, RoomUpdateWithoutHousekeepingTasksInput>, RoomUncheckedUpdateWithoutHousekeepingTasksInput>
+  }
+
+  export type UserUpdateOneWithoutHousekeepingAssignmentsNestedInput = {
+    create?: XOR<UserCreateWithoutHousekeepingAssignmentsInput, UserUncheckedCreateWithoutHousekeepingAssignmentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutHousekeepingAssignmentsInput
+    upsert?: UserUpsertWithoutHousekeepingAssignmentsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutHousekeepingAssignmentsInput, UserUpdateWithoutHousekeepingAssignmentsInput>, UserUncheckedUpdateWithoutHousekeepingAssignmentsInput>
+  }
+
+  export type RoomCreateNestedOneWithoutMaintenanceInput = {
+    create?: XOR<RoomCreateWithoutMaintenanceInput, RoomUncheckedCreateWithoutMaintenanceInput>
+    connectOrCreate?: RoomCreateOrConnectWithoutMaintenanceInput
+    connect?: RoomWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutMaintenanceReportsInput = {
+    create?: XOR<UserCreateWithoutMaintenanceReportsInput, UserUncheckedCreateWithoutMaintenanceReportsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMaintenanceReportsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutMaintenanceAssignmentsInput = {
+    create?: XOR<UserCreateWithoutMaintenanceAssignmentsInput, UserUncheckedCreateWithoutMaintenanceAssignmentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMaintenanceAssignmentsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumMaintenanceStatusFieldUpdateOperationsInput = {
+    set?: $Enums.MaintenanceStatus
+  }
+
+  export type EnumMaintenancePriorityFieldUpdateOperationsInput = {
+    set?: $Enums.MaintenancePriority
+  }
+
+  export type RoomUpdateOneWithoutMaintenanceNestedInput = {
+    create?: XOR<RoomCreateWithoutMaintenanceInput, RoomUncheckedCreateWithoutMaintenanceInput>
+    connectOrCreate?: RoomCreateOrConnectWithoutMaintenanceInput
+    upsert?: RoomUpsertWithoutMaintenanceInput
+    disconnect?: RoomWhereInput | boolean
+    delete?: RoomWhereInput | boolean
+    connect?: RoomWhereUniqueInput
+    update?: XOR<XOR<RoomUpdateToOneWithWhereWithoutMaintenanceInput, RoomUpdateWithoutMaintenanceInput>, RoomUncheckedUpdateWithoutMaintenanceInput>
+  }
+
+  export type UserUpdateOneWithoutMaintenanceReportsNestedInput = {
+    create?: XOR<UserCreateWithoutMaintenanceReportsInput, UserUncheckedCreateWithoutMaintenanceReportsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMaintenanceReportsInput
+    upsert?: UserUpsertWithoutMaintenanceReportsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMaintenanceReportsInput, UserUpdateWithoutMaintenanceReportsInput>, UserUncheckedUpdateWithoutMaintenanceReportsInput>
+  }
+
+  export type UserUpdateOneWithoutMaintenanceAssignmentsNestedInput = {
+    create?: XOR<UserCreateWithoutMaintenanceAssignmentsInput, UserUncheckedCreateWithoutMaintenanceAssignmentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMaintenanceAssignmentsInput
+    upsert?: UserUpsertWithoutMaintenanceAssignmentsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMaintenanceAssignmentsInput, UserUpdateWithoutMaintenanceAssignmentsInput>, UserUncheckedUpdateWithoutMaintenanceAssignmentsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -41641,6 +43909,57 @@ export namespace Prisma {
     _max?: NestedEnumRoleNameFilter<$PrismaModel>
   }
 
+  export type NestedEnumHousekeepingStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.HousekeepingStatus | EnumHousekeepingStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.HousekeepingStatus[] | ListEnumHousekeepingStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.HousekeepingStatus[] | ListEnumHousekeepingStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumHousekeepingStatusFilter<$PrismaModel> | $Enums.HousekeepingStatus
+  }
+
+  export type NestedEnumHousekeepingStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.HousekeepingStatus | EnumHousekeepingStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.HousekeepingStatus[] | ListEnumHousekeepingStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.HousekeepingStatus[] | ListEnumHousekeepingStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumHousekeepingStatusWithAggregatesFilter<$PrismaModel> | $Enums.HousekeepingStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumHousekeepingStatusFilter<$PrismaModel>
+    _max?: NestedEnumHousekeepingStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumMaintenanceStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.MaintenanceStatus | EnumMaintenanceStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.MaintenanceStatus[] | ListEnumMaintenanceStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MaintenanceStatus[] | ListEnumMaintenanceStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumMaintenanceStatusFilter<$PrismaModel> | $Enums.MaintenanceStatus
+  }
+
+  export type NestedEnumMaintenancePriorityFilter<$PrismaModel = never> = {
+    equals?: $Enums.MaintenancePriority | EnumMaintenancePriorityFieldRefInput<$PrismaModel>
+    in?: $Enums.MaintenancePriority[] | ListEnumMaintenancePriorityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MaintenancePriority[] | ListEnumMaintenancePriorityFieldRefInput<$PrismaModel>
+    not?: NestedEnumMaintenancePriorityFilter<$PrismaModel> | $Enums.MaintenancePriority
+  }
+
+  export type NestedEnumMaintenanceStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MaintenanceStatus | EnumMaintenanceStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.MaintenanceStatus[] | ListEnumMaintenanceStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MaintenanceStatus[] | ListEnumMaintenanceStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumMaintenanceStatusWithAggregatesFilter<$PrismaModel> | $Enums.MaintenanceStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMaintenanceStatusFilter<$PrismaModel>
+    _max?: NestedEnumMaintenanceStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumMaintenancePriorityWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MaintenancePriority | EnumMaintenancePriorityFieldRefInput<$PrismaModel>
+    in?: $Enums.MaintenancePriority[] | ListEnumMaintenancePriorityFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MaintenancePriority[] | ListEnumMaintenancePriorityFieldRefInput<$PrismaModel>
+    not?: NestedEnumMaintenancePriorityWithAggregatesFilter<$PrismaModel> | $Enums.MaintenancePriority
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMaintenancePriorityFilter<$PrismaModel>
+    _max?: NestedEnumMaintenancePriorityFilter<$PrismaModel>
+  }
+
   export type UserRoleCreateWithoutUserInput = {
     id?: string
     createdAt?: Date | string
@@ -41662,6 +43981,110 @@ export namespace Prisma {
 
   export type UserRoleCreateManyUserInputEnvelope = {
     data: UserRoleCreateManyUserInput | UserRoleCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type HousekeepingTaskCreateWithoutAssignedToInput = {
+    id?: string
+    status?: $Enums.HousekeepingStatus
+    notes?: string | null
+    startedAt?: Date | string | null
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    room: RoomCreateNestedOneWithoutHousekeepingTasksInput
+  }
+
+  export type HousekeepingTaskUncheckedCreateWithoutAssignedToInput = {
+    id?: string
+    roomId: string
+    status?: $Enums.HousekeepingStatus
+    notes?: string | null
+    startedAt?: Date | string | null
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type HousekeepingTaskCreateOrConnectWithoutAssignedToInput = {
+    where: HousekeepingTaskWhereUniqueInput
+    create: XOR<HousekeepingTaskCreateWithoutAssignedToInput, HousekeepingTaskUncheckedCreateWithoutAssignedToInput>
+  }
+
+  export type HousekeepingTaskCreateManyAssignedToInputEnvelope = {
+    data: HousekeepingTaskCreateManyAssignedToInput | HousekeepingTaskCreateManyAssignedToInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MaintenanceCreateWithoutReportedByInput = {
+    id?: string
+    title: string
+    description: string
+    status?: $Enums.MaintenanceStatus
+    priority?: $Enums.MaintenancePriority
+    resolvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    room?: RoomCreateNestedOneWithoutMaintenanceInput
+    assignedTo?: UserCreateNestedOneWithoutMaintenanceAssignmentsInput
+  }
+
+  export type MaintenanceUncheckedCreateWithoutReportedByInput = {
+    id?: string
+    roomId?: string | null
+    assignedToId?: string | null
+    title: string
+    description: string
+    status?: $Enums.MaintenanceStatus
+    priority?: $Enums.MaintenancePriority
+    resolvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MaintenanceCreateOrConnectWithoutReportedByInput = {
+    where: MaintenanceWhereUniqueInput
+    create: XOR<MaintenanceCreateWithoutReportedByInput, MaintenanceUncheckedCreateWithoutReportedByInput>
+  }
+
+  export type MaintenanceCreateManyReportedByInputEnvelope = {
+    data: MaintenanceCreateManyReportedByInput | MaintenanceCreateManyReportedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MaintenanceCreateWithoutAssignedToInput = {
+    id?: string
+    title: string
+    description: string
+    status?: $Enums.MaintenanceStatus
+    priority?: $Enums.MaintenancePriority
+    resolvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    room?: RoomCreateNestedOneWithoutMaintenanceInput
+    reportedBy?: UserCreateNestedOneWithoutMaintenanceReportsInput
+  }
+
+  export type MaintenanceUncheckedCreateWithoutAssignedToInput = {
+    id?: string
+    roomId?: string | null
+    reportedById?: string | null
+    title: string
+    description: string
+    status?: $Enums.MaintenanceStatus
+    priority?: $Enums.MaintenancePriority
+    resolvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MaintenanceCreateOrConnectWithoutAssignedToInput = {
+    where: MaintenanceWhereUniqueInput
+    create: XOR<MaintenanceCreateWithoutAssignedToInput, MaintenanceUncheckedCreateWithoutAssignedToInput>
+  }
+
+  export type MaintenanceCreateManyAssignedToInputEnvelope = {
+    data: MaintenanceCreateManyAssignedToInput | MaintenanceCreateManyAssignedToInput[]
     skipDuplicates?: boolean
   }
 
@@ -41690,6 +44113,86 @@ export namespace Prisma {
     roleId?: StringFilter<"UserRole"> | string
     createdAt?: DateTimeFilter<"UserRole"> | Date | string
     updatedAt?: DateTimeFilter<"UserRole"> | Date | string
+  }
+
+  export type HousekeepingTaskUpsertWithWhereUniqueWithoutAssignedToInput = {
+    where: HousekeepingTaskWhereUniqueInput
+    update: XOR<HousekeepingTaskUpdateWithoutAssignedToInput, HousekeepingTaskUncheckedUpdateWithoutAssignedToInput>
+    create: XOR<HousekeepingTaskCreateWithoutAssignedToInput, HousekeepingTaskUncheckedCreateWithoutAssignedToInput>
+  }
+
+  export type HousekeepingTaskUpdateWithWhereUniqueWithoutAssignedToInput = {
+    where: HousekeepingTaskWhereUniqueInput
+    data: XOR<HousekeepingTaskUpdateWithoutAssignedToInput, HousekeepingTaskUncheckedUpdateWithoutAssignedToInput>
+  }
+
+  export type HousekeepingTaskUpdateManyWithWhereWithoutAssignedToInput = {
+    where: HousekeepingTaskScalarWhereInput
+    data: XOR<HousekeepingTaskUpdateManyMutationInput, HousekeepingTaskUncheckedUpdateManyWithoutAssignedToInput>
+  }
+
+  export type HousekeepingTaskScalarWhereInput = {
+    AND?: HousekeepingTaskScalarWhereInput | HousekeepingTaskScalarWhereInput[]
+    OR?: HousekeepingTaskScalarWhereInput[]
+    NOT?: HousekeepingTaskScalarWhereInput | HousekeepingTaskScalarWhereInput[]
+    id?: StringFilter<"HousekeepingTask"> | string
+    roomId?: StringFilter<"HousekeepingTask"> | string
+    assignedToId?: StringNullableFilter<"HousekeepingTask"> | string | null
+    status?: EnumHousekeepingStatusFilter<"HousekeepingTask"> | $Enums.HousekeepingStatus
+    notes?: StringNullableFilter<"HousekeepingTask"> | string | null
+    startedAt?: DateTimeNullableFilter<"HousekeepingTask"> | Date | string | null
+    completedAt?: DateTimeNullableFilter<"HousekeepingTask"> | Date | string | null
+    createdAt?: DateTimeFilter<"HousekeepingTask"> | Date | string
+    updatedAt?: DateTimeFilter<"HousekeepingTask"> | Date | string
+  }
+
+  export type MaintenanceUpsertWithWhereUniqueWithoutReportedByInput = {
+    where: MaintenanceWhereUniqueInput
+    update: XOR<MaintenanceUpdateWithoutReportedByInput, MaintenanceUncheckedUpdateWithoutReportedByInput>
+    create: XOR<MaintenanceCreateWithoutReportedByInput, MaintenanceUncheckedCreateWithoutReportedByInput>
+  }
+
+  export type MaintenanceUpdateWithWhereUniqueWithoutReportedByInput = {
+    where: MaintenanceWhereUniqueInput
+    data: XOR<MaintenanceUpdateWithoutReportedByInput, MaintenanceUncheckedUpdateWithoutReportedByInput>
+  }
+
+  export type MaintenanceUpdateManyWithWhereWithoutReportedByInput = {
+    where: MaintenanceScalarWhereInput
+    data: XOR<MaintenanceUpdateManyMutationInput, MaintenanceUncheckedUpdateManyWithoutReportedByInput>
+  }
+
+  export type MaintenanceScalarWhereInput = {
+    AND?: MaintenanceScalarWhereInput | MaintenanceScalarWhereInput[]
+    OR?: MaintenanceScalarWhereInput[]
+    NOT?: MaintenanceScalarWhereInput | MaintenanceScalarWhereInput[]
+    id?: StringFilter<"Maintenance"> | string
+    roomId?: StringNullableFilter<"Maintenance"> | string | null
+    reportedById?: StringNullableFilter<"Maintenance"> | string | null
+    assignedToId?: StringNullableFilter<"Maintenance"> | string | null
+    title?: StringFilter<"Maintenance"> | string
+    description?: StringFilter<"Maintenance"> | string
+    status?: EnumMaintenanceStatusFilter<"Maintenance"> | $Enums.MaintenanceStatus
+    priority?: EnumMaintenancePriorityFilter<"Maintenance"> | $Enums.MaintenancePriority
+    resolvedAt?: DateTimeNullableFilter<"Maintenance"> | Date | string | null
+    createdAt?: DateTimeFilter<"Maintenance"> | Date | string
+    updatedAt?: DateTimeFilter<"Maintenance"> | Date | string
+  }
+
+  export type MaintenanceUpsertWithWhereUniqueWithoutAssignedToInput = {
+    where: MaintenanceWhereUniqueInput
+    update: XOR<MaintenanceUpdateWithoutAssignedToInput, MaintenanceUncheckedUpdateWithoutAssignedToInput>
+    create: XOR<MaintenanceCreateWithoutAssignedToInput, MaintenanceUncheckedCreateWithoutAssignedToInput>
+  }
+
+  export type MaintenanceUpdateWithWhereUniqueWithoutAssignedToInput = {
+    where: MaintenanceWhereUniqueInput
+    data: XOR<MaintenanceUpdateWithoutAssignedToInput, MaintenanceUncheckedUpdateWithoutAssignedToInput>
+  }
+
+  export type MaintenanceUpdateManyWithWhereWithoutAssignedToInput = {
+    where: MaintenanceScalarWhereInput
+    data: XOR<MaintenanceUpdateManyMutationInput, MaintenanceUncheckedUpdateManyWithoutAssignedToInput>
   }
 
   export type ReservationCreateWithoutGuestInput = {
@@ -42725,6 +45228,7 @@ export namespace Prisma {
     floor?: number | null
     reservations?: ReservationCreateNestedManyWithoutRoomInput
     maintenance?: MaintenanceCreateNestedManyWithoutRoomInput
+    housekeepingTasks?: HousekeepingTaskCreateNestedManyWithoutRoomInput
   }
 
   export type RoomUncheckedCreateWithoutRoomTypeInput = {
@@ -42734,6 +45238,7 @@ export namespace Prisma {
     floor?: number | null
     reservations?: ReservationUncheckedCreateNestedManyWithoutRoomInput
     maintenance?: MaintenanceUncheckedCreateNestedManyWithoutRoomInput
+    housekeepingTasks?: HousekeepingTaskUncheckedCreateNestedManyWithoutRoomInput
   }
 
   export type RoomCreateOrConnectWithoutRoomTypeInput = {
@@ -42980,16 +45485,28 @@ export namespace Prisma {
 
   export type MaintenanceCreateWithoutRoomInput = {
     id?: string
-    startDate: Date | string
-    endDate: Date | string
-    reason: string
+    title: string
+    description: string
+    status?: $Enums.MaintenanceStatus
+    priority?: $Enums.MaintenancePriority
+    resolvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    reportedBy?: UserCreateNestedOneWithoutMaintenanceReportsInput
+    assignedTo?: UserCreateNestedOneWithoutMaintenanceAssignmentsInput
   }
 
   export type MaintenanceUncheckedCreateWithoutRoomInput = {
     id?: string
-    startDate: Date | string
-    endDate: Date | string
-    reason: string
+    reportedById?: string | null
+    assignedToId?: string | null
+    title: string
+    description: string
+    status?: $Enums.MaintenanceStatus
+    priority?: $Enums.MaintenancePriority
+    resolvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type MaintenanceCreateOrConnectWithoutRoomInput = {
@@ -42999,6 +45516,38 @@ export namespace Prisma {
 
   export type MaintenanceCreateManyRoomInputEnvelope = {
     data: MaintenanceCreateManyRoomInput | MaintenanceCreateManyRoomInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type HousekeepingTaskCreateWithoutRoomInput = {
+    id?: string
+    status?: $Enums.HousekeepingStatus
+    notes?: string | null
+    startedAt?: Date | string | null
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    assignedTo?: UserCreateNestedOneWithoutHousekeepingAssignmentsInput
+  }
+
+  export type HousekeepingTaskUncheckedCreateWithoutRoomInput = {
+    id?: string
+    assignedToId?: string | null
+    status?: $Enums.HousekeepingStatus
+    notes?: string | null
+    startedAt?: Date | string | null
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type HousekeepingTaskCreateOrConnectWithoutRoomInput = {
+    where: HousekeepingTaskWhereUniqueInput
+    create: XOR<HousekeepingTaskCreateWithoutRoomInput, HousekeepingTaskUncheckedCreateWithoutRoomInput>
+  }
+
+  export type HousekeepingTaskCreateManyRoomInputEnvelope = {
+    data: HousekeepingTaskCreateManyRoomInput | HousekeepingTaskCreateManyRoomInput[]
     skipDuplicates?: boolean
   }
 
@@ -43073,15 +45622,20 @@ export namespace Prisma {
     data: XOR<MaintenanceUpdateManyMutationInput, MaintenanceUncheckedUpdateManyWithoutRoomInput>
   }
 
-  export type MaintenanceScalarWhereInput = {
-    AND?: MaintenanceScalarWhereInput | MaintenanceScalarWhereInput[]
-    OR?: MaintenanceScalarWhereInput[]
-    NOT?: MaintenanceScalarWhereInput | MaintenanceScalarWhereInput[]
-    id?: StringFilter<"Maintenance"> | string
-    roomId?: StringFilter<"Maintenance"> | string
-    startDate?: DateTimeFilter<"Maintenance"> | Date | string
-    endDate?: DateTimeFilter<"Maintenance"> | Date | string
-    reason?: StringFilter<"Maintenance"> | string
+  export type HousekeepingTaskUpsertWithWhereUniqueWithoutRoomInput = {
+    where: HousekeepingTaskWhereUniqueInput
+    update: XOR<HousekeepingTaskUpdateWithoutRoomInput, HousekeepingTaskUncheckedUpdateWithoutRoomInput>
+    create: XOR<HousekeepingTaskCreateWithoutRoomInput, HousekeepingTaskUncheckedCreateWithoutRoomInput>
+  }
+
+  export type HousekeepingTaskUpdateWithWhereUniqueWithoutRoomInput = {
+    where: HousekeepingTaskWhereUniqueInput
+    data: XOR<HousekeepingTaskUpdateWithoutRoomInput, HousekeepingTaskUncheckedUpdateWithoutRoomInput>
+  }
+
+  export type HousekeepingTaskUpdateManyWithWhereWithoutRoomInput = {
+    where: HousekeepingTaskScalarWhereInput
+    data: XOR<HousekeepingTaskUpdateManyMutationInput, HousekeepingTaskUncheckedUpdateManyWithoutRoomInput>
   }
 
   export type RoomTypeCreateWithoutRatesInput = {
@@ -43352,6 +45906,7 @@ export namespace Prisma {
     floor?: number | null
     roomType: RoomTypeCreateNestedOneWithoutRoomsInput
     maintenance?: MaintenanceCreateNestedManyWithoutRoomInput
+    housekeepingTasks?: HousekeepingTaskCreateNestedManyWithoutRoomInput
   }
 
   export type RoomUncheckedCreateWithoutReservationsInput = {
@@ -43361,6 +45916,7 @@ export namespace Prisma {
     floor?: number | null
     roomTypeId: string
     maintenance?: MaintenanceUncheckedCreateNestedManyWithoutRoomInput
+    housekeepingTasks?: HousekeepingTaskUncheckedCreateNestedManyWithoutRoomInput
   }
 
   export type RoomCreateOrConnectWithoutReservationsInput = {
@@ -43581,6 +46137,7 @@ export namespace Prisma {
     floor?: NullableIntFieldUpdateOperationsInput | number | null
     roomType?: RoomTypeUpdateOneRequiredWithoutRoomsNestedInput
     maintenance?: MaintenanceUpdateManyWithoutRoomNestedInput
+    housekeepingTasks?: HousekeepingTaskUpdateManyWithoutRoomNestedInput
   }
 
   export type RoomUncheckedUpdateWithoutReservationsInput = {
@@ -43590,6 +46147,7 @@ export namespace Prisma {
     floor?: NullableIntFieldUpdateOperationsInput | number | null
     roomTypeId?: StringFieldUpdateOperationsInput | string
     maintenance?: MaintenanceUncheckedUpdateManyWithoutRoomNestedInput
+    housekeepingTasks?: HousekeepingTaskUncheckedUpdateManyWithoutRoomNestedInput
   }
 
   export type RoomRateUpsertWithoutReservationsInput = {
@@ -44899,58 +47457,6 @@ export namespace Prisma {
     data: XOR<RestaurantOrderItemUpdateManyMutationInput, RestaurantOrderItemUncheckedUpdateManyWithoutMenuItemInput>
   }
 
-  export type RoomCreateWithoutMaintenanceInput = {
-    id?: string
-    number: string
-    status: $Enums.RoomStatus
-    floor?: number | null
-    roomType: RoomTypeCreateNestedOneWithoutRoomsInput
-    reservations?: ReservationCreateNestedManyWithoutRoomInput
-  }
-
-  export type RoomUncheckedCreateWithoutMaintenanceInput = {
-    id?: string
-    number: string
-    status: $Enums.RoomStatus
-    floor?: number | null
-    roomTypeId: string
-    reservations?: ReservationUncheckedCreateNestedManyWithoutRoomInput
-  }
-
-  export type RoomCreateOrConnectWithoutMaintenanceInput = {
-    where: RoomWhereUniqueInput
-    create: XOR<RoomCreateWithoutMaintenanceInput, RoomUncheckedCreateWithoutMaintenanceInput>
-  }
-
-  export type RoomUpsertWithoutMaintenanceInput = {
-    update: XOR<RoomUpdateWithoutMaintenanceInput, RoomUncheckedUpdateWithoutMaintenanceInput>
-    create: XOR<RoomCreateWithoutMaintenanceInput, RoomUncheckedCreateWithoutMaintenanceInput>
-    where?: RoomWhereInput
-  }
-
-  export type RoomUpdateToOneWithWhereWithoutMaintenanceInput = {
-    where?: RoomWhereInput
-    data: XOR<RoomUpdateWithoutMaintenanceInput, RoomUncheckedUpdateWithoutMaintenanceInput>
-  }
-
-  export type RoomUpdateWithoutMaintenanceInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    number?: StringFieldUpdateOperationsInput | string
-    status?: EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
-    floor?: NullableIntFieldUpdateOperationsInput | number | null
-    roomType?: RoomTypeUpdateOneRequiredWithoutRoomsNestedInput
-    reservations?: ReservationUpdateManyWithoutRoomNestedInput
-  }
-
-  export type RoomUncheckedUpdateWithoutMaintenanceInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    number?: StringFieldUpdateOperationsInput | string
-    status?: EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
-    floor?: NullableIntFieldUpdateOperationsInput | number | null
-    roomTypeId?: StringFieldUpdateOperationsInput | string
-    reservations?: ReservationUncheckedUpdateManyWithoutRoomNestedInput
-  }
-
   export type GuestCreateWithoutCompanyInput = {
     id?: string
     firstName: string
@@ -45188,6 +47694,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     deleted?: boolean
     deletedAt?: Date | string | null
+    housekeepingAssignments?: HousekeepingTaskCreateNestedManyWithoutAssignedToInput
+    maintenanceReports?: MaintenanceCreateNestedManyWithoutReportedByInput
+    maintenanceAssignments?: MaintenanceCreateNestedManyWithoutAssignedToInput
   }
 
   export type UserUncheckedCreateWithoutUserRolesInput = {
@@ -45213,6 +47722,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     deleted?: boolean
     deletedAt?: Date | string | null
+    housekeepingAssignments?: HousekeepingTaskUncheckedCreateNestedManyWithoutAssignedToInput
+    maintenanceReports?: MaintenanceUncheckedCreateNestedManyWithoutReportedByInput
+    maintenanceAssignments?: MaintenanceUncheckedCreateNestedManyWithoutAssignedToInput
   }
 
   export type UserCreateOrConnectWithoutUserRolesInput = {
@@ -45281,6 +47793,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    housekeepingAssignments?: HousekeepingTaskUpdateManyWithoutAssignedToNestedInput
+    maintenanceReports?: MaintenanceUpdateManyWithoutReportedByNestedInput
+    maintenanceAssignments?: MaintenanceUpdateManyWithoutAssignedToNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUserRolesInput = {
@@ -45306,6 +47821,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deleted?: BoolFieldUpdateOperationsInput | boolean
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    housekeepingAssignments?: HousekeepingTaskUncheckedUpdateManyWithoutAssignedToNestedInput
+    maintenanceReports?: MaintenanceUncheckedUpdateManyWithoutReportedByNestedInput
+    maintenanceAssignments?: MaintenanceUncheckedUpdateManyWithoutAssignedToNestedInput
   }
 
   export type RolePermissionCreateWithoutPermissionInput = {
@@ -45430,9 +47948,542 @@ export namespace Prisma {
     userRoles?: UserRoleUncheckedUpdateManyWithoutRoleNestedInput
   }
 
+  export type RoomCreateWithoutHousekeepingTasksInput = {
+    id?: string
+    number: string
+    status: $Enums.RoomStatus
+    floor?: number | null
+    roomType: RoomTypeCreateNestedOneWithoutRoomsInput
+    reservations?: ReservationCreateNestedManyWithoutRoomInput
+    maintenance?: MaintenanceCreateNestedManyWithoutRoomInput
+  }
+
+  export type RoomUncheckedCreateWithoutHousekeepingTasksInput = {
+    id?: string
+    number: string
+    status: $Enums.RoomStatus
+    floor?: number | null
+    roomTypeId: string
+    reservations?: ReservationUncheckedCreateNestedManyWithoutRoomInput
+    maintenance?: MaintenanceUncheckedCreateNestedManyWithoutRoomInput
+  }
+
+  export type RoomCreateOrConnectWithoutHousekeepingTasksInput = {
+    where: RoomWhereUniqueInput
+    create: XOR<RoomCreateWithoutHousekeepingTasksInput, RoomUncheckedCreateWithoutHousekeepingTasksInput>
+  }
+
+  export type UserCreateWithoutHousekeepingAssignmentsInput = {
+    id?: string
+    email: string
+    phone?: string | null
+    fullname: string
+    password: string
+    emailVerified?: boolean
+    emailOtpHash?: string | null
+    emailOtpExpiresAt?: Date | string | null
+    otp?: string | null
+    otpExpiresAt?: Date | string | null
+    resetPasswordToken?: string | null
+    resetPasswordExpiresAt?: Date | string | null
+    profileImage?: string | null
+    pin?: string | null
+    status?: $Enums.UserStatus
+    phoneVerified?: boolean
+    paystackCustomerId?: string | null
+    lastLogin?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deleted?: boolean
+    deletedAt?: Date | string | null
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    maintenanceReports?: MaintenanceCreateNestedManyWithoutReportedByInput
+    maintenanceAssignments?: MaintenanceCreateNestedManyWithoutAssignedToInput
+  }
+
+  export type UserUncheckedCreateWithoutHousekeepingAssignmentsInput = {
+    id?: string
+    email: string
+    phone?: string | null
+    fullname: string
+    password: string
+    emailVerified?: boolean
+    emailOtpHash?: string | null
+    emailOtpExpiresAt?: Date | string | null
+    otp?: string | null
+    otpExpiresAt?: Date | string | null
+    resetPasswordToken?: string | null
+    resetPasswordExpiresAt?: Date | string | null
+    profileImage?: string | null
+    pin?: string | null
+    status?: $Enums.UserStatus
+    phoneVerified?: boolean
+    paystackCustomerId?: string | null
+    lastLogin?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deleted?: boolean
+    deletedAt?: Date | string | null
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    maintenanceReports?: MaintenanceUncheckedCreateNestedManyWithoutReportedByInput
+    maintenanceAssignments?: MaintenanceUncheckedCreateNestedManyWithoutAssignedToInput
+  }
+
+  export type UserCreateOrConnectWithoutHousekeepingAssignmentsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutHousekeepingAssignmentsInput, UserUncheckedCreateWithoutHousekeepingAssignmentsInput>
+  }
+
+  export type RoomUpsertWithoutHousekeepingTasksInput = {
+    update: XOR<RoomUpdateWithoutHousekeepingTasksInput, RoomUncheckedUpdateWithoutHousekeepingTasksInput>
+    create: XOR<RoomCreateWithoutHousekeepingTasksInput, RoomUncheckedCreateWithoutHousekeepingTasksInput>
+    where?: RoomWhereInput
+  }
+
+  export type RoomUpdateToOneWithWhereWithoutHousekeepingTasksInput = {
+    where?: RoomWhereInput
+    data: XOR<RoomUpdateWithoutHousekeepingTasksInput, RoomUncheckedUpdateWithoutHousekeepingTasksInput>
+  }
+
+  export type RoomUpdateWithoutHousekeepingTasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    status?: EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+    floor?: NullableIntFieldUpdateOperationsInput | number | null
+    roomType?: RoomTypeUpdateOneRequiredWithoutRoomsNestedInput
+    reservations?: ReservationUpdateManyWithoutRoomNestedInput
+    maintenance?: MaintenanceUpdateManyWithoutRoomNestedInput
+  }
+
+  export type RoomUncheckedUpdateWithoutHousekeepingTasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    status?: EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+    floor?: NullableIntFieldUpdateOperationsInput | number | null
+    roomTypeId?: StringFieldUpdateOperationsInput | string
+    reservations?: ReservationUncheckedUpdateManyWithoutRoomNestedInput
+    maintenance?: MaintenanceUncheckedUpdateManyWithoutRoomNestedInput
+  }
+
+  export type UserUpsertWithoutHousekeepingAssignmentsInput = {
+    update: XOR<UserUpdateWithoutHousekeepingAssignmentsInput, UserUncheckedUpdateWithoutHousekeepingAssignmentsInput>
+    create: XOR<UserCreateWithoutHousekeepingAssignmentsInput, UserUncheckedCreateWithoutHousekeepingAssignmentsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutHousekeepingAssignmentsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutHousekeepingAssignmentsInput, UserUncheckedUpdateWithoutHousekeepingAssignmentsInput>
+  }
+
+  export type UserUpdateWithoutHousekeepingAssignmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    fullname?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailOtpHash?: NullableStringFieldUpdateOperationsInput | string | null
+    emailOtpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetPasswordExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    pin?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    paystackCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    lastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    maintenanceReports?: MaintenanceUpdateManyWithoutReportedByNestedInput
+    maintenanceAssignments?: MaintenanceUpdateManyWithoutAssignedToNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutHousekeepingAssignmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    fullname?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailOtpHash?: NullableStringFieldUpdateOperationsInput | string | null
+    emailOtpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetPasswordExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    pin?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    paystackCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    lastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    maintenanceReports?: MaintenanceUncheckedUpdateManyWithoutReportedByNestedInput
+    maintenanceAssignments?: MaintenanceUncheckedUpdateManyWithoutAssignedToNestedInput
+  }
+
+  export type RoomCreateWithoutMaintenanceInput = {
+    id?: string
+    number: string
+    status: $Enums.RoomStatus
+    floor?: number | null
+    roomType: RoomTypeCreateNestedOneWithoutRoomsInput
+    reservations?: ReservationCreateNestedManyWithoutRoomInput
+    housekeepingTasks?: HousekeepingTaskCreateNestedManyWithoutRoomInput
+  }
+
+  export type RoomUncheckedCreateWithoutMaintenanceInput = {
+    id?: string
+    number: string
+    status: $Enums.RoomStatus
+    floor?: number | null
+    roomTypeId: string
+    reservations?: ReservationUncheckedCreateNestedManyWithoutRoomInput
+    housekeepingTasks?: HousekeepingTaskUncheckedCreateNestedManyWithoutRoomInput
+  }
+
+  export type RoomCreateOrConnectWithoutMaintenanceInput = {
+    where: RoomWhereUniqueInput
+    create: XOR<RoomCreateWithoutMaintenanceInput, RoomUncheckedCreateWithoutMaintenanceInput>
+  }
+
+  export type UserCreateWithoutMaintenanceReportsInput = {
+    id?: string
+    email: string
+    phone?: string | null
+    fullname: string
+    password: string
+    emailVerified?: boolean
+    emailOtpHash?: string | null
+    emailOtpExpiresAt?: Date | string | null
+    otp?: string | null
+    otpExpiresAt?: Date | string | null
+    resetPasswordToken?: string | null
+    resetPasswordExpiresAt?: Date | string | null
+    profileImage?: string | null
+    pin?: string | null
+    status?: $Enums.UserStatus
+    phoneVerified?: boolean
+    paystackCustomerId?: string | null
+    lastLogin?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deleted?: boolean
+    deletedAt?: Date | string | null
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    housekeepingAssignments?: HousekeepingTaskCreateNestedManyWithoutAssignedToInput
+    maintenanceAssignments?: MaintenanceCreateNestedManyWithoutAssignedToInput
+  }
+
+  export type UserUncheckedCreateWithoutMaintenanceReportsInput = {
+    id?: string
+    email: string
+    phone?: string | null
+    fullname: string
+    password: string
+    emailVerified?: boolean
+    emailOtpHash?: string | null
+    emailOtpExpiresAt?: Date | string | null
+    otp?: string | null
+    otpExpiresAt?: Date | string | null
+    resetPasswordToken?: string | null
+    resetPasswordExpiresAt?: Date | string | null
+    profileImage?: string | null
+    pin?: string | null
+    status?: $Enums.UserStatus
+    phoneVerified?: boolean
+    paystackCustomerId?: string | null
+    lastLogin?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deleted?: boolean
+    deletedAt?: Date | string | null
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    housekeepingAssignments?: HousekeepingTaskUncheckedCreateNestedManyWithoutAssignedToInput
+    maintenanceAssignments?: MaintenanceUncheckedCreateNestedManyWithoutAssignedToInput
+  }
+
+  export type UserCreateOrConnectWithoutMaintenanceReportsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutMaintenanceReportsInput, UserUncheckedCreateWithoutMaintenanceReportsInput>
+  }
+
+  export type UserCreateWithoutMaintenanceAssignmentsInput = {
+    id?: string
+    email: string
+    phone?: string | null
+    fullname: string
+    password: string
+    emailVerified?: boolean
+    emailOtpHash?: string | null
+    emailOtpExpiresAt?: Date | string | null
+    otp?: string | null
+    otpExpiresAt?: Date | string | null
+    resetPasswordToken?: string | null
+    resetPasswordExpiresAt?: Date | string | null
+    profileImage?: string | null
+    pin?: string | null
+    status?: $Enums.UserStatus
+    phoneVerified?: boolean
+    paystackCustomerId?: string | null
+    lastLogin?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deleted?: boolean
+    deletedAt?: Date | string | null
+    userRoles?: UserRoleCreateNestedManyWithoutUserInput
+    housekeepingAssignments?: HousekeepingTaskCreateNestedManyWithoutAssignedToInput
+    maintenanceReports?: MaintenanceCreateNestedManyWithoutReportedByInput
+  }
+
+  export type UserUncheckedCreateWithoutMaintenanceAssignmentsInput = {
+    id?: string
+    email: string
+    phone?: string | null
+    fullname: string
+    password: string
+    emailVerified?: boolean
+    emailOtpHash?: string | null
+    emailOtpExpiresAt?: Date | string | null
+    otp?: string | null
+    otpExpiresAt?: Date | string | null
+    resetPasswordToken?: string | null
+    resetPasswordExpiresAt?: Date | string | null
+    profileImage?: string | null
+    pin?: string | null
+    status?: $Enums.UserStatus
+    phoneVerified?: boolean
+    paystackCustomerId?: string | null
+    lastLogin?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deleted?: boolean
+    deletedAt?: Date | string | null
+    userRoles?: UserRoleUncheckedCreateNestedManyWithoutUserInput
+    housekeepingAssignments?: HousekeepingTaskUncheckedCreateNestedManyWithoutAssignedToInput
+    maintenanceReports?: MaintenanceUncheckedCreateNestedManyWithoutReportedByInput
+  }
+
+  export type UserCreateOrConnectWithoutMaintenanceAssignmentsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutMaintenanceAssignmentsInput, UserUncheckedCreateWithoutMaintenanceAssignmentsInput>
+  }
+
+  export type RoomUpsertWithoutMaintenanceInput = {
+    update: XOR<RoomUpdateWithoutMaintenanceInput, RoomUncheckedUpdateWithoutMaintenanceInput>
+    create: XOR<RoomCreateWithoutMaintenanceInput, RoomUncheckedCreateWithoutMaintenanceInput>
+    where?: RoomWhereInput
+  }
+
+  export type RoomUpdateToOneWithWhereWithoutMaintenanceInput = {
+    where?: RoomWhereInput
+    data: XOR<RoomUpdateWithoutMaintenanceInput, RoomUncheckedUpdateWithoutMaintenanceInput>
+  }
+
+  export type RoomUpdateWithoutMaintenanceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    status?: EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+    floor?: NullableIntFieldUpdateOperationsInput | number | null
+    roomType?: RoomTypeUpdateOneRequiredWithoutRoomsNestedInput
+    reservations?: ReservationUpdateManyWithoutRoomNestedInput
+    housekeepingTasks?: HousekeepingTaskUpdateManyWithoutRoomNestedInput
+  }
+
+  export type RoomUncheckedUpdateWithoutMaintenanceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    status?: EnumRoomStatusFieldUpdateOperationsInput | $Enums.RoomStatus
+    floor?: NullableIntFieldUpdateOperationsInput | number | null
+    roomTypeId?: StringFieldUpdateOperationsInput | string
+    reservations?: ReservationUncheckedUpdateManyWithoutRoomNestedInput
+    housekeepingTasks?: HousekeepingTaskUncheckedUpdateManyWithoutRoomNestedInput
+  }
+
+  export type UserUpsertWithoutMaintenanceReportsInput = {
+    update: XOR<UserUpdateWithoutMaintenanceReportsInput, UserUncheckedUpdateWithoutMaintenanceReportsInput>
+    create: XOR<UserCreateWithoutMaintenanceReportsInput, UserUncheckedCreateWithoutMaintenanceReportsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutMaintenanceReportsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutMaintenanceReportsInput, UserUncheckedUpdateWithoutMaintenanceReportsInput>
+  }
+
+  export type UserUpdateWithoutMaintenanceReportsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    fullname?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailOtpHash?: NullableStringFieldUpdateOperationsInput | string | null
+    emailOtpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetPasswordExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    pin?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    paystackCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    lastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    housekeepingAssignments?: HousekeepingTaskUpdateManyWithoutAssignedToNestedInput
+    maintenanceAssignments?: MaintenanceUpdateManyWithoutAssignedToNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutMaintenanceReportsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    fullname?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailOtpHash?: NullableStringFieldUpdateOperationsInput | string | null
+    emailOtpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetPasswordExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    pin?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    paystackCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    lastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    housekeepingAssignments?: HousekeepingTaskUncheckedUpdateManyWithoutAssignedToNestedInput
+    maintenanceAssignments?: MaintenanceUncheckedUpdateManyWithoutAssignedToNestedInput
+  }
+
+  export type UserUpsertWithoutMaintenanceAssignmentsInput = {
+    update: XOR<UserUpdateWithoutMaintenanceAssignmentsInput, UserUncheckedUpdateWithoutMaintenanceAssignmentsInput>
+    create: XOR<UserCreateWithoutMaintenanceAssignmentsInput, UserUncheckedCreateWithoutMaintenanceAssignmentsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutMaintenanceAssignmentsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutMaintenanceAssignmentsInput, UserUncheckedUpdateWithoutMaintenanceAssignmentsInput>
+  }
+
+  export type UserUpdateWithoutMaintenanceAssignmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    fullname?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailOtpHash?: NullableStringFieldUpdateOperationsInput | string | null
+    emailOtpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetPasswordExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    pin?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    paystackCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    lastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    userRoles?: UserRoleUpdateManyWithoutUserNestedInput
+    housekeepingAssignments?: HousekeepingTaskUpdateManyWithoutAssignedToNestedInput
+    maintenanceReports?: MaintenanceUpdateManyWithoutReportedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutMaintenanceAssignmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    fullname?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailOtpHash?: NullableStringFieldUpdateOperationsInput | string | null
+    emailOtpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    otp?: NullableStringFieldUpdateOperationsInput | string | null
+    otpExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    resetPasswordToken?: NullableStringFieldUpdateOperationsInput | string | null
+    resetPasswordExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    pin?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    phoneVerified?: BoolFieldUpdateOperationsInput | boolean
+    paystackCustomerId?: NullableStringFieldUpdateOperationsInput | string | null
+    lastLogin?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deleted?: BoolFieldUpdateOperationsInput | boolean
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    userRoles?: UserRoleUncheckedUpdateManyWithoutUserNestedInput
+    housekeepingAssignments?: HousekeepingTaskUncheckedUpdateManyWithoutAssignedToNestedInput
+    maintenanceReports?: MaintenanceUncheckedUpdateManyWithoutReportedByNestedInput
+  }
+
   export type UserRoleCreateManyUserInput = {
     id?: string
     roleId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type HousekeepingTaskCreateManyAssignedToInput = {
+    id?: string
+    roomId: string
+    status?: $Enums.HousekeepingStatus
+    notes?: string | null
+    startedAt?: Date | string | null
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MaintenanceCreateManyReportedByInput = {
+    id?: string
+    roomId?: string | null
+    assignedToId?: string | null
+    title: string
+    description: string
+    status?: $Enums.MaintenanceStatus
+    priority?: $Enums.MaintenancePriority
+    resolvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MaintenanceCreateManyAssignedToInput = {
+    id?: string
+    roomId?: string | null
+    reportedById?: string | null
+    title: string
+    description: string
+    status?: $Enums.MaintenanceStatus
+    priority?: $Enums.MaintenancePriority
+    resolvedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -45454,6 +48505,117 @@ export namespace Prisma {
   export type UserRoleUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     roleId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HousekeepingTaskUpdateWithoutAssignedToInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumHousekeepingStatusFieldUpdateOperationsInput | $Enums.HousekeepingStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    room?: RoomUpdateOneRequiredWithoutHousekeepingTasksNestedInput
+  }
+
+  export type HousekeepingTaskUncheckedUpdateWithoutAssignedToInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roomId?: StringFieldUpdateOperationsInput | string
+    status?: EnumHousekeepingStatusFieldUpdateOperationsInput | $Enums.HousekeepingStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HousekeepingTaskUncheckedUpdateManyWithoutAssignedToInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roomId?: StringFieldUpdateOperationsInput | string
+    status?: EnumHousekeepingStatusFieldUpdateOperationsInput | $Enums.HousekeepingStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MaintenanceUpdateWithoutReportedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumMaintenanceStatusFieldUpdateOperationsInput | $Enums.MaintenanceStatus
+    priority?: EnumMaintenancePriorityFieldUpdateOperationsInput | $Enums.MaintenancePriority
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    room?: RoomUpdateOneWithoutMaintenanceNestedInput
+    assignedTo?: UserUpdateOneWithoutMaintenanceAssignmentsNestedInput
+  }
+
+  export type MaintenanceUncheckedUpdateWithoutReportedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roomId?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumMaintenanceStatusFieldUpdateOperationsInput | $Enums.MaintenanceStatus
+    priority?: EnumMaintenancePriorityFieldUpdateOperationsInput | $Enums.MaintenancePriority
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MaintenanceUncheckedUpdateManyWithoutReportedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roomId?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumMaintenanceStatusFieldUpdateOperationsInput | $Enums.MaintenanceStatus
+    priority?: EnumMaintenancePriorityFieldUpdateOperationsInput | $Enums.MaintenancePriority
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MaintenanceUpdateWithoutAssignedToInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumMaintenanceStatusFieldUpdateOperationsInput | $Enums.MaintenanceStatus
+    priority?: EnumMaintenancePriorityFieldUpdateOperationsInput | $Enums.MaintenancePriority
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    room?: RoomUpdateOneWithoutMaintenanceNestedInput
+    reportedBy?: UserUpdateOneWithoutMaintenanceReportsNestedInput
+  }
+
+  export type MaintenanceUncheckedUpdateWithoutAssignedToInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roomId?: NullableStringFieldUpdateOperationsInput | string | null
+    reportedById?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumMaintenanceStatusFieldUpdateOperationsInput | $Enums.MaintenanceStatus
+    priority?: EnumMaintenancePriorityFieldUpdateOperationsInput | $Enums.MaintenancePriority
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MaintenanceUncheckedUpdateManyWithoutAssignedToInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    roomId?: NullableStringFieldUpdateOperationsInput | string | null
+    reportedById?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumMaintenanceStatusFieldUpdateOperationsInput | $Enums.MaintenanceStatus
+    priority?: EnumMaintenancePriorityFieldUpdateOperationsInput | $Enums.MaintenancePriority
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -45844,6 +49006,7 @@ export namespace Prisma {
     floor?: NullableIntFieldUpdateOperationsInput | number | null
     reservations?: ReservationUpdateManyWithoutRoomNestedInput
     maintenance?: MaintenanceUpdateManyWithoutRoomNestedInput
+    housekeepingTasks?: HousekeepingTaskUpdateManyWithoutRoomNestedInput
   }
 
   export type RoomUncheckedUpdateWithoutRoomTypeInput = {
@@ -45853,6 +49016,7 @@ export namespace Prisma {
     floor?: NullableIntFieldUpdateOperationsInput | number | null
     reservations?: ReservationUncheckedUpdateManyWithoutRoomNestedInput
     maintenance?: MaintenanceUncheckedUpdateManyWithoutRoomNestedInput
+    housekeepingTasks?: HousekeepingTaskUncheckedUpdateManyWithoutRoomNestedInput
   }
 
   export type RoomUncheckedUpdateManyWithoutRoomTypeInput = {
@@ -45961,9 +49125,26 @@ export namespace Prisma {
 
   export type MaintenanceCreateManyRoomInput = {
     id?: string
-    startDate: Date | string
-    endDate: Date | string
-    reason: string
+    reportedById?: string | null
+    assignedToId?: string | null
+    title: string
+    description: string
+    status?: $Enums.MaintenanceStatus
+    priority?: $Enums.MaintenancePriority
+    resolvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type HousekeepingTaskCreateManyRoomInput = {
+    id?: string
+    assignedToId?: string | null
+    status?: $Enums.HousekeepingStatus
+    notes?: string | null
+    startedAt?: Date | string | null
+    completedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ReservationUpdateWithoutRoomInput = {
@@ -46043,23 +49224,74 @@ export namespace Prisma {
 
   export type MaintenanceUpdateWithoutRoomInput = {
     id?: StringFieldUpdateOperationsInput | string
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    reason?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumMaintenanceStatusFieldUpdateOperationsInput | $Enums.MaintenanceStatus
+    priority?: EnumMaintenancePriorityFieldUpdateOperationsInput | $Enums.MaintenancePriority
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reportedBy?: UserUpdateOneWithoutMaintenanceReportsNestedInput
+    assignedTo?: UserUpdateOneWithoutMaintenanceAssignmentsNestedInput
   }
 
   export type MaintenanceUncheckedUpdateWithoutRoomInput = {
     id?: StringFieldUpdateOperationsInput | string
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    reason?: StringFieldUpdateOperationsInput | string
+    reportedById?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumMaintenanceStatusFieldUpdateOperationsInput | $Enums.MaintenanceStatus
+    priority?: EnumMaintenancePriorityFieldUpdateOperationsInput | $Enums.MaintenancePriority
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MaintenanceUncheckedUpdateManyWithoutRoomInput = {
     id?: StringFieldUpdateOperationsInput | string
-    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    reason?: StringFieldUpdateOperationsInput | string
+    reportedById?: NullableStringFieldUpdateOperationsInput | string | null
+    assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumMaintenanceStatusFieldUpdateOperationsInput | $Enums.MaintenanceStatus
+    priority?: EnumMaintenancePriorityFieldUpdateOperationsInput | $Enums.MaintenancePriority
+    resolvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HousekeepingTaskUpdateWithoutRoomInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumHousekeepingStatusFieldUpdateOperationsInput | $Enums.HousekeepingStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    assignedTo?: UserUpdateOneWithoutHousekeepingAssignmentsNestedInput
+  }
+
+  export type HousekeepingTaskUncheckedUpdateWithoutRoomInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumHousekeepingStatusFieldUpdateOperationsInput | $Enums.HousekeepingStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type HousekeepingTaskUncheckedUpdateManyWithoutRoomInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assignedToId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumHousekeepingStatusFieldUpdateOperationsInput | $Enums.HousekeepingStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    startedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ReservationCreateManyRoomRateInput = {

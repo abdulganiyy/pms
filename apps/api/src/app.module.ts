@@ -25,6 +25,8 @@ import { HousekeepingService } from './housekeeping/housekeeping.service';
 import { MaintenanceService } from './maintenance/maintenance.service';
 import { RoleModule } from './role/role.module';
 import { PermissionModule } from './permission/permission.module';
+import { HousekeepingModule } from './housekeeping/housekeeping.module';
+import { MaintenanceModule } from './maintenance/maintenance.module';
 
 @Module({
   imports: [
@@ -53,6 +55,8 @@ import { PermissionModule } from './permission/permission.module';
     DashboardModule,
     RoleModule,
     PermissionModule,
+    HousekeepingModule,
+    MaintenanceModule,
   ],
   controllers: [AppController],
   providers: [AppService, HousekeepingService, MaintenanceService],

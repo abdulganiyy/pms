@@ -164,3 +164,9 @@ export const createRestaurantOrderSchema = z.object({
     )
     .min(1, "At least one menu item is required"),
 });
+
+export const makePaymentSchema = z.object({
+  amount: z.coerce.number().int().min(1),
+  method: z.string().min(1, "Payment method is required"),
+  reference: z.string().optional(),
+});

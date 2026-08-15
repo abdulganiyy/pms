@@ -43,6 +43,12 @@ model User {
 
 
   userRoles              UserRole[]
+
+  housekeepingAssignments HousekeepingTask[] 
+
+  maintenanceReports Maintenance[] @relation("MaintenanceReporter")
+
+  maintenanceAssignments Maintenance[] @relation("MaintenanceAssignee")
 }
 
 model Guest {
@@ -237,6 +243,8 @@ model Room {
 
   reservations  Reservation[]
   maintenance   Maintenance[]
+  housekeepingTasks HousekeepingTask[] 
+
 }
 
 model RoomRate {
@@ -509,18 +517,6 @@ model MenuItem {
   orderItems RestaurantOrderItem[]
 }
 
-model Maintenance {
-    id String @id @default(cuid())
-
-    roomId String
-    room Room @relation(fields:[roomId], references:[id])
-
-    startDate DateTime
-    endDate DateTime
-
-    reason String
-}
-
 model Company {
   id            String @id @default(cuid())
   name          String
@@ -746,3 +742,74 @@ enum Currency {
   USD
 }
 
+enum HousekeepingStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+}
+
+model HousekeepingTask {
+  id String @id @default(cuid())
+
+  roomId String
+  room   Room @relation(fields: [roomId], references: [id])
+
+  assignedToId String?
+  assignedTo   User? @relation(fields: [assignedToId], references: [id])
+
+  status HousekeepingStatus @default(PENDING)
+
+  notes String?
+
+  startedAt   DateTime?
+  completedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([roomId])
+  @@index([assignedToId])
+  @@index([status])
+}
+
+enum MaintenanceStatus {
+  REPORTED
+  IN_PROGRESS
+  RESOLVED
+}
+
+enum MaintenancePriority {
+  LOW
+  NORMAL
+  HIGH
+  URGENT
+}
+
+model Maintenance {
+  id String @id @default(cuid())
+
+  roomId String?
+  room   Room? @relation(fields: [roomId], references: [id])
+
+  reportedById String?
+  reportedBy   User? @relation("MaintenanceReporter",fields: [reportedById], references: [id])
+
+  assignedToId String?
+  assignedTo   User? @relation("MaintenanceAssignee",fields: [assignedToId], references: [id])
+
+  title       String
+  description String
+
+  status   MaintenanceStatus   @default(REPORTED)
+  priority MaintenancePriority @default(NORMAL)
+
+  resolvedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([roomId])
+  @@index([assignedToId])
+  @@index([status])
+  @@index([priority])
+}

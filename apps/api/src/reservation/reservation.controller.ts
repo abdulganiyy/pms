@@ -20,12 +20,17 @@ import { RoleName } from '../../generated/prisma';
 import { CancelReservationDto } from './dto/cancel-reservation.dto';
 import { ChangeReservationRoomDto } from './dto/change-reservation-room.dto';
 import { GetReservationsDto } from './dto/get-reservations.dto';
+import { FolioService } from '../folio/folio.service';
+import { CreateFolioPaymentDto } from '../folio/dto/create-folio-payment.dto';
 
 @UseGuards(JwtGuard, RolesGuard)
 @Roles(RoleName.SUPER_ADMIN, RoleName.OWNER, RoleName.FRONT_DESK_MANAGER)
 @Controller('reservation')
 export class ReservationController {
-  constructor(private readonly reservationService: ReservationService) {}
+  constructor(
+    private readonly reservationService: ReservationService,
+    private folioService: FolioService,
+  ) {}
 
   @Post()
   create(@Body() dto: CreateReservationDto, @Req() req: any) {
@@ -73,6 +78,24 @@ export class ReservationController {
   ) {
     return this.reservationService.changeRoom(id, dto, req.user?.id);
   }
+
+  @Get(':id/transaction')
+  async getFolio(
+    @Param('id')
+    id: string,
+  ) {
+    return this.folioService.getReservationFolio(id);
+  }
+
+  @Post(':id/payment')
+  async makePayment(
+    @Param('id')
+    id: string,
+    @Body() dto: CreateFolioPaymentDto,
+  ) {
+    return this.folioService.createPayment(id, dto);
+  }
+
   @Get()
   findAll(@Query() query: GetReservationsDto) {
     return this.reservationService.findAll(query);
@@ -82,14 +105,6 @@ export class ReservationController {
   findOne(@Param('id') id: string) {
     return this.reservationService.findOne(id);
   }
-
-  // @Patch(':id')
-  // update(
-  //   @Param('id') id: string,
-  //   @Body() updateReservationDto: UpdateReservationDto,
-  // ) {
-  //   return this.reservationService.update(id, updateReservationDto);
-  // }
 
   @Delete(':id')
   remove(@Param('id') id: string) {

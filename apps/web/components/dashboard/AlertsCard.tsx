@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-import { ClipboardCheck, Sparkles, Wrench } from "lucide-react";
+import { Sparkles, Wrench } from "lucide-react";
 import { DashboardSummary } from "@/types";
 
 export function AlertsCard({
@@ -21,12 +21,12 @@ export function AlertsCard({
       description: "Pending maintenance tasks",
       type: "danger",
     },
-    {
-      icon: ClipboardCheck,
-      title: `${alerts?.pendingPayments ?? 0} pending payments`,
-      description: "Review outstanding folios",
-      type: "warning",
-    },
+    // {
+    //   icon: ClipboardCheck,
+    //   title: `${alerts?.pendingPayments ?? 0} pending payments`,
+    //   description: "Review outstanding folios",
+    //   type: "warning",
+    // },
   ];
 
   return (

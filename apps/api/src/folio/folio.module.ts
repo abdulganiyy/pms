@@ -5,5 +5,6 @@ import { FolioController } from './folio.controller';
 @Module({
   controllers: [FolioController],
   providers: [FolioService],
+  exports: [FolioService],
 })
 export class FolioModule {}

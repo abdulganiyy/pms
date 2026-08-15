@@ -503,3 +503,43 @@ export const createRestaurantOrderFieldConfig = ({
     ],
   },
 ];
+
+export const makePaymentFieldConfig: FieldConfig[] = [
+  {
+    name: "amount",
+    label: "Amount",
+    type: "number",
+  },
+  {
+    name: "method",
+    label: "Method",
+    type: "select",
+    options: [
+      {
+        label: "Cash",
+        value: "CASH",
+      },
+      {
+        label: "Card",
+        value: "CARD",
+      },
+      {
+        label: "Bank Transfer",
+        value: "BANK_TRANSFER",
+      },
+      {
+        label: "Pos",
+        value: "POS",
+      },
+      {
+        label: "Online",
+        value: "ONLINE",
+      },
+    ],
+  },
+  {
+    name: "reference",
+    label: "Reference",
+    type: "text",
+  },
+];

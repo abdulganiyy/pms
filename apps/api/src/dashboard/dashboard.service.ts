@@ -1,6 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { eachDayOfInterval, endOfDay, startOfDay, subDays } from 'date-fns';
+import {
+  HousekeepingStatus,
+  MaintenanceStatus,
+  PaymentStatus,
+} from '../../generated/prisma';
 
 @Injectable()
 export class DashboardService {
@@ -28,6 +33,8 @@ export class DashboardService {
       recentPayments,
       occupancyData,
       revenue,
+      housekeeping,
+      maintenance,
     ] = await Promise.all([
       this.prisma.room.count(),
 
@@ -165,6 +172,21 @@ export class DashboardService {
       }),
       this.getOccupancy(),
       this.getRevenue(),
+      this.prisma.housekeepingTask.count({
+        where: {
+          status: {
+            in: [HousekeepingStatus.PENDING, HousekeepingStatus.IN_PROGRESS],
+          },
+        },
+      }),
+
+      this.prisma.maintenance.count({
+        where: {
+          status: {
+            in: [MaintenanceStatus.REPORTED, MaintenanceStatus.IN_PROGRESS],
+          },
+        },
+      }),
     ]);
 
     // console.log(totalRooms, occupiedRooms);
@@ -201,6 +223,10 @@ export class DashboardService {
       recentPayments,
       occupancy: occupancyData,
       revenue,
+      alerts: {
+        housekeeping,
+        maintenance,
+      },
     };
   }
 

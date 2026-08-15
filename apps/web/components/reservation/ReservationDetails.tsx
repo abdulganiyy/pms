@@ -12,10 +12,11 @@ import Image from "next/image";
 import EditReservation from "./EditReservation";
 import { useState } from "react";
 import CancelReservation from "./CancelReservation";
-import DeleteReservation from "./DeleteReservation";
 import ChangeReservationRoom from "./ChangeReservationRoom";
 import CheckInReservation from "./CheckInReservation";
 import CheckOutReservation from "./CheckOutReservation";
+import ViewReservationFolio from "./ViewReservationFolio";
+import MakeReservationPayment from "./MakeReservationPayment";
 
 type ReservationDetailsProps = {
   reservation: ReservationType;
@@ -33,6 +34,8 @@ const ReservationDetails = ({
   const [openChangeRoom, setOpenChangeRoom] = useState(false);
   const [openCheckin, setOpenCheckin] = useState(false);
   const [openCheckout, setOpenCheckout] = useState(false);
+  const [openFolio, setOpenFoilio] = useState(false);
+  const [openPaymentModal, setOpenPaymentModal] = useState(false);
 
   const canEdit =
     reservation.status === "CONFIRMED" || reservation.status === "CHECKED_IN";
@@ -109,11 +112,11 @@ const ReservationDetails = ({
                 statusType="reservationType"
               />
 
-              <DetailItem
+              {/* <DetailItem
                 label="Payment Status"
                 value={reservation.paymentStatus}
                 statusType="payment"
-              />
+              /> */}
 
               <DetailItem
                 label="Status"
@@ -211,6 +214,31 @@ const ReservationDetails = ({
                 height={100}
               />
             )}
+          </section>
+
+          <Separator />
+
+          <section>
+            <h3 className="mb-3 text-sm font-semibold text-muted-foreground uppercase">
+              Financial Actions
+            </h3>
+            <div className="flex gap-2">
+              {reservation.status == "CHECKED_IN" && (
+                <ViewReservationFolio
+                  reservationId={reservation.id}
+                  open={openFolio}
+                  setOpen={setOpenFoilio}
+                />
+              )}
+
+              {reservation.status == "CHECKED_IN" && (
+                <MakeReservationPayment
+                  reservation={reservation}
+                  open={openPaymentModal}
+                  setOpen={setOpenPaymentModal}
+                />
+              )}
+            </div>
           </section>
 
           <Separator />
