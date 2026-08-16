@@ -59,7 +59,7 @@ model Guest {
   lastName          String
   middleName        String?
 
-  email             String?
+  email             String? @unique
   phone             String?
 
   dateOfBirth       DateTime?
@@ -202,6 +202,8 @@ model RoomType {
   maxAdults   Int
   maxChildren Int
 
+  maxGuests Int
+
   baseOccupancy Int
 
   size         Int?
@@ -300,11 +302,15 @@ model Reservation {
   checkedOutAt  DateTime?
   noShowAt      DateTime?
 
+  note   String?
+
   checkIn DateTime
   checkOut DateTime
 
   adults       Int                @default(1)
-  children      Int                @default(0)
+  children      Int               @default(0)
+
+  totalGuests      Int            @default(1)
 
   type ReservationType   
 

@@ -246,6 +246,22 @@ export interface DashboardSummary {
   recentPayments?: DashboardPayment[];
 }
 
-interface DashboardContentProps {
-  data: DashboardSummary;
-}
+export type AvailableRate = {
+  id: string;
+  name: string;
+  pricePerNight: number;
+  totalPrice: number;
+  refundable: boolean;
+  breakfastIncluded: boolean;
+};
+
+export type AvailableRoomType = {
+  id: string;
+  name: string;
+  description: string | null;
+  maxGuests: number;
+  availableRooms: number;
+  images: string[];
+  rates: AvailableRate[];
+  note?: string;
+};

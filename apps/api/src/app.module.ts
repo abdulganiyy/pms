@@ -27,6 +27,7 @@ import { RoleModule } from './role/role.module';
 import { PermissionModule } from './permission/permission.module';
 import { HousekeepingModule } from './housekeeping/housekeeping.module';
 import { MaintenanceModule } from './maintenance/maintenance.module';
+import { BookingModule } from './booking/booking.module';
 
 @Module({
   imports: [
@@ -57,6 +58,7 @@ import { MaintenanceModule } from './maintenance/maintenance.module';
     PermissionModule,
     HousekeepingModule,
     MaintenanceModule,
+    BookingModule,
   ],
   controllers: [AppController],
   providers: [AppService, HousekeepingService, MaintenanceService],

@@ -45,9 +45,9 @@ const EditGuest = ({ guest }: EditGuestProps) => {
   const defaultValues = {
     firstName: guest.firstName,
     lastName: guest.lastName,
-    gender: guest.gender.toLowerCase(),
+    gender: guest.gender?.toLowerCase(),
     nationality: guest.nationality,
-    dateOfBirth: new Date(guest.dateOfBirth),
+    dateOfBirth: new Date(guest?.dateOfBirth),
     email: guest.email,
     phone: guest.phone,
     passport: guest.passportId ? [{ url: guest.passportId }] : [],
@@ -60,7 +60,7 @@ const EditGuest = ({ guest }: EditGuestProps) => {
       const res = await axios.patch(`/api/guest/${guest.id}`, {
         ...rest,
         gender: gender.toUpperCase(),
-        passportId: (passport[0] as unknown as UploadResult).url,
+        passportId: (passport[0] as unknown as UploadResult)?.url,
       });
 
       return res.data;

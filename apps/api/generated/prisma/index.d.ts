@@ -11513,6 +11513,7 @@ export namespace Prisma {
   export type RoomTypeAvgAggregateOutputType = {
     maxAdults: number | null
     maxChildren: number | null
+    maxGuests: number | null
     baseOccupancy: number | null
     size: number | null
   }
@@ -11520,6 +11521,7 @@ export namespace Prisma {
   export type RoomTypeSumAggregateOutputType = {
     maxAdults: number | null
     maxChildren: number | null
+    maxGuests: number | null
     baseOccupancy: number | null
     size: number | null
   }
@@ -11531,6 +11533,7 @@ export namespace Prisma {
     description: string | null
     maxAdults: number | null
     maxChildren: number | null
+    maxGuests: number | null
     baseOccupancy: number | null
     size: number | null
     createdAt: Date | null
@@ -11544,6 +11547,7 @@ export namespace Prisma {
     description: string | null
     maxAdults: number | null
     maxChildren: number | null
+    maxGuests: number | null
     baseOccupancy: number | null
     size: number | null
     createdAt: Date | null
@@ -11557,6 +11561,7 @@ export namespace Prisma {
     description: number
     maxAdults: number
     maxChildren: number
+    maxGuests: number
     baseOccupancy: number
     size: number
     createdAt: number
@@ -11568,6 +11573,7 @@ export namespace Prisma {
   export type RoomTypeAvgAggregateInputType = {
     maxAdults?: true
     maxChildren?: true
+    maxGuests?: true
     baseOccupancy?: true
     size?: true
   }
@@ -11575,6 +11581,7 @@ export namespace Prisma {
   export type RoomTypeSumAggregateInputType = {
     maxAdults?: true
     maxChildren?: true
+    maxGuests?: true
     baseOccupancy?: true
     size?: true
   }
@@ -11586,6 +11593,7 @@ export namespace Prisma {
     description?: true
     maxAdults?: true
     maxChildren?: true
+    maxGuests?: true
     baseOccupancy?: true
     size?: true
     createdAt?: true
@@ -11599,6 +11607,7 @@ export namespace Prisma {
     description?: true
     maxAdults?: true
     maxChildren?: true
+    maxGuests?: true
     baseOccupancy?: true
     size?: true
     createdAt?: true
@@ -11612,6 +11621,7 @@ export namespace Prisma {
     description?: true
     maxAdults?: true
     maxChildren?: true
+    maxGuests?: true
     baseOccupancy?: true
     size?: true
     createdAt?: true
@@ -11712,6 +11722,7 @@ export namespace Prisma {
     description: string | null
     maxAdults: number
     maxChildren: number
+    maxGuests: number
     baseOccupancy: number
     size: number | null
     createdAt: Date
@@ -11744,6 +11755,7 @@ export namespace Prisma {
     description?: boolean
     maxAdults?: boolean
     maxChildren?: boolean
+    maxGuests?: boolean
     baseOccupancy?: boolean
     size?: boolean
     createdAt?: boolean
@@ -11760,6 +11772,7 @@ export namespace Prisma {
     description?: boolean
     maxAdults?: boolean
     maxChildren?: boolean
+    maxGuests?: boolean
     baseOccupancy?: boolean
     size?: boolean
     createdAt?: boolean
@@ -11773,6 +11786,7 @@ export namespace Prisma {
     description?: boolean
     maxAdults?: boolean
     maxChildren?: boolean
+    maxGuests?: boolean
     baseOccupancy?: boolean
     size?: boolean
     createdAt?: boolean
@@ -11786,13 +11800,14 @@ export namespace Prisma {
     description?: boolean
     maxAdults?: boolean
     maxChildren?: boolean
+    maxGuests?: boolean
     baseOccupancy?: boolean
     size?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type RoomTypeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "code" | "description" | "maxAdults" | "maxChildren" | "baseOccupancy" | "size" | "createdAt" | "updatedAt", ExtArgs["result"]["roomType"]>
+  export type RoomTypeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "code" | "description" | "maxAdults" | "maxChildren" | "maxGuests" | "baseOccupancy" | "size" | "createdAt" | "updatedAt", ExtArgs["result"]["roomType"]>
   export type RoomTypeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     rooms?: boolean | RoomType$roomsArgs<ExtArgs>
     rates?: boolean | RoomType$ratesArgs<ExtArgs>
@@ -11814,6 +11829,7 @@ export namespace Prisma {
       description: string | null
       maxAdults: number
       maxChildren: number
+      maxGuests: number
       baseOccupancy: number
       size: number | null
       createdAt: Date
@@ -12249,6 +12265,7 @@ export namespace Prisma {
     readonly description: FieldRef<"RoomType", 'String'>
     readonly maxAdults: FieldRef<"RoomType", 'Int'>
     readonly maxChildren: FieldRef<"RoomType", 'Int'>
+    readonly maxGuests: FieldRef<"RoomType", 'Int'>
     readonly baseOccupancy: FieldRef<"RoomType", 'Int'>
     readonly size: FieldRef<"RoomType", 'Int'>
     readonly createdAt: FieldRef<"RoomType", 'DateTime'>
@@ -16163,6 +16180,7 @@ export namespace Prisma {
     totalAmount: Decimal | null
     adults: number | null
     children: number | null
+    totalGuests: number | null
   }
 
   export type ReservationSumAggregateOutputType = {
@@ -16172,6 +16190,7 @@ export namespace Prisma {
     totalAmount: Decimal | null
     adults: number | null
     children: number | null
+    totalGuests: number | null
   }
 
   export type ReservationMinAggregateOutputType = {
@@ -16189,10 +16208,12 @@ export namespace Prisma {
     checkedInAt: Date | null
     checkedOutAt: Date | null
     noShowAt: Date | null
+    note: string | null
     checkIn: Date | null
     checkOut: Date | null
     adults: number | null
     children: number | null
+    totalGuests: number | null
     type: $Enums.ReservationType | null
     status: $Enums.ReservationStatus | null
     createdAt: Date | null
@@ -16213,10 +16234,12 @@ export namespace Prisma {
     checkedInAt: Date | null
     checkedOutAt: Date | null
     noShowAt: Date | null
+    note: string | null
     checkIn: Date | null
     checkOut: Date | null
     adults: number | null
     children: number | null
+    totalGuests: number | null
     type: $Enums.ReservationType | null
     status: $Enums.ReservationStatus | null
     createdAt: Date | null
@@ -16237,10 +16260,12 @@ export namespace Prisma {
     checkedInAt: number
     checkedOutAt: number
     noShowAt: number
+    note: number
     checkIn: number
     checkOut: number
     adults: number
     children: number
+    totalGuests: number
     type: number
     status: number
     createdAt: number
@@ -16255,6 +16280,7 @@ export namespace Prisma {
     totalAmount?: true
     adults?: true
     children?: true
+    totalGuests?: true
   }
 
   export type ReservationSumAggregateInputType = {
@@ -16264,6 +16290,7 @@ export namespace Prisma {
     totalAmount?: true
     adults?: true
     children?: true
+    totalGuests?: true
   }
 
   export type ReservationMinAggregateInputType = {
@@ -16281,10 +16308,12 @@ export namespace Prisma {
     checkedInAt?: true
     checkedOutAt?: true
     noShowAt?: true
+    note?: true
     checkIn?: true
     checkOut?: true
     adults?: true
     children?: true
+    totalGuests?: true
     type?: true
     status?: true
     createdAt?: true
@@ -16305,10 +16334,12 @@ export namespace Prisma {
     checkedInAt?: true
     checkedOutAt?: true
     noShowAt?: true
+    note?: true
     checkIn?: true
     checkOut?: true
     adults?: true
     children?: true
+    totalGuests?: true
     type?: true
     status?: true
     createdAt?: true
@@ -16329,10 +16360,12 @@ export namespace Prisma {
     checkedInAt?: true
     checkedOutAt?: true
     noShowAt?: true
+    note?: true
     checkIn?: true
     checkOut?: true
     adults?: true
     children?: true
+    totalGuests?: true
     type?: true
     status?: true
     createdAt?: true
@@ -16440,10 +16473,12 @@ export namespace Prisma {
     checkedInAt: Date | null
     checkedOutAt: Date | null
     noShowAt: Date | null
+    note: string | null
     checkIn: Date
     checkOut: Date
     adults: number
     children: number
+    totalGuests: number
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt: Date
@@ -16483,10 +16518,12 @@ export namespace Prisma {
     checkedInAt?: boolean
     checkedOutAt?: boolean
     noShowAt?: boolean
+    note?: boolean
     checkIn?: boolean
     checkOut?: boolean
     adults?: boolean
     children?: boolean
+    totalGuests?: boolean
     type?: boolean
     status?: boolean
     createdAt?: boolean
@@ -16514,10 +16551,12 @@ export namespace Prisma {
     checkedInAt?: boolean
     checkedOutAt?: boolean
     noShowAt?: boolean
+    note?: boolean
     checkIn?: boolean
     checkOut?: boolean
     adults?: boolean
     children?: boolean
+    totalGuests?: boolean
     type?: boolean
     status?: boolean
     createdAt?: boolean
@@ -16541,10 +16580,12 @@ export namespace Prisma {
     checkedInAt?: boolean
     checkedOutAt?: boolean
     noShowAt?: boolean
+    note?: boolean
     checkIn?: boolean
     checkOut?: boolean
     adults?: boolean
     children?: boolean
+    totalGuests?: boolean
     type?: boolean
     status?: boolean
     createdAt?: boolean
@@ -16568,16 +16609,18 @@ export namespace Prisma {
     checkedInAt?: boolean
     checkedOutAt?: boolean
     noShowAt?: boolean
+    note?: boolean
     checkIn?: boolean
     checkOut?: boolean
     adults?: boolean
     children?: boolean
+    totalGuests?: boolean
     type?: boolean
     status?: boolean
     createdAt?: boolean
   }
 
-  export type ReservationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "guestId" | "roomId" | "roomRateId" | "nightlyRate" | "tax" | "discount" | "totalAmount" | "cancelledAt" | "cancelledById" | "cancellationReason" | "checkedInAt" | "checkedOutAt" | "noShowAt" | "checkIn" | "checkOut" | "adults" | "children" | "type" | "status" | "createdAt", ExtArgs["result"]["reservation"]>
+  export type ReservationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "guestId" | "roomId" | "roomRateId" | "nightlyRate" | "tax" | "discount" | "totalAmount" | "cancelledAt" | "cancelledById" | "cancellationReason" | "checkedInAt" | "checkedOutAt" | "noShowAt" | "note" | "checkIn" | "checkOut" | "adults" | "children" | "totalGuests" | "type" | "status" | "createdAt", ExtArgs["result"]["reservation"]>
   export type ReservationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     guest?: boolean | GuestDefaultArgs<ExtArgs>
     room?: boolean | RoomDefaultArgs<ExtArgs>
@@ -16623,10 +16666,12 @@ export namespace Prisma {
       checkedInAt: Date | null
       checkedOutAt: Date | null
       noShowAt: Date | null
+      note: string | null
       checkIn: Date
       checkOut: Date
       adults: number
       children: number
+      totalGuests: number
       type: $Enums.ReservationType
       status: $Enums.ReservationStatus
       createdAt: Date
@@ -17073,10 +17118,12 @@ export namespace Prisma {
     readonly checkedInAt: FieldRef<"Reservation", 'DateTime'>
     readonly checkedOutAt: FieldRef<"Reservation", 'DateTime'>
     readonly noShowAt: FieldRef<"Reservation", 'DateTime'>
+    readonly note: FieldRef<"Reservation", 'String'>
     readonly checkIn: FieldRef<"Reservation", 'DateTime'>
     readonly checkOut: FieldRef<"Reservation", 'DateTime'>
     readonly adults: FieldRef<"Reservation", 'Int'>
     readonly children: FieldRef<"Reservation", 'Int'>
+    readonly totalGuests: FieldRef<"Reservation", 'Int'>
     readonly type: FieldRef<"Reservation", 'ReservationType'>
     readonly status: FieldRef<"Reservation", 'ReservationStatus'>
     readonly createdAt: FieldRef<"Reservation", 'DateTime'>
@@ -34602,6 +34649,7 @@ export namespace Prisma {
     description: 'description',
     maxAdults: 'maxAdults',
     maxChildren: 'maxChildren',
+    maxGuests: 'maxGuests',
     baseOccupancy: 'baseOccupancy',
     size: 'size',
     createdAt: 'createdAt',
@@ -34662,10 +34710,12 @@ export namespace Prisma {
     checkedInAt: 'checkedInAt',
     checkedOutAt: 'checkedOutAt',
     noShowAt: 'noShowAt',
+    note: 'note',
     checkIn: 'checkIn',
     checkOut: 'checkOut',
     adults: 'adults',
     children: 'children',
+    totalGuests: 'totalGuests',
     type: 'type',
     status: 'status',
     createdAt: 'createdAt'
@@ -35498,6 +35548,7 @@ export namespace Prisma {
 
   export type GuestWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    email?: string
     loyaltyNumber?: string
     AND?: GuestWhereInput | GuestWhereInput[]
     OR?: GuestWhereInput[]
@@ -35505,7 +35556,6 @@ export namespace Prisma {
     firstName?: StringFilter<"Guest"> | string
     lastName?: StringFilter<"Guest"> | string
     middleName?: StringNullableFilter<"Guest"> | string | null
-    email?: StringNullableFilter<"Guest"> | string | null
     phone?: StringNullableFilter<"Guest"> | string | null
     dateOfBirth?: DateTimeNullableFilter<"Guest"> | Date | string | null
     gender?: EnumGenderNullableFilter<"Guest"> | $Enums.Gender | null
@@ -35528,7 +35578,7 @@ export namespace Prisma {
     paymentMethods?: GuestPaymentMethodListRelationFilter
     restaurantOrders?: RestaurantOrderListRelationFilter
     company?: XOR<CompanyNullableScalarRelationFilter, CompanyWhereInput> | null
-  }, "id" | "loyaltyNumber">
+  }, "id" | "email" | "loyaltyNumber">
 
   export type GuestOrderByWithAggregationInput = {
     id?: SortOrder
@@ -35908,6 +35958,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"RoomType"> | string | null
     maxAdults?: IntFilter<"RoomType"> | number
     maxChildren?: IntFilter<"RoomType"> | number
+    maxGuests?: IntFilter<"RoomType"> | number
     baseOccupancy?: IntFilter<"RoomType"> | number
     size?: IntNullableFilter<"RoomType"> | number | null
     createdAt?: DateTimeFilter<"RoomType"> | Date | string
@@ -35923,6 +35974,7 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     maxAdults?: SortOrder
     maxChildren?: SortOrder
+    maxGuests?: SortOrder
     baseOccupancy?: SortOrder
     size?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -35941,6 +35993,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"RoomType"> | string | null
     maxAdults?: IntFilter<"RoomType"> | number
     maxChildren?: IntFilter<"RoomType"> | number
+    maxGuests?: IntFilter<"RoomType"> | number
     baseOccupancy?: IntFilter<"RoomType"> | number
     size?: IntNullableFilter<"RoomType"> | number | null
     createdAt?: DateTimeFilter<"RoomType"> | Date | string
@@ -35956,6 +36009,7 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     maxAdults?: SortOrder
     maxChildren?: SortOrder
+    maxGuests?: SortOrder
     baseOccupancy?: SortOrder
     size?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -35977,6 +36031,7 @@ export namespace Prisma {
     description?: StringNullableWithAggregatesFilter<"RoomType"> | string | null
     maxAdults?: IntWithAggregatesFilter<"RoomType"> | number
     maxChildren?: IntWithAggregatesFilter<"RoomType"> | number
+    maxGuests?: IntWithAggregatesFilter<"RoomType"> | number
     baseOccupancy?: IntWithAggregatesFilter<"RoomType"> | number
     size?: IntNullableWithAggregatesFilter<"RoomType"> | number | null
     createdAt?: DateTimeWithAggregatesFilter<"RoomType"> | Date | string
@@ -36200,10 +36255,12 @@ export namespace Prisma {
     checkedInAt?: DateTimeNullableFilter<"Reservation"> | Date | string | null
     checkedOutAt?: DateTimeNullableFilter<"Reservation"> | Date | string | null
     noShowAt?: DateTimeNullableFilter<"Reservation"> | Date | string | null
+    note?: StringNullableFilter<"Reservation"> | string | null
     checkIn?: DateTimeFilter<"Reservation"> | Date | string
     checkOut?: DateTimeFilter<"Reservation"> | Date | string
     adults?: IntFilter<"Reservation"> | number
     children?: IntFilter<"Reservation"> | number
+    totalGuests?: IntFilter<"Reservation"> | number
     type?: EnumReservationTypeFilter<"Reservation"> | $Enums.ReservationType
     status?: EnumReservationStatusFilter<"Reservation"> | $Enums.ReservationStatus
     createdAt?: DateTimeFilter<"Reservation"> | Date | string
@@ -36230,10 +36287,12 @@ export namespace Prisma {
     checkedInAt?: SortOrderInput | SortOrder
     checkedOutAt?: SortOrderInput | SortOrder
     noShowAt?: SortOrderInput | SortOrder
+    note?: SortOrderInput | SortOrder
     checkIn?: SortOrder
     checkOut?: SortOrder
     adults?: SortOrder
     children?: SortOrder
+    totalGuests?: SortOrder
     type?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
@@ -36263,10 +36322,12 @@ export namespace Prisma {
     checkedInAt?: DateTimeNullableFilter<"Reservation"> | Date | string | null
     checkedOutAt?: DateTimeNullableFilter<"Reservation"> | Date | string | null
     noShowAt?: DateTimeNullableFilter<"Reservation"> | Date | string | null
+    note?: StringNullableFilter<"Reservation"> | string | null
     checkIn?: DateTimeFilter<"Reservation"> | Date | string
     checkOut?: DateTimeFilter<"Reservation"> | Date | string
     adults?: IntFilter<"Reservation"> | number
     children?: IntFilter<"Reservation"> | number
+    totalGuests?: IntFilter<"Reservation"> | number
     type?: EnumReservationTypeFilter<"Reservation"> | $Enums.ReservationType
     status?: EnumReservationStatusFilter<"Reservation"> | $Enums.ReservationStatus
     createdAt?: DateTimeFilter<"Reservation"> | Date | string
@@ -36293,10 +36354,12 @@ export namespace Prisma {
     checkedInAt?: SortOrderInput | SortOrder
     checkedOutAt?: SortOrderInput | SortOrder
     noShowAt?: SortOrderInput | SortOrder
+    note?: SortOrderInput | SortOrder
     checkIn?: SortOrder
     checkOut?: SortOrder
     adults?: SortOrder
     children?: SortOrder
+    totalGuests?: SortOrder
     type?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
@@ -36325,10 +36388,12 @@ export namespace Prisma {
     checkedInAt?: DateTimeNullableWithAggregatesFilter<"Reservation"> | Date | string | null
     checkedOutAt?: DateTimeNullableWithAggregatesFilter<"Reservation"> | Date | string | null
     noShowAt?: DateTimeNullableWithAggregatesFilter<"Reservation"> | Date | string | null
+    note?: StringNullableWithAggregatesFilter<"Reservation"> | string | null
     checkIn?: DateTimeWithAggregatesFilter<"Reservation"> | Date | string
     checkOut?: DateTimeWithAggregatesFilter<"Reservation"> | Date | string
     adults?: IntWithAggregatesFilter<"Reservation"> | number
     children?: IntWithAggregatesFilter<"Reservation"> | number
+    totalGuests?: IntWithAggregatesFilter<"Reservation"> | number
     type?: EnumReservationTypeWithAggregatesFilter<"Reservation"> | $Enums.ReservationType
     status?: EnumReservationStatusWithAggregatesFilter<"Reservation"> | $Enums.ReservationStatus
     createdAt?: DateTimeWithAggregatesFilter<"Reservation"> | Date | string
@@ -38065,6 +38130,7 @@ export namespace Prisma {
     description?: string | null
     maxAdults: number
     maxChildren: number
+    maxGuests: number
     baseOccupancy: number
     size?: number | null
     createdAt?: Date | string
@@ -38080,6 +38146,7 @@ export namespace Prisma {
     description?: string | null
     maxAdults: number
     maxChildren: number
+    maxGuests: number
     baseOccupancy: number
     size?: number | null
     createdAt?: Date | string
@@ -38095,6 +38162,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     maxAdults?: IntFieldUpdateOperationsInput | number
     maxChildren?: IntFieldUpdateOperationsInput | number
+    maxGuests?: IntFieldUpdateOperationsInput | number
     baseOccupancy?: IntFieldUpdateOperationsInput | number
     size?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -38110,6 +38178,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     maxAdults?: IntFieldUpdateOperationsInput | number
     maxChildren?: IntFieldUpdateOperationsInput | number
+    maxGuests?: IntFieldUpdateOperationsInput | number
     baseOccupancy?: IntFieldUpdateOperationsInput | number
     size?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -38125,6 +38194,7 @@ export namespace Prisma {
     description?: string | null
     maxAdults: number
     maxChildren: number
+    maxGuests: number
     baseOccupancy: number
     size?: number | null
     createdAt?: Date | string
@@ -38138,6 +38208,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     maxAdults?: IntFieldUpdateOperationsInput | number
     maxChildren?: IntFieldUpdateOperationsInput | number
+    maxGuests?: IntFieldUpdateOperationsInput | number
     baseOccupancy?: IntFieldUpdateOperationsInput | number
     size?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -38151,6 +38222,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     maxAdults?: IntFieldUpdateOperationsInput | number
     maxChildren?: IntFieldUpdateOperationsInput | number
+    maxGuests?: IntFieldUpdateOperationsInput | number
     baseOccupancy?: IntFieldUpdateOperationsInput | number
     size?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -38375,10 +38447,12 @@ export namespace Prisma {
     checkedInAt?: Date | string | null
     checkedOutAt?: Date | string | null
     noShowAt?: Date | string | null
+    note?: string | null
     checkIn: Date | string
     checkOut: Date | string
     adults?: number
     children?: number
+    totalGuests?: number
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt?: Date | string
@@ -38405,10 +38479,12 @@ export namespace Prisma {
     checkedInAt?: Date | string | null
     checkedOutAt?: Date | string | null
     noShowAt?: Date | string | null
+    note?: string | null
     checkIn: Date | string
     checkOut: Date | string
     adults?: number
     children?: number
+    totalGuests?: number
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt?: Date | string
@@ -38429,10 +38505,12 @@ export namespace Prisma {
     checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
+    totalGuests?: IntFieldUpdateOperationsInput | number
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -38459,10 +38537,12 @@ export namespace Prisma {
     checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
+    totalGuests?: IntFieldUpdateOperationsInput | number
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -38486,10 +38566,12 @@ export namespace Prisma {
     checkedInAt?: Date | string | null
     checkedOutAt?: Date | string | null
     noShowAt?: Date | string | null
+    note?: string | null
     checkIn: Date | string
     checkOut: Date | string
     adults?: number
     children?: number
+    totalGuests?: number
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt?: Date | string
@@ -38507,10 +38589,12 @@ export namespace Prisma {
     checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
+    totalGuests?: IntFieldUpdateOperationsInput | number
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -38531,10 +38615,12 @@ export namespace Prisma {
     checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
+    totalGuests?: IntFieldUpdateOperationsInput | number
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -40278,6 +40364,7 @@ export namespace Prisma {
     description?: SortOrder
     maxAdults?: SortOrder
     maxChildren?: SortOrder
+    maxGuests?: SortOrder
     baseOccupancy?: SortOrder
     size?: SortOrder
     createdAt?: SortOrder
@@ -40287,6 +40374,7 @@ export namespace Prisma {
   export type RoomTypeAvgOrderByAggregateInput = {
     maxAdults?: SortOrder
     maxChildren?: SortOrder
+    maxGuests?: SortOrder
     baseOccupancy?: SortOrder
     size?: SortOrder
   }
@@ -40298,6 +40386,7 @@ export namespace Prisma {
     description?: SortOrder
     maxAdults?: SortOrder
     maxChildren?: SortOrder
+    maxGuests?: SortOrder
     baseOccupancy?: SortOrder
     size?: SortOrder
     createdAt?: SortOrder
@@ -40311,6 +40400,7 @@ export namespace Prisma {
     description?: SortOrder
     maxAdults?: SortOrder
     maxChildren?: SortOrder
+    maxGuests?: SortOrder
     baseOccupancy?: SortOrder
     size?: SortOrder
     createdAt?: SortOrder
@@ -40320,6 +40410,7 @@ export namespace Prisma {
   export type RoomTypeSumOrderByAggregateInput = {
     maxAdults?: SortOrder
     maxChildren?: SortOrder
+    maxGuests?: SortOrder
     baseOccupancy?: SortOrder
     size?: SortOrder
   }
@@ -40540,10 +40631,12 @@ export namespace Prisma {
     checkedInAt?: SortOrder
     checkedOutAt?: SortOrder
     noShowAt?: SortOrder
+    note?: SortOrder
     checkIn?: SortOrder
     checkOut?: SortOrder
     adults?: SortOrder
     children?: SortOrder
+    totalGuests?: SortOrder
     type?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
@@ -40556,6 +40649,7 @@ export namespace Prisma {
     totalAmount?: SortOrder
     adults?: SortOrder
     children?: SortOrder
+    totalGuests?: SortOrder
   }
 
   export type ReservationMaxOrderByAggregateInput = {
@@ -40573,10 +40667,12 @@ export namespace Prisma {
     checkedInAt?: SortOrder
     checkedOutAt?: SortOrder
     noShowAt?: SortOrder
+    note?: SortOrder
     checkIn?: SortOrder
     checkOut?: SortOrder
     adults?: SortOrder
     children?: SortOrder
+    totalGuests?: SortOrder
     type?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
@@ -40597,10 +40693,12 @@ export namespace Prisma {
     checkedInAt?: SortOrder
     checkedOutAt?: SortOrder
     noShowAt?: SortOrder
+    note?: SortOrder
     checkIn?: SortOrder
     checkOut?: SortOrder
     adults?: SortOrder
     children?: SortOrder
+    totalGuests?: SortOrder
     type?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
@@ -40613,6 +40711,7 @@ export namespace Prisma {
     totalAmount?: SortOrder
     adults?: SortOrder
     children?: SortOrder
+    totalGuests?: SortOrder
   }
 
   export type DecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -44207,10 +44306,12 @@ export namespace Prisma {
     checkedInAt?: Date | string | null
     checkedOutAt?: Date | string | null
     noShowAt?: Date | string | null
+    note?: string | null
     checkIn: Date | string
     checkOut: Date | string
     adults?: number
     children?: number
+    totalGuests?: number
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt?: Date | string
@@ -44235,10 +44336,12 @@ export namespace Prisma {
     checkedInAt?: Date | string | null
     checkedOutAt?: Date | string | null
     noShowAt?: Date | string | null
+    note?: string | null
     checkIn: Date | string
     checkOut: Date | string
     adults?: number
     children?: number
+    totalGuests?: number
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt?: Date | string
@@ -44494,10 +44597,12 @@ export namespace Prisma {
     checkedInAt?: DateTimeNullableFilter<"Reservation"> | Date | string | null
     checkedOutAt?: DateTimeNullableFilter<"Reservation"> | Date | string | null
     noShowAt?: DateTimeNullableFilter<"Reservation"> | Date | string | null
+    note?: StringNullableFilter<"Reservation"> | string | null
     checkIn?: DateTimeFilter<"Reservation"> | Date | string
     checkOut?: DateTimeFilter<"Reservation"> | Date | string
     adults?: IntFilter<"Reservation"> | number
     children?: IntFilter<"Reservation"> | number
+    totalGuests?: IntFilter<"Reservation"> | number
     type?: EnumReservationTypeFilter<"Reservation"> | $Enums.ReservationType
     status?: EnumReservationStatusFilter<"Reservation"> | $Enums.ReservationStatus
     createdAt?: DateTimeFilter<"Reservation"> | Date | string
@@ -45395,6 +45500,7 @@ export namespace Prisma {
     description?: string | null
     maxAdults: number
     maxChildren: number
+    maxGuests: number
     baseOccupancy: number
     size?: number | null
     createdAt?: Date | string
@@ -45409,6 +45515,7 @@ export namespace Prisma {
     description?: string | null
     maxAdults: number
     maxChildren: number
+    maxGuests: number
     baseOccupancy: number
     size?: number | null
     createdAt?: Date | string
@@ -45433,10 +45540,12 @@ export namespace Prisma {
     checkedInAt?: Date | string | null
     checkedOutAt?: Date | string | null
     noShowAt?: Date | string | null
+    note?: string | null
     checkIn: Date | string
     checkOut: Date | string
     adults?: number
     children?: number
+    totalGuests?: number
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt?: Date | string
@@ -45461,10 +45570,12 @@ export namespace Prisma {
     checkedInAt?: Date | string | null
     checkedOutAt?: Date | string | null
     noShowAt?: Date | string | null
+    note?: string | null
     checkIn: Date | string
     checkOut: Date | string
     adults?: number
     children?: number
+    totalGuests?: number
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt?: Date | string
@@ -45569,6 +45680,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     maxAdults?: IntFieldUpdateOperationsInput | number
     maxChildren?: IntFieldUpdateOperationsInput | number
+    maxGuests?: IntFieldUpdateOperationsInput | number
     baseOccupancy?: IntFieldUpdateOperationsInput | number
     size?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -45583,6 +45695,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     maxAdults?: IntFieldUpdateOperationsInput | number
     maxChildren?: IntFieldUpdateOperationsInput | number
+    maxGuests?: IntFieldUpdateOperationsInput | number
     baseOccupancy?: IntFieldUpdateOperationsInput | number
     size?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -45645,6 +45758,7 @@ export namespace Prisma {
     description?: string | null
     maxAdults: number
     maxChildren: number
+    maxGuests: number
     baseOccupancy: number
     size?: number | null
     createdAt?: Date | string
@@ -45659,6 +45773,7 @@ export namespace Prisma {
     description?: string | null
     maxAdults: number
     maxChildren: number
+    maxGuests: number
     baseOccupancy: number
     size?: number | null
     createdAt?: Date | string
@@ -45704,10 +45819,12 @@ export namespace Prisma {
     checkedInAt?: Date | string | null
     checkedOutAt?: Date | string | null
     noShowAt?: Date | string | null
+    note?: string | null
     checkIn: Date | string
     checkOut: Date | string
     adults?: number
     children?: number
+    totalGuests?: number
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt?: Date | string
@@ -45732,10 +45849,12 @@ export namespace Prisma {
     checkedInAt?: Date | string | null
     checkedOutAt?: Date | string | null
     noShowAt?: Date | string | null
+    note?: string | null
     checkIn: Date | string
     checkOut: Date | string
     adults?: number
     children?: number
+    totalGuests?: number
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt?: Date | string
@@ -45772,6 +45891,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     maxAdults?: IntFieldUpdateOperationsInput | number
     maxChildren?: IntFieldUpdateOperationsInput | number
+    maxGuests?: IntFieldUpdateOperationsInput | number
     baseOccupancy?: IntFieldUpdateOperationsInput | number
     size?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -45786,6 +45906,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     maxAdults?: IntFieldUpdateOperationsInput | number
     maxChildren?: IntFieldUpdateOperationsInput | number
+    maxGuests?: IntFieldUpdateOperationsInput | number
     baseOccupancy?: IntFieldUpdateOperationsInput | number
     size?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -46264,10 +46385,12 @@ export namespace Prisma {
     checkedInAt?: Date | string | null
     checkedOutAt?: Date | string | null
     noShowAt?: Date | string | null
+    note?: string | null
     checkIn: Date | string
     checkOut: Date | string
     adults?: number
     children?: number
+    totalGuests?: number
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt?: Date | string
@@ -46293,10 +46416,12 @@ export namespace Prisma {
     checkedInAt?: Date | string | null
     checkedOutAt?: Date | string | null
     noShowAt?: Date | string | null
+    note?: string | null
     checkIn: Date | string
     checkOut: Date | string
     adults?: number
     children?: number
+    totalGuests?: number
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt?: Date | string
@@ -46332,10 +46457,12 @@ export namespace Prisma {
     checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
+    totalGuests?: IntFieldUpdateOperationsInput | number
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -46361,10 +46488,12 @@ export namespace Prisma {
     checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
+    totalGuests?: IntFieldUpdateOperationsInput | number
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -46384,10 +46513,12 @@ export namespace Prisma {
     checkedInAt?: Date | string | null
     checkedOutAt?: Date | string | null
     noShowAt?: Date | string | null
+    note?: string | null
     checkIn: Date | string
     checkOut: Date | string
     adults?: number
     children?: number
+    totalGuests?: number
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt?: Date | string
@@ -46413,10 +46544,12 @@ export namespace Prisma {
     checkedInAt?: Date | string | null
     checkedOutAt?: Date | string | null
     noShowAt?: Date | string | null
+    note?: string | null
     checkIn: Date | string
     checkOut: Date | string
     adults?: number
     children?: number
+    totalGuests?: number
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt?: Date | string
@@ -46512,10 +46645,12 @@ export namespace Prisma {
     checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
+    totalGuests?: IntFieldUpdateOperationsInput | number
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -46541,10 +46676,12 @@ export namespace Prisma {
     checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
+    totalGuests?: IntFieldUpdateOperationsInput | number
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -46927,10 +47064,12 @@ export namespace Prisma {
     checkedInAt?: Date | string | null
     checkedOutAt?: Date | string | null
     noShowAt?: Date | string | null
+    note?: string | null
     checkIn: Date | string
     checkOut: Date | string
     adults?: number
     children?: number
+    totalGuests?: number
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt?: Date | string
@@ -46956,10 +47095,12 @@ export namespace Prisma {
     checkedInAt?: Date | string | null
     checkedOutAt?: Date | string | null
     noShowAt?: Date | string | null
+    note?: string | null
     checkIn: Date | string
     checkOut: Date | string
     adults?: number
     children?: number
+    totalGuests?: number
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt?: Date | string
@@ -47118,10 +47259,12 @@ export namespace Prisma {
     checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
+    totalGuests?: IntFieldUpdateOperationsInput | number
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47147,10 +47290,12 @@ export namespace Prisma {
     checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
+    totalGuests?: IntFieldUpdateOperationsInput | number
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48634,10 +48779,12 @@ export namespace Prisma {
     checkedInAt?: Date | string | null
     checkedOutAt?: Date | string | null
     noShowAt?: Date | string | null
+    note?: string | null
     checkIn: Date | string
     checkOut: Date | string
     adults?: number
     children?: number
+    totalGuests?: number
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt?: Date | string
@@ -48720,10 +48867,12 @@ export namespace Prisma {
     checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
+    totalGuests?: IntFieldUpdateOperationsInput | number
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48748,10 +48897,12 @@ export namespace Prisma {
     checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
+    totalGuests?: IntFieldUpdateOperationsInput | number
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48774,10 +48925,12 @@ export namespace Prisma {
     checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
+    totalGuests?: IntFieldUpdateOperationsInput | number
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -49114,10 +49267,12 @@ export namespace Prisma {
     checkedInAt?: Date | string | null
     checkedOutAt?: Date | string | null
     noShowAt?: Date | string | null
+    note?: string | null
     checkIn: Date | string
     checkOut: Date | string
     adults?: number
     children?: number
+    totalGuests?: number
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt?: Date | string
@@ -49159,10 +49314,12 @@ export namespace Prisma {
     checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
+    totalGuests?: IntFieldUpdateOperationsInput | number
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -49187,10 +49344,12 @@ export namespace Prisma {
     checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
+    totalGuests?: IntFieldUpdateOperationsInput | number
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -49213,10 +49372,12 @@ export namespace Prisma {
     checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
+    totalGuests?: IntFieldUpdateOperationsInput | number
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -49308,10 +49469,12 @@ export namespace Prisma {
     checkedInAt?: Date | string | null
     checkedOutAt?: Date | string | null
     noShowAt?: Date | string | null
+    note?: string | null
     checkIn: Date | string
     checkOut: Date | string
     adults?: number
     children?: number
+    totalGuests?: number
     type: $Enums.ReservationType
     status: $Enums.ReservationStatus
     createdAt?: Date | string
@@ -49329,10 +49492,12 @@ export namespace Prisma {
     checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
+    totalGuests?: IntFieldUpdateOperationsInput | number
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -49357,10 +49522,12 @@ export namespace Prisma {
     checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
+    totalGuests?: IntFieldUpdateOperationsInput | number
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -49383,10 +49550,12 @@ export namespace Prisma {
     checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
     checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
     adults?: IntFieldUpdateOperationsInput | number
     children?: IntFieldUpdateOperationsInput | number
+    totalGuests?: IntFieldUpdateOperationsInput | number
     type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
     status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

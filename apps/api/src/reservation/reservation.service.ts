@@ -284,7 +284,7 @@ export class ReservationService {
         throw new NotFoundException('Reservation not found');
       }
 
-      if (reservation.status !== ReservationStatus.CONFIRMED) {
+      if (!['CONFIRMED', 'PENDING'].includes(reservation.status)) {
         throw new BadRequestException(
           `Reservation cannot be checked in from ${reservation.status} status`,
         );

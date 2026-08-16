@@ -43,11 +43,13 @@ const ReservationDetails = ({
   const canChangeRoom =
     reservation.status === "CONFIRMED" || reservation.status === "CHECKED_IN";
 
-  const canCheckIn = reservation.status === "CONFIRMED";
+  const canCheckIn =
+    reservation.status === "CONFIRMED" || reservation.status === "PENDING";
 
   const canCheckOut = reservation.status === "CHECKED_IN";
 
-  const canCancel = reservation.status === "CONFIRMED";
+  const canCancel =
+    reservation.status === "CONFIRMED" || reservation.status === "PENDING";
 
   return (
     <Dialog open={openDialog} onOpenChange={setOpenDialog}>

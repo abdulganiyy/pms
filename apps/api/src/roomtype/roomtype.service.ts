@@ -10,7 +10,10 @@ export class RoomtypeService {
 
   create(createRoomTypeDto: CreateRoomTypeDto) {
     return this.prismaService.roomType.create({
-      data: createRoomTypeDto,
+      data: {
+        ...createRoomTypeDto,
+        maxGuests: createRoomTypeDto.maxAdults + createRoomTypeDto.maxChildren,
+      },
     });
   }
 
