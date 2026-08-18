@@ -265,3 +265,21 @@ export type AvailableRoomType = {
   rates: AvailableRate[];
   note?: string;
 };
+
+export type Maintenance = {
+  id: string;
+  title: string;
+  description?: number;
+  status: string;
+  priority: string;
+  assignedTo: User;
+  room: Room;
+};
+
+export type Housekeeping = {
+  id: string;
+  notes?: number;
+  status: string;
+  assignedTo: User;
+  room: Room;
+};

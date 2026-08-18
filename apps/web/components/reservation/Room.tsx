@@ -43,6 +43,7 @@ const CalendarCell = ({
         id: room.id,
         number: room.number,
       },
+      roomType: room.roomType,
       start: day,
       end: day,
     });

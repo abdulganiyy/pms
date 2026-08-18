@@ -10,6 +10,7 @@ import { PrismaService } from '../prisma/prisma.service';
 
 import { CreateMaintenanceTicketDto } from './dto/create-maintenance-ticket.dto';
 import { AssignMaintenanceTicketDto } from './dto/assign-maintenance-ticket.dto';
+import { GetMaintenancesDto } from './dto/get-maintenaces.dto';
 
 @Injectable()
 export class MaintenanceService {
@@ -43,17 +44,45 @@ export class MaintenanceService {
     });
   }
 
-  async findAll() {
-    return this.prisma.maintenance.findMany({
-      orderBy: {
-        createdAt: 'desc',
+  async findAll(query: GetMaintenancesDto) {
+    const { page = 1, limit = 1000, search } = query;
+
+    const skip = (page - 1) * limit;
+
+    let where: any = {};
+
+    if (search) {
+      where.OR = [{ title: { contains: search, mode: 'insensitive' } }];
+    }
+
+    const [maintenaces, total] = await this.prisma.$transaction([
+      this.prisma.maintenance.findMany({
+        where: {
+          ...where,
+        },
+        skip,
+        take: +limit,
+        orderBy: { createdAt: 'desc' },
+
+        include: {
+          room: true,
+          reportedBy: true,
+          assignedTo: true,
+        },
+      }),
+
+      this.prisma.maintenance.count({ where }),
+    ]);
+
+    return {
+      data: maintenaces,
+      meta: {
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit),
       },
-      include: {
-        room: true,
-        reportedBy: true,
-        assignedTo: true,
-      },
-    });
+    };
   }
 
   async findOne(id: string) {

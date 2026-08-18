@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 
@@ -17,6 +18,7 @@ import { JwtGuard } from '../common/guards/jwt.guard';
 import { RolesGuard } from '../common/guards/roles.guard';
 import { Roles } from '../common/decorators/roles.decorator';
 import { RoleName } from '../../generated/prisma';
+import { GetMaintenancesDto } from './dto/get-maintenaces.dto';
 
 @Controller('maintenance')
 @UseGuards(JwtGuard, RolesGuard)
@@ -30,8 +32,8 @@ export class MaintenanceController {
   }
 
   @Get()
-  findAll() {
-    return this.maintenanceService.findAll();
+  findAll(@Query() query: GetMaintenancesDto) {
+    return this.maintenanceService.findAll(query);
   }
 
   @Get(':id')

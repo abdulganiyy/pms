@@ -543,3 +543,64 @@ export const makePaymentFieldConfig: FieldConfig[] = [
     type: "text",
   },
 ];
+
+export const createMaintenanceFieldConfig: FieldConfig[] = [
+  {
+    name: "roomId",
+    label: "Room ID",
+    type: "select",
+  },
+  {
+    name: "title",
+    label: "Title",
+    type: "text",
+  },
+  {
+    name: "description",
+    label: "Description",
+    type: "text",
+  },
+  {
+    name: "priority",
+    label: "Priority",
+    placeholder: "Select Status",
+    type: "select",
+    options: [
+      { label: "Low", value: "LOW" },
+      { label: "Normal", value: "NORMAL" },
+      { label: "High", value: "HIGH" },
+      { label: "Urgent", value: "URGENT" },
+    ],
+  },
+];
+
+export const assignMaintenanceFieldConfig: FieldConfig[] = [
+  {
+    name: "assignedToId",
+    label: "User",
+    placeholder: "Select User",
+    type: "select",
+  },
+];
+
+export const createHousekeepingTaskFieldConfig: FieldConfig[] = [
+  {
+    name: "roomId",
+    label: "Room ID",
+    type: "select",
+  },
+  {
+    name: "notes",
+    label: "Notes",
+    type: "text",
+  },
+];
+
+export const assignHousekeepingTaskFieldConfig: FieldConfig[] = [
+  {
+    name: "assignedToId",
+    label: "User",
+    placeholder: "Select User",
+    type: "select",
+  },
+];

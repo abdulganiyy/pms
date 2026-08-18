@@ -170,3 +170,23 @@ export const makePaymentSchema = z.object({
   method: z.string().min(1, "Payment method is required"),
   reference: z.string().optional(),
 });
+
+export const createMaintenanceSchema = z.object({
+  roomId: z.string().min(1, "Room number is required"),
+  priority: z.enum(["LOW", "NORMAL", "HIGH", "URGENT"]),
+  title: z.string().min(1, "Title is required"),
+  description: z.string().min(1, "Description is required"),
+});
+
+export const assignMaintenanceSchema = z.object({
+  assignedToId: z.string().min(1, "User id is required"),
+});
+
+export const createHousekeepingTaskSchema = z.object({
+  roomId: z.string().min(1, "Room number is required"),
+  notes: z.string().optional(),
+});
+
+export const assignHousekeepingTaskSchema = z.object({
+  assignedToId: z.string().min(1, "User id is required"),
+});

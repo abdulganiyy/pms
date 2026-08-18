@@ -24,6 +24,7 @@ export default function ReservationPage() {
 
   const [selection, setSelection] = useState<{
     roomId: string;
+    roomType: { id: string; name: string };
     start: Date;
     end: Date;
   } | null>(null);

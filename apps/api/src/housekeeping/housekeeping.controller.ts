@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 
@@ -17,6 +18,7 @@ import { JwtGuard } from '../common/guards/jwt.guard';
 import { RolesGuard } from '../common/guards/roles.guard';
 import { Roles } from '../common/decorators/roles.decorator';
 import { RoleName } from '../../generated/prisma';
+import { GetHousekeepingTasksDto } from './dto/get-housekeeping-tasks.dto';
 
 @Controller('housekeeping')
 @UseGuards(JwtGuard, RolesGuard)
@@ -30,8 +32,8 @@ export class HousekeepingController {
   }
 
   @Get()
-  findAll() {
-    return this.housekeepingService.findAll();
+  findAll(@Query() query: GetHousekeepingTasksDto) {
+    return this.housekeepingService.findAll(query);
   }
 
   @Get(':id')

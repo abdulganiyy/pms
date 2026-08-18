@@ -36,10 +36,20 @@ const CreateReservation = ({
     },
   });
 
-  const roomRateOptions = roomRates?.data?.map((roomRate: RoomRate) => ({
-    label: `${roomRate.currency}${roomRate.price}`,
-    value: roomRate.id,
-  }));
+  const roomRateOptions = useMemo(() => {
+    if (!roomRates?.data || !selection?.roomType?.id) {
+      return [];
+    }
+
+    return roomRates.data
+      .filter(
+        (roomRate: RoomRate) => roomRate.roomType.id === selection.roomType.id,
+      )
+      .map((roomRate: RoomRate) => ({
+        label: `${roomRate.ratePlan.name} rate - ${roomRate.currency}${roomRate.price}`,
+        value: roomRate.id,
+      }));
+  }, [roomRates?.data, selection?.roomType?.id]);
 
   const { data: guests } = useQuery({
     queryKey: ["guests"],

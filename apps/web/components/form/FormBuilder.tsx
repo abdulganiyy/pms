@@ -59,8 +59,6 @@ export default function FormBuilder<T extends Record<string, unknown>>({
     }
   }, [values, defaults]);
 
-  console.log(methods.formState.errors);
-
   return (
     <>
       <div className="w-full max-w-xl">

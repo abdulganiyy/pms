@@ -7,6 +7,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { HousekeepingStatus, RoomStatus } from '../../generated/prisma';
 import { CreateHousekeepingTaskDto } from './dto/create-housekeeping-task.dto';
 import { AssignHousekeepingTaskDto } from './dto/assign-housekeeping-task.dto';
+import { GetHousekeepingTasksDto } from './dto/get-housekeeping-tasks.dto';
 
 @Injectable()
 export class HousekeepingService {
@@ -47,16 +48,44 @@ export class HousekeepingService {
     return task;
   }
 
-  async findAll() {
-    return this.prisma.housekeepingTask.findMany({
-      orderBy: {
-        createdAt: 'desc',
+  async findAll(query: GetHousekeepingTasksDto) {
+    const { page = 1, limit = 1000, search } = query;
+
+    const skip = (page - 1) * limit;
+
+    let where: any = {};
+
+    if (search) {
+      where.OR = [];
+    }
+
+    const [housekeepingTasks, total] = await this.prisma.$transaction([
+      this.prisma.housekeepingTask.findMany({
+        where: {
+          ...where,
+        },
+        skip,
+        take: +limit,
+        orderBy: { createdAt: 'desc' },
+
+        include: {
+          room: true,
+          assignedTo: true,
+        },
+      }),
+
+      this.prisma.housekeepingTask.count({ where }),
+    ]);
+
+    return {
+      data: housekeepingTasks,
+      meta: {
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit),
       },
-      include: {
-        room: true,
-        assignedTo: true,
-      },
-    });
+    };
   }
 
   async findOne(id: string) {

@@ -11,6 +11,8 @@ import {
   MessageCircleMore,
   UserRound,
   UsersRound,
+  Brush,
+  Wrench,
 } from "lucide-react";
 
 export type SidebarItem = {
@@ -72,6 +74,18 @@ export const sidebarConfig: SidebarItem[] = [
         label: "Services",
         href: "/dashboard/service",
         permission: "service.view",
+      },
+      {
+        icon: Brush,
+        label: "Housekeeping",
+        href: "/dashboard/housekeeping",
+        permission: "housekeeping.view",
+      },
+      {
+        icon: Wrench,
+        label: "Maintenance",
+        href: "/dashboard/maintenance",
+        permission: "maintenance.view",
       },
     ],
   },
