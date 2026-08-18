@@ -49,7 +49,7 @@ export function TableSkeleton({
             <TableRow key={rowIndex}>
               {Array.from({ length: columns }).map((_, columnIndex) => (
                 <TableCell key={columnIndex}>
-                  <Skeleton className="h-5 w-full max-w-[120px]" />
+                  <Skeleton className="h-5 w-full max-w-30" />
                 </TableCell>
               ))}
             </TableRow>

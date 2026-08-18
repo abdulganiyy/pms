@@ -73,6 +73,7 @@ export type ReservationType = {
   totalAmount: number;
   adults: number;
   children: number;
+  nightlyRate: number;
 };
 
 export type Room = {

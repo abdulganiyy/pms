@@ -13,6 +13,7 @@ import {
   UsersRound,
   Brush,
   Wrench,
+  Monitor,
 } from "lucide-react";
 
 export type SidebarItem = {
@@ -32,25 +33,31 @@ export const sidebarConfig: SidebarItem[] = [
         icon: UserRound,
         label: "Guests",
         href: "/dashboard/guest",
-        permission: "guest.view",
+        permission: "guests.view",
       },
       {
         icon: UsersRound,
         label: "Users",
         href: "/dashboard/user",
-        permission: "user.view",
+        permission: "users.view",
       },
       {
         icon: Bed,
         label: "Rooms",
         href: "/dashboard/room",
-        permission: "room.view",
+        permission: "rooms.view",
       },
       {
         icon: CalendarDays,
         label: "Reservations",
         href: "/dashboard/reservation",
-        permission: "reservation.view",
+        permission: "reservations.view",
+      },
+      {
+        icon: Monitor,
+        label: "Front Desk",
+        href: "/dashboard/frontdesk",
+        permission: "front_desk.view",
       },
     ],
   },
@@ -67,13 +74,13 @@ export const sidebarConfig: SidebarItem[] = [
         icon: CreditCard,
         label: "Billing",
         href: "/dashboard/billing",
-        permission: "billing.view",
+        permission: "reports.folio.view",
       },
       {
         icon: FileText,
         label: "Services",
         href: "/dashboard/service",
-        permission: "service.view",
+        permission: "services.view",
       },
       {
         icon: Brush,

@@ -135,8 +135,7 @@ export class ReservationService {
         take: +limit,
         orderBy: { createdAt: 'desc' },
 
-        select: {
-          id: true,
+        include: {
           guest: true,
           room: true,
         },
