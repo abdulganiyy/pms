@@ -60,6 +60,19 @@ export type TaskType = {
   end: string;
 };
 
+export type ReservationSelection = {
+  start?: Date;
+  end?: Date;
+  room?: {
+    id: string;
+    number: string;
+  };
+  roomType?: {
+    id: string;
+    name: string;
+  };
+};
+
 export type ReservationType = {
   id: string;
   type: string;

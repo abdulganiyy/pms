@@ -16,25 +16,22 @@ import Room from "@/components/reservation/Room";
 import CreateReservation from "@/components/reservation/CreateReservation";
 import { DatePickerWithRange } from "@/components/DateRangePicker";
 import { cn } from "@/lib/utils";
-import { type Room as RoomType } from "@/types";
+import { ReservationSelection, type Room as RoomType } from "@/types";
 import { toast } from "sonner";
 
 export default function FrontDeskPage() {
   const queryClient = useQueryClient();
 
-  const [selection, setSelection] = useState<{
-    roomId: string;
-    roomType: { id: string; name: string };
-    start: Date;
-    end: Date;
-  } | null>(null);
+  const [selection, setSelection] = useState<
+    ReservationSelection | undefined
+  >();
 
   const [isSelecting, setIsSelecting] = useState(false);
   const [openBookingDialog, setOpenBookingDialog] = useState(false);
 
   const [date, setDate] = useState<DateRange | undefined>({
-    from: new Date("2026-08-01"),
-    to: addDays(new Date("2026-08-01"), 30),
+    from: new Date(),
+    to: addDays(new Date(), 30),
   });
 
   const [rooms, setRooms] = useState<RoomType[]>([]);

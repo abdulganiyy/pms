@@ -11,9 +11,10 @@ import { ReservationType } from "@/types";
 
 import { StatusBadge } from "../StatusBadge";
 import { differenceInCalendarDays, format } from "date-fns";
-import { Button } from "@base-ui/react";
-import { Eye, EyeIcon } from "lucide-react";
+import { EyeIcon, Plus } from "lucide-react";
 import ReservationDetails from "./ReservationDetails";
+import { Button } from "../ui/button";
+import CreateReservation from "./CreateReservation";
 
 export const Reservations = () => {
   const [pagination, setPagination] = useState({
@@ -21,12 +22,15 @@ export const Reservations = () => {
     pageSize: 10,
   });
 
+  const [selectedReservation, setSelectedReservation] =
+    useState<ReservationType | null>(null);
+
   const [openCreateReservationDialog, setOpenCreateReservationDialog] =
     useState(false);
   const [openReservationDialog, setOpenReservationDialog] = useState(false);
 
   const { data, isLoading, isError, error, refetch } = useQuery({
-    queryKey: ["rooms", pagination],
+    queryKey: ["reservations", pagination],
     queryFn: async () => {
       const params = buildQueryParams({
         page: String(pagination.pageIndex + 1),
@@ -58,10 +62,13 @@ export const Reservations = () => {
   return (
     <div className="space-y-4">
       <div className="flex justify-end">
-        {/* <CreateRoom
-          openDialog={openCreateRoomDialog}
-          setOpenDialog={setOpenCreateRoomDialog}
-        /> */}
+        <Button onClick={() => setOpenCreateReservationDialog(true)}>
+          <Plus /> Create Reservation
+        </Button>
+        <CreateReservation
+          openBookingDialog={openCreateReservationDialog}
+          setOpenBookingDialog={setOpenCreateReservationDialog}
+        />
       </div>
       <div>
         <CustomTable
@@ -196,14 +203,21 @@ export const Reservations = () => {
               header: "Actions",
               cell: ({ row }) => (
                 <div className="flex gap-2">
-                  <Button onClick={() => setOpenReservationDialog(true)}>
+                  <Button
+                    onClick={() => {
+                      setSelectedReservation(row.original);
+                      setOpenReservationDialog(true);
+                    }}
+                  >
                     <EyeIcon />
                   </Button>
-                  <ReservationDetails
-                    reservation={row.original}
-                    openDialog={openReservationDialog}
-                    setOpenDialog={setOpenReservationDialog}
-                  />
+                  {selectedReservation && (
+                    <ReservationDetails
+                      reservation={selectedReservation}
+                      openDialog={openReservationDialog}
+                      setOpenDialog={setOpenReservationDialog}
+                    />
+                  )}
                 </div>
               ),
             },
