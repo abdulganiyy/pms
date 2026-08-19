@@ -120,13 +120,15 @@ export class UserService {
   }
 
   async updateUser(id: string, dto: UpdateUserDto) {
+    const { roleIds, ...others } = dto;
+
+    if (roleIds !== undefined) {
+      await this.updateRoles(id, roleIds);
+    }
+
     return this.prisma.user.update({
-      where: {
-        id,
-      },
-      data: {
-        ...dto,
-      },
+      where: { id },
+      data: others,
     });
   }
 

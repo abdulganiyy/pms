@@ -14,19 +14,19 @@ import { CreateFolioDto } from './dto/create-folio.dto';
 import { UpdateFolioDto } from './dto/update-folio.dto';
 import { CreateFolioTransactionDto } from '../foliotransaction/dto/create-foliotransaction.dto';
 import { JwtGuard } from '../common/guards/jwt.guard';
-import { RolesGuard } from '../common/guards/roles.guard';
-import { Roles } from '../common/decorators/roles.decorator';
-import { RoleName } from '../../generated/prisma';
+import { Permissions as RequirePermission } from '../common/decorators/permissions.decorator';
+import { PermissionsGuard } from '../common/guards/permissions.guard';
+import { PERMISSIONS } from '../constants/permission.constant';
 import { GetFoliosDto } from './dto/get-folios.dto';
 import { CreateFolioPaymentDto } from './dto/create-folio-payment.dto';
 
-@UseGuards(JwtGuard, RolesGuard)
-@Roles(RoleName.SUPER_ADMIN, RoleName.OWNER, RoleName.FRONT_DESK_MANAGER)
+@UseGuards(JwtGuard, PermissionsGuard)
 @Controller('folio')
 export class FolioController {
   constructor(private readonly folioService: FolioService) {}
 
   @Post(':folioId/transaction')
+  @RequirePermission(PERMISSIONS.FOLIOS_ADD_CHARGE)
   createTransaction(
     @Param('folioId') folioId: string,
     @Body() dto: CreateFolioTransactionDto,
@@ -35,6 +35,7 @@ export class FolioController {
   }
 
   @Get(':id/transaction')
+  @RequirePermission(PERMISSIONS.FOLIOS_VIEW)
   async getFolio(
     @Param('id')
     id: string,
@@ -43,6 +44,7 @@ export class FolioController {
   }
 
   @Post(':id/folio/payment')
+  @RequirePermission(PERMISSIONS.PAYMENTS_COLLECT)
   async createPayment(
     @Param('id')
     id: string,
@@ -54,6 +56,7 @@ export class FolioController {
   }
 
   @Get()
+  @RequirePermission(PERMISSIONS.FOLIOS_VIEW)
   findAll(@Query() query: GetFoliosDto) {
     return this.folioService.findAll(query);
   }

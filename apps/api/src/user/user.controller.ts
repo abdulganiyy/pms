@@ -15,40 +15,39 @@ import {
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { JwtGuard } from '../common/guards/jwt.guard';
-import { RolesGuard } from '../common/guards/roles.guard';
-import { Roles } from '../common/decorators/roles.decorator';
-import { RoleName } from '../../generated/prisma';
 import { GetUsersDto } from './dto/get-users.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { GetUser } from '../common/decorators/get-user.decorator';
 import { PermissionsGuard } from '../common/guards/permissions.guard';
 import { Permissions as RequirePermission } from '../common/decorators/permissions.decorator';
 import { PERMISSIONS } from '../constants/permission.constant';
 import { UpdateUserRolesDto } from './dto/update-user-roles.dto';
 
 @Controller('user')
-@UseGuards(JwtGuard, RolesGuard)
-@Roles(RoleName.SUPER_ADMIN, RoleName.OWNER)
+@UseGuards(JwtGuard, PermissionsGuard)
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
+  @RequirePermission(PERMISSIONS.USERS_CREATE)
   async createUser(@Body() dto: CreateUserDto) {
     return this.userService.createUser(dto);
   }
 
   @Patch(':id')
+  @RequirePermission(PERMISSIONS.USERS_UPDATE)
   updateUser(@Param('id') id: string, @Body() dto: UpdateUserDto) {
     return this.userService.updateUser(id, dto);
   }
 
   @Get()
+  @RequirePermission(PERMISSIONS.USERS_VIEW)
   async getUsers(@Query() query: GetUsersDto) {
     return this.userService.getUsers(query);
   }
 
   @Delete(':id')
+  @RequirePermission(PERMISSIONS.USERS_DELETE)
   async deleteUser(@Param('id') id: string) {
     return this.userService.softdelete(id);
   }

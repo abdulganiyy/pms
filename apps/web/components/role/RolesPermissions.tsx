@@ -105,10 +105,10 @@ export default function RolesPermissions() {
             </p>
           </div>
 
-          <Button onClick={() => setCreateDialogOpen(true)}>
+          {/* <Button onClick={() => setCreateDialogOpen(true)}>
             <Plus className="mr-2 h-4 w-4" />
             New Role
-          </Button>
+          </Button> */}
         </div>
 
         {/* Summary */}

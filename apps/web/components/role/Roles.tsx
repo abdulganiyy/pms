@@ -6,8 +6,6 @@ import { Search, ShieldCheck, MoreHorizontal, Eye } from "lucide-react";
 
 import { CardTitle, CardDescription } from "@/components/ui/card";
 
-import { TabsContent } from "@/components/ui/tabs";
-
 import { Input } from "@/components/ui/input";
 
 import { Button } from "@/components/ui/button";
@@ -148,16 +146,16 @@ export default function Roles({
                   <Eye className="mr-2 h-4 w-4" />
                   View permissions
                 </DropdownMenuItem>
-
+                {/* 
                 <EditRole
                   onOpenChange={setEditDialogOpen}
                   role={role}
                   setSelectedRole={setSelectedRole}
-                />
+                /> */}
 
-                <CloneRole role={role} />
+                {/* <CloneRole role={role} /> */}
 
-                {!role.isSystem && <DeleteRole role={role} />}
+                {/* {!role.isSystem && <DeleteRole role={role} />} */}
               </DropdownMenuContent>
             </DropdownMenu>
           </div>

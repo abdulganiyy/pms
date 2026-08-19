@@ -6,13 +6,15 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { createNewUserFieldConfig } from "@/config";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import FormBuilder from "../form/FormBuilder";
 import z from "zod";
 import axios from "axios";
 import { toast } from "sonner";
 import { Button } from "../ui/button";
 import { UploadResult } from "@/lib/upload";
+import { useMemo } from "react";
+import { Role } from "@/lib/api/roles-permissions";
 
 const uploadSchema = z.object({
   url: z.string(),
@@ -25,6 +27,7 @@ export const createNewUserSchema = z.object({
   email: z.string(),
   phone: z.string(),
   photo: z.array(uploadSchema),
+  roleIds: z.array(z.string()),
 });
 
 type CreateNewUserProps = {
@@ -34,6 +37,32 @@ type CreateNewUserProps = {
 
 const CreateNewUser = ({ openDialog, setOpenDialog }: CreateNewUserProps) => {
   const queryClient = useQueryClient();
+
+  const { data: roles } = useQuery({
+    queryKey: ["roles"],
+    queryFn: async () => {
+      const res = await axios.get("/api/role");
+      return res.data;
+    },
+  });
+
+  const rolesOptions = roles?.map((role: Role) => ({
+    label: role.name,
+    value: role.id,
+  }));
+
+  const fieldConfig = useMemo(
+    () =>
+      createNewUserFieldConfig.map((field) =>
+        field.name === "roleIds"
+          ? {
+              ...field,
+              options: rolesOptions,
+            }
+          : field,
+      ),
+    [],
+  );
 
   const mutation = useMutation({
     mutationFn: async (data: z.infer<typeof createNewUserSchema>) => {
@@ -71,7 +100,7 @@ const CreateNewUser = ({ openDialog, setOpenDialog }: CreateNewUserProps) => {
         <DialogHeader>
           <DialogTitle>Create New User</DialogTitle>
           <FormBuilder
-            config={createNewUserFieldConfig}
+            config={fieldConfig}
             schema={createNewUserSchema}
             onSubmit={onSubmit}
             submitText="Create New User"

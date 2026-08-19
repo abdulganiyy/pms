@@ -1,5 +1,5 @@
 import { editUserFieldConfig } from "@/config";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import FormBuilder from "../form/FormBuilder";
 import z from "zod";
 import axios from "axios";
@@ -15,7 +15,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { Role } from "@/lib/api/roles-permissions";
 
 const uploadSchema = z.object({
   url: z.string(),
@@ -28,6 +29,7 @@ export const EditUserSchema = z.object({
   email: z.string(),
   phone: z.string(),
   photo: z.array(uploadSchema),
+  roleIds: z.array(z.string()),
 });
 
 type EditUserProps = {
@@ -38,11 +40,38 @@ const EditUser = ({ user }: EditUserProps) => {
   const [open, setOpen] = useState(false);
   const queryClient = useQueryClient();
 
+  const { data: roles } = useQuery({
+    queryKey: ["roles"],
+    queryFn: async () => {
+      const res = await axios.get("/api/role");
+      return res.data;
+    },
+  });
+
+  const rolesOptions = roles?.map((role: Role) => ({
+    label: role.name,
+    value: role.id,
+  }));
+
+  const fieldConfig = useMemo(
+    () =>
+      editUserFieldConfig.map((field) =>
+        field.name === "roleIds"
+          ? {
+              ...field,
+              options: rolesOptions,
+            }
+          : field,
+      ),
+    [],
+  );
+
   const defaultValues = {
     fullname: user.fullname,
     email: user.email,
     phone: user.phone,
     photo: user.profileImage ? [{ url: user.profileImage }] : [],
+    roleIds: user.roles.map((role: any) => role.id),
   };
 
   const mutation = useMutation({
@@ -89,7 +118,7 @@ const EditUser = ({ user }: EditUserProps) => {
           <DialogTitle>Edit User Information</DialogTitle>
         </DialogHeader>
         <FormBuilder
-          config={editUserFieldConfig}
+          config={fieldConfig}
           schema={EditUserSchema}
           onSubmit={onSubmit}
           submitText="Edit User"

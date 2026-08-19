@@ -117,7 +117,11 @@ export const createNewUserFieldConfig: FieldConfig[] = [
     label: "Phone Number",
     type: "text",
   },
-
+  {
+    name: "roleIds",
+    label: "Roles",
+    type: "multi-select",
+  },
   {
     name: "photo",
     label: "User Image",

@@ -133,17 +133,17 @@ export default function UserPage() {
             },
           ]}
           searcheable
-          filters={[
-            {
-              column: "status",
-              label: "Sort by status",
-              type: "select",
-              options: [
-                { label: "Active", value: "ACTIVE" },
-                { label: "Pending", value: "PENDING" },
-              ],
-            },
-          ]}
+          // filters={[
+          //   {
+          //     column: "status",
+          //     label: "Sort by status",
+          //     type: "select",
+          //     options: [
+          //       { label: "Active", value: "ACTIVE" },
+          //       { label: "Pending", value: "PENDING" },
+          //     ],
+          //   },
+          // ]}
           meta={data?.meta as { total: number; limit: number }}
           pagination={pagination}
           onPaginationChange={setPagination}
