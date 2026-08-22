@@ -23,8 +23,8 @@ export const editRoomTypeSchema = z.object({
 export const createRatePlanSchema = z.object({
   name: z.string().min(1, "Rate plan name is required"),
   cancellationPolicy: z.string().optional(),
-  includesBreakfast: z.boolean(),
-  refundable: z.boolean(),
+  includesBreakfast: z.boolean().default(false),
+  refundable: z.boolean().default(false),
 });
 
 export const editRatePlanSchema = z.object({
@@ -41,7 +41,7 @@ export const createRoomRateSchema = z
     startDate: z.coerce.date(),
     endDate: z.coerce.date(),
     price: z.coerce.number().min(0, "Price cannot be negative"),
-    currency: z.string().length(3, "Invalid currency"),
+    currency: z.string().length(3, "Invalid currency").default("NGN"),
   })
   .refine((data) => data.endDate > data.startDate, {
     message: "End date must be after start date",
@@ -189,4 +189,55 @@ export const createHousekeepingTaskSchema = z.object({
 
 export const assignHousekeepingTaskSchema = z.object({
   assignedToId: z.string().min(1, "User id is required"),
+});
+
+export const createLaundryItemSchema = z.object({
+  name: z.string().min(1),
+  description: z.string().optional(),
+  type: z.enum(["WASH", "DRY_CLEAN", "IRON", "PRESS", "FOLD", "OTHER"]),
+  price: z.coerce.number().min(0),
+});
+
+export const createLaundryOrderSchema = z.object({
+  guestId: z.string().min(1),
+
+  reservationId: z.string().optional(),
+
+  folioId: z.string().optional(),
+
+  notes: z.string().optional(),
+
+  items: z
+    .array(
+      z.object({
+        laundryItemId: z.string().min(1),
+
+        quantity: z.coerce.number().int().min(1),
+      }),
+    )
+    .min(1),
+});
+
+export const createGymPlanSchema = z.object({
+  name: z.string().min(1),
+
+  description: z.string().optional(),
+
+  duration: z.enum(["DAILY", "WEEKLY", "MONTHLY", "QUARTERLY", "YEARLY"]),
+
+  durationValue: z.coerce.number().int().min(1),
+
+  price: z.coerce.number().min(0),
+});
+
+export const createGymMembershipSchema = z.object({
+  guestId: z.string().min(1),
+
+  reservationId: z.string().optional(),
+
+  planId: z.string().min(1),
+
+  startDate: z.coerce.date(),
+
+  notes: z.string().optional(),
 });

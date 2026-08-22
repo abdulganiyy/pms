@@ -315,6 +315,8 @@ exports.Prisma.PaymentScalarFieldEnum = {
   id: 'id',
   folioId: 'folioId',
   restaurantOrderId: 'restaurantOrderId',
+  laundryOrderId: 'laundryOrderId',
+  gymMembershipId: 'gymMembershipId',
   amount: 'amount',
   refundedAmount: 'refundedAmount',
   status: 'status',
@@ -425,6 +427,78 @@ exports.Prisma.MaintenanceScalarFieldEnum = {
   status: 'status',
   priority: 'priority',
   resolvedAt: 'resolvedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.LaundryItemScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  type: 'type',
+  price: 'price',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.LaundryOrderScalarFieldEnum = {
+  id: 'id',
+  guestId: 'guestId',
+  reservationId: 'reservationId',
+  folioId: 'folioId',
+  status: 'status',
+  paymentStatus: 'paymentStatus',
+  notes: 'notes',
+  subtotal: 'subtotal',
+  tax: 'tax',
+  total: 'total',
+  receivedAt: 'receivedAt',
+  readyAt: 'readyAt',
+  deliveredAt: 'deliveredAt',
+  cancelledAt: 'cancelledAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.LaundryOrderItemScalarFieldEnum = {
+  id: 'id',
+  orderId: 'orderId',
+  laundryItemId: 'laundryItemId',
+  name: 'name',
+  quantity: 'quantity',
+  unitPrice: 'unitPrice',
+  total: 'total',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.GymMembershipPlanScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  duration: 'duration',
+  durationValue: 'durationValue',
+  price: 'price',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.GymMembershipScalarFieldEnum = {
+  id: 'id',
+  guestId: 'guestId',
+  planId: 'planId',
+  reservationId: 'reservationId',
+  status: 'status',
+  paymentStatus: 'paymentStatus',
+  settlementMethod: 'settlementMethod',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  price: 'price',
+  notes: 'notes',
+  activatedAt: 'activatedAt',
+  suspendedAt: 'suspendedAt',
+  cancelledAt: 'cancelledAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -645,6 +719,63 @@ exports.MaintenancePriority = exports.$Enums.MaintenancePriority = {
   URGENT: 'URGENT'
 };
 
+exports.LaundryItemType = exports.$Enums.LaundryItemType = {
+  WASH: 'WASH',
+  DRY_CLEAN: 'DRY_CLEAN',
+  IRON: 'IRON',
+  PRESS: 'PRESS',
+  FOLD: 'FOLD',
+  OTHER: 'OTHER'
+};
+
+exports.LaundryOrderStatus = exports.$Enums.LaundryOrderStatus = {
+  PENDING: 'PENDING',
+  RECEIVED: 'RECEIVED',
+  PROCESSING: 'PROCESSING',
+  READY: 'READY',
+  DELIVERED: 'DELIVERED',
+  CANCELLED: 'CANCELLED'
+};
+
+exports.LaundryPaymentStatus = exports.$Enums.LaundryPaymentStatus = {
+  UNPAID: 'UNPAID',
+  PARTIALLY_PAID: 'PARTIALLY_PAID',
+  PAID: 'PAID',
+  ROOM_CHARGED: 'ROOM_CHARGED',
+  REFUNDED: 'REFUNDED',
+  PARTIALLY_REFUNDED: 'PARTIALLY_REFUNDED'
+};
+
+exports.GymMembershipDuration = exports.$Enums.GymMembershipDuration = {
+  DAILY: 'DAILY',
+  WEEKLY: 'WEEKLY',
+  MONTHLY: 'MONTHLY',
+  QUARTERLY: 'QUARTERLY',
+  YEARLY: 'YEARLY'
+};
+
+exports.GymMembershipStatus = exports.$Enums.GymMembershipStatus = {
+  PENDING: 'PENDING',
+  ACTIVE: 'ACTIVE',
+  EXPIRED: 'EXPIRED',
+  SUSPENDED: 'SUSPENDED',
+  CANCELLED: 'CANCELLED'
+};
+
+exports.GymPaymentStatus = exports.$Enums.GymPaymentStatus = {
+  UNPAID: 'UNPAID',
+  PARTIALLY_PAID: 'PARTIALLY_PAID',
+  PAID: 'PAID',
+  ROOM_CHARGED: 'ROOM_CHARGED',
+  REFUNDED: 'REFUNDED',
+  PARTIALLY_REFUNDED: 'PARTIALLY_REFUNDED'
+};
+
+exports.GymSettlementMethod = exports.$Enums.GymSettlementMethod = {
+  DIRECT_PAYMENT: 'DIRECT_PAYMENT',
+  ROOM_CHARGE: 'ROOM_CHARGE'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Guest: 'Guest',
@@ -671,7 +802,12 @@ exports.Prisma.ModelName = {
   Permission: 'Permission',
   RolePermission: 'RolePermission',
   HousekeepingTask: 'HousekeepingTask',
-  Maintenance: 'Maintenance'
+  Maintenance: 'Maintenance',
+  LaundryItem: 'LaundryItem',
+  LaundryOrder: 'LaundryOrder',
+  LaundryOrderItem: 'LaundryOrderItem',
+  GymMembershipPlan: 'GymMembershipPlan',
+  GymMembership: 'GymMembership'
 };
 
 /**

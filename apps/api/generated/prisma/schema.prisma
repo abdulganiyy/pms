@@ -90,6 +90,8 @@ model Guest {
   emergencyContacts GuestEmergencyContact[]
   paymentMethods    GuestPaymentMethod[]
   restaurantOrders  RestaurantOrder[]
+  laundryOrders     LaundryOrder[]
+  gymMemberships    GymMembership[]
   companyId         String?
   company           Company?                @relation(fields: [companyId], references: [id])
 
@@ -308,6 +310,8 @@ model Reservation {
   auditLogs ReservationAudit[]
 
   restaurantOrders RestaurantOrder[]
+  laundryOrders    LaundryOrder[]
+  gymMemberships   GymMembership[]
 
   createdAt DateTime @default(now())
 
@@ -354,6 +358,8 @@ model Folio {
   transactions FolioTransaction[]
 
   payments Payment[]
+
+  laundryOrders LaundryOrder[]
 }
 
 model FolioTransaction {
@@ -382,6 +388,14 @@ model Payment {
   restaurantOrderId String?
 
   restaurantOrder RestaurantOrder? @relation(fields: [restaurantOrderId], references: [id])
+
+  laundryOrderId String?
+
+  laundryOrder LaundryOrder? @relation(fields: [laundryOrderId], references: [id])
+
+  gymMembershipId String?
+
+  gymMembership GymMembership? @relation(fields: [gymMembershipId], references: [id])
 
   amount Decimal
 
@@ -793,4 +807,201 @@ model Maintenance {
   @@index([assignedToId])
   @@index([status])
   @@index([priority])
+}
+
+enum LaundryOrderStatus {
+  PENDING
+  RECEIVED
+  PROCESSING
+  READY
+  DELIVERED
+  CANCELLED
+}
+
+enum LaundryPaymentStatus {
+  UNPAID
+  PARTIALLY_PAID
+  PAID
+  ROOM_CHARGED
+  REFUNDED
+  PARTIALLY_REFUNDED
+}
+
+enum LaundryItemType {
+  WASH
+  DRY_CLEAN
+  IRON
+  PRESS
+  FOLD
+  OTHER
+}
+
+model LaundryItem {
+  id          String          @id @default(cuid())
+  name        String
+  description String?
+  type        LaundryItemType
+  price       Decimal         @db.Decimal(12, 2)
+  isActive    Boolean         @default(true)
+
+  orderItems LaundryOrderItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([type])
+  @@index([isActive])
+}
+
+model LaundryOrder {
+  id String @id @default(cuid())
+
+  guestId       String
+  reservationId String?
+  folioId       String?
+
+  guest       Guest        @relation(fields: [guestId], references: [id])
+  reservation Reservation? @relation(fields: [reservationId], references: [id])
+  folio       Folio?       @relation(fields: [folioId], references: [id])
+
+  status LaundryOrderStatus @default(PENDING)
+
+  paymentStatus LaundryPaymentStatus @default(UNPAID)
+
+  notes String?
+
+  subtotal Decimal @db.Decimal(12, 2)
+  tax      Decimal @default(0) @db.Decimal(12, 2)
+  total    Decimal @db.Decimal(12, 2)
+
+  receivedAt  DateTime?
+  readyAt     DateTime?
+  deliveredAt DateTime?
+  cancelledAt DateTime?
+
+  items LaundryOrderItem[]
+
+  payments Payment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([guestId])
+  @@index([reservationId])
+  @@index([folioId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model LaundryOrderItem {
+  id String @id @default(cuid())
+
+  orderId       String
+  laundryItemId String
+
+  order       LaundryOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  laundryItem LaundryItem  @relation(fields: [laundryItemId], references: [id])
+
+  name      String
+  quantity  Int
+  unitPrice Decimal @db.Decimal(12, 2)
+  total     Decimal @db.Decimal(12, 2)
+
+  createdAt DateTime @default(now())
+
+  @@index([orderId])
+  @@index([laundryItemId])
+}
+
+enum GymMembershipStatus {
+  PENDING
+  ACTIVE
+  EXPIRED
+  SUSPENDED
+  CANCELLED
+}
+
+enum GymMembershipDuration {
+  DAILY
+  WEEKLY
+  MONTHLY
+  QUARTERLY
+  YEARLY
+}
+
+model GymMembershipPlan {
+  id String @id @default(cuid())
+
+  name        String
+  description String?
+
+  duration      GymMembershipDuration
+  durationValue Int                   @default(1)
+
+  price Decimal @db.Decimal(12, 2)
+
+  isActive Boolean @default(true)
+
+  memberships GymMembership[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([isActive])
+}
+
+enum GymPaymentStatus {
+  UNPAID
+  PARTIALLY_PAID
+  PAID
+  ROOM_CHARGED
+  REFUNDED
+  PARTIALLY_REFUNDED
+}
+
+enum GymSettlementMethod {
+  DIRECT_PAYMENT
+  ROOM_CHARGE
+}
+
+model GymMembership {
+  id String @id @default(cuid())
+
+  guestId String
+  planId  String
+
+  reservationId String?
+  reservation   Reservation? @relation(fields: [reservationId], references: [id])
+
+  guest Guest @relation(fields: [guestId], references: [id])
+
+  plan GymMembershipPlan @relation(fields: [planId], references: [id])
+
+  status GymMembershipStatus @default(PENDING)
+
+  paymentStatus GymPaymentStatus @default(UNPAID)
+
+  settlementMethod GymSettlementMethod?
+
+  startDate DateTime
+  endDate   DateTime
+
+  price Decimal @db.Decimal(12, 2)
+
+  notes String?
+
+  payments Payment[]
+
+  activatedAt DateTime?
+  suspendedAt DateTime?
+  cancelledAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([guestId])
+  @@index([planId])
+  @@index([status])
+  @@index([startDate])
+  @@index([endDate])
 }

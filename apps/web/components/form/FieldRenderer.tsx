@@ -174,7 +174,38 @@ export default function FieldRenderer({ field }: Props) {
             <MultiSelectField field={field} control={control} />
           )}
 
+          {field.type === "number" && (
+            <Input
+              name={rhField.name}
+              ref={rhField.ref}
+              value={
+                rhField.value === undefined || rhField.value === null
+                  ? ""
+                  : Number(rhField.value).toLocaleString("en-US")
+              }
+              onBlur={rhField.onBlur}
+              onChange={(e) => {
+                const rawValue = e.target.value.replace(/,/g, "");
+
+                if (rawValue === "") {
+                  rhField.onChange(undefined);
+                  return;
+                }
+
+                const numberValue = Number(rawValue);
+
+                if (!Number.isNaN(numberValue)) {
+                  rhField.onChange(numberValue);
+                }
+              }}
+              type="text"
+              inputMode="decimal"
+              placeholder={field.placeholder}
+            />
+          )}
+
           {![
+            "number",
             "textarea",
             "select",
             "checkbox",

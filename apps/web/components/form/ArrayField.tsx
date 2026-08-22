@@ -19,6 +19,7 @@ import {
 
 import { Plus, Trash2 } from "lucide-react";
 import { FieldConfig } from "@/types";
+import { SearchableSelect } from "./SearchableSelect";
 
 type ArrayFieldProps = {
   field: FieldConfig;
@@ -68,6 +69,9 @@ export const ArrayField = ({
           <div className="grid grid-cols-2 gap-4">
             {field.fields?.map((childField) => {
               const fieldName = `${field.name}.${index}.${childField.name}`;
+
+              // const childError =
+              //   errors?.[field.name]?.[index]?.[childField.name];
 
               return (
                 <div key={childField.name} className="space-y-2">
@@ -119,6 +123,14 @@ export const ArrayField = ({
                     <Input
                       placeholder={childField.placeholder}
                       {...register(fieldName)}
+                    />
+                  )}
+
+                  {childField.type === "searchable-select" && (
+                    <SearchableSelect
+                      field={childField}
+                      control={control}
+                      name={fieldName}
                     />
                   )}
                 </div>

@@ -103,10 +103,17 @@ export const RoomRates = () => {
             {
               accessorKey: "price",
               header: "Price",
-            },
-            {
-              accessorKey: "currency",
-              header: "Currency",
+              cell: ({ row }) => {
+                return (
+                  <div>
+                    {new Intl.NumberFormat("en-NG", {
+                      style: "currency",
+                      currency: `${row.original.currency ?? "NGN"}`,
+                      maximumFractionDigits: 0,
+                    }).format(row.original.price ?? 0)}
+                  </div>
+                );
+              },
             },
 
             {

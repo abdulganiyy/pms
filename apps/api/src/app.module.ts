@@ -28,6 +28,8 @@ import { PermissionModule } from './permission/permission.module';
 import { HousekeepingModule } from './housekeeping/housekeeping.module';
 import { MaintenanceModule } from './maintenance/maintenance.module';
 import { BookingModule } from './booking/booking.module';
+import { LaundryModule } from './laundry/laundry.module';
+import { GymMembershipModule } from './gym-membership/gym-membership.module';
 
 @Module({
   imports: [
@@ -59,6 +61,8 @@ import { BookingModule } from './booking/booking.module';
     HousekeepingModule,
     MaintenanceModule,
     BookingModule,
+    LaundryModule,
+    GymMembershipModule,
   ],
   controllers: [AppController],
   providers: [AppService, HousekeepingService, MaintenanceService],

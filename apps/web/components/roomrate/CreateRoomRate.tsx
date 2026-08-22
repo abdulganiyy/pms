@@ -5,7 +5,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { createRoomRateFieldConfig, createRoomTypeFieldConfig } from "@/config";
+import { createRoomRateFieldConfig } from "@/config";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import FormBuilder from "../form/FormBuilder";
 import z from "zod";

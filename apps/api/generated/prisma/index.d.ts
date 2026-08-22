@@ -143,6 +143,31 @@ export type HousekeepingTask = $Result.DefaultSelection<Prisma.$HousekeepingTask
  * 
  */
 export type Maintenance = $Result.DefaultSelection<Prisma.$MaintenancePayload>
+/**
+ * Model LaundryItem
+ * 
+ */
+export type LaundryItem = $Result.DefaultSelection<Prisma.$LaundryItemPayload>
+/**
+ * Model LaundryOrder
+ * 
+ */
+export type LaundryOrder = $Result.DefaultSelection<Prisma.$LaundryOrderPayload>
+/**
+ * Model LaundryOrderItem
+ * 
+ */
+export type LaundryOrderItem = $Result.DefaultSelection<Prisma.$LaundryOrderItemPayload>
+/**
+ * Model GymMembershipPlan
+ * 
+ */
+export type GymMembershipPlan = $Result.DefaultSelection<Prisma.$GymMembershipPlanPayload>
+/**
+ * Model GymMembership
+ * 
+ */
+export type GymMembership = $Result.DefaultSelection<Prisma.$GymMembershipPayload>
 
 /**
  * Enums
@@ -417,6 +442,84 @@ export const MaintenancePriority: {
 
 export type MaintenancePriority = (typeof MaintenancePriority)[keyof typeof MaintenancePriority]
 
+
+export const LaundryOrderStatus: {
+  PENDING: 'PENDING',
+  RECEIVED: 'RECEIVED',
+  PROCESSING: 'PROCESSING',
+  READY: 'READY',
+  DELIVERED: 'DELIVERED',
+  CANCELLED: 'CANCELLED'
+};
+
+export type LaundryOrderStatus = (typeof LaundryOrderStatus)[keyof typeof LaundryOrderStatus]
+
+
+export const LaundryPaymentStatus: {
+  UNPAID: 'UNPAID',
+  PARTIALLY_PAID: 'PARTIALLY_PAID',
+  PAID: 'PAID',
+  ROOM_CHARGED: 'ROOM_CHARGED',
+  REFUNDED: 'REFUNDED',
+  PARTIALLY_REFUNDED: 'PARTIALLY_REFUNDED'
+};
+
+export type LaundryPaymentStatus = (typeof LaundryPaymentStatus)[keyof typeof LaundryPaymentStatus]
+
+
+export const LaundryItemType: {
+  WASH: 'WASH',
+  DRY_CLEAN: 'DRY_CLEAN',
+  IRON: 'IRON',
+  PRESS: 'PRESS',
+  FOLD: 'FOLD',
+  OTHER: 'OTHER'
+};
+
+export type LaundryItemType = (typeof LaundryItemType)[keyof typeof LaundryItemType]
+
+
+export const GymMembershipStatus: {
+  PENDING: 'PENDING',
+  ACTIVE: 'ACTIVE',
+  EXPIRED: 'EXPIRED',
+  SUSPENDED: 'SUSPENDED',
+  CANCELLED: 'CANCELLED'
+};
+
+export type GymMembershipStatus = (typeof GymMembershipStatus)[keyof typeof GymMembershipStatus]
+
+
+export const GymMembershipDuration: {
+  DAILY: 'DAILY',
+  WEEKLY: 'WEEKLY',
+  MONTHLY: 'MONTHLY',
+  QUARTERLY: 'QUARTERLY',
+  YEARLY: 'YEARLY'
+};
+
+export type GymMembershipDuration = (typeof GymMembershipDuration)[keyof typeof GymMembershipDuration]
+
+
+export const GymPaymentStatus: {
+  UNPAID: 'UNPAID',
+  PARTIALLY_PAID: 'PARTIALLY_PAID',
+  PAID: 'PAID',
+  ROOM_CHARGED: 'ROOM_CHARGED',
+  REFUNDED: 'REFUNDED',
+  PARTIALLY_REFUNDED: 'PARTIALLY_REFUNDED'
+};
+
+export type GymPaymentStatus = (typeof GymPaymentStatus)[keyof typeof GymPaymentStatus]
+
+
+export const GymSettlementMethod: {
+  DIRECT_PAYMENT: 'DIRECT_PAYMENT',
+  ROOM_CHARGE: 'ROOM_CHARGE'
+};
+
+export type GymSettlementMethod = (typeof GymSettlementMethod)[keyof typeof GymSettlementMethod]
+
 }
 
 export type ReservationAuditAction = $Enums.ReservationAuditAction
@@ -506,6 +609,34 @@ export const MaintenanceStatus: typeof $Enums.MaintenanceStatus
 export type MaintenancePriority = $Enums.MaintenancePriority
 
 export const MaintenancePriority: typeof $Enums.MaintenancePriority
+
+export type LaundryOrderStatus = $Enums.LaundryOrderStatus
+
+export const LaundryOrderStatus: typeof $Enums.LaundryOrderStatus
+
+export type LaundryPaymentStatus = $Enums.LaundryPaymentStatus
+
+export const LaundryPaymentStatus: typeof $Enums.LaundryPaymentStatus
+
+export type LaundryItemType = $Enums.LaundryItemType
+
+export const LaundryItemType: typeof $Enums.LaundryItemType
+
+export type GymMembershipStatus = $Enums.GymMembershipStatus
+
+export const GymMembershipStatus: typeof $Enums.GymMembershipStatus
+
+export type GymMembershipDuration = $Enums.GymMembershipDuration
+
+export const GymMembershipDuration: typeof $Enums.GymMembershipDuration
+
+export type GymPaymentStatus = $Enums.GymPaymentStatus
+
+export const GymPaymentStatus: typeof $Enums.GymPaymentStatus
+
+export type GymSettlementMethod = $Enums.GymSettlementMethod
+
+export const GymSettlementMethod: typeof $Enums.GymSettlementMethod
 
 /**
  * ##  Prisma Client ʲˢ
@@ -887,6 +1018,56 @@ export class PrismaClient<
     * ```
     */
   get maintenance(): Prisma.MaintenanceDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.laundryItem`: Exposes CRUD operations for the **LaundryItem** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more LaundryItems
+    * const laundryItems = await prisma.laundryItem.findMany()
+    * ```
+    */
+  get laundryItem(): Prisma.LaundryItemDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.laundryOrder`: Exposes CRUD operations for the **LaundryOrder** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more LaundryOrders
+    * const laundryOrders = await prisma.laundryOrder.findMany()
+    * ```
+    */
+  get laundryOrder(): Prisma.LaundryOrderDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.laundryOrderItem`: Exposes CRUD operations for the **LaundryOrderItem** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more LaundryOrderItems
+    * const laundryOrderItems = await prisma.laundryOrderItem.findMany()
+    * ```
+    */
+  get laundryOrderItem(): Prisma.LaundryOrderItemDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.gymMembershipPlan`: Exposes CRUD operations for the **GymMembershipPlan** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more GymMembershipPlans
+    * const gymMembershipPlans = await prisma.gymMembershipPlan.findMany()
+    * ```
+    */
+  get gymMembershipPlan(): Prisma.GymMembershipPlanDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.gymMembership`: Exposes CRUD operations for the **GymMembership** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more GymMemberships
+    * const gymMemberships = await prisma.gymMembership.findMany()
+    * ```
+    */
+  get gymMembership(): Prisma.GymMembershipDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1359,7 +1540,12 @@ export namespace Prisma {
     Permission: 'Permission',
     RolePermission: 'RolePermission',
     HousekeepingTask: 'HousekeepingTask',
-    Maintenance: 'Maintenance'
+    Maintenance: 'Maintenance',
+    LaundryItem: 'LaundryItem',
+    LaundryOrder: 'LaundryOrder',
+    LaundryOrderItem: 'LaundryOrderItem',
+    GymMembershipPlan: 'GymMembershipPlan',
+    GymMembership: 'GymMembership'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1375,7 +1561,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "guest" | "guestAddress" | "guestDocument" | "guestEmergencyContact" | "guestPaymentMethod" | "roomType" | "ratePlan" | "room" | "roomRate" | "reservation" | "reservationAudit" | "folio" | "folioTransaction" | "payment" | "paymentRefund" | "restaurantOrder" | "restaurantOrderItem" | "menuItem" | "company" | "role" | "userRole" | "permission" | "rolePermission" | "housekeepingTask" | "maintenance"
+      modelProps: "user" | "guest" | "guestAddress" | "guestDocument" | "guestEmergencyContact" | "guestPaymentMethod" | "roomType" | "ratePlan" | "room" | "roomRate" | "reservation" | "reservationAudit" | "folio" | "folioTransaction" | "payment" | "paymentRefund" | "restaurantOrder" | "restaurantOrderItem" | "menuItem" | "company" | "role" | "userRole" | "permission" | "rolePermission" | "housekeepingTask" | "maintenance" | "laundryItem" | "laundryOrder" | "laundryOrderItem" | "gymMembershipPlan" | "gymMembership"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3303,6 +3489,376 @@ export namespace Prisma {
           }
         }
       }
+      LaundryItem: {
+        payload: Prisma.$LaundryItemPayload<ExtArgs>
+        fields: Prisma.LaundryItemFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.LaundryItemFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaundryItemPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.LaundryItemFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaundryItemPayload>
+          }
+          findFirst: {
+            args: Prisma.LaundryItemFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaundryItemPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.LaundryItemFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaundryItemPayload>
+          }
+          findMany: {
+            args: Prisma.LaundryItemFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaundryItemPayload>[]
+          }
+          create: {
+            args: Prisma.LaundryItemCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaundryItemPayload>
+          }
+          createMany: {
+            args: Prisma.LaundryItemCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.LaundryItemCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaundryItemPayload>[]
+          }
+          delete: {
+            args: Prisma.LaundryItemDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaundryItemPayload>
+          }
+          update: {
+            args: Prisma.LaundryItemUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaundryItemPayload>
+          }
+          deleteMany: {
+            args: Prisma.LaundryItemDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.LaundryItemUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.LaundryItemUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaundryItemPayload>[]
+          }
+          upsert: {
+            args: Prisma.LaundryItemUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaundryItemPayload>
+          }
+          aggregate: {
+            args: Prisma.LaundryItemAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateLaundryItem>
+          }
+          groupBy: {
+            args: Prisma.LaundryItemGroupByArgs<ExtArgs>
+            result: $Utils.Optional<LaundryItemGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.LaundryItemCountArgs<ExtArgs>
+            result: $Utils.Optional<LaundryItemCountAggregateOutputType> | number
+          }
+        }
+      }
+      LaundryOrder: {
+        payload: Prisma.$LaundryOrderPayload<ExtArgs>
+        fields: Prisma.LaundryOrderFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.LaundryOrderFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaundryOrderPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.LaundryOrderFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaundryOrderPayload>
+          }
+          findFirst: {
+            args: Prisma.LaundryOrderFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaundryOrderPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.LaundryOrderFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaundryOrderPayload>
+          }
+          findMany: {
+            args: Prisma.LaundryOrderFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaundryOrderPayload>[]
+          }
+          create: {
+            args: Prisma.LaundryOrderCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaundryOrderPayload>
+          }
+          createMany: {
+            args: Prisma.LaundryOrderCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.LaundryOrderCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaundryOrderPayload>[]
+          }
+          delete: {
+            args: Prisma.LaundryOrderDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaundryOrderPayload>
+          }
+          update: {
+            args: Prisma.LaundryOrderUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaundryOrderPayload>
+          }
+          deleteMany: {
+            args: Prisma.LaundryOrderDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.LaundryOrderUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.LaundryOrderUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaundryOrderPayload>[]
+          }
+          upsert: {
+            args: Prisma.LaundryOrderUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaundryOrderPayload>
+          }
+          aggregate: {
+            args: Prisma.LaundryOrderAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateLaundryOrder>
+          }
+          groupBy: {
+            args: Prisma.LaundryOrderGroupByArgs<ExtArgs>
+            result: $Utils.Optional<LaundryOrderGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.LaundryOrderCountArgs<ExtArgs>
+            result: $Utils.Optional<LaundryOrderCountAggregateOutputType> | number
+          }
+        }
+      }
+      LaundryOrderItem: {
+        payload: Prisma.$LaundryOrderItemPayload<ExtArgs>
+        fields: Prisma.LaundryOrderItemFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.LaundryOrderItemFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaundryOrderItemPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.LaundryOrderItemFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaundryOrderItemPayload>
+          }
+          findFirst: {
+            args: Prisma.LaundryOrderItemFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaundryOrderItemPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.LaundryOrderItemFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaundryOrderItemPayload>
+          }
+          findMany: {
+            args: Prisma.LaundryOrderItemFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaundryOrderItemPayload>[]
+          }
+          create: {
+            args: Prisma.LaundryOrderItemCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaundryOrderItemPayload>
+          }
+          createMany: {
+            args: Prisma.LaundryOrderItemCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.LaundryOrderItemCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaundryOrderItemPayload>[]
+          }
+          delete: {
+            args: Prisma.LaundryOrderItemDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaundryOrderItemPayload>
+          }
+          update: {
+            args: Prisma.LaundryOrderItemUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaundryOrderItemPayload>
+          }
+          deleteMany: {
+            args: Prisma.LaundryOrderItemDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.LaundryOrderItemUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.LaundryOrderItemUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaundryOrderItemPayload>[]
+          }
+          upsert: {
+            args: Prisma.LaundryOrderItemUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LaundryOrderItemPayload>
+          }
+          aggregate: {
+            args: Prisma.LaundryOrderItemAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateLaundryOrderItem>
+          }
+          groupBy: {
+            args: Prisma.LaundryOrderItemGroupByArgs<ExtArgs>
+            result: $Utils.Optional<LaundryOrderItemGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.LaundryOrderItemCountArgs<ExtArgs>
+            result: $Utils.Optional<LaundryOrderItemCountAggregateOutputType> | number
+          }
+        }
+      }
+      GymMembershipPlan: {
+        payload: Prisma.$GymMembershipPlanPayload<ExtArgs>
+        fields: Prisma.GymMembershipPlanFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.GymMembershipPlanFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GymMembershipPlanPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.GymMembershipPlanFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GymMembershipPlanPayload>
+          }
+          findFirst: {
+            args: Prisma.GymMembershipPlanFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GymMembershipPlanPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.GymMembershipPlanFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GymMembershipPlanPayload>
+          }
+          findMany: {
+            args: Prisma.GymMembershipPlanFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GymMembershipPlanPayload>[]
+          }
+          create: {
+            args: Prisma.GymMembershipPlanCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GymMembershipPlanPayload>
+          }
+          createMany: {
+            args: Prisma.GymMembershipPlanCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.GymMembershipPlanCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GymMembershipPlanPayload>[]
+          }
+          delete: {
+            args: Prisma.GymMembershipPlanDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GymMembershipPlanPayload>
+          }
+          update: {
+            args: Prisma.GymMembershipPlanUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GymMembershipPlanPayload>
+          }
+          deleteMany: {
+            args: Prisma.GymMembershipPlanDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.GymMembershipPlanUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.GymMembershipPlanUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GymMembershipPlanPayload>[]
+          }
+          upsert: {
+            args: Prisma.GymMembershipPlanUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GymMembershipPlanPayload>
+          }
+          aggregate: {
+            args: Prisma.GymMembershipPlanAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateGymMembershipPlan>
+          }
+          groupBy: {
+            args: Prisma.GymMembershipPlanGroupByArgs<ExtArgs>
+            result: $Utils.Optional<GymMembershipPlanGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.GymMembershipPlanCountArgs<ExtArgs>
+            result: $Utils.Optional<GymMembershipPlanCountAggregateOutputType> | number
+          }
+        }
+      }
+      GymMembership: {
+        payload: Prisma.$GymMembershipPayload<ExtArgs>
+        fields: Prisma.GymMembershipFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.GymMembershipFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GymMembershipPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.GymMembershipFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GymMembershipPayload>
+          }
+          findFirst: {
+            args: Prisma.GymMembershipFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GymMembershipPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.GymMembershipFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GymMembershipPayload>
+          }
+          findMany: {
+            args: Prisma.GymMembershipFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GymMembershipPayload>[]
+          }
+          create: {
+            args: Prisma.GymMembershipCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GymMembershipPayload>
+          }
+          createMany: {
+            args: Prisma.GymMembershipCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.GymMembershipCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GymMembershipPayload>[]
+          }
+          delete: {
+            args: Prisma.GymMembershipDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GymMembershipPayload>
+          }
+          update: {
+            args: Prisma.GymMembershipUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GymMembershipPayload>
+          }
+          deleteMany: {
+            args: Prisma.GymMembershipDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.GymMembershipUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.GymMembershipUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GymMembershipPayload>[]
+          }
+          upsert: {
+            args: Prisma.GymMembershipUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GymMembershipPayload>
+          }
+          aggregate: {
+            args: Prisma.GymMembershipAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateGymMembership>
+          }
+          groupBy: {
+            args: Prisma.GymMembershipGroupByArgs<ExtArgs>
+            result: $Utils.Optional<GymMembershipGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.GymMembershipCountArgs<ExtArgs>
+            result: $Utils.Optional<GymMembershipCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -3452,6 +4008,11 @@ export namespace Prisma {
     rolePermission?: RolePermissionOmit
     housekeepingTask?: HousekeepingTaskOmit
     maintenance?: MaintenanceOmit
+    laundryItem?: LaundryItemOmit
+    laundryOrder?: LaundryOrderOmit
+    laundryOrderItem?: LaundryOrderItemOmit
+    gymMembershipPlan?: GymMembershipPlanOmit
+    gymMembership?: GymMembershipOmit
   }
 
   /* Types for Logging */
@@ -3596,6 +4157,8 @@ export namespace Prisma {
     emergencyContacts: number
     paymentMethods: number
     restaurantOrders: number
+    laundryOrders: number
+    gymMemberships: number
   }
 
   export type GuestCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3605,6 +4168,8 @@ export namespace Prisma {
     emergencyContacts?: boolean | GuestCountOutputTypeCountEmergencyContactsArgs
     paymentMethods?: boolean | GuestCountOutputTypeCountPaymentMethodsArgs
     restaurantOrders?: boolean | GuestCountOutputTypeCountRestaurantOrdersArgs
+    laundryOrders?: boolean | GuestCountOutputTypeCountLaundryOrdersArgs
+    gymMemberships?: boolean | GuestCountOutputTypeCountGymMembershipsArgs
   }
 
   // Custom InputTypes
@@ -3658,6 +4223,20 @@ export namespace Prisma {
    */
   export type GuestCountOutputTypeCountRestaurantOrdersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: RestaurantOrderWhereInput
+  }
+
+  /**
+   * GuestCountOutputType without action
+   */
+  export type GuestCountOutputTypeCountLaundryOrdersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LaundryOrderWhereInput
+  }
+
+  /**
+   * GuestCountOutputType without action
+   */
+  export type GuestCountOutputTypeCountGymMembershipsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GymMembershipWhereInput
   }
 
 
@@ -3819,11 +4398,15 @@ export namespace Prisma {
   export type ReservationCountOutputType = {
     auditLogs: number
     restaurantOrders: number
+    laundryOrders: number
+    gymMemberships: number
   }
 
   export type ReservationCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     auditLogs?: boolean | ReservationCountOutputTypeCountAuditLogsArgs
     restaurantOrders?: boolean | ReservationCountOutputTypeCountRestaurantOrdersArgs
+    laundryOrders?: boolean | ReservationCountOutputTypeCountLaundryOrdersArgs
+    gymMemberships?: boolean | ReservationCountOutputTypeCountGymMembershipsArgs
   }
 
   // Custom InputTypes
@@ -3851,6 +4434,20 @@ export namespace Prisma {
     where?: RestaurantOrderWhereInput
   }
 
+  /**
+   * ReservationCountOutputType without action
+   */
+  export type ReservationCountOutputTypeCountLaundryOrdersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LaundryOrderWhereInput
+  }
+
+  /**
+   * ReservationCountOutputType without action
+   */
+  export type ReservationCountOutputTypeCountGymMembershipsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GymMembershipWhereInput
+  }
+
 
   /**
    * Count Type FolioCountOutputType
@@ -3859,11 +4456,13 @@ export namespace Prisma {
   export type FolioCountOutputType = {
     transactions: number
     payments: number
+    laundryOrders: number
   }
 
   export type FolioCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     transactions?: boolean | FolioCountOutputTypeCountTransactionsArgs
     payments?: boolean | FolioCountOutputTypeCountPaymentsArgs
+    laundryOrders?: boolean | FolioCountOutputTypeCountLaundryOrdersArgs
   }
 
   // Custom InputTypes
@@ -3889,6 +4488,13 @@ export namespace Prisma {
    */
   export type FolioCountOutputTypeCountPaymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PaymentWhereInput
+  }
+
+  /**
+   * FolioCountOutputType without action
+   */
+  export type FolioCountOutputTypeCountLaundryOrdersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LaundryOrderWhereInput
   }
 
 
@@ -4093,6 +4699,139 @@ export namespace Prisma {
    */
   export type PermissionCountOutputTypeCountRolePermissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: RolePermissionWhereInput
+  }
+
+
+  /**
+   * Count Type LaundryItemCountOutputType
+   */
+
+  export type LaundryItemCountOutputType = {
+    orderItems: number
+  }
+
+  export type LaundryItemCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    orderItems?: boolean | LaundryItemCountOutputTypeCountOrderItemsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * LaundryItemCountOutputType without action
+   */
+  export type LaundryItemCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryItemCountOutputType
+     */
+    select?: LaundryItemCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * LaundryItemCountOutputType without action
+   */
+  export type LaundryItemCountOutputTypeCountOrderItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LaundryOrderItemWhereInput
+  }
+
+
+  /**
+   * Count Type LaundryOrderCountOutputType
+   */
+
+  export type LaundryOrderCountOutputType = {
+    items: number
+    payments: number
+  }
+
+  export type LaundryOrderCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    items?: boolean | LaundryOrderCountOutputTypeCountItemsArgs
+    payments?: boolean | LaundryOrderCountOutputTypeCountPaymentsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * LaundryOrderCountOutputType without action
+   */
+  export type LaundryOrderCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryOrderCountOutputType
+     */
+    select?: LaundryOrderCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * LaundryOrderCountOutputType without action
+   */
+  export type LaundryOrderCountOutputTypeCountItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LaundryOrderItemWhereInput
+  }
+
+  /**
+   * LaundryOrderCountOutputType without action
+   */
+  export type LaundryOrderCountOutputTypeCountPaymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PaymentWhereInput
+  }
+
+
+  /**
+   * Count Type GymMembershipPlanCountOutputType
+   */
+
+  export type GymMembershipPlanCountOutputType = {
+    memberships: number
+  }
+
+  export type GymMembershipPlanCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    memberships?: boolean | GymMembershipPlanCountOutputTypeCountMembershipsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * GymMembershipPlanCountOutputType without action
+   */
+  export type GymMembershipPlanCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GymMembershipPlanCountOutputType
+     */
+    select?: GymMembershipPlanCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * GymMembershipPlanCountOutputType without action
+   */
+  export type GymMembershipPlanCountOutputTypeCountMembershipsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GymMembershipWhereInput
+  }
+
+
+  /**
+   * Count Type GymMembershipCountOutputType
+   */
+
+  export type GymMembershipCountOutputType = {
+    payments: number
+  }
+
+  export type GymMembershipCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    payments?: boolean | GymMembershipCountOutputTypeCountPaymentsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * GymMembershipCountOutputType without action
+   */
+  export type GymMembershipCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GymMembershipCountOutputType
+     */
+    select?: GymMembershipCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * GymMembershipCountOutputType without action
+   */
+  export type GymMembershipCountOutputTypeCountPaymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PaymentWhereInput
   }
 
 
@@ -5812,6 +6551,8 @@ export namespace Prisma {
     emergencyContacts?: boolean | Guest$emergencyContactsArgs<ExtArgs>
     paymentMethods?: boolean | Guest$paymentMethodsArgs<ExtArgs>
     restaurantOrders?: boolean | Guest$restaurantOrdersArgs<ExtArgs>
+    laundryOrders?: boolean | Guest$laundryOrdersArgs<ExtArgs>
+    gymMemberships?: boolean | Guest$gymMembershipsArgs<ExtArgs>
     company?: boolean | Guest$companyArgs<ExtArgs>
     _count?: boolean | GuestCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["guest"]>
@@ -5898,6 +6639,8 @@ export namespace Prisma {
     emergencyContacts?: boolean | Guest$emergencyContactsArgs<ExtArgs>
     paymentMethods?: boolean | Guest$paymentMethodsArgs<ExtArgs>
     restaurantOrders?: boolean | Guest$restaurantOrdersArgs<ExtArgs>
+    laundryOrders?: boolean | Guest$laundryOrdersArgs<ExtArgs>
+    gymMemberships?: boolean | Guest$gymMembershipsArgs<ExtArgs>
     company?: boolean | Guest$companyArgs<ExtArgs>
     _count?: boolean | GuestCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -5917,6 +6660,8 @@ export namespace Prisma {
       emergencyContacts: Prisma.$GuestEmergencyContactPayload<ExtArgs>[]
       paymentMethods: Prisma.$GuestPaymentMethodPayload<ExtArgs>[]
       restaurantOrders: Prisma.$RestaurantOrderPayload<ExtArgs>[]
+      laundryOrders: Prisma.$LaundryOrderPayload<ExtArgs>[]
+      gymMemberships: Prisma.$GymMembershipPayload<ExtArgs>[]
       company: Prisma.$CompanyPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -6341,6 +7086,8 @@ export namespace Prisma {
     emergencyContacts<T extends Guest$emergencyContactsArgs<ExtArgs> = {}>(args?: Subset<T, Guest$emergencyContactsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GuestEmergencyContactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     paymentMethods<T extends Guest$paymentMethodsArgs<ExtArgs> = {}>(args?: Subset<T, Guest$paymentMethodsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GuestPaymentMethodPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     restaurantOrders<T extends Guest$restaurantOrdersArgs<ExtArgs> = {}>(args?: Subset<T, Guest$restaurantOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RestaurantOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    laundryOrders<T extends Guest$laundryOrdersArgs<ExtArgs> = {}>(args?: Subset<T, Guest$laundryOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LaundryOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    gymMemberships<T extends Guest$gymMembershipsArgs<ExtArgs> = {}>(args?: Subset<T, Guest$gymMembershipsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GymMembershipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     company<T extends Guest$companyArgs<ExtArgs> = {}>(args?: Subset<T, Guest$companyArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -6934,6 +7681,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: RestaurantOrderScalarFieldEnum | RestaurantOrderScalarFieldEnum[]
+  }
+
+  /**
+   * Guest.laundryOrders
+   */
+  export type Guest$laundryOrdersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryOrder
+     */
+    select?: LaundryOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryOrder
+     */
+    omit?: LaundryOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryOrderInclude<ExtArgs> | null
+    where?: LaundryOrderWhereInput
+    orderBy?: LaundryOrderOrderByWithRelationInput | LaundryOrderOrderByWithRelationInput[]
+    cursor?: LaundryOrderWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LaundryOrderScalarFieldEnum | LaundryOrderScalarFieldEnum[]
+  }
+
+  /**
+   * Guest.gymMemberships
+   */
+  export type Guest$gymMembershipsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GymMembership
+     */
+    select?: GymMembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GymMembership
+     */
+    omit?: GymMembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GymMembershipInclude<ExtArgs> | null
+    where?: GymMembershipWhereInput
+    orderBy?: GymMembershipOrderByWithRelationInput | GymMembershipOrderByWithRelationInput[]
+    cursor?: GymMembershipWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GymMembershipScalarFieldEnum | GymMembershipScalarFieldEnum[]
   }
 
   /**
@@ -16533,6 +17328,8 @@ export namespace Prisma {
     folio?: boolean | Reservation$folioArgs<ExtArgs>
     auditLogs?: boolean | Reservation$auditLogsArgs<ExtArgs>
     restaurantOrders?: boolean | Reservation$restaurantOrdersArgs<ExtArgs>
+    laundryOrders?: boolean | Reservation$laundryOrdersArgs<ExtArgs>
+    gymMemberships?: boolean | Reservation$gymMembershipsArgs<ExtArgs>
     _count?: boolean | ReservationCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["reservation"]>
 
@@ -16628,6 +17425,8 @@ export namespace Prisma {
     folio?: boolean | Reservation$folioArgs<ExtArgs>
     auditLogs?: boolean | Reservation$auditLogsArgs<ExtArgs>
     restaurantOrders?: boolean | Reservation$restaurantOrdersArgs<ExtArgs>
+    laundryOrders?: boolean | Reservation$laundryOrdersArgs<ExtArgs>
+    gymMemberships?: boolean | Reservation$gymMembershipsArgs<ExtArgs>
     _count?: boolean | ReservationCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ReservationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -16650,6 +17449,8 @@ export namespace Prisma {
       folio: Prisma.$FolioPayload<ExtArgs> | null
       auditLogs: Prisma.$ReservationAuditPayload<ExtArgs>[]
       restaurantOrders: Prisma.$RestaurantOrderPayload<ExtArgs>[]
+      laundryOrders: Prisma.$LaundryOrderPayload<ExtArgs>[]
+      gymMemberships: Prisma.$GymMembershipPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -17075,6 +17876,8 @@ export namespace Prisma {
     folio<T extends Reservation$folioArgs<ExtArgs> = {}>(args?: Subset<T, Reservation$folioArgs<ExtArgs>>): Prisma__FolioClient<$Result.GetResult<Prisma.$FolioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     auditLogs<T extends Reservation$auditLogsArgs<ExtArgs> = {}>(args?: Subset<T, Reservation$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReservationAuditPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     restaurantOrders<T extends Reservation$restaurantOrdersArgs<ExtArgs> = {}>(args?: Subset<T, Reservation$restaurantOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RestaurantOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    laundryOrders<T extends Reservation$laundryOrdersArgs<ExtArgs> = {}>(args?: Subset<T, Reservation$laundryOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LaundryOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    gymMemberships<T extends Reservation$gymMembershipsArgs<ExtArgs> = {}>(args?: Subset<T, Reservation$gymMembershipsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GymMembershipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -17592,6 +18395,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: RestaurantOrderScalarFieldEnum | RestaurantOrderScalarFieldEnum[]
+  }
+
+  /**
+   * Reservation.laundryOrders
+   */
+  export type Reservation$laundryOrdersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryOrder
+     */
+    select?: LaundryOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryOrder
+     */
+    omit?: LaundryOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryOrderInclude<ExtArgs> | null
+    where?: LaundryOrderWhereInput
+    orderBy?: LaundryOrderOrderByWithRelationInput | LaundryOrderOrderByWithRelationInput[]
+    cursor?: LaundryOrderWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LaundryOrderScalarFieldEnum | LaundryOrderScalarFieldEnum[]
+  }
+
+  /**
+   * Reservation.gymMemberships
+   */
+  export type Reservation$gymMembershipsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GymMembership
+     */
+    select?: GymMembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GymMembership
+     */
+    omit?: GymMembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GymMembershipInclude<ExtArgs> | null
+    where?: GymMembershipWhereInput
+    orderBy?: GymMembershipOrderByWithRelationInput | GymMembershipOrderByWithRelationInput[]
+    cursor?: GymMembershipWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GymMembershipScalarFieldEnum | GymMembershipScalarFieldEnum[]
   }
 
   /**
@@ -18850,6 +19701,7 @@ export namespace Prisma {
     reservation?: boolean | ReservationDefaultArgs<ExtArgs>
     transactions?: boolean | Folio$transactionsArgs<ExtArgs>
     payments?: boolean | Folio$paymentsArgs<ExtArgs>
+    laundryOrders?: boolean | Folio$laundryOrdersArgs<ExtArgs>
     _count?: boolean | FolioCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["folio"]>
 
@@ -18875,6 +19727,7 @@ export namespace Prisma {
     reservation?: boolean | ReservationDefaultArgs<ExtArgs>
     transactions?: boolean | Folio$transactionsArgs<ExtArgs>
     payments?: boolean | Folio$paymentsArgs<ExtArgs>
+    laundryOrders?: boolean | Folio$laundryOrdersArgs<ExtArgs>
     _count?: boolean | FolioCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type FolioIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -18890,6 +19743,7 @@ export namespace Prisma {
       reservation: Prisma.$ReservationPayload<ExtArgs>
       transactions: Prisma.$FolioTransactionPayload<ExtArgs>[]
       payments: Prisma.$PaymentPayload<ExtArgs>[]
+      laundryOrders: Prisma.$LaundryOrderPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -19291,6 +20145,7 @@ export namespace Prisma {
     reservation<T extends ReservationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ReservationDefaultArgs<ExtArgs>>): Prisma__ReservationClient<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     transactions<T extends Folio$transactionsArgs<ExtArgs> = {}>(args?: Subset<T, Folio$transactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FolioTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     payments<T extends Folio$paymentsArgs<ExtArgs> = {}>(args?: Subset<T, Folio$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    laundryOrders<T extends Folio$laundryOrdersArgs<ExtArgs> = {}>(args?: Subset<T, Folio$laundryOrdersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LaundryOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -19768,6 +20623,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PaymentScalarFieldEnum | PaymentScalarFieldEnum[]
+  }
+
+  /**
+   * Folio.laundryOrders
+   */
+  export type Folio$laundryOrdersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryOrder
+     */
+    select?: LaundryOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryOrder
+     */
+    omit?: LaundryOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryOrderInclude<ExtArgs> | null
+    where?: LaundryOrderWhereInput
+    orderBy?: LaundryOrderOrderByWithRelationInput | LaundryOrderOrderByWithRelationInput[]
+    cursor?: LaundryOrderWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LaundryOrderScalarFieldEnum | LaundryOrderScalarFieldEnum[]
   }
 
   /**
@@ -20925,6 +21804,8 @@ export namespace Prisma {
     id: string | null
     folioId: string | null
     restaurantOrderId: string | null
+    laundryOrderId: string | null
+    gymMembershipId: string | null
     amount: Decimal | null
     refundedAmount: Decimal | null
     status: $Enums.PaymentStatus | null
@@ -20937,6 +21818,8 @@ export namespace Prisma {
     id: string | null
     folioId: string | null
     restaurantOrderId: string | null
+    laundryOrderId: string | null
+    gymMembershipId: string | null
     amount: Decimal | null
     refundedAmount: Decimal | null
     status: $Enums.PaymentStatus | null
@@ -20949,6 +21832,8 @@ export namespace Prisma {
     id: number
     folioId: number
     restaurantOrderId: number
+    laundryOrderId: number
+    gymMembershipId: number
     amount: number
     refundedAmount: number
     status: number
@@ -20973,6 +21858,8 @@ export namespace Prisma {
     id?: true
     folioId?: true
     restaurantOrderId?: true
+    laundryOrderId?: true
+    gymMembershipId?: true
     amount?: true
     refundedAmount?: true
     status?: true
@@ -20985,6 +21872,8 @@ export namespace Prisma {
     id?: true
     folioId?: true
     restaurantOrderId?: true
+    laundryOrderId?: true
+    gymMembershipId?: true
     amount?: true
     refundedAmount?: true
     status?: true
@@ -20997,6 +21886,8 @@ export namespace Prisma {
     id?: true
     folioId?: true
     restaurantOrderId?: true
+    laundryOrderId?: true
+    gymMembershipId?: true
     amount?: true
     refundedAmount?: true
     status?: true
@@ -21096,6 +21987,8 @@ export namespace Prisma {
     id: string
     folioId: string | null
     restaurantOrderId: string | null
+    laundryOrderId: string | null
+    gymMembershipId: string | null
     amount: Decimal
     refundedAmount: Decimal
     status: $Enums.PaymentStatus
@@ -21127,6 +22020,8 @@ export namespace Prisma {
     id?: boolean
     folioId?: boolean
     restaurantOrderId?: boolean
+    laundryOrderId?: boolean
+    gymMembershipId?: boolean
     amount?: boolean
     refundedAmount?: boolean
     status?: boolean
@@ -21135,6 +22030,8 @@ export namespace Prisma {
     createdAt?: boolean
     folio?: boolean | Payment$folioArgs<ExtArgs>
     restaurantOrder?: boolean | Payment$restaurantOrderArgs<ExtArgs>
+    laundryOrder?: boolean | Payment$laundryOrderArgs<ExtArgs>
+    gymMembership?: boolean | Payment$gymMembershipArgs<ExtArgs>
     refunds?: boolean | Payment$refundsArgs<ExtArgs>
     _count?: boolean | PaymentCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["payment"]>
@@ -21143,6 +22040,8 @@ export namespace Prisma {
     id?: boolean
     folioId?: boolean
     restaurantOrderId?: boolean
+    laundryOrderId?: boolean
+    gymMembershipId?: boolean
     amount?: boolean
     refundedAmount?: boolean
     status?: boolean
@@ -21151,12 +22050,16 @@ export namespace Prisma {
     createdAt?: boolean
     folio?: boolean | Payment$folioArgs<ExtArgs>
     restaurantOrder?: boolean | Payment$restaurantOrderArgs<ExtArgs>
+    laundryOrder?: boolean | Payment$laundryOrderArgs<ExtArgs>
+    gymMembership?: boolean | Payment$gymMembershipArgs<ExtArgs>
   }, ExtArgs["result"]["payment"]>
 
   export type PaymentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     folioId?: boolean
     restaurantOrderId?: boolean
+    laundryOrderId?: boolean
+    gymMembershipId?: boolean
     amount?: boolean
     refundedAmount?: boolean
     status?: boolean
@@ -21165,12 +22068,16 @@ export namespace Prisma {
     createdAt?: boolean
     folio?: boolean | Payment$folioArgs<ExtArgs>
     restaurantOrder?: boolean | Payment$restaurantOrderArgs<ExtArgs>
+    laundryOrder?: boolean | Payment$laundryOrderArgs<ExtArgs>
+    gymMembership?: boolean | Payment$gymMembershipArgs<ExtArgs>
   }, ExtArgs["result"]["payment"]>
 
   export type PaymentSelectScalar = {
     id?: boolean
     folioId?: boolean
     restaurantOrderId?: boolean
+    laundryOrderId?: boolean
+    gymMembershipId?: boolean
     amount?: boolean
     refundedAmount?: boolean
     status?: boolean
@@ -21179,20 +22086,26 @@ export namespace Prisma {
     createdAt?: boolean
   }
 
-  export type PaymentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "folioId" | "restaurantOrderId" | "amount" | "refundedAmount" | "status" | "reference" | "method" | "createdAt", ExtArgs["result"]["payment"]>
+  export type PaymentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "folioId" | "restaurantOrderId" | "laundryOrderId" | "gymMembershipId" | "amount" | "refundedAmount" | "status" | "reference" | "method" | "createdAt", ExtArgs["result"]["payment"]>
   export type PaymentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     folio?: boolean | Payment$folioArgs<ExtArgs>
     restaurantOrder?: boolean | Payment$restaurantOrderArgs<ExtArgs>
+    laundryOrder?: boolean | Payment$laundryOrderArgs<ExtArgs>
+    gymMembership?: boolean | Payment$gymMembershipArgs<ExtArgs>
     refunds?: boolean | Payment$refundsArgs<ExtArgs>
     _count?: boolean | PaymentCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PaymentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     folio?: boolean | Payment$folioArgs<ExtArgs>
     restaurantOrder?: boolean | Payment$restaurantOrderArgs<ExtArgs>
+    laundryOrder?: boolean | Payment$laundryOrderArgs<ExtArgs>
+    gymMembership?: boolean | Payment$gymMembershipArgs<ExtArgs>
   }
   export type PaymentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     folio?: boolean | Payment$folioArgs<ExtArgs>
     restaurantOrder?: boolean | Payment$restaurantOrderArgs<ExtArgs>
+    laundryOrder?: boolean | Payment$laundryOrderArgs<ExtArgs>
+    gymMembership?: boolean | Payment$gymMembershipArgs<ExtArgs>
   }
 
   export type $PaymentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -21200,12 +22113,16 @@ export namespace Prisma {
     objects: {
       folio: Prisma.$FolioPayload<ExtArgs> | null
       restaurantOrder: Prisma.$RestaurantOrderPayload<ExtArgs> | null
+      laundryOrder: Prisma.$LaundryOrderPayload<ExtArgs> | null
+      gymMembership: Prisma.$GymMembershipPayload<ExtArgs> | null
       refunds: Prisma.$PaymentRefundPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       folioId: string | null
       restaurantOrderId: string | null
+      laundryOrderId: string | null
+      gymMembershipId: string | null
       amount: Prisma.Decimal
       refundedAmount: Prisma.Decimal
       status: $Enums.PaymentStatus
@@ -21608,6 +22525,8 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     folio<T extends Payment$folioArgs<ExtArgs> = {}>(args?: Subset<T, Payment$folioArgs<ExtArgs>>): Prisma__FolioClient<$Result.GetResult<Prisma.$FolioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     restaurantOrder<T extends Payment$restaurantOrderArgs<ExtArgs> = {}>(args?: Subset<T, Payment$restaurantOrderArgs<ExtArgs>>): Prisma__RestaurantOrderClient<$Result.GetResult<Prisma.$RestaurantOrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    laundryOrder<T extends Payment$laundryOrderArgs<ExtArgs> = {}>(args?: Subset<T, Payment$laundryOrderArgs<ExtArgs>>): Prisma__LaundryOrderClient<$Result.GetResult<Prisma.$LaundryOrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    gymMembership<T extends Payment$gymMembershipArgs<ExtArgs> = {}>(args?: Subset<T, Payment$gymMembershipArgs<ExtArgs>>): Prisma__GymMembershipClient<$Result.GetResult<Prisma.$GymMembershipPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     refunds<T extends Payment$refundsArgs<ExtArgs> = {}>(args?: Subset<T, Payment$refundsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentRefundPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -21641,6 +22560,8 @@ export namespace Prisma {
     readonly id: FieldRef<"Payment", 'String'>
     readonly folioId: FieldRef<"Payment", 'String'>
     readonly restaurantOrderId: FieldRef<"Payment", 'String'>
+    readonly laundryOrderId: FieldRef<"Payment", 'String'>
+    readonly gymMembershipId: FieldRef<"Payment", 'String'>
     readonly amount: FieldRef<"Payment", 'Decimal'>
     readonly refundedAmount: FieldRef<"Payment", 'Decimal'>
     readonly status: FieldRef<"Payment", 'PaymentStatus'>
@@ -22083,6 +23004,44 @@ export namespace Prisma {
      */
     include?: RestaurantOrderInclude<ExtArgs> | null
     where?: RestaurantOrderWhereInput
+  }
+
+  /**
+   * Payment.laundryOrder
+   */
+  export type Payment$laundryOrderArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryOrder
+     */
+    select?: LaundryOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryOrder
+     */
+    omit?: LaundryOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryOrderInclude<ExtArgs> | null
+    where?: LaundryOrderWhereInput
+  }
+
+  /**
+   * Payment.gymMembership
+   */
+  export type Payment$gymMembershipArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GymMembership
+     */
+    select?: GymMembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GymMembership
+     */
+    omit?: GymMembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GymMembershipInclude<ExtArgs> | null
+    where?: GymMembershipWhereInput
   }
 
   /**
@@ -34512,6 +35471,6136 @@ export namespace Prisma {
 
 
   /**
+   * Model LaundryItem
+   */
+
+  export type AggregateLaundryItem = {
+    _count: LaundryItemCountAggregateOutputType | null
+    _avg: LaundryItemAvgAggregateOutputType | null
+    _sum: LaundryItemSumAggregateOutputType | null
+    _min: LaundryItemMinAggregateOutputType | null
+    _max: LaundryItemMaxAggregateOutputType | null
+  }
+
+  export type LaundryItemAvgAggregateOutputType = {
+    price: Decimal | null
+  }
+
+  export type LaundryItemSumAggregateOutputType = {
+    price: Decimal | null
+  }
+
+  export type LaundryItemMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    description: string | null
+    type: $Enums.LaundryItemType | null
+    price: Decimal | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type LaundryItemMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    description: string | null
+    type: $Enums.LaundryItemType | null
+    price: Decimal | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type LaundryItemCountAggregateOutputType = {
+    id: number
+    name: number
+    description: number
+    type: number
+    price: number
+    isActive: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type LaundryItemAvgAggregateInputType = {
+    price?: true
+  }
+
+  export type LaundryItemSumAggregateInputType = {
+    price?: true
+  }
+
+  export type LaundryItemMinAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    type?: true
+    price?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type LaundryItemMaxAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    type?: true
+    price?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type LaundryItemCountAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    type?: true
+    price?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type LaundryItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LaundryItem to aggregate.
+     */
+    where?: LaundryItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LaundryItems to fetch.
+     */
+    orderBy?: LaundryItemOrderByWithRelationInput | LaundryItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: LaundryItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LaundryItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LaundryItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned LaundryItems
+    **/
+    _count?: true | LaundryItemCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: LaundryItemAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: LaundryItemSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: LaundryItemMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: LaundryItemMaxAggregateInputType
+  }
+
+  export type GetLaundryItemAggregateType<T extends LaundryItemAggregateArgs> = {
+        [P in keyof T & keyof AggregateLaundryItem]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateLaundryItem[P]>
+      : GetScalarType<T[P], AggregateLaundryItem[P]>
+  }
+
+
+
+
+  export type LaundryItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LaundryItemWhereInput
+    orderBy?: LaundryItemOrderByWithAggregationInput | LaundryItemOrderByWithAggregationInput[]
+    by: LaundryItemScalarFieldEnum[] | LaundryItemScalarFieldEnum
+    having?: LaundryItemScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: LaundryItemCountAggregateInputType | true
+    _avg?: LaundryItemAvgAggregateInputType
+    _sum?: LaundryItemSumAggregateInputType
+    _min?: LaundryItemMinAggregateInputType
+    _max?: LaundryItemMaxAggregateInputType
+  }
+
+  export type LaundryItemGroupByOutputType = {
+    id: string
+    name: string
+    description: string | null
+    type: $Enums.LaundryItemType
+    price: Decimal
+    isActive: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: LaundryItemCountAggregateOutputType | null
+    _avg: LaundryItemAvgAggregateOutputType | null
+    _sum: LaundryItemSumAggregateOutputType | null
+    _min: LaundryItemMinAggregateOutputType | null
+    _max: LaundryItemMaxAggregateOutputType | null
+  }
+
+  type GetLaundryItemGroupByPayload<T extends LaundryItemGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<LaundryItemGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof LaundryItemGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], LaundryItemGroupByOutputType[P]>
+            : GetScalarType<T[P], LaundryItemGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type LaundryItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    type?: boolean
+    price?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    orderItems?: boolean | LaundryItem$orderItemsArgs<ExtArgs>
+    _count?: boolean | LaundryItemCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["laundryItem"]>
+
+  export type LaundryItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    type?: boolean
+    price?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["laundryItem"]>
+
+  export type LaundryItemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    type?: boolean
+    price?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["laundryItem"]>
+
+  export type LaundryItemSelectScalar = {
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    type?: boolean
+    price?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type LaundryItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "type" | "price" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["laundryItem"]>
+  export type LaundryItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    orderItems?: boolean | LaundryItem$orderItemsArgs<ExtArgs>
+    _count?: boolean | LaundryItemCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type LaundryItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type LaundryItemIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $LaundryItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "LaundryItem"
+    objects: {
+      orderItems: Prisma.$LaundryOrderItemPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      description: string | null
+      type: $Enums.LaundryItemType
+      price: Prisma.Decimal
+      isActive: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["laundryItem"]>
+    composites: {}
+  }
+
+  type LaundryItemGetPayload<S extends boolean | null | undefined | LaundryItemDefaultArgs> = $Result.GetResult<Prisma.$LaundryItemPayload, S>
+
+  type LaundryItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<LaundryItemFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: LaundryItemCountAggregateInputType | true
+    }
+
+  export interface LaundryItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['LaundryItem'], meta: { name: 'LaundryItem' } }
+    /**
+     * Find zero or one LaundryItem that matches the filter.
+     * @param {LaundryItemFindUniqueArgs} args - Arguments to find a LaundryItem
+     * @example
+     * // Get one LaundryItem
+     * const laundryItem = await prisma.laundryItem.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends LaundryItemFindUniqueArgs>(args: SelectSubset<T, LaundryItemFindUniqueArgs<ExtArgs>>): Prisma__LaundryItemClient<$Result.GetResult<Prisma.$LaundryItemPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one LaundryItem that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {LaundryItemFindUniqueOrThrowArgs} args - Arguments to find a LaundryItem
+     * @example
+     * // Get one LaundryItem
+     * const laundryItem = await prisma.laundryItem.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends LaundryItemFindUniqueOrThrowArgs>(args: SelectSubset<T, LaundryItemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__LaundryItemClient<$Result.GetResult<Prisma.$LaundryItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LaundryItem that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaundryItemFindFirstArgs} args - Arguments to find a LaundryItem
+     * @example
+     * // Get one LaundryItem
+     * const laundryItem = await prisma.laundryItem.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends LaundryItemFindFirstArgs>(args?: SelectSubset<T, LaundryItemFindFirstArgs<ExtArgs>>): Prisma__LaundryItemClient<$Result.GetResult<Prisma.$LaundryItemPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LaundryItem that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaundryItemFindFirstOrThrowArgs} args - Arguments to find a LaundryItem
+     * @example
+     * // Get one LaundryItem
+     * const laundryItem = await prisma.laundryItem.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends LaundryItemFindFirstOrThrowArgs>(args?: SelectSubset<T, LaundryItemFindFirstOrThrowArgs<ExtArgs>>): Prisma__LaundryItemClient<$Result.GetResult<Prisma.$LaundryItemPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more LaundryItems that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaundryItemFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all LaundryItems
+     * const laundryItems = await prisma.laundryItem.findMany()
+     * 
+     * // Get first 10 LaundryItems
+     * const laundryItems = await prisma.laundryItem.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const laundryItemWithIdOnly = await prisma.laundryItem.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends LaundryItemFindManyArgs>(args?: SelectSubset<T, LaundryItemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LaundryItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a LaundryItem.
+     * @param {LaundryItemCreateArgs} args - Arguments to create a LaundryItem.
+     * @example
+     * // Create one LaundryItem
+     * const LaundryItem = await prisma.laundryItem.create({
+     *   data: {
+     *     // ... data to create a LaundryItem
+     *   }
+     * })
+     * 
+     */
+    create<T extends LaundryItemCreateArgs>(args: SelectSubset<T, LaundryItemCreateArgs<ExtArgs>>): Prisma__LaundryItemClient<$Result.GetResult<Prisma.$LaundryItemPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many LaundryItems.
+     * @param {LaundryItemCreateManyArgs} args - Arguments to create many LaundryItems.
+     * @example
+     * // Create many LaundryItems
+     * const laundryItem = await prisma.laundryItem.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends LaundryItemCreateManyArgs>(args?: SelectSubset<T, LaundryItemCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many LaundryItems and returns the data saved in the database.
+     * @param {LaundryItemCreateManyAndReturnArgs} args - Arguments to create many LaundryItems.
+     * @example
+     * // Create many LaundryItems
+     * const laundryItem = await prisma.laundryItem.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many LaundryItems and only return the `id`
+     * const laundryItemWithIdOnly = await prisma.laundryItem.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends LaundryItemCreateManyAndReturnArgs>(args?: SelectSubset<T, LaundryItemCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LaundryItemPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a LaundryItem.
+     * @param {LaundryItemDeleteArgs} args - Arguments to delete one LaundryItem.
+     * @example
+     * // Delete one LaundryItem
+     * const LaundryItem = await prisma.laundryItem.delete({
+     *   where: {
+     *     // ... filter to delete one LaundryItem
+     *   }
+     * })
+     * 
+     */
+    delete<T extends LaundryItemDeleteArgs>(args: SelectSubset<T, LaundryItemDeleteArgs<ExtArgs>>): Prisma__LaundryItemClient<$Result.GetResult<Prisma.$LaundryItemPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one LaundryItem.
+     * @param {LaundryItemUpdateArgs} args - Arguments to update one LaundryItem.
+     * @example
+     * // Update one LaundryItem
+     * const laundryItem = await prisma.laundryItem.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends LaundryItemUpdateArgs>(args: SelectSubset<T, LaundryItemUpdateArgs<ExtArgs>>): Prisma__LaundryItemClient<$Result.GetResult<Prisma.$LaundryItemPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more LaundryItems.
+     * @param {LaundryItemDeleteManyArgs} args - Arguments to filter LaundryItems to delete.
+     * @example
+     * // Delete a few LaundryItems
+     * const { count } = await prisma.laundryItem.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends LaundryItemDeleteManyArgs>(args?: SelectSubset<T, LaundryItemDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LaundryItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaundryItemUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many LaundryItems
+     * const laundryItem = await prisma.laundryItem.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends LaundryItemUpdateManyArgs>(args: SelectSubset<T, LaundryItemUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LaundryItems and returns the data updated in the database.
+     * @param {LaundryItemUpdateManyAndReturnArgs} args - Arguments to update many LaundryItems.
+     * @example
+     * // Update many LaundryItems
+     * const laundryItem = await prisma.laundryItem.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more LaundryItems and only return the `id`
+     * const laundryItemWithIdOnly = await prisma.laundryItem.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends LaundryItemUpdateManyAndReturnArgs>(args: SelectSubset<T, LaundryItemUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LaundryItemPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one LaundryItem.
+     * @param {LaundryItemUpsertArgs} args - Arguments to update or create a LaundryItem.
+     * @example
+     * // Update or create a LaundryItem
+     * const laundryItem = await prisma.laundryItem.upsert({
+     *   create: {
+     *     // ... data to create a LaundryItem
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the LaundryItem we want to update
+     *   }
+     * })
+     */
+    upsert<T extends LaundryItemUpsertArgs>(args: SelectSubset<T, LaundryItemUpsertArgs<ExtArgs>>): Prisma__LaundryItemClient<$Result.GetResult<Prisma.$LaundryItemPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of LaundryItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaundryItemCountArgs} args - Arguments to filter LaundryItems to count.
+     * @example
+     * // Count the number of LaundryItems
+     * const count = await prisma.laundryItem.count({
+     *   where: {
+     *     // ... the filter for the LaundryItems we want to count
+     *   }
+     * })
+    **/
+    count<T extends LaundryItemCountArgs>(
+      args?: Subset<T, LaundryItemCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], LaundryItemCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a LaundryItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaundryItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends LaundryItemAggregateArgs>(args: Subset<T, LaundryItemAggregateArgs>): Prisma.PrismaPromise<GetLaundryItemAggregateType<T>>
+
+    /**
+     * Group by LaundryItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaundryItemGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends LaundryItemGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: LaundryItemGroupByArgs['orderBy'] }
+        : { orderBy?: LaundryItemGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, LaundryItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLaundryItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the LaundryItem model
+   */
+  readonly fields: LaundryItemFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for LaundryItem.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__LaundryItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    orderItems<T extends LaundryItem$orderItemsArgs<ExtArgs> = {}>(args?: Subset<T, LaundryItem$orderItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LaundryOrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the LaundryItem model
+   */
+  interface LaundryItemFieldRefs {
+    readonly id: FieldRef<"LaundryItem", 'String'>
+    readonly name: FieldRef<"LaundryItem", 'String'>
+    readonly description: FieldRef<"LaundryItem", 'String'>
+    readonly type: FieldRef<"LaundryItem", 'LaundryItemType'>
+    readonly price: FieldRef<"LaundryItem", 'Decimal'>
+    readonly isActive: FieldRef<"LaundryItem", 'Boolean'>
+    readonly createdAt: FieldRef<"LaundryItem", 'DateTime'>
+    readonly updatedAt: FieldRef<"LaundryItem", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * LaundryItem findUnique
+   */
+  export type LaundryItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryItem
+     */
+    select?: LaundryItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryItem
+     */
+    omit?: LaundryItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryItemInclude<ExtArgs> | null
+    /**
+     * Filter, which LaundryItem to fetch.
+     */
+    where: LaundryItemWhereUniqueInput
+  }
+
+  /**
+   * LaundryItem findUniqueOrThrow
+   */
+  export type LaundryItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryItem
+     */
+    select?: LaundryItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryItem
+     */
+    omit?: LaundryItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryItemInclude<ExtArgs> | null
+    /**
+     * Filter, which LaundryItem to fetch.
+     */
+    where: LaundryItemWhereUniqueInput
+  }
+
+  /**
+   * LaundryItem findFirst
+   */
+  export type LaundryItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryItem
+     */
+    select?: LaundryItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryItem
+     */
+    omit?: LaundryItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryItemInclude<ExtArgs> | null
+    /**
+     * Filter, which LaundryItem to fetch.
+     */
+    where?: LaundryItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LaundryItems to fetch.
+     */
+    orderBy?: LaundryItemOrderByWithRelationInput | LaundryItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LaundryItems.
+     */
+    cursor?: LaundryItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LaundryItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LaundryItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LaundryItems.
+     */
+    distinct?: LaundryItemScalarFieldEnum | LaundryItemScalarFieldEnum[]
+  }
+
+  /**
+   * LaundryItem findFirstOrThrow
+   */
+  export type LaundryItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryItem
+     */
+    select?: LaundryItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryItem
+     */
+    omit?: LaundryItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryItemInclude<ExtArgs> | null
+    /**
+     * Filter, which LaundryItem to fetch.
+     */
+    where?: LaundryItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LaundryItems to fetch.
+     */
+    orderBy?: LaundryItemOrderByWithRelationInput | LaundryItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LaundryItems.
+     */
+    cursor?: LaundryItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LaundryItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LaundryItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LaundryItems.
+     */
+    distinct?: LaundryItemScalarFieldEnum | LaundryItemScalarFieldEnum[]
+  }
+
+  /**
+   * LaundryItem findMany
+   */
+  export type LaundryItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryItem
+     */
+    select?: LaundryItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryItem
+     */
+    omit?: LaundryItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryItemInclude<ExtArgs> | null
+    /**
+     * Filter, which LaundryItems to fetch.
+     */
+    where?: LaundryItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LaundryItems to fetch.
+     */
+    orderBy?: LaundryItemOrderByWithRelationInput | LaundryItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing LaundryItems.
+     */
+    cursor?: LaundryItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LaundryItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LaundryItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LaundryItems.
+     */
+    distinct?: LaundryItemScalarFieldEnum | LaundryItemScalarFieldEnum[]
+  }
+
+  /**
+   * LaundryItem create
+   */
+  export type LaundryItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryItem
+     */
+    select?: LaundryItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryItem
+     */
+    omit?: LaundryItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryItemInclude<ExtArgs> | null
+    /**
+     * The data needed to create a LaundryItem.
+     */
+    data: XOR<LaundryItemCreateInput, LaundryItemUncheckedCreateInput>
+  }
+
+  /**
+   * LaundryItem createMany
+   */
+  export type LaundryItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many LaundryItems.
+     */
+    data: LaundryItemCreateManyInput | LaundryItemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * LaundryItem createManyAndReturn
+   */
+  export type LaundryItemCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryItem
+     */
+    select?: LaundryItemSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryItem
+     */
+    omit?: LaundryItemOmit<ExtArgs> | null
+    /**
+     * The data used to create many LaundryItems.
+     */
+    data: LaundryItemCreateManyInput | LaundryItemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * LaundryItem update
+   */
+  export type LaundryItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryItem
+     */
+    select?: LaundryItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryItem
+     */
+    omit?: LaundryItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryItemInclude<ExtArgs> | null
+    /**
+     * The data needed to update a LaundryItem.
+     */
+    data: XOR<LaundryItemUpdateInput, LaundryItemUncheckedUpdateInput>
+    /**
+     * Choose, which LaundryItem to update.
+     */
+    where: LaundryItemWhereUniqueInput
+  }
+
+  /**
+   * LaundryItem updateMany
+   */
+  export type LaundryItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update LaundryItems.
+     */
+    data: XOR<LaundryItemUpdateManyMutationInput, LaundryItemUncheckedUpdateManyInput>
+    /**
+     * Filter which LaundryItems to update
+     */
+    where?: LaundryItemWhereInput
+    /**
+     * Limit how many LaundryItems to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * LaundryItem updateManyAndReturn
+   */
+  export type LaundryItemUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryItem
+     */
+    select?: LaundryItemSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryItem
+     */
+    omit?: LaundryItemOmit<ExtArgs> | null
+    /**
+     * The data used to update LaundryItems.
+     */
+    data: XOR<LaundryItemUpdateManyMutationInput, LaundryItemUncheckedUpdateManyInput>
+    /**
+     * Filter which LaundryItems to update
+     */
+    where?: LaundryItemWhereInput
+    /**
+     * Limit how many LaundryItems to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * LaundryItem upsert
+   */
+  export type LaundryItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryItem
+     */
+    select?: LaundryItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryItem
+     */
+    omit?: LaundryItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryItemInclude<ExtArgs> | null
+    /**
+     * The filter to search for the LaundryItem to update in case it exists.
+     */
+    where: LaundryItemWhereUniqueInput
+    /**
+     * In case the LaundryItem found by the `where` argument doesn't exist, create a new LaundryItem with this data.
+     */
+    create: XOR<LaundryItemCreateInput, LaundryItemUncheckedCreateInput>
+    /**
+     * In case the LaundryItem was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<LaundryItemUpdateInput, LaundryItemUncheckedUpdateInput>
+  }
+
+  /**
+   * LaundryItem delete
+   */
+  export type LaundryItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryItem
+     */
+    select?: LaundryItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryItem
+     */
+    omit?: LaundryItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryItemInclude<ExtArgs> | null
+    /**
+     * Filter which LaundryItem to delete.
+     */
+    where: LaundryItemWhereUniqueInput
+  }
+
+  /**
+   * LaundryItem deleteMany
+   */
+  export type LaundryItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LaundryItems to delete
+     */
+    where?: LaundryItemWhereInput
+    /**
+     * Limit how many LaundryItems to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * LaundryItem.orderItems
+   */
+  export type LaundryItem$orderItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryOrderItem
+     */
+    select?: LaundryOrderItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryOrderItem
+     */
+    omit?: LaundryOrderItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryOrderItemInclude<ExtArgs> | null
+    where?: LaundryOrderItemWhereInput
+    orderBy?: LaundryOrderItemOrderByWithRelationInput | LaundryOrderItemOrderByWithRelationInput[]
+    cursor?: LaundryOrderItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LaundryOrderItemScalarFieldEnum | LaundryOrderItemScalarFieldEnum[]
+  }
+
+  /**
+   * LaundryItem without action
+   */
+  export type LaundryItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryItem
+     */
+    select?: LaundryItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryItem
+     */
+    omit?: LaundryItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryItemInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model LaundryOrder
+   */
+
+  export type AggregateLaundryOrder = {
+    _count: LaundryOrderCountAggregateOutputType | null
+    _avg: LaundryOrderAvgAggregateOutputType | null
+    _sum: LaundryOrderSumAggregateOutputType | null
+    _min: LaundryOrderMinAggregateOutputType | null
+    _max: LaundryOrderMaxAggregateOutputType | null
+  }
+
+  export type LaundryOrderAvgAggregateOutputType = {
+    subtotal: Decimal | null
+    tax: Decimal | null
+    total: Decimal | null
+  }
+
+  export type LaundryOrderSumAggregateOutputType = {
+    subtotal: Decimal | null
+    tax: Decimal | null
+    total: Decimal | null
+  }
+
+  export type LaundryOrderMinAggregateOutputType = {
+    id: string | null
+    guestId: string | null
+    reservationId: string | null
+    folioId: string | null
+    status: $Enums.LaundryOrderStatus | null
+    paymentStatus: $Enums.LaundryPaymentStatus | null
+    notes: string | null
+    subtotal: Decimal | null
+    tax: Decimal | null
+    total: Decimal | null
+    receivedAt: Date | null
+    readyAt: Date | null
+    deliveredAt: Date | null
+    cancelledAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type LaundryOrderMaxAggregateOutputType = {
+    id: string | null
+    guestId: string | null
+    reservationId: string | null
+    folioId: string | null
+    status: $Enums.LaundryOrderStatus | null
+    paymentStatus: $Enums.LaundryPaymentStatus | null
+    notes: string | null
+    subtotal: Decimal | null
+    tax: Decimal | null
+    total: Decimal | null
+    receivedAt: Date | null
+    readyAt: Date | null
+    deliveredAt: Date | null
+    cancelledAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type LaundryOrderCountAggregateOutputType = {
+    id: number
+    guestId: number
+    reservationId: number
+    folioId: number
+    status: number
+    paymentStatus: number
+    notes: number
+    subtotal: number
+    tax: number
+    total: number
+    receivedAt: number
+    readyAt: number
+    deliveredAt: number
+    cancelledAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type LaundryOrderAvgAggregateInputType = {
+    subtotal?: true
+    tax?: true
+    total?: true
+  }
+
+  export type LaundryOrderSumAggregateInputType = {
+    subtotal?: true
+    tax?: true
+    total?: true
+  }
+
+  export type LaundryOrderMinAggregateInputType = {
+    id?: true
+    guestId?: true
+    reservationId?: true
+    folioId?: true
+    status?: true
+    paymentStatus?: true
+    notes?: true
+    subtotal?: true
+    tax?: true
+    total?: true
+    receivedAt?: true
+    readyAt?: true
+    deliveredAt?: true
+    cancelledAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type LaundryOrderMaxAggregateInputType = {
+    id?: true
+    guestId?: true
+    reservationId?: true
+    folioId?: true
+    status?: true
+    paymentStatus?: true
+    notes?: true
+    subtotal?: true
+    tax?: true
+    total?: true
+    receivedAt?: true
+    readyAt?: true
+    deliveredAt?: true
+    cancelledAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type LaundryOrderCountAggregateInputType = {
+    id?: true
+    guestId?: true
+    reservationId?: true
+    folioId?: true
+    status?: true
+    paymentStatus?: true
+    notes?: true
+    subtotal?: true
+    tax?: true
+    total?: true
+    receivedAt?: true
+    readyAt?: true
+    deliveredAt?: true
+    cancelledAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type LaundryOrderAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LaundryOrder to aggregate.
+     */
+    where?: LaundryOrderWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LaundryOrders to fetch.
+     */
+    orderBy?: LaundryOrderOrderByWithRelationInput | LaundryOrderOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: LaundryOrderWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LaundryOrders from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LaundryOrders.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned LaundryOrders
+    **/
+    _count?: true | LaundryOrderCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: LaundryOrderAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: LaundryOrderSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: LaundryOrderMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: LaundryOrderMaxAggregateInputType
+  }
+
+  export type GetLaundryOrderAggregateType<T extends LaundryOrderAggregateArgs> = {
+        [P in keyof T & keyof AggregateLaundryOrder]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateLaundryOrder[P]>
+      : GetScalarType<T[P], AggregateLaundryOrder[P]>
+  }
+
+
+
+
+  export type LaundryOrderGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LaundryOrderWhereInput
+    orderBy?: LaundryOrderOrderByWithAggregationInput | LaundryOrderOrderByWithAggregationInput[]
+    by: LaundryOrderScalarFieldEnum[] | LaundryOrderScalarFieldEnum
+    having?: LaundryOrderScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: LaundryOrderCountAggregateInputType | true
+    _avg?: LaundryOrderAvgAggregateInputType
+    _sum?: LaundryOrderSumAggregateInputType
+    _min?: LaundryOrderMinAggregateInputType
+    _max?: LaundryOrderMaxAggregateInputType
+  }
+
+  export type LaundryOrderGroupByOutputType = {
+    id: string
+    guestId: string
+    reservationId: string | null
+    folioId: string | null
+    status: $Enums.LaundryOrderStatus
+    paymentStatus: $Enums.LaundryPaymentStatus
+    notes: string | null
+    subtotal: Decimal
+    tax: Decimal
+    total: Decimal
+    receivedAt: Date | null
+    readyAt: Date | null
+    deliveredAt: Date | null
+    cancelledAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: LaundryOrderCountAggregateOutputType | null
+    _avg: LaundryOrderAvgAggregateOutputType | null
+    _sum: LaundryOrderSumAggregateOutputType | null
+    _min: LaundryOrderMinAggregateOutputType | null
+    _max: LaundryOrderMaxAggregateOutputType | null
+  }
+
+  type GetLaundryOrderGroupByPayload<T extends LaundryOrderGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<LaundryOrderGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof LaundryOrderGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], LaundryOrderGroupByOutputType[P]>
+            : GetScalarType<T[P], LaundryOrderGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type LaundryOrderSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    guestId?: boolean
+    reservationId?: boolean
+    folioId?: boolean
+    status?: boolean
+    paymentStatus?: boolean
+    notes?: boolean
+    subtotal?: boolean
+    tax?: boolean
+    total?: boolean
+    receivedAt?: boolean
+    readyAt?: boolean
+    deliveredAt?: boolean
+    cancelledAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    guest?: boolean | GuestDefaultArgs<ExtArgs>
+    reservation?: boolean | LaundryOrder$reservationArgs<ExtArgs>
+    folio?: boolean | LaundryOrder$folioArgs<ExtArgs>
+    items?: boolean | LaundryOrder$itemsArgs<ExtArgs>
+    payments?: boolean | LaundryOrder$paymentsArgs<ExtArgs>
+    _count?: boolean | LaundryOrderCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["laundryOrder"]>
+
+  export type LaundryOrderSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    guestId?: boolean
+    reservationId?: boolean
+    folioId?: boolean
+    status?: boolean
+    paymentStatus?: boolean
+    notes?: boolean
+    subtotal?: boolean
+    tax?: boolean
+    total?: boolean
+    receivedAt?: boolean
+    readyAt?: boolean
+    deliveredAt?: boolean
+    cancelledAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    guest?: boolean | GuestDefaultArgs<ExtArgs>
+    reservation?: boolean | LaundryOrder$reservationArgs<ExtArgs>
+    folio?: boolean | LaundryOrder$folioArgs<ExtArgs>
+  }, ExtArgs["result"]["laundryOrder"]>
+
+  export type LaundryOrderSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    guestId?: boolean
+    reservationId?: boolean
+    folioId?: boolean
+    status?: boolean
+    paymentStatus?: boolean
+    notes?: boolean
+    subtotal?: boolean
+    tax?: boolean
+    total?: boolean
+    receivedAt?: boolean
+    readyAt?: boolean
+    deliveredAt?: boolean
+    cancelledAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    guest?: boolean | GuestDefaultArgs<ExtArgs>
+    reservation?: boolean | LaundryOrder$reservationArgs<ExtArgs>
+    folio?: boolean | LaundryOrder$folioArgs<ExtArgs>
+  }, ExtArgs["result"]["laundryOrder"]>
+
+  export type LaundryOrderSelectScalar = {
+    id?: boolean
+    guestId?: boolean
+    reservationId?: boolean
+    folioId?: boolean
+    status?: boolean
+    paymentStatus?: boolean
+    notes?: boolean
+    subtotal?: boolean
+    tax?: boolean
+    total?: boolean
+    receivedAt?: boolean
+    readyAt?: boolean
+    deliveredAt?: boolean
+    cancelledAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type LaundryOrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "guestId" | "reservationId" | "folioId" | "status" | "paymentStatus" | "notes" | "subtotal" | "tax" | "total" | "receivedAt" | "readyAt" | "deliveredAt" | "cancelledAt" | "createdAt" | "updatedAt", ExtArgs["result"]["laundryOrder"]>
+  export type LaundryOrderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    guest?: boolean | GuestDefaultArgs<ExtArgs>
+    reservation?: boolean | LaundryOrder$reservationArgs<ExtArgs>
+    folio?: boolean | LaundryOrder$folioArgs<ExtArgs>
+    items?: boolean | LaundryOrder$itemsArgs<ExtArgs>
+    payments?: boolean | LaundryOrder$paymentsArgs<ExtArgs>
+    _count?: boolean | LaundryOrderCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type LaundryOrderIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    guest?: boolean | GuestDefaultArgs<ExtArgs>
+    reservation?: boolean | LaundryOrder$reservationArgs<ExtArgs>
+    folio?: boolean | LaundryOrder$folioArgs<ExtArgs>
+  }
+  export type LaundryOrderIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    guest?: boolean | GuestDefaultArgs<ExtArgs>
+    reservation?: boolean | LaundryOrder$reservationArgs<ExtArgs>
+    folio?: boolean | LaundryOrder$folioArgs<ExtArgs>
+  }
+
+  export type $LaundryOrderPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "LaundryOrder"
+    objects: {
+      guest: Prisma.$GuestPayload<ExtArgs>
+      reservation: Prisma.$ReservationPayload<ExtArgs> | null
+      folio: Prisma.$FolioPayload<ExtArgs> | null
+      items: Prisma.$LaundryOrderItemPayload<ExtArgs>[]
+      payments: Prisma.$PaymentPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      guestId: string
+      reservationId: string | null
+      folioId: string | null
+      status: $Enums.LaundryOrderStatus
+      paymentStatus: $Enums.LaundryPaymentStatus
+      notes: string | null
+      subtotal: Prisma.Decimal
+      tax: Prisma.Decimal
+      total: Prisma.Decimal
+      receivedAt: Date | null
+      readyAt: Date | null
+      deliveredAt: Date | null
+      cancelledAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["laundryOrder"]>
+    composites: {}
+  }
+
+  type LaundryOrderGetPayload<S extends boolean | null | undefined | LaundryOrderDefaultArgs> = $Result.GetResult<Prisma.$LaundryOrderPayload, S>
+
+  type LaundryOrderCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<LaundryOrderFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: LaundryOrderCountAggregateInputType | true
+    }
+
+  export interface LaundryOrderDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['LaundryOrder'], meta: { name: 'LaundryOrder' } }
+    /**
+     * Find zero or one LaundryOrder that matches the filter.
+     * @param {LaundryOrderFindUniqueArgs} args - Arguments to find a LaundryOrder
+     * @example
+     * // Get one LaundryOrder
+     * const laundryOrder = await prisma.laundryOrder.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends LaundryOrderFindUniqueArgs>(args: SelectSubset<T, LaundryOrderFindUniqueArgs<ExtArgs>>): Prisma__LaundryOrderClient<$Result.GetResult<Prisma.$LaundryOrderPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one LaundryOrder that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {LaundryOrderFindUniqueOrThrowArgs} args - Arguments to find a LaundryOrder
+     * @example
+     * // Get one LaundryOrder
+     * const laundryOrder = await prisma.laundryOrder.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends LaundryOrderFindUniqueOrThrowArgs>(args: SelectSubset<T, LaundryOrderFindUniqueOrThrowArgs<ExtArgs>>): Prisma__LaundryOrderClient<$Result.GetResult<Prisma.$LaundryOrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LaundryOrder that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaundryOrderFindFirstArgs} args - Arguments to find a LaundryOrder
+     * @example
+     * // Get one LaundryOrder
+     * const laundryOrder = await prisma.laundryOrder.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends LaundryOrderFindFirstArgs>(args?: SelectSubset<T, LaundryOrderFindFirstArgs<ExtArgs>>): Prisma__LaundryOrderClient<$Result.GetResult<Prisma.$LaundryOrderPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LaundryOrder that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaundryOrderFindFirstOrThrowArgs} args - Arguments to find a LaundryOrder
+     * @example
+     * // Get one LaundryOrder
+     * const laundryOrder = await prisma.laundryOrder.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends LaundryOrderFindFirstOrThrowArgs>(args?: SelectSubset<T, LaundryOrderFindFirstOrThrowArgs<ExtArgs>>): Prisma__LaundryOrderClient<$Result.GetResult<Prisma.$LaundryOrderPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more LaundryOrders that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaundryOrderFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all LaundryOrders
+     * const laundryOrders = await prisma.laundryOrder.findMany()
+     * 
+     * // Get first 10 LaundryOrders
+     * const laundryOrders = await prisma.laundryOrder.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const laundryOrderWithIdOnly = await prisma.laundryOrder.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends LaundryOrderFindManyArgs>(args?: SelectSubset<T, LaundryOrderFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LaundryOrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a LaundryOrder.
+     * @param {LaundryOrderCreateArgs} args - Arguments to create a LaundryOrder.
+     * @example
+     * // Create one LaundryOrder
+     * const LaundryOrder = await prisma.laundryOrder.create({
+     *   data: {
+     *     // ... data to create a LaundryOrder
+     *   }
+     * })
+     * 
+     */
+    create<T extends LaundryOrderCreateArgs>(args: SelectSubset<T, LaundryOrderCreateArgs<ExtArgs>>): Prisma__LaundryOrderClient<$Result.GetResult<Prisma.$LaundryOrderPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many LaundryOrders.
+     * @param {LaundryOrderCreateManyArgs} args - Arguments to create many LaundryOrders.
+     * @example
+     * // Create many LaundryOrders
+     * const laundryOrder = await prisma.laundryOrder.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends LaundryOrderCreateManyArgs>(args?: SelectSubset<T, LaundryOrderCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many LaundryOrders and returns the data saved in the database.
+     * @param {LaundryOrderCreateManyAndReturnArgs} args - Arguments to create many LaundryOrders.
+     * @example
+     * // Create many LaundryOrders
+     * const laundryOrder = await prisma.laundryOrder.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many LaundryOrders and only return the `id`
+     * const laundryOrderWithIdOnly = await prisma.laundryOrder.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends LaundryOrderCreateManyAndReturnArgs>(args?: SelectSubset<T, LaundryOrderCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LaundryOrderPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a LaundryOrder.
+     * @param {LaundryOrderDeleteArgs} args - Arguments to delete one LaundryOrder.
+     * @example
+     * // Delete one LaundryOrder
+     * const LaundryOrder = await prisma.laundryOrder.delete({
+     *   where: {
+     *     // ... filter to delete one LaundryOrder
+     *   }
+     * })
+     * 
+     */
+    delete<T extends LaundryOrderDeleteArgs>(args: SelectSubset<T, LaundryOrderDeleteArgs<ExtArgs>>): Prisma__LaundryOrderClient<$Result.GetResult<Prisma.$LaundryOrderPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one LaundryOrder.
+     * @param {LaundryOrderUpdateArgs} args - Arguments to update one LaundryOrder.
+     * @example
+     * // Update one LaundryOrder
+     * const laundryOrder = await prisma.laundryOrder.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends LaundryOrderUpdateArgs>(args: SelectSubset<T, LaundryOrderUpdateArgs<ExtArgs>>): Prisma__LaundryOrderClient<$Result.GetResult<Prisma.$LaundryOrderPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more LaundryOrders.
+     * @param {LaundryOrderDeleteManyArgs} args - Arguments to filter LaundryOrders to delete.
+     * @example
+     * // Delete a few LaundryOrders
+     * const { count } = await prisma.laundryOrder.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends LaundryOrderDeleteManyArgs>(args?: SelectSubset<T, LaundryOrderDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LaundryOrders.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaundryOrderUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many LaundryOrders
+     * const laundryOrder = await prisma.laundryOrder.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends LaundryOrderUpdateManyArgs>(args: SelectSubset<T, LaundryOrderUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LaundryOrders and returns the data updated in the database.
+     * @param {LaundryOrderUpdateManyAndReturnArgs} args - Arguments to update many LaundryOrders.
+     * @example
+     * // Update many LaundryOrders
+     * const laundryOrder = await prisma.laundryOrder.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more LaundryOrders and only return the `id`
+     * const laundryOrderWithIdOnly = await prisma.laundryOrder.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends LaundryOrderUpdateManyAndReturnArgs>(args: SelectSubset<T, LaundryOrderUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LaundryOrderPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one LaundryOrder.
+     * @param {LaundryOrderUpsertArgs} args - Arguments to update or create a LaundryOrder.
+     * @example
+     * // Update or create a LaundryOrder
+     * const laundryOrder = await prisma.laundryOrder.upsert({
+     *   create: {
+     *     // ... data to create a LaundryOrder
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the LaundryOrder we want to update
+     *   }
+     * })
+     */
+    upsert<T extends LaundryOrderUpsertArgs>(args: SelectSubset<T, LaundryOrderUpsertArgs<ExtArgs>>): Prisma__LaundryOrderClient<$Result.GetResult<Prisma.$LaundryOrderPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of LaundryOrders.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaundryOrderCountArgs} args - Arguments to filter LaundryOrders to count.
+     * @example
+     * // Count the number of LaundryOrders
+     * const count = await prisma.laundryOrder.count({
+     *   where: {
+     *     // ... the filter for the LaundryOrders we want to count
+     *   }
+     * })
+    **/
+    count<T extends LaundryOrderCountArgs>(
+      args?: Subset<T, LaundryOrderCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], LaundryOrderCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a LaundryOrder.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaundryOrderAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends LaundryOrderAggregateArgs>(args: Subset<T, LaundryOrderAggregateArgs>): Prisma.PrismaPromise<GetLaundryOrderAggregateType<T>>
+
+    /**
+     * Group by LaundryOrder.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaundryOrderGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends LaundryOrderGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: LaundryOrderGroupByArgs['orderBy'] }
+        : { orderBy?: LaundryOrderGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, LaundryOrderGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLaundryOrderGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the LaundryOrder model
+   */
+  readonly fields: LaundryOrderFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for LaundryOrder.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__LaundryOrderClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    guest<T extends GuestDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GuestDefaultArgs<ExtArgs>>): Prisma__GuestClient<$Result.GetResult<Prisma.$GuestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    reservation<T extends LaundryOrder$reservationArgs<ExtArgs> = {}>(args?: Subset<T, LaundryOrder$reservationArgs<ExtArgs>>): Prisma__ReservationClient<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    folio<T extends LaundryOrder$folioArgs<ExtArgs> = {}>(args?: Subset<T, LaundryOrder$folioArgs<ExtArgs>>): Prisma__FolioClient<$Result.GetResult<Prisma.$FolioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    items<T extends LaundryOrder$itemsArgs<ExtArgs> = {}>(args?: Subset<T, LaundryOrder$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LaundryOrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    payments<T extends LaundryOrder$paymentsArgs<ExtArgs> = {}>(args?: Subset<T, LaundryOrder$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the LaundryOrder model
+   */
+  interface LaundryOrderFieldRefs {
+    readonly id: FieldRef<"LaundryOrder", 'String'>
+    readonly guestId: FieldRef<"LaundryOrder", 'String'>
+    readonly reservationId: FieldRef<"LaundryOrder", 'String'>
+    readonly folioId: FieldRef<"LaundryOrder", 'String'>
+    readonly status: FieldRef<"LaundryOrder", 'LaundryOrderStatus'>
+    readonly paymentStatus: FieldRef<"LaundryOrder", 'LaundryPaymentStatus'>
+    readonly notes: FieldRef<"LaundryOrder", 'String'>
+    readonly subtotal: FieldRef<"LaundryOrder", 'Decimal'>
+    readonly tax: FieldRef<"LaundryOrder", 'Decimal'>
+    readonly total: FieldRef<"LaundryOrder", 'Decimal'>
+    readonly receivedAt: FieldRef<"LaundryOrder", 'DateTime'>
+    readonly readyAt: FieldRef<"LaundryOrder", 'DateTime'>
+    readonly deliveredAt: FieldRef<"LaundryOrder", 'DateTime'>
+    readonly cancelledAt: FieldRef<"LaundryOrder", 'DateTime'>
+    readonly createdAt: FieldRef<"LaundryOrder", 'DateTime'>
+    readonly updatedAt: FieldRef<"LaundryOrder", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * LaundryOrder findUnique
+   */
+  export type LaundryOrderFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryOrder
+     */
+    select?: LaundryOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryOrder
+     */
+    omit?: LaundryOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryOrderInclude<ExtArgs> | null
+    /**
+     * Filter, which LaundryOrder to fetch.
+     */
+    where: LaundryOrderWhereUniqueInput
+  }
+
+  /**
+   * LaundryOrder findUniqueOrThrow
+   */
+  export type LaundryOrderFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryOrder
+     */
+    select?: LaundryOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryOrder
+     */
+    omit?: LaundryOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryOrderInclude<ExtArgs> | null
+    /**
+     * Filter, which LaundryOrder to fetch.
+     */
+    where: LaundryOrderWhereUniqueInput
+  }
+
+  /**
+   * LaundryOrder findFirst
+   */
+  export type LaundryOrderFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryOrder
+     */
+    select?: LaundryOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryOrder
+     */
+    omit?: LaundryOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryOrderInclude<ExtArgs> | null
+    /**
+     * Filter, which LaundryOrder to fetch.
+     */
+    where?: LaundryOrderWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LaundryOrders to fetch.
+     */
+    orderBy?: LaundryOrderOrderByWithRelationInput | LaundryOrderOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LaundryOrders.
+     */
+    cursor?: LaundryOrderWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LaundryOrders from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LaundryOrders.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LaundryOrders.
+     */
+    distinct?: LaundryOrderScalarFieldEnum | LaundryOrderScalarFieldEnum[]
+  }
+
+  /**
+   * LaundryOrder findFirstOrThrow
+   */
+  export type LaundryOrderFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryOrder
+     */
+    select?: LaundryOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryOrder
+     */
+    omit?: LaundryOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryOrderInclude<ExtArgs> | null
+    /**
+     * Filter, which LaundryOrder to fetch.
+     */
+    where?: LaundryOrderWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LaundryOrders to fetch.
+     */
+    orderBy?: LaundryOrderOrderByWithRelationInput | LaundryOrderOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LaundryOrders.
+     */
+    cursor?: LaundryOrderWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LaundryOrders from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LaundryOrders.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LaundryOrders.
+     */
+    distinct?: LaundryOrderScalarFieldEnum | LaundryOrderScalarFieldEnum[]
+  }
+
+  /**
+   * LaundryOrder findMany
+   */
+  export type LaundryOrderFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryOrder
+     */
+    select?: LaundryOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryOrder
+     */
+    omit?: LaundryOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryOrderInclude<ExtArgs> | null
+    /**
+     * Filter, which LaundryOrders to fetch.
+     */
+    where?: LaundryOrderWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LaundryOrders to fetch.
+     */
+    orderBy?: LaundryOrderOrderByWithRelationInput | LaundryOrderOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing LaundryOrders.
+     */
+    cursor?: LaundryOrderWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LaundryOrders from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LaundryOrders.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LaundryOrders.
+     */
+    distinct?: LaundryOrderScalarFieldEnum | LaundryOrderScalarFieldEnum[]
+  }
+
+  /**
+   * LaundryOrder create
+   */
+  export type LaundryOrderCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryOrder
+     */
+    select?: LaundryOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryOrder
+     */
+    omit?: LaundryOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryOrderInclude<ExtArgs> | null
+    /**
+     * The data needed to create a LaundryOrder.
+     */
+    data: XOR<LaundryOrderCreateInput, LaundryOrderUncheckedCreateInput>
+  }
+
+  /**
+   * LaundryOrder createMany
+   */
+  export type LaundryOrderCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many LaundryOrders.
+     */
+    data: LaundryOrderCreateManyInput | LaundryOrderCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * LaundryOrder createManyAndReturn
+   */
+  export type LaundryOrderCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryOrder
+     */
+    select?: LaundryOrderSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryOrder
+     */
+    omit?: LaundryOrderOmit<ExtArgs> | null
+    /**
+     * The data used to create many LaundryOrders.
+     */
+    data: LaundryOrderCreateManyInput | LaundryOrderCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryOrderIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * LaundryOrder update
+   */
+  export type LaundryOrderUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryOrder
+     */
+    select?: LaundryOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryOrder
+     */
+    omit?: LaundryOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryOrderInclude<ExtArgs> | null
+    /**
+     * The data needed to update a LaundryOrder.
+     */
+    data: XOR<LaundryOrderUpdateInput, LaundryOrderUncheckedUpdateInput>
+    /**
+     * Choose, which LaundryOrder to update.
+     */
+    where: LaundryOrderWhereUniqueInput
+  }
+
+  /**
+   * LaundryOrder updateMany
+   */
+  export type LaundryOrderUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update LaundryOrders.
+     */
+    data: XOR<LaundryOrderUpdateManyMutationInput, LaundryOrderUncheckedUpdateManyInput>
+    /**
+     * Filter which LaundryOrders to update
+     */
+    where?: LaundryOrderWhereInput
+    /**
+     * Limit how many LaundryOrders to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * LaundryOrder updateManyAndReturn
+   */
+  export type LaundryOrderUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryOrder
+     */
+    select?: LaundryOrderSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryOrder
+     */
+    omit?: LaundryOrderOmit<ExtArgs> | null
+    /**
+     * The data used to update LaundryOrders.
+     */
+    data: XOR<LaundryOrderUpdateManyMutationInput, LaundryOrderUncheckedUpdateManyInput>
+    /**
+     * Filter which LaundryOrders to update
+     */
+    where?: LaundryOrderWhereInput
+    /**
+     * Limit how many LaundryOrders to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryOrderIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * LaundryOrder upsert
+   */
+  export type LaundryOrderUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryOrder
+     */
+    select?: LaundryOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryOrder
+     */
+    omit?: LaundryOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryOrderInclude<ExtArgs> | null
+    /**
+     * The filter to search for the LaundryOrder to update in case it exists.
+     */
+    where: LaundryOrderWhereUniqueInput
+    /**
+     * In case the LaundryOrder found by the `where` argument doesn't exist, create a new LaundryOrder with this data.
+     */
+    create: XOR<LaundryOrderCreateInput, LaundryOrderUncheckedCreateInput>
+    /**
+     * In case the LaundryOrder was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<LaundryOrderUpdateInput, LaundryOrderUncheckedUpdateInput>
+  }
+
+  /**
+   * LaundryOrder delete
+   */
+  export type LaundryOrderDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryOrder
+     */
+    select?: LaundryOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryOrder
+     */
+    omit?: LaundryOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryOrderInclude<ExtArgs> | null
+    /**
+     * Filter which LaundryOrder to delete.
+     */
+    where: LaundryOrderWhereUniqueInput
+  }
+
+  /**
+   * LaundryOrder deleteMany
+   */
+  export type LaundryOrderDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LaundryOrders to delete
+     */
+    where?: LaundryOrderWhereInput
+    /**
+     * Limit how many LaundryOrders to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * LaundryOrder.reservation
+   */
+  export type LaundryOrder$reservationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reservation
+     */
+    select?: ReservationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reservation
+     */
+    omit?: ReservationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReservationInclude<ExtArgs> | null
+    where?: ReservationWhereInput
+  }
+
+  /**
+   * LaundryOrder.folio
+   */
+  export type LaundryOrder$folioArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Folio
+     */
+    select?: FolioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Folio
+     */
+    omit?: FolioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FolioInclude<ExtArgs> | null
+    where?: FolioWhereInput
+  }
+
+  /**
+   * LaundryOrder.items
+   */
+  export type LaundryOrder$itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryOrderItem
+     */
+    select?: LaundryOrderItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryOrderItem
+     */
+    omit?: LaundryOrderItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryOrderItemInclude<ExtArgs> | null
+    where?: LaundryOrderItemWhereInput
+    orderBy?: LaundryOrderItemOrderByWithRelationInput | LaundryOrderItemOrderByWithRelationInput[]
+    cursor?: LaundryOrderItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LaundryOrderItemScalarFieldEnum | LaundryOrderItemScalarFieldEnum[]
+  }
+
+  /**
+   * LaundryOrder.payments
+   */
+  export type LaundryOrder$paymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Payment
+     */
+    select?: PaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Payment
+     */
+    omit?: PaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentInclude<ExtArgs> | null
+    where?: PaymentWhereInput
+    orderBy?: PaymentOrderByWithRelationInput | PaymentOrderByWithRelationInput[]
+    cursor?: PaymentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PaymentScalarFieldEnum | PaymentScalarFieldEnum[]
+  }
+
+  /**
+   * LaundryOrder without action
+   */
+  export type LaundryOrderDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryOrder
+     */
+    select?: LaundryOrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryOrder
+     */
+    omit?: LaundryOrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryOrderInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model LaundryOrderItem
+   */
+
+  export type AggregateLaundryOrderItem = {
+    _count: LaundryOrderItemCountAggregateOutputType | null
+    _avg: LaundryOrderItemAvgAggregateOutputType | null
+    _sum: LaundryOrderItemSumAggregateOutputType | null
+    _min: LaundryOrderItemMinAggregateOutputType | null
+    _max: LaundryOrderItemMaxAggregateOutputType | null
+  }
+
+  export type LaundryOrderItemAvgAggregateOutputType = {
+    quantity: number | null
+    unitPrice: Decimal | null
+    total: Decimal | null
+  }
+
+  export type LaundryOrderItemSumAggregateOutputType = {
+    quantity: number | null
+    unitPrice: Decimal | null
+    total: Decimal | null
+  }
+
+  export type LaundryOrderItemMinAggregateOutputType = {
+    id: string | null
+    orderId: string | null
+    laundryItemId: string | null
+    name: string | null
+    quantity: number | null
+    unitPrice: Decimal | null
+    total: Decimal | null
+    createdAt: Date | null
+  }
+
+  export type LaundryOrderItemMaxAggregateOutputType = {
+    id: string | null
+    orderId: string | null
+    laundryItemId: string | null
+    name: string | null
+    quantity: number | null
+    unitPrice: Decimal | null
+    total: Decimal | null
+    createdAt: Date | null
+  }
+
+  export type LaundryOrderItemCountAggregateOutputType = {
+    id: number
+    orderId: number
+    laundryItemId: number
+    name: number
+    quantity: number
+    unitPrice: number
+    total: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type LaundryOrderItemAvgAggregateInputType = {
+    quantity?: true
+    unitPrice?: true
+    total?: true
+  }
+
+  export type LaundryOrderItemSumAggregateInputType = {
+    quantity?: true
+    unitPrice?: true
+    total?: true
+  }
+
+  export type LaundryOrderItemMinAggregateInputType = {
+    id?: true
+    orderId?: true
+    laundryItemId?: true
+    name?: true
+    quantity?: true
+    unitPrice?: true
+    total?: true
+    createdAt?: true
+  }
+
+  export type LaundryOrderItemMaxAggregateInputType = {
+    id?: true
+    orderId?: true
+    laundryItemId?: true
+    name?: true
+    quantity?: true
+    unitPrice?: true
+    total?: true
+    createdAt?: true
+  }
+
+  export type LaundryOrderItemCountAggregateInputType = {
+    id?: true
+    orderId?: true
+    laundryItemId?: true
+    name?: true
+    quantity?: true
+    unitPrice?: true
+    total?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type LaundryOrderItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LaundryOrderItem to aggregate.
+     */
+    where?: LaundryOrderItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LaundryOrderItems to fetch.
+     */
+    orderBy?: LaundryOrderItemOrderByWithRelationInput | LaundryOrderItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: LaundryOrderItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LaundryOrderItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LaundryOrderItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned LaundryOrderItems
+    **/
+    _count?: true | LaundryOrderItemCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: LaundryOrderItemAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: LaundryOrderItemSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: LaundryOrderItemMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: LaundryOrderItemMaxAggregateInputType
+  }
+
+  export type GetLaundryOrderItemAggregateType<T extends LaundryOrderItemAggregateArgs> = {
+        [P in keyof T & keyof AggregateLaundryOrderItem]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateLaundryOrderItem[P]>
+      : GetScalarType<T[P], AggregateLaundryOrderItem[P]>
+  }
+
+
+
+
+  export type LaundryOrderItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LaundryOrderItemWhereInput
+    orderBy?: LaundryOrderItemOrderByWithAggregationInput | LaundryOrderItemOrderByWithAggregationInput[]
+    by: LaundryOrderItemScalarFieldEnum[] | LaundryOrderItemScalarFieldEnum
+    having?: LaundryOrderItemScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: LaundryOrderItemCountAggregateInputType | true
+    _avg?: LaundryOrderItemAvgAggregateInputType
+    _sum?: LaundryOrderItemSumAggregateInputType
+    _min?: LaundryOrderItemMinAggregateInputType
+    _max?: LaundryOrderItemMaxAggregateInputType
+  }
+
+  export type LaundryOrderItemGroupByOutputType = {
+    id: string
+    orderId: string
+    laundryItemId: string
+    name: string
+    quantity: number
+    unitPrice: Decimal
+    total: Decimal
+    createdAt: Date
+    _count: LaundryOrderItemCountAggregateOutputType | null
+    _avg: LaundryOrderItemAvgAggregateOutputType | null
+    _sum: LaundryOrderItemSumAggregateOutputType | null
+    _min: LaundryOrderItemMinAggregateOutputType | null
+    _max: LaundryOrderItemMaxAggregateOutputType | null
+  }
+
+  type GetLaundryOrderItemGroupByPayload<T extends LaundryOrderItemGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<LaundryOrderItemGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof LaundryOrderItemGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], LaundryOrderItemGroupByOutputType[P]>
+            : GetScalarType<T[P], LaundryOrderItemGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type LaundryOrderItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    orderId?: boolean
+    laundryItemId?: boolean
+    name?: boolean
+    quantity?: boolean
+    unitPrice?: boolean
+    total?: boolean
+    createdAt?: boolean
+    order?: boolean | LaundryOrderDefaultArgs<ExtArgs>
+    laundryItem?: boolean | LaundryItemDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["laundryOrderItem"]>
+
+  export type LaundryOrderItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    orderId?: boolean
+    laundryItemId?: boolean
+    name?: boolean
+    quantity?: boolean
+    unitPrice?: boolean
+    total?: boolean
+    createdAt?: boolean
+    order?: boolean | LaundryOrderDefaultArgs<ExtArgs>
+    laundryItem?: boolean | LaundryItemDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["laundryOrderItem"]>
+
+  export type LaundryOrderItemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    orderId?: boolean
+    laundryItemId?: boolean
+    name?: boolean
+    quantity?: boolean
+    unitPrice?: boolean
+    total?: boolean
+    createdAt?: boolean
+    order?: boolean | LaundryOrderDefaultArgs<ExtArgs>
+    laundryItem?: boolean | LaundryItemDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["laundryOrderItem"]>
+
+  export type LaundryOrderItemSelectScalar = {
+    id?: boolean
+    orderId?: boolean
+    laundryItemId?: boolean
+    name?: boolean
+    quantity?: boolean
+    unitPrice?: boolean
+    total?: boolean
+    createdAt?: boolean
+  }
+
+  export type LaundryOrderItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orderId" | "laundryItemId" | "name" | "quantity" | "unitPrice" | "total" | "createdAt", ExtArgs["result"]["laundryOrderItem"]>
+  export type LaundryOrderItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    order?: boolean | LaundryOrderDefaultArgs<ExtArgs>
+    laundryItem?: boolean | LaundryItemDefaultArgs<ExtArgs>
+  }
+  export type LaundryOrderItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    order?: boolean | LaundryOrderDefaultArgs<ExtArgs>
+    laundryItem?: boolean | LaundryItemDefaultArgs<ExtArgs>
+  }
+  export type LaundryOrderItemIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    order?: boolean | LaundryOrderDefaultArgs<ExtArgs>
+    laundryItem?: boolean | LaundryItemDefaultArgs<ExtArgs>
+  }
+
+  export type $LaundryOrderItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "LaundryOrderItem"
+    objects: {
+      order: Prisma.$LaundryOrderPayload<ExtArgs>
+      laundryItem: Prisma.$LaundryItemPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      orderId: string
+      laundryItemId: string
+      name: string
+      quantity: number
+      unitPrice: Prisma.Decimal
+      total: Prisma.Decimal
+      createdAt: Date
+    }, ExtArgs["result"]["laundryOrderItem"]>
+    composites: {}
+  }
+
+  type LaundryOrderItemGetPayload<S extends boolean | null | undefined | LaundryOrderItemDefaultArgs> = $Result.GetResult<Prisma.$LaundryOrderItemPayload, S>
+
+  type LaundryOrderItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<LaundryOrderItemFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: LaundryOrderItemCountAggregateInputType | true
+    }
+
+  export interface LaundryOrderItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['LaundryOrderItem'], meta: { name: 'LaundryOrderItem' } }
+    /**
+     * Find zero or one LaundryOrderItem that matches the filter.
+     * @param {LaundryOrderItemFindUniqueArgs} args - Arguments to find a LaundryOrderItem
+     * @example
+     * // Get one LaundryOrderItem
+     * const laundryOrderItem = await prisma.laundryOrderItem.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends LaundryOrderItemFindUniqueArgs>(args: SelectSubset<T, LaundryOrderItemFindUniqueArgs<ExtArgs>>): Prisma__LaundryOrderItemClient<$Result.GetResult<Prisma.$LaundryOrderItemPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one LaundryOrderItem that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {LaundryOrderItemFindUniqueOrThrowArgs} args - Arguments to find a LaundryOrderItem
+     * @example
+     * // Get one LaundryOrderItem
+     * const laundryOrderItem = await prisma.laundryOrderItem.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends LaundryOrderItemFindUniqueOrThrowArgs>(args: SelectSubset<T, LaundryOrderItemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__LaundryOrderItemClient<$Result.GetResult<Prisma.$LaundryOrderItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LaundryOrderItem that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaundryOrderItemFindFirstArgs} args - Arguments to find a LaundryOrderItem
+     * @example
+     * // Get one LaundryOrderItem
+     * const laundryOrderItem = await prisma.laundryOrderItem.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends LaundryOrderItemFindFirstArgs>(args?: SelectSubset<T, LaundryOrderItemFindFirstArgs<ExtArgs>>): Prisma__LaundryOrderItemClient<$Result.GetResult<Prisma.$LaundryOrderItemPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LaundryOrderItem that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaundryOrderItemFindFirstOrThrowArgs} args - Arguments to find a LaundryOrderItem
+     * @example
+     * // Get one LaundryOrderItem
+     * const laundryOrderItem = await prisma.laundryOrderItem.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends LaundryOrderItemFindFirstOrThrowArgs>(args?: SelectSubset<T, LaundryOrderItemFindFirstOrThrowArgs<ExtArgs>>): Prisma__LaundryOrderItemClient<$Result.GetResult<Prisma.$LaundryOrderItemPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more LaundryOrderItems that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaundryOrderItemFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all LaundryOrderItems
+     * const laundryOrderItems = await prisma.laundryOrderItem.findMany()
+     * 
+     * // Get first 10 LaundryOrderItems
+     * const laundryOrderItems = await prisma.laundryOrderItem.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const laundryOrderItemWithIdOnly = await prisma.laundryOrderItem.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends LaundryOrderItemFindManyArgs>(args?: SelectSubset<T, LaundryOrderItemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LaundryOrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a LaundryOrderItem.
+     * @param {LaundryOrderItemCreateArgs} args - Arguments to create a LaundryOrderItem.
+     * @example
+     * // Create one LaundryOrderItem
+     * const LaundryOrderItem = await prisma.laundryOrderItem.create({
+     *   data: {
+     *     // ... data to create a LaundryOrderItem
+     *   }
+     * })
+     * 
+     */
+    create<T extends LaundryOrderItemCreateArgs>(args: SelectSubset<T, LaundryOrderItemCreateArgs<ExtArgs>>): Prisma__LaundryOrderItemClient<$Result.GetResult<Prisma.$LaundryOrderItemPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many LaundryOrderItems.
+     * @param {LaundryOrderItemCreateManyArgs} args - Arguments to create many LaundryOrderItems.
+     * @example
+     * // Create many LaundryOrderItems
+     * const laundryOrderItem = await prisma.laundryOrderItem.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends LaundryOrderItemCreateManyArgs>(args?: SelectSubset<T, LaundryOrderItemCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many LaundryOrderItems and returns the data saved in the database.
+     * @param {LaundryOrderItemCreateManyAndReturnArgs} args - Arguments to create many LaundryOrderItems.
+     * @example
+     * // Create many LaundryOrderItems
+     * const laundryOrderItem = await prisma.laundryOrderItem.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many LaundryOrderItems and only return the `id`
+     * const laundryOrderItemWithIdOnly = await prisma.laundryOrderItem.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends LaundryOrderItemCreateManyAndReturnArgs>(args?: SelectSubset<T, LaundryOrderItemCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LaundryOrderItemPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a LaundryOrderItem.
+     * @param {LaundryOrderItemDeleteArgs} args - Arguments to delete one LaundryOrderItem.
+     * @example
+     * // Delete one LaundryOrderItem
+     * const LaundryOrderItem = await prisma.laundryOrderItem.delete({
+     *   where: {
+     *     // ... filter to delete one LaundryOrderItem
+     *   }
+     * })
+     * 
+     */
+    delete<T extends LaundryOrderItemDeleteArgs>(args: SelectSubset<T, LaundryOrderItemDeleteArgs<ExtArgs>>): Prisma__LaundryOrderItemClient<$Result.GetResult<Prisma.$LaundryOrderItemPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one LaundryOrderItem.
+     * @param {LaundryOrderItemUpdateArgs} args - Arguments to update one LaundryOrderItem.
+     * @example
+     * // Update one LaundryOrderItem
+     * const laundryOrderItem = await prisma.laundryOrderItem.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends LaundryOrderItemUpdateArgs>(args: SelectSubset<T, LaundryOrderItemUpdateArgs<ExtArgs>>): Prisma__LaundryOrderItemClient<$Result.GetResult<Prisma.$LaundryOrderItemPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more LaundryOrderItems.
+     * @param {LaundryOrderItemDeleteManyArgs} args - Arguments to filter LaundryOrderItems to delete.
+     * @example
+     * // Delete a few LaundryOrderItems
+     * const { count } = await prisma.laundryOrderItem.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends LaundryOrderItemDeleteManyArgs>(args?: SelectSubset<T, LaundryOrderItemDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LaundryOrderItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaundryOrderItemUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many LaundryOrderItems
+     * const laundryOrderItem = await prisma.laundryOrderItem.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends LaundryOrderItemUpdateManyArgs>(args: SelectSubset<T, LaundryOrderItemUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LaundryOrderItems and returns the data updated in the database.
+     * @param {LaundryOrderItemUpdateManyAndReturnArgs} args - Arguments to update many LaundryOrderItems.
+     * @example
+     * // Update many LaundryOrderItems
+     * const laundryOrderItem = await prisma.laundryOrderItem.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more LaundryOrderItems and only return the `id`
+     * const laundryOrderItemWithIdOnly = await prisma.laundryOrderItem.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends LaundryOrderItemUpdateManyAndReturnArgs>(args: SelectSubset<T, LaundryOrderItemUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LaundryOrderItemPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one LaundryOrderItem.
+     * @param {LaundryOrderItemUpsertArgs} args - Arguments to update or create a LaundryOrderItem.
+     * @example
+     * // Update or create a LaundryOrderItem
+     * const laundryOrderItem = await prisma.laundryOrderItem.upsert({
+     *   create: {
+     *     // ... data to create a LaundryOrderItem
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the LaundryOrderItem we want to update
+     *   }
+     * })
+     */
+    upsert<T extends LaundryOrderItemUpsertArgs>(args: SelectSubset<T, LaundryOrderItemUpsertArgs<ExtArgs>>): Prisma__LaundryOrderItemClient<$Result.GetResult<Prisma.$LaundryOrderItemPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of LaundryOrderItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaundryOrderItemCountArgs} args - Arguments to filter LaundryOrderItems to count.
+     * @example
+     * // Count the number of LaundryOrderItems
+     * const count = await prisma.laundryOrderItem.count({
+     *   where: {
+     *     // ... the filter for the LaundryOrderItems we want to count
+     *   }
+     * })
+    **/
+    count<T extends LaundryOrderItemCountArgs>(
+      args?: Subset<T, LaundryOrderItemCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], LaundryOrderItemCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a LaundryOrderItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaundryOrderItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends LaundryOrderItemAggregateArgs>(args: Subset<T, LaundryOrderItemAggregateArgs>): Prisma.PrismaPromise<GetLaundryOrderItemAggregateType<T>>
+
+    /**
+     * Group by LaundryOrderItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LaundryOrderItemGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends LaundryOrderItemGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: LaundryOrderItemGroupByArgs['orderBy'] }
+        : { orderBy?: LaundryOrderItemGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, LaundryOrderItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLaundryOrderItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the LaundryOrderItem model
+   */
+  readonly fields: LaundryOrderItemFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for LaundryOrderItem.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__LaundryOrderItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    order<T extends LaundryOrderDefaultArgs<ExtArgs> = {}>(args?: Subset<T, LaundryOrderDefaultArgs<ExtArgs>>): Prisma__LaundryOrderClient<$Result.GetResult<Prisma.$LaundryOrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    laundryItem<T extends LaundryItemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, LaundryItemDefaultArgs<ExtArgs>>): Prisma__LaundryItemClient<$Result.GetResult<Prisma.$LaundryItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the LaundryOrderItem model
+   */
+  interface LaundryOrderItemFieldRefs {
+    readonly id: FieldRef<"LaundryOrderItem", 'String'>
+    readonly orderId: FieldRef<"LaundryOrderItem", 'String'>
+    readonly laundryItemId: FieldRef<"LaundryOrderItem", 'String'>
+    readonly name: FieldRef<"LaundryOrderItem", 'String'>
+    readonly quantity: FieldRef<"LaundryOrderItem", 'Int'>
+    readonly unitPrice: FieldRef<"LaundryOrderItem", 'Decimal'>
+    readonly total: FieldRef<"LaundryOrderItem", 'Decimal'>
+    readonly createdAt: FieldRef<"LaundryOrderItem", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * LaundryOrderItem findUnique
+   */
+  export type LaundryOrderItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryOrderItem
+     */
+    select?: LaundryOrderItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryOrderItem
+     */
+    omit?: LaundryOrderItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryOrderItemInclude<ExtArgs> | null
+    /**
+     * Filter, which LaundryOrderItem to fetch.
+     */
+    where: LaundryOrderItemWhereUniqueInput
+  }
+
+  /**
+   * LaundryOrderItem findUniqueOrThrow
+   */
+  export type LaundryOrderItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryOrderItem
+     */
+    select?: LaundryOrderItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryOrderItem
+     */
+    omit?: LaundryOrderItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryOrderItemInclude<ExtArgs> | null
+    /**
+     * Filter, which LaundryOrderItem to fetch.
+     */
+    where: LaundryOrderItemWhereUniqueInput
+  }
+
+  /**
+   * LaundryOrderItem findFirst
+   */
+  export type LaundryOrderItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryOrderItem
+     */
+    select?: LaundryOrderItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryOrderItem
+     */
+    omit?: LaundryOrderItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryOrderItemInclude<ExtArgs> | null
+    /**
+     * Filter, which LaundryOrderItem to fetch.
+     */
+    where?: LaundryOrderItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LaundryOrderItems to fetch.
+     */
+    orderBy?: LaundryOrderItemOrderByWithRelationInput | LaundryOrderItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LaundryOrderItems.
+     */
+    cursor?: LaundryOrderItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LaundryOrderItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LaundryOrderItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LaundryOrderItems.
+     */
+    distinct?: LaundryOrderItemScalarFieldEnum | LaundryOrderItemScalarFieldEnum[]
+  }
+
+  /**
+   * LaundryOrderItem findFirstOrThrow
+   */
+  export type LaundryOrderItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryOrderItem
+     */
+    select?: LaundryOrderItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryOrderItem
+     */
+    omit?: LaundryOrderItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryOrderItemInclude<ExtArgs> | null
+    /**
+     * Filter, which LaundryOrderItem to fetch.
+     */
+    where?: LaundryOrderItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LaundryOrderItems to fetch.
+     */
+    orderBy?: LaundryOrderItemOrderByWithRelationInput | LaundryOrderItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LaundryOrderItems.
+     */
+    cursor?: LaundryOrderItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LaundryOrderItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LaundryOrderItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LaundryOrderItems.
+     */
+    distinct?: LaundryOrderItemScalarFieldEnum | LaundryOrderItemScalarFieldEnum[]
+  }
+
+  /**
+   * LaundryOrderItem findMany
+   */
+  export type LaundryOrderItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryOrderItem
+     */
+    select?: LaundryOrderItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryOrderItem
+     */
+    omit?: LaundryOrderItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryOrderItemInclude<ExtArgs> | null
+    /**
+     * Filter, which LaundryOrderItems to fetch.
+     */
+    where?: LaundryOrderItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LaundryOrderItems to fetch.
+     */
+    orderBy?: LaundryOrderItemOrderByWithRelationInput | LaundryOrderItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing LaundryOrderItems.
+     */
+    cursor?: LaundryOrderItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LaundryOrderItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LaundryOrderItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LaundryOrderItems.
+     */
+    distinct?: LaundryOrderItemScalarFieldEnum | LaundryOrderItemScalarFieldEnum[]
+  }
+
+  /**
+   * LaundryOrderItem create
+   */
+  export type LaundryOrderItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryOrderItem
+     */
+    select?: LaundryOrderItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryOrderItem
+     */
+    omit?: LaundryOrderItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryOrderItemInclude<ExtArgs> | null
+    /**
+     * The data needed to create a LaundryOrderItem.
+     */
+    data: XOR<LaundryOrderItemCreateInput, LaundryOrderItemUncheckedCreateInput>
+  }
+
+  /**
+   * LaundryOrderItem createMany
+   */
+  export type LaundryOrderItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many LaundryOrderItems.
+     */
+    data: LaundryOrderItemCreateManyInput | LaundryOrderItemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * LaundryOrderItem createManyAndReturn
+   */
+  export type LaundryOrderItemCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryOrderItem
+     */
+    select?: LaundryOrderItemSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryOrderItem
+     */
+    omit?: LaundryOrderItemOmit<ExtArgs> | null
+    /**
+     * The data used to create many LaundryOrderItems.
+     */
+    data: LaundryOrderItemCreateManyInput | LaundryOrderItemCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryOrderItemIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * LaundryOrderItem update
+   */
+  export type LaundryOrderItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryOrderItem
+     */
+    select?: LaundryOrderItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryOrderItem
+     */
+    omit?: LaundryOrderItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryOrderItemInclude<ExtArgs> | null
+    /**
+     * The data needed to update a LaundryOrderItem.
+     */
+    data: XOR<LaundryOrderItemUpdateInput, LaundryOrderItemUncheckedUpdateInput>
+    /**
+     * Choose, which LaundryOrderItem to update.
+     */
+    where: LaundryOrderItemWhereUniqueInput
+  }
+
+  /**
+   * LaundryOrderItem updateMany
+   */
+  export type LaundryOrderItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update LaundryOrderItems.
+     */
+    data: XOR<LaundryOrderItemUpdateManyMutationInput, LaundryOrderItemUncheckedUpdateManyInput>
+    /**
+     * Filter which LaundryOrderItems to update
+     */
+    where?: LaundryOrderItemWhereInput
+    /**
+     * Limit how many LaundryOrderItems to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * LaundryOrderItem updateManyAndReturn
+   */
+  export type LaundryOrderItemUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryOrderItem
+     */
+    select?: LaundryOrderItemSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryOrderItem
+     */
+    omit?: LaundryOrderItemOmit<ExtArgs> | null
+    /**
+     * The data used to update LaundryOrderItems.
+     */
+    data: XOR<LaundryOrderItemUpdateManyMutationInput, LaundryOrderItemUncheckedUpdateManyInput>
+    /**
+     * Filter which LaundryOrderItems to update
+     */
+    where?: LaundryOrderItemWhereInput
+    /**
+     * Limit how many LaundryOrderItems to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryOrderItemIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * LaundryOrderItem upsert
+   */
+  export type LaundryOrderItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryOrderItem
+     */
+    select?: LaundryOrderItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryOrderItem
+     */
+    omit?: LaundryOrderItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryOrderItemInclude<ExtArgs> | null
+    /**
+     * The filter to search for the LaundryOrderItem to update in case it exists.
+     */
+    where: LaundryOrderItemWhereUniqueInput
+    /**
+     * In case the LaundryOrderItem found by the `where` argument doesn't exist, create a new LaundryOrderItem with this data.
+     */
+    create: XOR<LaundryOrderItemCreateInput, LaundryOrderItemUncheckedCreateInput>
+    /**
+     * In case the LaundryOrderItem was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<LaundryOrderItemUpdateInput, LaundryOrderItemUncheckedUpdateInput>
+  }
+
+  /**
+   * LaundryOrderItem delete
+   */
+  export type LaundryOrderItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryOrderItem
+     */
+    select?: LaundryOrderItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryOrderItem
+     */
+    omit?: LaundryOrderItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryOrderItemInclude<ExtArgs> | null
+    /**
+     * Filter which LaundryOrderItem to delete.
+     */
+    where: LaundryOrderItemWhereUniqueInput
+  }
+
+  /**
+   * LaundryOrderItem deleteMany
+   */
+  export type LaundryOrderItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LaundryOrderItems to delete
+     */
+    where?: LaundryOrderItemWhereInput
+    /**
+     * Limit how many LaundryOrderItems to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * LaundryOrderItem without action
+   */
+  export type LaundryOrderItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LaundryOrderItem
+     */
+    select?: LaundryOrderItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LaundryOrderItem
+     */
+    omit?: LaundryOrderItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LaundryOrderItemInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model GymMembershipPlan
+   */
+
+  export type AggregateGymMembershipPlan = {
+    _count: GymMembershipPlanCountAggregateOutputType | null
+    _avg: GymMembershipPlanAvgAggregateOutputType | null
+    _sum: GymMembershipPlanSumAggregateOutputType | null
+    _min: GymMembershipPlanMinAggregateOutputType | null
+    _max: GymMembershipPlanMaxAggregateOutputType | null
+  }
+
+  export type GymMembershipPlanAvgAggregateOutputType = {
+    durationValue: number | null
+    price: Decimal | null
+  }
+
+  export type GymMembershipPlanSumAggregateOutputType = {
+    durationValue: number | null
+    price: Decimal | null
+  }
+
+  export type GymMembershipPlanMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    description: string | null
+    duration: $Enums.GymMembershipDuration | null
+    durationValue: number | null
+    price: Decimal | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type GymMembershipPlanMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    description: string | null
+    duration: $Enums.GymMembershipDuration | null
+    durationValue: number | null
+    price: Decimal | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type GymMembershipPlanCountAggregateOutputType = {
+    id: number
+    name: number
+    description: number
+    duration: number
+    durationValue: number
+    price: number
+    isActive: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type GymMembershipPlanAvgAggregateInputType = {
+    durationValue?: true
+    price?: true
+  }
+
+  export type GymMembershipPlanSumAggregateInputType = {
+    durationValue?: true
+    price?: true
+  }
+
+  export type GymMembershipPlanMinAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    duration?: true
+    durationValue?: true
+    price?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type GymMembershipPlanMaxAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    duration?: true
+    durationValue?: true
+    price?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type GymMembershipPlanCountAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    duration?: true
+    durationValue?: true
+    price?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type GymMembershipPlanAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GymMembershipPlan to aggregate.
+     */
+    where?: GymMembershipPlanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GymMembershipPlans to fetch.
+     */
+    orderBy?: GymMembershipPlanOrderByWithRelationInput | GymMembershipPlanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: GymMembershipPlanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GymMembershipPlans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GymMembershipPlans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned GymMembershipPlans
+    **/
+    _count?: true | GymMembershipPlanCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: GymMembershipPlanAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: GymMembershipPlanSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: GymMembershipPlanMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: GymMembershipPlanMaxAggregateInputType
+  }
+
+  export type GetGymMembershipPlanAggregateType<T extends GymMembershipPlanAggregateArgs> = {
+        [P in keyof T & keyof AggregateGymMembershipPlan]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateGymMembershipPlan[P]>
+      : GetScalarType<T[P], AggregateGymMembershipPlan[P]>
+  }
+
+
+
+
+  export type GymMembershipPlanGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GymMembershipPlanWhereInput
+    orderBy?: GymMembershipPlanOrderByWithAggregationInput | GymMembershipPlanOrderByWithAggregationInput[]
+    by: GymMembershipPlanScalarFieldEnum[] | GymMembershipPlanScalarFieldEnum
+    having?: GymMembershipPlanScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: GymMembershipPlanCountAggregateInputType | true
+    _avg?: GymMembershipPlanAvgAggregateInputType
+    _sum?: GymMembershipPlanSumAggregateInputType
+    _min?: GymMembershipPlanMinAggregateInputType
+    _max?: GymMembershipPlanMaxAggregateInputType
+  }
+
+  export type GymMembershipPlanGroupByOutputType = {
+    id: string
+    name: string
+    description: string | null
+    duration: $Enums.GymMembershipDuration
+    durationValue: number
+    price: Decimal
+    isActive: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: GymMembershipPlanCountAggregateOutputType | null
+    _avg: GymMembershipPlanAvgAggregateOutputType | null
+    _sum: GymMembershipPlanSumAggregateOutputType | null
+    _min: GymMembershipPlanMinAggregateOutputType | null
+    _max: GymMembershipPlanMaxAggregateOutputType | null
+  }
+
+  type GetGymMembershipPlanGroupByPayload<T extends GymMembershipPlanGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<GymMembershipPlanGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof GymMembershipPlanGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], GymMembershipPlanGroupByOutputType[P]>
+            : GetScalarType<T[P], GymMembershipPlanGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type GymMembershipPlanSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    duration?: boolean
+    durationValue?: boolean
+    price?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    memberships?: boolean | GymMembershipPlan$membershipsArgs<ExtArgs>
+    _count?: boolean | GymMembershipPlanCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["gymMembershipPlan"]>
+
+  export type GymMembershipPlanSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    duration?: boolean
+    durationValue?: boolean
+    price?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["gymMembershipPlan"]>
+
+  export type GymMembershipPlanSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    duration?: boolean
+    durationValue?: boolean
+    price?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["gymMembershipPlan"]>
+
+  export type GymMembershipPlanSelectScalar = {
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    duration?: boolean
+    durationValue?: boolean
+    price?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type GymMembershipPlanOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "duration" | "durationValue" | "price" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["gymMembershipPlan"]>
+  export type GymMembershipPlanInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    memberships?: boolean | GymMembershipPlan$membershipsArgs<ExtArgs>
+    _count?: boolean | GymMembershipPlanCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type GymMembershipPlanIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type GymMembershipPlanIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $GymMembershipPlanPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "GymMembershipPlan"
+    objects: {
+      memberships: Prisma.$GymMembershipPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      description: string | null
+      duration: $Enums.GymMembershipDuration
+      durationValue: number
+      price: Prisma.Decimal
+      isActive: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["gymMembershipPlan"]>
+    composites: {}
+  }
+
+  type GymMembershipPlanGetPayload<S extends boolean | null | undefined | GymMembershipPlanDefaultArgs> = $Result.GetResult<Prisma.$GymMembershipPlanPayload, S>
+
+  type GymMembershipPlanCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<GymMembershipPlanFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: GymMembershipPlanCountAggregateInputType | true
+    }
+
+  export interface GymMembershipPlanDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['GymMembershipPlan'], meta: { name: 'GymMembershipPlan' } }
+    /**
+     * Find zero or one GymMembershipPlan that matches the filter.
+     * @param {GymMembershipPlanFindUniqueArgs} args - Arguments to find a GymMembershipPlan
+     * @example
+     * // Get one GymMembershipPlan
+     * const gymMembershipPlan = await prisma.gymMembershipPlan.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends GymMembershipPlanFindUniqueArgs>(args: SelectSubset<T, GymMembershipPlanFindUniqueArgs<ExtArgs>>): Prisma__GymMembershipPlanClient<$Result.GetResult<Prisma.$GymMembershipPlanPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one GymMembershipPlan that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {GymMembershipPlanFindUniqueOrThrowArgs} args - Arguments to find a GymMembershipPlan
+     * @example
+     * // Get one GymMembershipPlan
+     * const gymMembershipPlan = await prisma.gymMembershipPlan.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends GymMembershipPlanFindUniqueOrThrowArgs>(args: SelectSubset<T, GymMembershipPlanFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GymMembershipPlanClient<$Result.GetResult<Prisma.$GymMembershipPlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GymMembershipPlan that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GymMembershipPlanFindFirstArgs} args - Arguments to find a GymMembershipPlan
+     * @example
+     * // Get one GymMembershipPlan
+     * const gymMembershipPlan = await prisma.gymMembershipPlan.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends GymMembershipPlanFindFirstArgs>(args?: SelectSubset<T, GymMembershipPlanFindFirstArgs<ExtArgs>>): Prisma__GymMembershipPlanClient<$Result.GetResult<Prisma.$GymMembershipPlanPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GymMembershipPlan that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GymMembershipPlanFindFirstOrThrowArgs} args - Arguments to find a GymMembershipPlan
+     * @example
+     * // Get one GymMembershipPlan
+     * const gymMembershipPlan = await prisma.gymMembershipPlan.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends GymMembershipPlanFindFirstOrThrowArgs>(args?: SelectSubset<T, GymMembershipPlanFindFirstOrThrowArgs<ExtArgs>>): Prisma__GymMembershipPlanClient<$Result.GetResult<Prisma.$GymMembershipPlanPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more GymMembershipPlans that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GymMembershipPlanFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all GymMembershipPlans
+     * const gymMembershipPlans = await prisma.gymMembershipPlan.findMany()
+     * 
+     * // Get first 10 GymMembershipPlans
+     * const gymMembershipPlans = await prisma.gymMembershipPlan.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const gymMembershipPlanWithIdOnly = await prisma.gymMembershipPlan.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends GymMembershipPlanFindManyArgs>(args?: SelectSubset<T, GymMembershipPlanFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GymMembershipPlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a GymMembershipPlan.
+     * @param {GymMembershipPlanCreateArgs} args - Arguments to create a GymMembershipPlan.
+     * @example
+     * // Create one GymMembershipPlan
+     * const GymMembershipPlan = await prisma.gymMembershipPlan.create({
+     *   data: {
+     *     // ... data to create a GymMembershipPlan
+     *   }
+     * })
+     * 
+     */
+    create<T extends GymMembershipPlanCreateArgs>(args: SelectSubset<T, GymMembershipPlanCreateArgs<ExtArgs>>): Prisma__GymMembershipPlanClient<$Result.GetResult<Prisma.$GymMembershipPlanPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many GymMembershipPlans.
+     * @param {GymMembershipPlanCreateManyArgs} args - Arguments to create many GymMembershipPlans.
+     * @example
+     * // Create many GymMembershipPlans
+     * const gymMembershipPlan = await prisma.gymMembershipPlan.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends GymMembershipPlanCreateManyArgs>(args?: SelectSubset<T, GymMembershipPlanCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many GymMembershipPlans and returns the data saved in the database.
+     * @param {GymMembershipPlanCreateManyAndReturnArgs} args - Arguments to create many GymMembershipPlans.
+     * @example
+     * // Create many GymMembershipPlans
+     * const gymMembershipPlan = await prisma.gymMembershipPlan.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many GymMembershipPlans and only return the `id`
+     * const gymMembershipPlanWithIdOnly = await prisma.gymMembershipPlan.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends GymMembershipPlanCreateManyAndReturnArgs>(args?: SelectSubset<T, GymMembershipPlanCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GymMembershipPlanPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a GymMembershipPlan.
+     * @param {GymMembershipPlanDeleteArgs} args - Arguments to delete one GymMembershipPlan.
+     * @example
+     * // Delete one GymMembershipPlan
+     * const GymMembershipPlan = await prisma.gymMembershipPlan.delete({
+     *   where: {
+     *     // ... filter to delete one GymMembershipPlan
+     *   }
+     * })
+     * 
+     */
+    delete<T extends GymMembershipPlanDeleteArgs>(args: SelectSubset<T, GymMembershipPlanDeleteArgs<ExtArgs>>): Prisma__GymMembershipPlanClient<$Result.GetResult<Prisma.$GymMembershipPlanPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one GymMembershipPlan.
+     * @param {GymMembershipPlanUpdateArgs} args - Arguments to update one GymMembershipPlan.
+     * @example
+     * // Update one GymMembershipPlan
+     * const gymMembershipPlan = await prisma.gymMembershipPlan.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends GymMembershipPlanUpdateArgs>(args: SelectSubset<T, GymMembershipPlanUpdateArgs<ExtArgs>>): Prisma__GymMembershipPlanClient<$Result.GetResult<Prisma.$GymMembershipPlanPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more GymMembershipPlans.
+     * @param {GymMembershipPlanDeleteManyArgs} args - Arguments to filter GymMembershipPlans to delete.
+     * @example
+     * // Delete a few GymMembershipPlans
+     * const { count } = await prisma.gymMembershipPlan.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends GymMembershipPlanDeleteManyArgs>(args?: SelectSubset<T, GymMembershipPlanDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GymMembershipPlans.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GymMembershipPlanUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many GymMembershipPlans
+     * const gymMembershipPlan = await prisma.gymMembershipPlan.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends GymMembershipPlanUpdateManyArgs>(args: SelectSubset<T, GymMembershipPlanUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GymMembershipPlans and returns the data updated in the database.
+     * @param {GymMembershipPlanUpdateManyAndReturnArgs} args - Arguments to update many GymMembershipPlans.
+     * @example
+     * // Update many GymMembershipPlans
+     * const gymMembershipPlan = await prisma.gymMembershipPlan.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more GymMembershipPlans and only return the `id`
+     * const gymMembershipPlanWithIdOnly = await prisma.gymMembershipPlan.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends GymMembershipPlanUpdateManyAndReturnArgs>(args: SelectSubset<T, GymMembershipPlanUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GymMembershipPlanPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one GymMembershipPlan.
+     * @param {GymMembershipPlanUpsertArgs} args - Arguments to update or create a GymMembershipPlan.
+     * @example
+     * // Update or create a GymMembershipPlan
+     * const gymMembershipPlan = await prisma.gymMembershipPlan.upsert({
+     *   create: {
+     *     // ... data to create a GymMembershipPlan
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the GymMembershipPlan we want to update
+     *   }
+     * })
+     */
+    upsert<T extends GymMembershipPlanUpsertArgs>(args: SelectSubset<T, GymMembershipPlanUpsertArgs<ExtArgs>>): Prisma__GymMembershipPlanClient<$Result.GetResult<Prisma.$GymMembershipPlanPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of GymMembershipPlans.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GymMembershipPlanCountArgs} args - Arguments to filter GymMembershipPlans to count.
+     * @example
+     * // Count the number of GymMembershipPlans
+     * const count = await prisma.gymMembershipPlan.count({
+     *   where: {
+     *     // ... the filter for the GymMembershipPlans we want to count
+     *   }
+     * })
+    **/
+    count<T extends GymMembershipPlanCountArgs>(
+      args?: Subset<T, GymMembershipPlanCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], GymMembershipPlanCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a GymMembershipPlan.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GymMembershipPlanAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends GymMembershipPlanAggregateArgs>(args: Subset<T, GymMembershipPlanAggregateArgs>): Prisma.PrismaPromise<GetGymMembershipPlanAggregateType<T>>
+
+    /**
+     * Group by GymMembershipPlan.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GymMembershipPlanGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends GymMembershipPlanGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: GymMembershipPlanGroupByArgs['orderBy'] }
+        : { orderBy?: GymMembershipPlanGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, GymMembershipPlanGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGymMembershipPlanGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the GymMembershipPlan model
+   */
+  readonly fields: GymMembershipPlanFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for GymMembershipPlan.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__GymMembershipPlanClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    memberships<T extends GymMembershipPlan$membershipsArgs<ExtArgs> = {}>(args?: Subset<T, GymMembershipPlan$membershipsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GymMembershipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the GymMembershipPlan model
+   */
+  interface GymMembershipPlanFieldRefs {
+    readonly id: FieldRef<"GymMembershipPlan", 'String'>
+    readonly name: FieldRef<"GymMembershipPlan", 'String'>
+    readonly description: FieldRef<"GymMembershipPlan", 'String'>
+    readonly duration: FieldRef<"GymMembershipPlan", 'GymMembershipDuration'>
+    readonly durationValue: FieldRef<"GymMembershipPlan", 'Int'>
+    readonly price: FieldRef<"GymMembershipPlan", 'Decimal'>
+    readonly isActive: FieldRef<"GymMembershipPlan", 'Boolean'>
+    readonly createdAt: FieldRef<"GymMembershipPlan", 'DateTime'>
+    readonly updatedAt: FieldRef<"GymMembershipPlan", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * GymMembershipPlan findUnique
+   */
+  export type GymMembershipPlanFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GymMembershipPlan
+     */
+    select?: GymMembershipPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GymMembershipPlan
+     */
+    omit?: GymMembershipPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GymMembershipPlanInclude<ExtArgs> | null
+    /**
+     * Filter, which GymMembershipPlan to fetch.
+     */
+    where: GymMembershipPlanWhereUniqueInput
+  }
+
+  /**
+   * GymMembershipPlan findUniqueOrThrow
+   */
+  export type GymMembershipPlanFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GymMembershipPlan
+     */
+    select?: GymMembershipPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GymMembershipPlan
+     */
+    omit?: GymMembershipPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GymMembershipPlanInclude<ExtArgs> | null
+    /**
+     * Filter, which GymMembershipPlan to fetch.
+     */
+    where: GymMembershipPlanWhereUniqueInput
+  }
+
+  /**
+   * GymMembershipPlan findFirst
+   */
+  export type GymMembershipPlanFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GymMembershipPlan
+     */
+    select?: GymMembershipPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GymMembershipPlan
+     */
+    omit?: GymMembershipPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GymMembershipPlanInclude<ExtArgs> | null
+    /**
+     * Filter, which GymMembershipPlan to fetch.
+     */
+    where?: GymMembershipPlanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GymMembershipPlans to fetch.
+     */
+    orderBy?: GymMembershipPlanOrderByWithRelationInput | GymMembershipPlanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GymMembershipPlans.
+     */
+    cursor?: GymMembershipPlanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GymMembershipPlans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GymMembershipPlans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GymMembershipPlans.
+     */
+    distinct?: GymMembershipPlanScalarFieldEnum | GymMembershipPlanScalarFieldEnum[]
+  }
+
+  /**
+   * GymMembershipPlan findFirstOrThrow
+   */
+  export type GymMembershipPlanFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GymMembershipPlan
+     */
+    select?: GymMembershipPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GymMembershipPlan
+     */
+    omit?: GymMembershipPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GymMembershipPlanInclude<ExtArgs> | null
+    /**
+     * Filter, which GymMembershipPlan to fetch.
+     */
+    where?: GymMembershipPlanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GymMembershipPlans to fetch.
+     */
+    orderBy?: GymMembershipPlanOrderByWithRelationInput | GymMembershipPlanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GymMembershipPlans.
+     */
+    cursor?: GymMembershipPlanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GymMembershipPlans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GymMembershipPlans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GymMembershipPlans.
+     */
+    distinct?: GymMembershipPlanScalarFieldEnum | GymMembershipPlanScalarFieldEnum[]
+  }
+
+  /**
+   * GymMembershipPlan findMany
+   */
+  export type GymMembershipPlanFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GymMembershipPlan
+     */
+    select?: GymMembershipPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GymMembershipPlan
+     */
+    omit?: GymMembershipPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GymMembershipPlanInclude<ExtArgs> | null
+    /**
+     * Filter, which GymMembershipPlans to fetch.
+     */
+    where?: GymMembershipPlanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GymMembershipPlans to fetch.
+     */
+    orderBy?: GymMembershipPlanOrderByWithRelationInput | GymMembershipPlanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing GymMembershipPlans.
+     */
+    cursor?: GymMembershipPlanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GymMembershipPlans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GymMembershipPlans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GymMembershipPlans.
+     */
+    distinct?: GymMembershipPlanScalarFieldEnum | GymMembershipPlanScalarFieldEnum[]
+  }
+
+  /**
+   * GymMembershipPlan create
+   */
+  export type GymMembershipPlanCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GymMembershipPlan
+     */
+    select?: GymMembershipPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GymMembershipPlan
+     */
+    omit?: GymMembershipPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GymMembershipPlanInclude<ExtArgs> | null
+    /**
+     * The data needed to create a GymMembershipPlan.
+     */
+    data: XOR<GymMembershipPlanCreateInput, GymMembershipPlanUncheckedCreateInput>
+  }
+
+  /**
+   * GymMembershipPlan createMany
+   */
+  export type GymMembershipPlanCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many GymMembershipPlans.
+     */
+    data: GymMembershipPlanCreateManyInput | GymMembershipPlanCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * GymMembershipPlan createManyAndReturn
+   */
+  export type GymMembershipPlanCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GymMembershipPlan
+     */
+    select?: GymMembershipPlanSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GymMembershipPlan
+     */
+    omit?: GymMembershipPlanOmit<ExtArgs> | null
+    /**
+     * The data used to create many GymMembershipPlans.
+     */
+    data: GymMembershipPlanCreateManyInput | GymMembershipPlanCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * GymMembershipPlan update
+   */
+  export type GymMembershipPlanUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GymMembershipPlan
+     */
+    select?: GymMembershipPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GymMembershipPlan
+     */
+    omit?: GymMembershipPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GymMembershipPlanInclude<ExtArgs> | null
+    /**
+     * The data needed to update a GymMembershipPlan.
+     */
+    data: XOR<GymMembershipPlanUpdateInput, GymMembershipPlanUncheckedUpdateInput>
+    /**
+     * Choose, which GymMembershipPlan to update.
+     */
+    where: GymMembershipPlanWhereUniqueInput
+  }
+
+  /**
+   * GymMembershipPlan updateMany
+   */
+  export type GymMembershipPlanUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update GymMembershipPlans.
+     */
+    data: XOR<GymMembershipPlanUpdateManyMutationInput, GymMembershipPlanUncheckedUpdateManyInput>
+    /**
+     * Filter which GymMembershipPlans to update
+     */
+    where?: GymMembershipPlanWhereInput
+    /**
+     * Limit how many GymMembershipPlans to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * GymMembershipPlan updateManyAndReturn
+   */
+  export type GymMembershipPlanUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GymMembershipPlan
+     */
+    select?: GymMembershipPlanSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GymMembershipPlan
+     */
+    omit?: GymMembershipPlanOmit<ExtArgs> | null
+    /**
+     * The data used to update GymMembershipPlans.
+     */
+    data: XOR<GymMembershipPlanUpdateManyMutationInput, GymMembershipPlanUncheckedUpdateManyInput>
+    /**
+     * Filter which GymMembershipPlans to update
+     */
+    where?: GymMembershipPlanWhereInput
+    /**
+     * Limit how many GymMembershipPlans to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * GymMembershipPlan upsert
+   */
+  export type GymMembershipPlanUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GymMembershipPlan
+     */
+    select?: GymMembershipPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GymMembershipPlan
+     */
+    omit?: GymMembershipPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GymMembershipPlanInclude<ExtArgs> | null
+    /**
+     * The filter to search for the GymMembershipPlan to update in case it exists.
+     */
+    where: GymMembershipPlanWhereUniqueInput
+    /**
+     * In case the GymMembershipPlan found by the `where` argument doesn't exist, create a new GymMembershipPlan with this data.
+     */
+    create: XOR<GymMembershipPlanCreateInput, GymMembershipPlanUncheckedCreateInput>
+    /**
+     * In case the GymMembershipPlan was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<GymMembershipPlanUpdateInput, GymMembershipPlanUncheckedUpdateInput>
+  }
+
+  /**
+   * GymMembershipPlan delete
+   */
+  export type GymMembershipPlanDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GymMembershipPlan
+     */
+    select?: GymMembershipPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GymMembershipPlan
+     */
+    omit?: GymMembershipPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GymMembershipPlanInclude<ExtArgs> | null
+    /**
+     * Filter which GymMembershipPlan to delete.
+     */
+    where: GymMembershipPlanWhereUniqueInput
+  }
+
+  /**
+   * GymMembershipPlan deleteMany
+   */
+  export type GymMembershipPlanDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GymMembershipPlans to delete
+     */
+    where?: GymMembershipPlanWhereInput
+    /**
+     * Limit how many GymMembershipPlans to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * GymMembershipPlan.memberships
+   */
+  export type GymMembershipPlan$membershipsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GymMembership
+     */
+    select?: GymMembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GymMembership
+     */
+    omit?: GymMembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GymMembershipInclude<ExtArgs> | null
+    where?: GymMembershipWhereInput
+    orderBy?: GymMembershipOrderByWithRelationInput | GymMembershipOrderByWithRelationInput[]
+    cursor?: GymMembershipWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GymMembershipScalarFieldEnum | GymMembershipScalarFieldEnum[]
+  }
+
+  /**
+   * GymMembershipPlan without action
+   */
+  export type GymMembershipPlanDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GymMembershipPlan
+     */
+    select?: GymMembershipPlanSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GymMembershipPlan
+     */
+    omit?: GymMembershipPlanOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GymMembershipPlanInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model GymMembership
+   */
+
+  export type AggregateGymMembership = {
+    _count: GymMembershipCountAggregateOutputType | null
+    _avg: GymMembershipAvgAggregateOutputType | null
+    _sum: GymMembershipSumAggregateOutputType | null
+    _min: GymMembershipMinAggregateOutputType | null
+    _max: GymMembershipMaxAggregateOutputType | null
+  }
+
+  export type GymMembershipAvgAggregateOutputType = {
+    price: Decimal | null
+  }
+
+  export type GymMembershipSumAggregateOutputType = {
+    price: Decimal | null
+  }
+
+  export type GymMembershipMinAggregateOutputType = {
+    id: string | null
+    guestId: string | null
+    planId: string | null
+    reservationId: string | null
+    status: $Enums.GymMembershipStatus | null
+    paymentStatus: $Enums.GymPaymentStatus | null
+    settlementMethod: $Enums.GymSettlementMethod | null
+    startDate: Date | null
+    endDate: Date | null
+    price: Decimal | null
+    notes: string | null
+    activatedAt: Date | null
+    suspendedAt: Date | null
+    cancelledAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type GymMembershipMaxAggregateOutputType = {
+    id: string | null
+    guestId: string | null
+    planId: string | null
+    reservationId: string | null
+    status: $Enums.GymMembershipStatus | null
+    paymentStatus: $Enums.GymPaymentStatus | null
+    settlementMethod: $Enums.GymSettlementMethod | null
+    startDate: Date | null
+    endDate: Date | null
+    price: Decimal | null
+    notes: string | null
+    activatedAt: Date | null
+    suspendedAt: Date | null
+    cancelledAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type GymMembershipCountAggregateOutputType = {
+    id: number
+    guestId: number
+    planId: number
+    reservationId: number
+    status: number
+    paymentStatus: number
+    settlementMethod: number
+    startDate: number
+    endDate: number
+    price: number
+    notes: number
+    activatedAt: number
+    suspendedAt: number
+    cancelledAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type GymMembershipAvgAggregateInputType = {
+    price?: true
+  }
+
+  export type GymMembershipSumAggregateInputType = {
+    price?: true
+  }
+
+  export type GymMembershipMinAggregateInputType = {
+    id?: true
+    guestId?: true
+    planId?: true
+    reservationId?: true
+    status?: true
+    paymentStatus?: true
+    settlementMethod?: true
+    startDate?: true
+    endDate?: true
+    price?: true
+    notes?: true
+    activatedAt?: true
+    suspendedAt?: true
+    cancelledAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type GymMembershipMaxAggregateInputType = {
+    id?: true
+    guestId?: true
+    planId?: true
+    reservationId?: true
+    status?: true
+    paymentStatus?: true
+    settlementMethod?: true
+    startDate?: true
+    endDate?: true
+    price?: true
+    notes?: true
+    activatedAt?: true
+    suspendedAt?: true
+    cancelledAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type GymMembershipCountAggregateInputType = {
+    id?: true
+    guestId?: true
+    planId?: true
+    reservationId?: true
+    status?: true
+    paymentStatus?: true
+    settlementMethod?: true
+    startDate?: true
+    endDate?: true
+    price?: true
+    notes?: true
+    activatedAt?: true
+    suspendedAt?: true
+    cancelledAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type GymMembershipAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GymMembership to aggregate.
+     */
+    where?: GymMembershipWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GymMemberships to fetch.
+     */
+    orderBy?: GymMembershipOrderByWithRelationInput | GymMembershipOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: GymMembershipWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GymMemberships from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GymMemberships.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned GymMemberships
+    **/
+    _count?: true | GymMembershipCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: GymMembershipAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: GymMembershipSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: GymMembershipMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: GymMembershipMaxAggregateInputType
+  }
+
+  export type GetGymMembershipAggregateType<T extends GymMembershipAggregateArgs> = {
+        [P in keyof T & keyof AggregateGymMembership]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateGymMembership[P]>
+      : GetScalarType<T[P], AggregateGymMembership[P]>
+  }
+
+
+
+
+  export type GymMembershipGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GymMembershipWhereInput
+    orderBy?: GymMembershipOrderByWithAggregationInput | GymMembershipOrderByWithAggregationInput[]
+    by: GymMembershipScalarFieldEnum[] | GymMembershipScalarFieldEnum
+    having?: GymMembershipScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: GymMembershipCountAggregateInputType | true
+    _avg?: GymMembershipAvgAggregateInputType
+    _sum?: GymMembershipSumAggregateInputType
+    _min?: GymMembershipMinAggregateInputType
+    _max?: GymMembershipMaxAggregateInputType
+  }
+
+  export type GymMembershipGroupByOutputType = {
+    id: string
+    guestId: string
+    planId: string
+    reservationId: string | null
+    status: $Enums.GymMembershipStatus
+    paymentStatus: $Enums.GymPaymentStatus
+    settlementMethod: $Enums.GymSettlementMethod | null
+    startDate: Date
+    endDate: Date
+    price: Decimal
+    notes: string | null
+    activatedAt: Date | null
+    suspendedAt: Date | null
+    cancelledAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: GymMembershipCountAggregateOutputType | null
+    _avg: GymMembershipAvgAggregateOutputType | null
+    _sum: GymMembershipSumAggregateOutputType | null
+    _min: GymMembershipMinAggregateOutputType | null
+    _max: GymMembershipMaxAggregateOutputType | null
+  }
+
+  type GetGymMembershipGroupByPayload<T extends GymMembershipGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<GymMembershipGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof GymMembershipGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], GymMembershipGroupByOutputType[P]>
+            : GetScalarType<T[P], GymMembershipGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type GymMembershipSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    guestId?: boolean
+    planId?: boolean
+    reservationId?: boolean
+    status?: boolean
+    paymentStatus?: boolean
+    settlementMethod?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    price?: boolean
+    notes?: boolean
+    activatedAt?: boolean
+    suspendedAt?: boolean
+    cancelledAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    reservation?: boolean | GymMembership$reservationArgs<ExtArgs>
+    guest?: boolean | GuestDefaultArgs<ExtArgs>
+    plan?: boolean | GymMembershipPlanDefaultArgs<ExtArgs>
+    payments?: boolean | GymMembership$paymentsArgs<ExtArgs>
+    _count?: boolean | GymMembershipCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["gymMembership"]>
+
+  export type GymMembershipSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    guestId?: boolean
+    planId?: boolean
+    reservationId?: boolean
+    status?: boolean
+    paymentStatus?: boolean
+    settlementMethod?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    price?: boolean
+    notes?: boolean
+    activatedAt?: boolean
+    suspendedAt?: boolean
+    cancelledAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    reservation?: boolean | GymMembership$reservationArgs<ExtArgs>
+    guest?: boolean | GuestDefaultArgs<ExtArgs>
+    plan?: boolean | GymMembershipPlanDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["gymMembership"]>
+
+  export type GymMembershipSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    guestId?: boolean
+    planId?: boolean
+    reservationId?: boolean
+    status?: boolean
+    paymentStatus?: boolean
+    settlementMethod?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    price?: boolean
+    notes?: boolean
+    activatedAt?: boolean
+    suspendedAt?: boolean
+    cancelledAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    reservation?: boolean | GymMembership$reservationArgs<ExtArgs>
+    guest?: boolean | GuestDefaultArgs<ExtArgs>
+    plan?: boolean | GymMembershipPlanDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["gymMembership"]>
+
+  export type GymMembershipSelectScalar = {
+    id?: boolean
+    guestId?: boolean
+    planId?: boolean
+    reservationId?: boolean
+    status?: boolean
+    paymentStatus?: boolean
+    settlementMethod?: boolean
+    startDate?: boolean
+    endDate?: boolean
+    price?: boolean
+    notes?: boolean
+    activatedAt?: boolean
+    suspendedAt?: boolean
+    cancelledAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type GymMembershipOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "guestId" | "planId" | "reservationId" | "status" | "paymentStatus" | "settlementMethod" | "startDate" | "endDate" | "price" | "notes" | "activatedAt" | "suspendedAt" | "cancelledAt" | "createdAt" | "updatedAt", ExtArgs["result"]["gymMembership"]>
+  export type GymMembershipInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    reservation?: boolean | GymMembership$reservationArgs<ExtArgs>
+    guest?: boolean | GuestDefaultArgs<ExtArgs>
+    plan?: boolean | GymMembershipPlanDefaultArgs<ExtArgs>
+    payments?: boolean | GymMembership$paymentsArgs<ExtArgs>
+    _count?: boolean | GymMembershipCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type GymMembershipIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    reservation?: boolean | GymMembership$reservationArgs<ExtArgs>
+    guest?: boolean | GuestDefaultArgs<ExtArgs>
+    plan?: boolean | GymMembershipPlanDefaultArgs<ExtArgs>
+  }
+  export type GymMembershipIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    reservation?: boolean | GymMembership$reservationArgs<ExtArgs>
+    guest?: boolean | GuestDefaultArgs<ExtArgs>
+    plan?: boolean | GymMembershipPlanDefaultArgs<ExtArgs>
+  }
+
+  export type $GymMembershipPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "GymMembership"
+    objects: {
+      reservation: Prisma.$ReservationPayload<ExtArgs> | null
+      guest: Prisma.$GuestPayload<ExtArgs>
+      plan: Prisma.$GymMembershipPlanPayload<ExtArgs>
+      payments: Prisma.$PaymentPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      guestId: string
+      planId: string
+      reservationId: string | null
+      status: $Enums.GymMembershipStatus
+      paymentStatus: $Enums.GymPaymentStatus
+      settlementMethod: $Enums.GymSettlementMethod | null
+      startDate: Date
+      endDate: Date
+      price: Prisma.Decimal
+      notes: string | null
+      activatedAt: Date | null
+      suspendedAt: Date | null
+      cancelledAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["gymMembership"]>
+    composites: {}
+  }
+
+  type GymMembershipGetPayload<S extends boolean | null | undefined | GymMembershipDefaultArgs> = $Result.GetResult<Prisma.$GymMembershipPayload, S>
+
+  type GymMembershipCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<GymMembershipFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: GymMembershipCountAggregateInputType | true
+    }
+
+  export interface GymMembershipDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['GymMembership'], meta: { name: 'GymMembership' } }
+    /**
+     * Find zero or one GymMembership that matches the filter.
+     * @param {GymMembershipFindUniqueArgs} args - Arguments to find a GymMembership
+     * @example
+     * // Get one GymMembership
+     * const gymMembership = await prisma.gymMembership.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends GymMembershipFindUniqueArgs>(args: SelectSubset<T, GymMembershipFindUniqueArgs<ExtArgs>>): Prisma__GymMembershipClient<$Result.GetResult<Prisma.$GymMembershipPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one GymMembership that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {GymMembershipFindUniqueOrThrowArgs} args - Arguments to find a GymMembership
+     * @example
+     * // Get one GymMembership
+     * const gymMembership = await prisma.gymMembership.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends GymMembershipFindUniqueOrThrowArgs>(args: SelectSubset<T, GymMembershipFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GymMembershipClient<$Result.GetResult<Prisma.$GymMembershipPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GymMembership that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GymMembershipFindFirstArgs} args - Arguments to find a GymMembership
+     * @example
+     * // Get one GymMembership
+     * const gymMembership = await prisma.gymMembership.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends GymMembershipFindFirstArgs>(args?: SelectSubset<T, GymMembershipFindFirstArgs<ExtArgs>>): Prisma__GymMembershipClient<$Result.GetResult<Prisma.$GymMembershipPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first GymMembership that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GymMembershipFindFirstOrThrowArgs} args - Arguments to find a GymMembership
+     * @example
+     * // Get one GymMembership
+     * const gymMembership = await prisma.gymMembership.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends GymMembershipFindFirstOrThrowArgs>(args?: SelectSubset<T, GymMembershipFindFirstOrThrowArgs<ExtArgs>>): Prisma__GymMembershipClient<$Result.GetResult<Prisma.$GymMembershipPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more GymMemberships that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GymMembershipFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all GymMemberships
+     * const gymMemberships = await prisma.gymMembership.findMany()
+     * 
+     * // Get first 10 GymMemberships
+     * const gymMemberships = await prisma.gymMembership.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const gymMembershipWithIdOnly = await prisma.gymMembership.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends GymMembershipFindManyArgs>(args?: SelectSubset<T, GymMembershipFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GymMembershipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a GymMembership.
+     * @param {GymMembershipCreateArgs} args - Arguments to create a GymMembership.
+     * @example
+     * // Create one GymMembership
+     * const GymMembership = await prisma.gymMembership.create({
+     *   data: {
+     *     // ... data to create a GymMembership
+     *   }
+     * })
+     * 
+     */
+    create<T extends GymMembershipCreateArgs>(args: SelectSubset<T, GymMembershipCreateArgs<ExtArgs>>): Prisma__GymMembershipClient<$Result.GetResult<Prisma.$GymMembershipPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many GymMemberships.
+     * @param {GymMembershipCreateManyArgs} args - Arguments to create many GymMemberships.
+     * @example
+     * // Create many GymMemberships
+     * const gymMembership = await prisma.gymMembership.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends GymMembershipCreateManyArgs>(args?: SelectSubset<T, GymMembershipCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many GymMemberships and returns the data saved in the database.
+     * @param {GymMembershipCreateManyAndReturnArgs} args - Arguments to create many GymMemberships.
+     * @example
+     * // Create many GymMemberships
+     * const gymMembership = await prisma.gymMembership.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many GymMemberships and only return the `id`
+     * const gymMembershipWithIdOnly = await prisma.gymMembership.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends GymMembershipCreateManyAndReturnArgs>(args?: SelectSubset<T, GymMembershipCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GymMembershipPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a GymMembership.
+     * @param {GymMembershipDeleteArgs} args - Arguments to delete one GymMembership.
+     * @example
+     * // Delete one GymMembership
+     * const GymMembership = await prisma.gymMembership.delete({
+     *   where: {
+     *     // ... filter to delete one GymMembership
+     *   }
+     * })
+     * 
+     */
+    delete<T extends GymMembershipDeleteArgs>(args: SelectSubset<T, GymMembershipDeleteArgs<ExtArgs>>): Prisma__GymMembershipClient<$Result.GetResult<Prisma.$GymMembershipPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one GymMembership.
+     * @param {GymMembershipUpdateArgs} args - Arguments to update one GymMembership.
+     * @example
+     * // Update one GymMembership
+     * const gymMembership = await prisma.gymMembership.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends GymMembershipUpdateArgs>(args: SelectSubset<T, GymMembershipUpdateArgs<ExtArgs>>): Prisma__GymMembershipClient<$Result.GetResult<Prisma.$GymMembershipPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more GymMemberships.
+     * @param {GymMembershipDeleteManyArgs} args - Arguments to filter GymMemberships to delete.
+     * @example
+     * // Delete a few GymMemberships
+     * const { count } = await prisma.gymMembership.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends GymMembershipDeleteManyArgs>(args?: SelectSubset<T, GymMembershipDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GymMemberships.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GymMembershipUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many GymMemberships
+     * const gymMembership = await prisma.gymMembership.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends GymMembershipUpdateManyArgs>(args: SelectSubset<T, GymMembershipUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more GymMemberships and returns the data updated in the database.
+     * @param {GymMembershipUpdateManyAndReturnArgs} args - Arguments to update many GymMemberships.
+     * @example
+     * // Update many GymMemberships
+     * const gymMembership = await prisma.gymMembership.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more GymMemberships and only return the `id`
+     * const gymMembershipWithIdOnly = await prisma.gymMembership.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends GymMembershipUpdateManyAndReturnArgs>(args: SelectSubset<T, GymMembershipUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GymMembershipPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one GymMembership.
+     * @param {GymMembershipUpsertArgs} args - Arguments to update or create a GymMembership.
+     * @example
+     * // Update or create a GymMembership
+     * const gymMembership = await prisma.gymMembership.upsert({
+     *   create: {
+     *     // ... data to create a GymMembership
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the GymMembership we want to update
+     *   }
+     * })
+     */
+    upsert<T extends GymMembershipUpsertArgs>(args: SelectSubset<T, GymMembershipUpsertArgs<ExtArgs>>): Prisma__GymMembershipClient<$Result.GetResult<Prisma.$GymMembershipPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of GymMemberships.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GymMembershipCountArgs} args - Arguments to filter GymMemberships to count.
+     * @example
+     * // Count the number of GymMemberships
+     * const count = await prisma.gymMembership.count({
+     *   where: {
+     *     // ... the filter for the GymMemberships we want to count
+     *   }
+     * })
+    **/
+    count<T extends GymMembershipCountArgs>(
+      args?: Subset<T, GymMembershipCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], GymMembershipCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a GymMembership.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GymMembershipAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends GymMembershipAggregateArgs>(args: Subset<T, GymMembershipAggregateArgs>): Prisma.PrismaPromise<GetGymMembershipAggregateType<T>>
+
+    /**
+     * Group by GymMembership.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GymMembershipGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends GymMembershipGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: GymMembershipGroupByArgs['orderBy'] }
+        : { orderBy?: GymMembershipGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, GymMembershipGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGymMembershipGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the GymMembership model
+   */
+  readonly fields: GymMembershipFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for GymMembership.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__GymMembershipClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    reservation<T extends GymMembership$reservationArgs<ExtArgs> = {}>(args?: Subset<T, GymMembership$reservationArgs<ExtArgs>>): Prisma__ReservationClient<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    guest<T extends GuestDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GuestDefaultArgs<ExtArgs>>): Prisma__GuestClient<$Result.GetResult<Prisma.$GuestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    plan<T extends GymMembershipPlanDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GymMembershipPlanDefaultArgs<ExtArgs>>): Prisma__GymMembershipPlanClient<$Result.GetResult<Prisma.$GymMembershipPlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    payments<T extends GymMembership$paymentsArgs<ExtArgs> = {}>(args?: Subset<T, GymMembership$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the GymMembership model
+   */
+  interface GymMembershipFieldRefs {
+    readonly id: FieldRef<"GymMembership", 'String'>
+    readonly guestId: FieldRef<"GymMembership", 'String'>
+    readonly planId: FieldRef<"GymMembership", 'String'>
+    readonly reservationId: FieldRef<"GymMembership", 'String'>
+    readonly status: FieldRef<"GymMembership", 'GymMembershipStatus'>
+    readonly paymentStatus: FieldRef<"GymMembership", 'GymPaymentStatus'>
+    readonly settlementMethod: FieldRef<"GymMembership", 'GymSettlementMethod'>
+    readonly startDate: FieldRef<"GymMembership", 'DateTime'>
+    readonly endDate: FieldRef<"GymMembership", 'DateTime'>
+    readonly price: FieldRef<"GymMembership", 'Decimal'>
+    readonly notes: FieldRef<"GymMembership", 'String'>
+    readonly activatedAt: FieldRef<"GymMembership", 'DateTime'>
+    readonly suspendedAt: FieldRef<"GymMembership", 'DateTime'>
+    readonly cancelledAt: FieldRef<"GymMembership", 'DateTime'>
+    readonly createdAt: FieldRef<"GymMembership", 'DateTime'>
+    readonly updatedAt: FieldRef<"GymMembership", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * GymMembership findUnique
+   */
+  export type GymMembershipFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GymMembership
+     */
+    select?: GymMembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GymMembership
+     */
+    omit?: GymMembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GymMembershipInclude<ExtArgs> | null
+    /**
+     * Filter, which GymMembership to fetch.
+     */
+    where: GymMembershipWhereUniqueInput
+  }
+
+  /**
+   * GymMembership findUniqueOrThrow
+   */
+  export type GymMembershipFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GymMembership
+     */
+    select?: GymMembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GymMembership
+     */
+    omit?: GymMembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GymMembershipInclude<ExtArgs> | null
+    /**
+     * Filter, which GymMembership to fetch.
+     */
+    where: GymMembershipWhereUniqueInput
+  }
+
+  /**
+   * GymMembership findFirst
+   */
+  export type GymMembershipFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GymMembership
+     */
+    select?: GymMembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GymMembership
+     */
+    omit?: GymMembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GymMembershipInclude<ExtArgs> | null
+    /**
+     * Filter, which GymMembership to fetch.
+     */
+    where?: GymMembershipWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GymMemberships to fetch.
+     */
+    orderBy?: GymMembershipOrderByWithRelationInput | GymMembershipOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GymMemberships.
+     */
+    cursor?: GymMembershipWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GymMemberships from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GymMemberships.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GymMemberships.
+     */
+    distinct?: GymMembershipScalarFieldEnum | GymMembershipScalarFieldEnum[]
+  }
+
+  /**
+   * GymMembership findFirstOrThrow
+   */
+  export type GymMembershipFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GymMembership
+     */
+    select?: GymMembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GymMembership
+     */
+    omit?: GymMembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GymMembershipInclude<ExtArgs> | null
+    /**
+     * Filter, which GymMembership to fetch.
+     */
+    where?: GymMembershipWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GymMemberships to fetch.
+     */
+    orderBy?: GymMembershipOrderByWithRelationInput | GymMembershipOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for GymMemberships.
+     */
+    cursor?: GymMembershipWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GymMemberships from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GymMemberships.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GymMemberships.
+     */
+    distinct?: GymMembershipScalarFieldEnum | GymMembershipScalarFieldEnum[]
+  }
+
+  /**
+   * GymMembership findMany
+   */
+  export type GymMembershipFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GymMembership
+     */
+    select?: GymMembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GymMembership
+     */
+    omit?: GymMembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GymMembershipInclude<ExtArgs> | null
+    /**
+     * Filter, which GymMemberships to fetch.
+     */
+    where?: GymMembershipWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of GymMemberships to fetch.
+     */
+    orderBy?: GymMembershipOrderByWithRelationInput | GymMembershipOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing GymMemberships.
+     */
+    cursor?: GymMembershipWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` GymMemberships from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` GymMemberships.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of GymMemberships.
+     */
+    distinct?: GymMembershipScalarFieldEnum | GymMembershipScalarFieldEnum[]
+  }
+
+  /**
+   * GymMembership create
+   */
+  export type GymMembershipCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GymMembership
+     */
+    select?: GymMembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GymMembership
+     */
+    omit?: GymMembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GymMembershipInclude<ExtArgs> | null
+    /**
+     * The data needed to create a GymMembership.
+     */
+    data: XOR<GymMembershipCreateInput, GymMembershipUncheckedCreateInput>
+  }
+
+  /**
+   * GymMembership createMany
+   */
+  export type GymMembershipCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many GymMemberships.
+     */
+    data: GymMembershipCreateManyInput | GymMembershipCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * GymMembership createManyAndReturn
+   */
+  export type GymMembershipCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GymMembership
+     */
+    select?: GymMembershipSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GymMembership
+     */
+    omit?: GymMembershipOmit<ExtArgs> | null
+    /**
+     * The data used to create many GymMemberships.
+     */
+    data: GymMembershipCreateManyInput | GymMembershipCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GymMembershipIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * GymMembership update
+   */
+  export type GymMembershipUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GymMembership
+     */
+    select?: GymMembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GymMembership
+     */
+    omit?: GymMembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GymMembershipInclude<ExtArgs> | null
+    /**
+     * The data needed to update a GymMembership.
+     */
+    data: XOR<GymMembershipUpdateInput, GymMembershipUncheckedUpdateInput>
+    /**
+     * Choose, which GymMembership to update.
+     */
+    where: GymMembershipWhereUniqueInput
+  }
+
+  /**
+   * GymMembership updateMany
+   */
+  export type GymMembershipUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update GymMemberships.
+     */
+    data: XOR<GymMembershipUpdateManyMutationInput, GymMembershipUncheckedUpdateManyInput>
+    /**
+     * Filter which GymMemberships to update
+     */
+    where?: GymMembershipWhereInput
+    /**
+     * Limit how many GymMemberships to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * GymMembership updateManyAndReturn
+   */
+  export type GymMembershipUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GymMembership
+     */
+    select?: GymMembershipSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the GymMembership
+     */
+    omit?: GymMembershipOmit<ExtArgs> | null
+    /**
+     * The data used to update GymMemberships.
+     */
+    data: XOR<GymMembershipUpdateManyMutationInput, GymMembershipUncheckedUpdateManyInput>
+    /**
+     * Filter which GymMemberships to update
+     */
+    where?: GymMembershipWhereInput
+    /**
+     * Limit how many GymMemberships to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GymMembershipIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * GymMembership upsert
+   */
+  export type GymMembershipUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GymMembership
+     */
+    select?: GymMembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GymMembership
+     */
+    omit?: GymMembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GymMembershipInclude<ExtArgs> | null
+    /**
+     * The filter to search for the GymMembership to update in case it exists.
+     */
+    where: GymMembershipWhereUniqueInput
+    /**
+     * In case the GymMembership found by the `where` argument doesn't exist, create a new GymMembership with this data.
+     */
+    create: XOR<GymMembershipCreateInput, GymMembershipUncheckedCreateInput>
+    /**
+     * In case the GymMembership was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<GymMembershipUpdateInput, GymMembershipUncheckedUpdateInput>
+  }
+
+  /**
+   * GymMembership delete
+   */
+  export type GymMembershipDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GymMembership
+     */
+    select?: GymMembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GymMembership
+     */
+    omit?: GymMembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GymMembershipInclude<ExtArgs> | null
+    /**
+     * Filter which GymMembership to delete.
+     */
+    where: GymMembershipWhereUniqueInput
+  }
+
+  /**
+   * GymMembership deleteMany
+   */
+  export type GymMembershipDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which GymMemberships to delete
+     */
+    where?: GymMembershipWhereInput
+    /**
+     * Limit how many GymMemberships to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * GymMembership.reservation
+   */
+  export type GymMembership$reservationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reservation
+     */
+    select?: ReservationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reservation
+     */
+    omit?: ReservationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReservationInclude<ExtArgs> | null
+    where?: ReservationWhereInput
+  }
+
+  /**
+   * GymMembership.payments
+   */
+  export type GymMembership$paymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Payment
+     */
+    select?: PaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Payment
+     */
+    omit?: PaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentInclude<ExtArgs> | null
+    where?: PaymentWhereInput
+    orderBy?: PaymentOrderByWithRelationInput | PaymentOrderByWithRelationInput[]
+    cursor?: PaymentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PaymentScalarFieldEnum | PaymentScalarFieldEnum[]
+  }
+
+  /**
+   * GymMembership without action
+   */
+  export type GymMembershipDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GymMembership
+     */
+    select?: GymMembershipSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GymMembership
+     */
+    omit?: GymMembershipOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GymMembershipInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -34762,6 +41851,8 @@ export namespace Prisma {
     id: 'id',
     folioId: 'folioId',
     restaurantOrderId: 'restaurantOrderId',
+    laundryOrderId: 'laundryOrderId',
+    gymMembershipId: 'gymMembershipId',
     amount: 'amount',
     refundedAmount: 'refundedAmount',
     status: 'status',
@@ -34910,6 +42001,93 @@ export namespace Prisma {
   };
 
   export type MaintenanceScalarFieldEnum = (typeof MaintenanceScalarFieldEnum)[keyof typeof MaintenanceScalarFieldEnum]
+
+
+  export const LaundryItemScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    description: 'description',
+    type: 'type',
+    price: 'price',
+    isActive: 'isActive',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type LaundryItemScalarFieldEnum = (typeof LaundryItemScalarFieldEnum)[keyof typeof LaundryItemScalarFieldEnum]
+
+
+  export const LaundryOrderScalarFieldEnum: {
+    id: 'id',
+    guestId: 'guestId',
+    reservationId: 'reservationId',
+    folioId: 'folioId',
+    status: 'status',
+    paymentStatus: 'paymentStatus',
+    notes: 'notes',
+    subtotal: 'subtotal',
+    tax: 'tax',
+    total: 'total',
+    receivedAt: 'receivedAt',
+    readyAt: 'readyAt',
+    deliveredAt: 'deliveredAt',
+    cancelledAt: 'cancelledAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type LaundryOrderScalarFieldEnum = (typeof LaundryOrderScalarFieldEnum)[keyof typeof LaundryOrderScalarFieldEnum]
+
+
+  export const LaundryOrderItemScalarFieldEnum: {
+    id: 'id',
+    orderId: 'orderId',
+    laundryItemId: 'laundryItemId',
+    name: 'name',
+    quantity: 'quantity',
+    unitPrice: 'unitPrice',
+    total: 'total',
+    createdAt: 'createdAt'
+  };
+
+  export type LaundryOrderItemScalarFieldEnum = (typeof LaundryOrderItemScalarFieldEnum)[keyof typeof LaundryOrderItemScalarFieldEnum]
+
+
+  export const GymMembershipPlanScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    description: 'description',
+    duration: 'duration',
+    durationValue: 'durationValue',
+    price: 'price',
+    isActive: 'isActive',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type GymMembershipPlanScalarFieldEnum = (typeof GymMembershipPlanScalarFieldEnum)[keyof typeof GymMembershipPlanScalarFieldEnum]
+
+
+  export const GymMembershipScalarFieldEnum: {
+    id: 'id',
+    guestId: 'guestId',
+    planId: 'planId',
+    reservationId: 'reservationId',
+    status: 'status',
+    paymentStatus: 'paymentStatus',
+    settlementMethod: 'settlementMethod',
+    startDate: 'startDate',
+    endDate: 'endDate',
+    price: 'price',
+    notes: 'notes',
+    activatedAt: 'activatedAt',
+    suspendedAt: 'suspendedAt',
+    cancelledAt: 'cancelledAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type GymMembershipScalarFieldEnum = (typeof GymMembershipScalarFieldEnum)[keyof typeof GymMembershipScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -35316,6 +42494,104 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'LaundryItemType'
+   */
+  export type EnumLaundryItemTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LaundryItemType'>
+    
+
+
+  /**
+   * Reference to a field of type 'LaundryItemType[]'
+   */
+  export type ListEnumLaundryItemTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LaundryItemType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'LaundryOrderStatus'
+   */
+  export type EnumLaundryOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LaundryOrderStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'LaundryOrderStatus[]'
+   */
+  export type ListEnumLaundryOrderStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LaundryOrderStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'LaundryPaymentStatus'
+   */
+  export type EnumLaundryPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LaundryPaymentStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'LaundryPaymentStatus[]'
+   */
+  export type ListEnumLaundryPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LaundryPaymentStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'GymMembershipDuration'
+   */
+  export type EnumGymMembershipDurationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GymMembershipDuration'>
+    
+
+
+  /**
+   * Reference to a field of type 'GymMembershipDuration[]'
+   */
+  export type ListEnumGymMembershipDurationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GymMembershipDuration[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'GymMembershipStatus'
+   */
+  export type EnumGymMembershipStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GymMembershipStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'GymMembershipStatus[]'
+   */
+  export type ListEnumGymMembershipStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GymMembershipStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'GymPaymentStatus'
+   */
+  export type EnumGymPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GymPaymentStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'GymPaymentStatus[]'
+   */
+  export type ListEnumGymPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GymPaymentStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'GymSettlementMethod'
+   */
+  export type EnumGymSettlementMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GymSettlementMethod'>
+    
+
+
+  /**
+   * Reference to a field of type 'GymSettlementMethod[]'
+   */
+  export type ListEnumGymSettlementMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'GymSettlementMethod[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -35512,6 +42788,8 @@ export namespace Prisma {
     emergencyContacts?: GuestEmergencyContactListRelationFilter
     paymentMethods?: GuestPaymentMethodListRelationFilter
     restaurantOrders?: RestaurantOrderListRelationFilter
+    laundryOrders?: LaundryOrderListRelationFilter
+    gymMemberships?: GymMembershipListRelationFilter
     company?: XOR<CompanyNullableScalarRelationFilter, CompanyWhereInput> | null
   }
 
@@ -35543,6 +42821,8 @@ export namespace Prisma {
     emergencyContacts?: GuestEmergencyContactOrderByRelationAggregateInput
     paymentMethods?: GuestPaymentMethodOrderByRelationAggregateInput
     restaurantOrders?: RestaurantOrderOrderByRelationAggregateInput
+    laundryOrders?: LaundryOrderOrderByRelationAggregateInput
+    gymMemberships?: GymMembershipOrderByRelationAggregateInput
     company?: CompanyOrderByWithRelationInput
   }
 
@@ -35577,6 +42857,8 @@ export namespace Prisma {
     emergencyContacts?: GuestEmergencyContactListRelationFilter
     paymentMethods?: GuestPaymentMethodListRelationFilter
     restaurantOrders?: RestaurantOrderListRelationFilter
+    laundryOrders?: LaundryOrderListRelationFilter
+    gymMemberships?: GymMembershipListRelationFilter
     company?: XOR<CompanyNullableScalarRelationFilter, CompanyWhereInput> | null
   }, "id" | "email" | "loyaltyNumber">
 
@@ -36270,6 +43552,8 @@ export namespace Prisma {
     folio?: XOR<FolioNullableScalarRelationFilter, FolioWhereInput> | null
     auditLogs?: ReservationAuditListRelationFilter
     restaurantOrders?: RestaurantOrderListRelationFilter
+    laundryOrders?: LaundryOrderListRelationFilter
+    gymMemberships?: GymMembershipListRelationFilter
   }
 
   export type ReservationOrderByWithRelationInput = {
@@ -36302,6 +43586,8 @@ export namespace Prisma {
     folio?: FolioOrderByWithRelationInput
     auditLogs?: ReservationAuditOrderByRelationAggregateInput
     restaurantOrders?: RestaurantOrderOrderByRelationAggregateInput
+    laundryOrders?: LaundryOrderOrderByRelationAggregateInput
+    gymMemberships?: GymMembershipOrderByRelationAggregateInput
   }
 
   export type ReservationWhereUniqueInput = Prisma.AtLeast<{
@@ -36337,6 +43623,8 @@ export namespace Prisma {
     folio?: XOR<FolioNullableScalarRelationFilter, FolioWhereInput> | null
     auditLogs?: ReservationAuditListRelationFilter
     restaurantOrders?: RestaurantOrderListRelationFilter
+    laundryOrders?: LaundryOrderListRelationFilter
+    gymMemberships?: GymMembershipListRelationFilter
   }, "id">
 
   export type ReservationOrderByWithAggregationInput = {
@@ -36478,6 +43766,7 @@ export namespace Prisma {
     reservation?: XOR<ReservationScalarRelationFilter, ReservationWhereInput>
     transactions?: FolioTransactionListRelationFilter
     payments?: PaymentListRelationFilter
+    laundryOrders?: LaundryOrderListRelationFilter
   }
 
   export type FolioOrderByWithRelationInput = {
@@ -36486,6 +43775,7 @@ export namespace Prisma {
     reservation?: ReservationOrderByWithRelationInput
     transactions?: FolioTransactionOrderByRelationAggregateInput
     payments?: PaymentOrderByRelationAggregateInput
+    laundryOrders?: LaundryOrderOrderByRelationAggregateInput
   }
 
   export type FolioWhereUniqueInput = Prisma.AtLeast<{
@@ -36497,6 +43787,7 @@ export namespace Prisma {
     reservation?: XOR<ReservationScalarRelationFilter, ReservationWhereInput>
     transactions?: FolioTransactionListRelationFilter
     payments?: PaymentListRelationFilter
+    laundryOrders?: LaundryOrderListRelationFilter
   }, "id" | "reservationId">
 
   export type FolioOrderByWithAggregationInput = {
@@ -36584,6 +43875,8 @@ export namespace Prisma {
     id?: StringFilter<"Payment"> | string
     folioId?: StringNullableFilter<"Payment"> | string | null
     restaurantOrderId?: StringNullableFilter<"Payment"> | string | null
+    laundryOrderId?: StringNullableFilter<"Payment"> | string | null
+    gymMembershipId?: StringNullableFilter<"Payment"> | string | null
     amount?: DecimalFilter<"Payment"> | Decimal | DecimalJsLike | number | string
     refundedAmount?: DecimalFilter<"Payment"> | Decimal | DecimalJsLike | number | string
     status?: EnumPaymentStatusFilter<"Payment"> | $Enums.PaymentStatus
@@ -36592,6 +43885,8 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Payment"> | Date | string
     folio?: XOR<FolioNullableScalarRelationFilter, FolioWhereInput> | null
     restaurantOrder?: XOR<RestaurantOrderNullableScalarRelationFilter, RestaurantOrderWhereInput> | null
+    laundryOrder?: XOR<LaundryOrderNullableScalarRelationFilter, LaundryOrderWhereInput> | null
+    gymMembership?: XOR<GymMembershipNullableScalarRelationFilter, GymMembershipWhereInput> | null
     refunds?: PaymentRefundListRelationFilter
   }
 
@@ -36599,6 +43894,8 @@ export namespace Prisma {
     id?: SortOrder
     folioId?: SortOrderInput | SortOrder
     restaurantOrderId?: SortOrderInput | SortOrder
+    laundryOrderId?: SortOrderInput | SortOrder
+    gymMembershipId?: SortOrderInput | SortOrder
     amount?: SortOrder
     refundedAmount?: SortOrder
     status?: SortOrder
@@ -36607,6 +43904,8 @@ export namespace Prisma {
     createdAt?: SortOrder
     folio?: FolioOrderByWithRelationInput
     restaurantOrder?: RestaurantOrderOrderByWithRelationInput
+    laundryOrder?: LaundryOrderOrderByWithRelationInput
+    gymMembership?: GymMembershipOrderByWithRelationInput
     refunds?: PaymentRefundOrderByRelationAggregateInput
   }
 
@@ -36617,6 +43916,8 @@ export namespace Prisma {
     NOT?: PaymentWhereInput | PaymentWhereInput[]
     folioId?: StringNullableFilter<"Payment"> | string | null
     restaurantOrderId?: StringNullableFilter<"Payment"> | string | null
+    laundryOrderId?: StringNullableFilter<"Payment"> | string | null
+    gymMembershipId?: StringNullableFilter<"Payment"> | string | null
     amount?: DecimalFilter<"Payment"> | Decimal | DecimalJsLike | number | string
     refundedAmount?: DecimalFilter<"Payment"> | Decimal | DecimalJsLike | number | string
     status?: EnumPaymentStatusFilter<"Payment"> | $Enums.PaymentStatus
@@ -36625,6 +43926,8 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Payment"> | Date | string
     folio?: XOR<FolioNullableScalarRelationFilter, FolioWhereInput> | null
     restaurantOrder?: XOR<RestaurantOrderNullableScalarRelationFilter, RestaurantOrderWhereInput> | null
+    laundryOrder?: XOR<LaundryOrderNullableScalarRelationFilter, LaundryOrderWhereInput> | null
+    gymMembership?: XOR<GymMembershipNullableScalarRelationFilter, GymMembershipWhereInput> | null
     refunds?: PaymentRefundListRelationFilter
   }, "id">
 
@@ -36632,6 +43935,8 @@ export namespace Prisma {
     id?: SortOrder
     folioId?: SortOrderInput | SortOrder
     restaurantOrderId?: SortOrderInput | SortOrder
+    laundryOrderId?: SortOrderInput | SortOrder
+    gymMembershipId?: SortOrderInput | SortOrder
     amount?: SortOrder
     refundedAmount?: SortOrder
     status?: SortOrder
@@ -36652,6 +43957,8 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Payment"> | string
     folioId?: StringNullableWithAggregatesFilter<"Payment"> | string | null
     restaurantOrderId?: StringNullableWithAggregatesFilter<"Payment"> | string | null
+    laundryOrderId?: StringNullableWithAggregatesFilter<"Payment"> | string | null
+    gymMembershipId?: StringNullableWithAggregatesFilter<"Payment"> | string | null
     amount?: DecimalWithAggregatesFilter<"Payment"> | Decimal | DecimalJsLike | number | string
     refundedAmount?: DecimalWithAggregatesFilter<"Payment"> | Decimal | DecimalJsLike | number | string
     status?: EnumPaymentStatusWithAggregatesFilter<"Payment"> | $Enums.PaymentStatus
@@ -37395,6 +44702,475 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Maintenance"> | Date | string
   }
 
+  export type LaundryItemWhereInput = {
+    AND?: LaundryItemWhereInput | LaundryItemWhereInput[]
+    OR?: LaundryItemWhereInput[]
+    NOT?: LaundryItemWhereInput | LaundryItemWhereInput[]
+    id?: StringFilter<"LaundryItem"> | string
+    name?: StringFilter<"LaundryItem"> | string
+    description?: StringNullableFilter<"LaundryItem"> | string | null
+    type?: EnumLaundryItemTypeFilter<"LaundryItem"> | $Enums.LaundryItemType
+    price?: DecimalFilter<"LaundryItem"> | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFilter<"LaundryItem"> | boolean
+    createdAt?: DateTimeFilter<"LaundryItem"> | Date | string
+    updatedAt?: DateTimeFilter<"LaundryItem"> | Date | string
+    orderItems?: LaundryOrderItemListRelationFilter
+  }
+
+  export type LaundryItemOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    type?: SortOrder
+    price?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    orderItems?: LaundryOrderItemOrderByRelationAggregateInput
+  }
+
+  export type LaundryItemWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: LaundryItemWhereInput | LaundryItemWhereInput[]
+    OR?: LaundryItemWhereInput[]
+    NOT?: LaundryItemWhereInput | LaundryItemWhereInput[]
+    name?: StringFilter<"LaundryItem"> | string
+    description?: StringNullableFilter<"LaundryItem"> | string | null
+    type?: EnumLaundryItemTypeFilter<"LaundryItem"> | $Enums.LaundryItemType
+    price?: DecimalFilter<"LaundryItem"> | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFilter<"LaundryItem"> | boolean
+    createdAt?: DateTimeFilter<"LaundryItem"> | Date | string
+    updatedAt?: DateTimeFilter<"LaundryItem"> | Date | string
+    orderItems?: LaundryOrderItemListRelationFilter
+  }, "id">
+
+  export type LaundryItemOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    type?: SortOrder
+    price?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: LaundryItemCountOrderByAggregateInput
+    _avg?: LaundryItemAvgOrderByAggregateInput
+    _max?: LaundryItemMaxOrderByAggregateInput
+    _min?: LaundryItemMinOrderByAggregateInput
+    _sum?: LaundryItemSumOrderByAggregateInput
+  }
+
+  export type LaundryItemScalarWhereWithAggregatesInput = {
+    AND?: LaundryItemScalarWhereWithAggregatesInput | LaundryItemScalarWhereWithAggregatesInput[]
+    OR?: LaundryItemScalarWhereWithAggregatesInput[]
+    NOT?: LaundryItemScalarWhereWithAggregatesInput | LaundryItemScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"LaundryItem"> | string
+    name?: StringWithAggregatesFilter<"LaundryItem"> | string
+    description?: StringNullableWithAggregatesFilter<"LaundryItem"> | string | null
+    type?: EnumLaundryItemTypeWithAggregatesFilter<"LaundryItem"> | $Enums.LaundryItemType
+    price?: DecimalWithAggregatesFilter<"LaundryItem"> | Decimal | DecimalJsLike | number | string
+    isActive?: BoolWithAggregatesFilter<"LaundryItem"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"LaundryItem"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"LaundryItem"> | Date | string
+  }
+
+  export type LaundryOrderWhereInput = {
+    AND?: LaundryOrderWhereInput | LaundryOrderWhereInput[]
+    OR?: LaundryOrderWhereInput[]
+    NOT?: LaundryOrderWhereInput | LaundryOrderWhereInput[]
+    id?: StringFilter<"LaundryOrder"> | string
+    guestId?: StringFilter<"LaundryOrder"> | string
+    reservationId?: StringNullableFilter<"LaundryOrder"> | string | null
+    folioId?: StringNullableFilter<"LaundryOrder"> | string | null
+    status?: EnumLaundryOrderStatusFilter<"LaundryOrder"> | $Enums.LaundryOrderStatus
+    paymentStatus?: EnumLaundryPaymentStatusFilter<"LaundryOrder"> | $Enums.LaundryPaymentStatus
+    notes?: StringNullableFilter<"LaundryOrder"> | string | null
+    subtotal?: DecimalFilter<"LaundryOrder"> | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFilter<"LaundryOrder"> | Decimal | DecimalJsLike | number | string
+    total?: DecimalFilter<"LaundryOrder"> | Decimal | DecimalJsLike | number | string
+    receivedAt?: DateTimeNullableFilter<"LaundryOrder"> | Date | string | null
+    readyAt?: DateTimeNullableFilter<"LaundryOrder"> | Date | string | null
+    deliveredAt?: DateTimeNullableFilter<"LaundryOrder"> | Date | string | null
+    cancelledAt?: DateTimeNullableFilter<"LaundryOrder"> | Date | string | null
+    createdAt?: DateTimeFilter<"LaundryOrder"> | Date | string
+    updatedAt?: DateTimeFilter<"LaundryOrder"> | Date | string
+    guest?: XOR<GuestScalarRelationFilter, GuestWhereInput>
+    reservation?: XOR<ReservationNullableScalarRelationFilter, ReservationWhereInput> | null
+    folio?: XOR<FolioNullableScalarRelationFilter, FolioWhereInput> | null
+    items?: LaundryOrderItemListRelationFilter
+    payments?: PaymentListRelationFilter
+  }
+
+  export type LaundryOrderOrderByWithRelationInput = {
+    id?: SortOrder
+    guestId?: SortOrder
+    reservationId?: SortOrderInput | SortOrder
+    folioId?: SortOrderInput | SortOrder
+    status?: SortOrder
+    paymentStatus?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    subtotal?: SortOrder
+    tax?: SortOrder
+    total?: SortOrder
+    receivedAt?: SortOrderInput | SortOrder
+    readyAt?: SortOrderInput | SortOrder
+    deliveredAt?: SortOrderInput | SortOrder
+    cancelledAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    guest?: GuestOrderByWithRelationInput
+    reservation?: ReservationOrderByWithRelationInput
+    folio?: FolioOrderByWithRelationInput
+    items?: LaundryOrderItemOrderByRelationAggregateInput
+    payments?: PaymentOrderByRelationAggregateInput
+  }
+
+  export type LaundryOrderWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: LaundryOrderWhereInput | LaundryOrderWhereInput[]
+    OR?: LaundryOrderWhereInput[]
+    NOT?: LaundryOrderWhereInput | LaundryOrderWhereInput[]
+    guestId?: StringFilter<"LaundryOrder"> | string
+    reservationId?: StringNullableFilter<"LaundryOrder"> | string | null
+    folioId?: StringNullableFilter<"LaundryOrder"> | string | null
+    status?: EnumLaundryOrderStatusFilter<"LaundryOrder"> | $Enums.LaundryOrderStatus
+    paymentStatus?: EnumLaundryPaymentStatusFilter<"LaundryOrder"> | $Enums.LaundryPaymentStatus
+    notes?: StringNullableFilter<"LaundryOrder"> | string | null
+    subtotal?: DecimalFilter<"LaundryOrder"> | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFilter<"LaundryOrder"> | Decimal | DecimalJsLike | number | string
+    total?: DecimalFilter<"LaundryOrder"> | Decimal | DecimalJsLike | number | string
+    receivedAt?: DateTimeNullableFilter<"LaundryOrder"> | Date | string | null
+    readyAt?: DateTimeNullableFilter<"LaundryOrder"> | Date | string | null
+    deliveredAt?: DateTimeNullableFilter<"LaundryOrder"> | Date | string | null
+    cancelledAt?: DateTimeNullableFilter<"LaundryOrder"> | Date | string | null
+    createdAt?: DateTimeFilter<"LaundryOrder"> | Date | string
+    updatedAt?: DateTimeFilter<"LaundryOrder"> | Date | string
+    guest?: XOR<GuestScalarRelationFilter, GuestWhereInput>
+    reservation?: XOR<ReservationNullableScalarRelationFilter, ReservationWhereInput> | null
+    folio?: XOR<FolioNullableScalarRelationFilter, FolioWhereInput> | null
+    items?: LaundryOrderItemListRelationFilter
+    payments?: PaymentListRelationFilter
+  }, "id">
+
+  export type LaundryOrderOrderByWithAggregationInput = {
+    id?: SortOrder
+    guestId?: SortOrder
+    reservationId?: SortOrderInput | SortOrder
+    folioId?: SortOrderInput | SortOrder
+    status?: SortOrder
+    paymentStatus?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    subtotal?: SortOrder
+    tax?: SortOrder
+    total?: SortOrder
+    receivedAt?: SortOrderInput | SortOrder
+    readyAt?: SortOrderInput | SortOrder
+    deliveredAt?: SortOrderInput | SortOrder
+    cancelledAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: LaundryOrderCountOrderByAggregateInput
+    _avg?: LaundryOrderAvgOrderByAggregateInput
+    _max?: LaundryOrderMaxOrderByAggregateInput
+    _min?: LaundryOrderMinOrderByAggregateInput
+    _sum?: LaundryOrderSumOrderByAggregateInput
+  }
+
+  export type LaundryOrderScalarWhereWithAggregatesInput = {
+    AND?: LaundryOrderScalarWhereWithAggregatesInput | LaundryOrderScalarWhereWithAggregatesInput[]
+    OR?: LaundryOrderScalarWhereWithAggregatesInput[]
+    NOT?: LaundryOrderScalarWhereWithAggregatesInput | LaundryOrderScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"LaundryOrder"> | string
+    guestId?: StringWithAggregatesFilter<"LaundryOrder"> | string
+    reservationId?: StringNullableWithAggregatesFilter<"LaundryOrder"> | string | null
+    folioId?: StringNullableWithAggregatesFilter<"LaundryOrder"> | string | null
+    status?: EnumLaundryOrderStatusWithAggregatesFilter<"LaundryOrder"> | $Enums.LaundryOrderStatus
+    paymentStatus?: EnumLaundryPaymentStatusWithAggregatesFilter<"LaundryOrder"> | $Enums.LaundryPaymentStatus
+    notes?: StringNullableWithAggregatesFilter<"LaundryOrder"> | string | null
+    subtotal?: DecimalWithAggregatesFilter<"LaundryOrder"> | Decimal | DecimalJsLike | number | string
+    tax?: DecimalWithAggregatesFilter<"LaundryOrder"> | Decimal | DecimalJsLike | number | string
+    total?: DecimalWithAggregatesFilter<"LaundryOrder"> | Decimal | DecimalJsLike | number | string
+    receivedAt?: DateTimeNullableWithAggregatesFilter<"LaundryOrder"> | Date | string | null
+    readyAt?: DateTimeNullableWithAggregatesFilter<"LaundryOrder"> | Date | string | null
+    deliveredAt?: DateTimeNullableWithAggregatesFilter<"LaundryOrder"> | Date | string | null
+    cancelledAt?: DateTimeNullableWithAggregatesFilter<"LaundryOrder"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"LaundryOrder"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"LaundryOrder"> | Date | string
+  }
+
+  export type LaundryOrderItemWhereInput = {
+    AND?: LaundryOrderItemWhereInput | LaundryOrderItemWhereInput[]
+    OR?: LaundryOrderItemWhereInput[]
+    NOT?: LaundryOrderItemWhereInput | LaundryOrderItemWhereInput[]
+    id?: StringFilter<"LaundryOrderItem"> | string
+    orderId?: StringFilter<"LaundryOrderItem"> | string
+    laundryItemId?: StringFilter<"LaundryOrderItem"> | string
+    name?: StringFilter<"LaundryOrderItem"> | string
+    quantity?: IntFilter<"LaundryOrderItem"> | number
+    unitPrice?: DecimalFilter<"LaundryOrderItem"> | Decimal | DecimalJsLike | number | string
+    total?: DecimalFilter<"LaundryOrderItem"> | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFilter<"LaundryOrderItem"> | Date | string
+    order?: XOR<LaundryOrderScalarRelationFilter, LaundryOrderWhereInput>
+    laundryItem?: XOR<LaundryItemScalarRelationFilter, LaundryItemWhereInput>
+  }
+
+  export type LaundryOrderItemOrderByWithRelationInput = {
+    id?: SortOrder
+    orderId?: SortOrder
+    laundryItemId?: SortOrder
+    name?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    total?: SortOrder
+    createdAt?: SortOrder
+    order?: LaundryOrderOrderByWithRelationInput
+    laundryItem?: LaundryItemOrderByWithRelationInput
+  }
+
+  export type LaundryOrderItemWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: LaundryOrderItemWhereInput | LaundryOrderItemWhereInput[]
+    OR?: LaundryOrderItemWhereInput[]
+    NOT?: LaundryOrderItemWhereInput | LaundryOrderItemWhereInput[]
+    orderId?: StringFilter<"LaundryOrderItem"> | string
+    laundryItemId?: StringFilter<"LaundryOrderItem"> | string
+    name?: StringFilter<"LaundryOrderItem"> | string
+    quantity?: IntFilter<"LaundryOrderItem"> | number
+    unitPrice?: DecimalFilter<"LaundryOrderItem"> | Decimal | DecimalJsLike | number | string
+    total?: DecimalFilter<"LaundryOrderItem"> | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFilter<"LaundryOrderItem"> | Date | string
+    order?: XOR<LaundryOrderScalarRelationFilter, LaundryOrderWhereInput>
+    laundryItem?: XOR<LaundryItemScalarRelationFilter, LaundryItemWhereInput>
+  }, "id">
+
+  export type LaundryOrderItemOrderByWithAggregationInput = {
+    id?: SortOrder
+    orderId?: SortOrder
+    laundryItemId?: SortOrder
+    name?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    total?: SortOrder
+    createdAt?: SortOrder
+    _count?: LaundryOrderItemCountOrderByAggregateInput
+    _avg?: LaundryOrderItemAvgOrderByAggregateInput
+    _max?: LaundryOrderItemMaxOrderByAggregateInput
+    _min?: LaundryOrderItemMinOrderByAggregateInput
+    _sum?: LaundryOrderItemSumOrderByAggregateInput
+  }
+
+  export type LaundryOrderItemScalarWhereWithAggregatesInput = {
+    AND?: LaundryOrderItemScalarWhereWithAggregatesInput | LaundryOrderItemScalarWhereWithAggregatesInput[]
+    OR?: LaundryOrderItemScalarWhereWithAggregatesInput[]
+    NOT?: LaundryOrderItemScalarWhereWithAggregatesInput | LaundryOrderItemScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"LaundryOrderItem"> | string
+    orderId?: StringWithAggregatesFilter<"LaundryOrderItem"> | string
+    laundryItemId?: StringWithAggregatesFilter<"LaundryOrderItem"> | string
+    name?: StringWithAggregatesFilter<"LaundryOrderItem"> | string
+    quantity?: IntWithAggregatesFilter<"LaundryOrderItem"> | number
+    unitPrice?: DecimalWithAggregatesFilter<"LaundryOrderItem"> | Decimal | DecimalJsLike | number | string
+    total?: DecimalWithAggregatesFilter<"LaundryOrderItem"> | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeWithAggregatesFilter<"LaundryOrderItem"> | Date | string
+  }
+
+  export type GymMembershipPlanWhereInput = {
+    AND?: GymMembershipPlanWhereInput | GymMembershipPlanWhereInput[]
+    OR?: GymMembershipPlanWhereInput[]
+    NOT?: GymMembershipPlanWhereInput | GymMembershipPlanWhereInput[]
+    id?: StringFilter<"GymMembershipPlan"> | string
+    name?: StringFilter<"GymMembershipPlan"> | string
+    description?: StringNullableFilter<"GymMembershipPlan"> | string | null
+    duration?: EnumGymMembershipDurationFilter<"GymMembershipPlan"> | $Enums.GymMembershipDuration
+    durationValue?: IntFilter<"GymMembershipPlan"> | number
+    price?: DecimalFilter<"GymMembershipPlan"> | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFilter<"GymMembershipPlan"> | boolean
+    createdAt?: DateTimeFilter<"GymMembershipPlan"> | Date | string
+    updatedAt?: DateTimeFilter<"GymMembershipPlan"> | Date | string
+    memberships?: GymMembershipListRelationFilter
+  }
+
+  export type GymMembershipPlanOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    duration?: SortOrder
+    durationValue?: SortOrder
+    price?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    memberships?: GymMembershipOrderByRelationAggregateInput
+  }
+
+  export type GymMembershipPlanWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: GymMembershipPlanWhereInput | GymMembershipPlanWhereInput[]
+    OR?: GymMembershipPlanWhereInput[]
+    NOT?: GymMembershipPlanWhereInput | GymMembershipPlanWhereInput[]
+    name?: StringFilter<"GymMembershipPlan"> | string
+    description?: StringNullableFilter<"GymMembershipPlan"> | string | null
+    duration?: EnumGymMembershipDurationFilter<"GymMembershipPlan"> | $Enums.GymMembershipDuration
+    durationValue?: IntFilter<"GymMembershipPlan"> | number
+    price?: DecimalFilter<"GymMembershipPlan"> | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFilter<"GymMembershipPlan"> | boolean
+    createdAt?: DateTimeFilter<"GymMembershipPlan"> | Date | string
+    updatedAt?: DateTimeFilter<"GymMembershipPlan"> | Date | string
+    memberships?: GymMembershipListRelationFilter
+  }, "id">
+
+  export type GymMembershipPlanOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    duration?: SortOrder
+    durationValue?: SortOrder
+    price?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: GymMembershipPlanCountOrderByAggregateInput
+    _avg?: GymMembershipPlanAvgOrderByAggregateInput
+    _max?: GymMembershipPlanMaxOrderByAggregateInput
+    _min?: GymMembershipPlanMinOrderByAggregateInput
+    _sum?: GymMembershipPlanSumOrderByAggregateInput
+  }
+
+  export type GymMembershipPlanScalarWhereWithAggregatesInput = {
+    AND?: GymMembershipPlanScalarWhereWithAggregatesInput | GymMembershipPlanScalarWhereWithAggregatesInput[]
+    OR?: GymMembershipPlanScalarWhereWithAggregatesInput[]
+    NOT?: GymMembershipPlanScalarWhereWithAggregatesInput | GymMembershipPlanScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"GymMembershipPlan"> | string
+    name?: StringWithAggregatesFilter<"GymMembershipPlan"> | string
+    description?: StringNullableWithAggregatesFilter<"GymMembershipPlan"> | string | null
+    duration?: EnumGymMembershipDurationWithAggregatesFilter<"GymMembershipPlan"> | $Enums.GymMembershipDuration
+    durationValue?: IntWithAggregatesFilter<"GymMembershipPlan"> | number
+    price?: DecimalWithAggregatesFilter<"GymMembershipPlan"> | Decimal | DecimalJsLike | number | string
+    isActive?: BoolWithAggregatesFilter<"GymMembershipPlan"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"GymMembershipPlan"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"GymMembershipPlan"> | Date | string
+  }
+
+  export type GymMembershipWhereInput = {
+    AND?: GymMembershipWhereInput | GymMembershipWhereInput[]
+    OR?: GymMembershipWhereInput[]
+    NOT?: GymMembershipWhereInput | GymMembershipWhereInput[]
+    id?: StringFilter<"GymMembership"> | string
+    guestId?: StringFilter<"GymMembership"> | string
+    planId?: StringFilter<"GymMembership"> | string
+    reservationId?: StringNullableFilter<"GymMembership"> | string | null
+    status?: EnumGymMembershipStatusFilter<"GymMembership"> | $Enums.GymMembershipStatus
+    paymentStatus?: EnumGymPaymentStatusFilter<"GymMembership"> | $Enums.GymPaymentStatus
+    settlementMethod?: EnumGymSettlementMethodNullableFilter<"GymMembership"> | $Enums.GymSettlementMethod | null
+    startDate?: DateTimeFilter<"GymMembership"> | Date | string
+    endDate?: DateTimeFilter<"GymMembership"> | Date | string
+    price?: DecimalFilter<"GymMembership"> | Decimal | DecimalJsLike | number | string
+    notes?: StringNullableFilter<"GymMembership"> | string | null
+    activatedAt?: DateTimeNullableFilter<"GymMembership"> | Date | string | null
+    suspendedAt?: DateTimeNullableFilter<"GymMembership"> | Date | string | null
+    cancelledAt?: DateTimeNullableFilter<"GymMembership"> | Date | string | null
+    createdAt?: DateTimeFilter<"GymMembership"> | Date | string
+    updatedAt?: DateTimeFilter<"GymMembership"> | Date | string
+    reservation?: XOR<ReservationNullableScalarRelationFilter, ReservationWhereInput> | null
+    guest?: XOR<GuestScalarRelationFilter, GuestWhereInput>
+    plan?: XOR<GymMembershipPlanScalarRelationFilter, GymMembershipPlanWhereInput>
+    payments?: PaymentListRelationFilter
+  }
+
+  export type GymMembershipOrderByWithRelationInput = {
+    id?: SortOrder
+    guestId?: SortOrder
+    planId?: SortOrder
+    reservationId?: SortOrderInput | SortOrder
+    status?: SortOrder
+    paymentStatus?: SortOrder
+    settlementMethod?: SortOrderInput | SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    price?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    activatedAt?: SortOrderInput | SortOrder
+    suspendedAt?: SortOrderInput | SortOrder
+    cancelledAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    reservation?: ReservationOrderByWithRelationInput
+    guest?: GuestOrderByWithRelationInput
+    plan?: GymMembershipPlanOrderByWithRelationInput
+    payments?: PaymentOrderByRelationAggregateInput
+  }
+
+  export type GymMembershipWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: GymMembershipWhereInput | GymMembershipWhereInput[]
+    OR?: GymMembershipWhereInput[]
+    NOT?: GymMembershipWhereInput | GymMembershipWhereInput[]
+    guestId?: StringFilter<"GymMembership"> | string
+    planId?: StringFilter<"GymMembership"> | string
+    reservationId?: StringNullableFilter<"GymMembership"> | string | null
+    status?: EnumGymMembershipStatusFilter<"GymMembership"> | $Enums.GymMembershipStatus
+    paymentStatus?: EnumGymPaymentStatusFilter<"GymMembership"> | $Enums.GymPaymentStatus
+    settlementMethod?: EnumGymSettlementMethodNullableFilter<"GymMembership"> | $Enums.GymSettlementMethod | null
+    startDate?: DateTimeFilter<"GymMembership"> | Date | string
+    endDate?: DateTimeFilter<"GymMembership"> | Date | string
+    price?: DecimalFilter<"GymMembership"> | Decimal | DecimalJsLike | number | string
+    notes?: StringNullableFilter<"GymMembership"> | string | null
+    activatedAt?: DateTimeNullableFilter<"GymMembership"> | Date | string | null
+    suspendedAt?: DateTimeNullableFilter<"GymMembership"> | Date | string | null
+    cancelledAt?: DateTimeNullableFilter<"GymMembership"> | Date | string | null
+    createdAt?: DateTimeFilter<"GymMembership"> | Date | string
+    updatedAt?: DateTimeFilter<"GymMembership"> | Date | string
+    reservation?: XOR<ReservationNullableScalarRelationFilter, ReservationWhereInput> | null
+    guest?: XOR<GuestScalarRelationFilter, GuestWhereInput>
+    plan?: XOR<GymMembershipPlanScalarRelationFilter, GymMembershipPlanWhereInput>
+    payments?: PaymentListRelationFilter
+  }, "id">
+
+  export type GymMembershipOrderByWithAggregationInput = {
+    id?: SortOrder
+    guestId?: SortOrder
+    planId?: SortOrder
+    reservationId?: SortOrderInput | SortOrder
+    status?: SortOrder
+    paymentStatus?: SortOrder
+    settlementMethod?: SortOrderInput | SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    price?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    activatedAt?: SortOrderInput | SortOrder
+    suspendedAt?: SortOrderInput | SortOrder
+    cancelledAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: GymMembershipCountOrderByAggregateInput
+    _avg?: GymMembershipAvgOrderByAggregateInput
+    _max?: GymMembershipMaxOrderByAggregateInput
+    _min?: GymMembershipMinOrderByAggregateInput
+    _sum?: GymMembershipSumOrderByAggregateInput
+  }
+
+  export type GymMembershipScalarWhereWithAggregatesInput = {
+    AND?: GymMembershipScalarWhereWithAggregatesInput | GymMembershipScalarWhereWithAggregatesInput[]
+    OR?: GymMembershipScalarWhereWithAggregatesInput[]
+    NOT?: GymMembershipScalarWhereWithAggregatesInput | GymMembershipScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"GymMembership"> | string
+    guestId?: StringWithAggregatesFilter<"GymMembership"> | string
+    planId?: StringWithAggregatesFilter<"GymMembership"> | string
+    reservationId?: StringNullableWithAggregatesFilter<"GymMembership"> | string | null
+    status?: EnumGymMembershipStatusWithAggregatesFilter<"GymMembership"> | $Enums.GymMembershipStatus
+    paymentStatus?: EnumGymPaymentStatusWithAggregatesFilter<"GymMembership"> | $Enums.GymPaymentStatus
+    settlementMethod?: EnumGymSettlementMethodNullableWithAggregatesFilter<"GymMembership"> | $Enums.GymSettlementMethod | null
+    startDate?: DateTimeWithAggregatesFilter<"GymMembership"> | Date | string
+    endDate?: DateTimeWithAggregatesFilter<"GymMembership"> | Date | string
+    price?: DecimalWithAggregatesFilter<"GymMembership"> | Decimal | DecimalJsLike | number | string
+    notes?: StringNullableWithAggregatesFilter<"GymMembership"> | string | null
+    activatedAt?: DateTimeNullableWithAggregatesFilter<"GymMembership"> | Date | string | null
+    suspendedAt?: DateTimeNullableWithAggregatesFilter<"GymMembership"> | Date | string | null
+    cancelledAt?: DateTimeNullableWithAggregatesFilter<"GymMembership"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"GymMembership"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"GymMembership"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     email: string
@@ -37613,6 +45389,8 @@ export namespace Prisma {
     emergencyContacts?: GuestEmergencyContactCreateNestedManyWithoutGuestInput
     paymentMethods?: GuestPaymentMethodCreateNestedManyWithoutGuestInput
     restaurantOrders?: RestaurantOrderCreateNestedManyWithoutGuestInput
+    laundryOrders?: LaundryOrderCreateNestedManyWithoutGuestInput
+    gymMemberships?: GymMembershipCreateNestedManyWithoutGuestInput
     company?: CompanyCreateNestedOneWithoutGuestsInput
   }
 
@@ -37644,6 +45422,8 @@ export namespace Prisma {
     emergencyContacts?: GuestEmergencyContactUncheckedCreateNestedManyWithoutGuestInput
     paymentMethods?: GuestPaymentMethodUncheckedCreateNestedManyWithoutGuestInput
     restaurantOrders?: RestaurantOrderUncheckedCreateNestedManyWithoutGuestInput
+    laundryOrders?: LaundryOrderUncheckedCreateNestedManyWithoutGuestInput
+    gymMemberships?: GymMembershipUncheckedCreateNestedManyWithoutGuestInput
   }
 
   export type GuestUpdateInput = {
@@ -37673,6 +45453,8 @@ export namespace Prisma {
     emergencyContacts?: GuestEmergencyContactUpdateManyWithoutGuestNestedInput
     paymentMethods?: GuestPaymentMethodUpdateManyWithoutGuestNestedInput
     restaurantOrders?: RestaurantOrderUpdateManyWithoutGuestNestedInput
+    laundryOrders?: LaundryOrderUpdateManyWithoutGuestNestedInput
+    gymMemberships?: GymMembershipUpdateManyWithoutGuestNestedInput
     company?: CompanyUpdateOneWithoutGuestsNestedInput
   }
 
@@ -37704,6 +45486,8 @@ export namespace Prisma {
     emergencyContacts?: GuestEmergencyContactUncheckedUpdateManyWithoutGuestNestedInput
     paymentMethods?: GuestPaymentMethodUncheckedUpdateManyWithoutGuestNestedInput
     restaurantOrders?: RestaurantOrderUncheckedUpdateManyWithoutGuestNestedInput
+    laundryOrders?: LaundryOrderUncheckedUpdateManyWithoutGuestNestedInput
+    gymMemberships?: GymMembershipUncheckedUpdateManyWithoutGuestNestedInput
   }
 
   export type GuestCreateManyInput = {
@@ -38462,6 +46246,8 @@ export namespace Prisma {
     folio?: FolioCreateNestedOneWithoutReservationInput
     auditLogs?: ReservationAuditCreateNestedManyWithoutReservationInput
     restaurantOrders?: RestaurantOrderCreateNestedManyWithoutReservationInput
+    laundryOrders?: LaundryOrderCreateNestedManyWithoutReservationInput
+    gymMemberships?: GymMembershipCreateNestedManyWithoutReservationInput
   }
 
   export type ReservationUncheckedCreateInput = {
@@ -38491,6 +46277,8 @@ export namespace Prisma {
     folio?: FolioUncheckedCreateNestedOneWithoutReservationInput
     auditLogs?: ReservationAuditUncheckedCreateNestedManyWithoutReservationInput
     restaurantOrders?: RestaurantOrderUncheckedCreateNestedManyWithoutReservationInput
+    laundryOrders?: LaundryOrderUncheckedCreateNestedManyWithoutReservationInput
+    gymMemberships?: GymMembershipUncheckedCreateNestedManyWithoutReservationInput
   }
 
   export type ReservationUpdateInput = {
@@ -38520,6 +46308,8 @@ export namespace Prisma {
     folio?: FolioUpdateOneWithoutReservationNestedInput
     auditLogs?: ReservationAuditUpdateManyWithoutReservationNestedInput
     restaurantOrders?: RestaurantOrderUpdateManyWithoutReservationNestedInput
+    laundryOrders?: LaundryOrderUpdateManyWithoutReservationNestedInput
+    gymMemberships?: GymMembershipUpdateManyWithoutReservationNestedInput
   }
 
   export type ReservationUncheckedUpdateInput = {
@@ -38549,6 +46339,8 @@ export namespace Prisma {
     folio?: FolioUncheckedUpdateOneWithoutReservationNestedInput
     auditLogs?: ReservationAuditUncheckedUpdateManyWithoutReservationNestedInput
     restaurantOrders?: RestaurantOrderUncheckedUpdateManyWithoutReservationNestedInput
+    laundryOrders?: LaundryOrderUncheckedUpdateManyWithoutReservationNestedInput
+    gymMemberships?: GymMembershipUncheckedUpdateManyWithoutReservationNestedInput
   }
 
   export type ReservationCreateManyInput = {
@@ -38707,6 +46499,7 @@ export namespace Prisma {
     reservation: ReservationCreateNestedOneWithoutFolioInput
     transactions?: FolioTransactionCreateNestedManyWithoutFolioInput
     payments?: PaymentCreateNestedManyWithoutFolioInput
+    laundryOrders?: LaundryOrderCreateNestedManyWithoutFolioInput
   }
 
   export type FolioUncheckedCreateInput = {
@@ -38714,6 +46507,7 @@ export namespace Prisma {
     reservationId: string
     transactions?: FolioTransactionUncheckedCreateNestedManyWithoutFolioInput
     payments?: PaymentUncheckedCreateNestedManyWithoutFolioInput
+    laundryOrders?: LaundryOrderUncheckedCreateNestedManyWithoutFolioInput
   }
 
   export type FolioUpdateInput = {
@@ -38721,6 +46515,7 @@ export namespace Prisma {
     reservation?: ReservationUpdateOneRequiredWithoutFolioNestedInput
     transactions?: FolioTransactionUpdateManyWithoutFolioNestedInput
     payments?: PaymentUpdateManyWithoutFolioNestedInput
+    laundryOrders?: LaundryOrderUpdateManyWithoutFolioNestedInput
   }
 
   export type FolioUncheckedUpdateInput = {
@@ -38728,6 +46523,7 @@ export namespace Prisma {
     reservationId?: StringFieldUpdateOperationsInput | string
     transactions?: FolioTransactionUncheckedUpdateManyWithoutFolioNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutFolioNestedInput
+    laundryOrders?: LaundryOrderUncheckedUpdateManyWithoutFolioNestedInput
   }
 
   export type FolioCreateManyInput = {
@@ -38816,6 +46612,8 @@ export namespace Prisma {
     createdAt?: Date | string
     folio?: FolioCreateNestedOneWithoutPaymentsInput
     restaurantOrder?: RestaurantOrderCreateNestedOneWithoutPaymentsInput
+    laundryOrder?: LaundryOrderCreateNestedOneWithoutPaymentsInput
+    gymMembership?: GymMembershipCreateNestedOneWithoutPaymentsInput
     refunds?: PaymentRefundCreateNestedManyWithoutPaymentInput
   }
 
@@ -38823,6 +46621,8 @@ export namespace Prisma {
     id?: string
     folioId?: string | null
     restaurantOrderId?: string | null
+    laundryOrderId?: string | null
+    gymMembershipId?: string | null
     amount: Decimal | DecimalJsLike | number | string
     refundedAmount?: Decimal | DecimalJsLike | number | string
     status?: $Enums.PaymentStatus
@@ -38842,6 +46642,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     folio?: FolioUpdateOneWithoutPaymentsNestedInput
     restaurantOrder?: RestaurantOrderUpdateOneWithoutPaymentsNestedInput
+    laundryOrder?: LaundryOrderUpdateOneWithoutPaymentsNestedInput
+    gymMembership?: GymMembershipUpdateOneWithoutPaymentsNestedInput
     refunds?: PaymentRefundUpdateManyWithoutPaymentNestedInput
   }
 
@@ -38849,6 +46651,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     folioId?: NullableStringFieldUpdateOperationsInput | string | null
     restaurantOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    laundryOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    gymMembershipId?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     refundedAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
@@ -38862,6 +46666,8 @@ export namespace Prisma {
     id?: string
     folioId?: string | null
     restaurantOrderId?: string | null
+    laundryOrderId?: string | null
+    gymMembershipId?: string | null
     amount: Decimal | DecimalJsLike | number | string
     refundedAmount?: Decimal | DecimalJsLike | number | string
     status?: $Enums.PaymentStatus
@@ -38884,6 +46690,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     folioId?: NullableStringFieldUpdateOperationsInput | string | null
     restaurantOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    laundryOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    gymMembershipId?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     refundedAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
@@ -39649,6 +47457,522 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type LaundryItemCreateInput = {
+    id?: string
+    name: string
+    description?: string | null
+    type: $Enums.LaundryItemType
+    price: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    orderItems?: LaundryOrderItemCreateNestedManyWithoutLaundryItemInput
+  }
+
+  export type LaundryItemUncheckedCreateInput = {
+    id?: string
+    name: string
+    description?: string | null
+    type: $Enums.LaundryItemType
+    price: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    orderItems?: LaundryOrderItemUncheckedCreateNestedManyWithoutLaundryItemInput
+  }
+
+  export type LaundryItemUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumLaundryItemTypeFieldUpdateOperationsInput | $Enums.LaundryItemType
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    orderItems?: LaundryOrderItemUpdateManyWithoutLaundryItemNestedInput
+  }
+
+  export type LaundryItemUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumLaundryItemTypeFieldUpdateOperationsInput | $Enums.LaundryItemType
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    orderItems?: LaundryOrderItemUncheckedUpdateManyWithoutLaundryItemNestedInput
+  }
+
+  export type LaundryItemCreateManyInput = {
+    id?: string
+    name: string
+    description?: string | null
+    type: $Enums.LaundryItemType
+    price: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type LaundryItemUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumLaundryItemTypeFieldUpdateOperationsInput | $Enums.LaundryItemType
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LaundryItemUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumLaundryItemTypeFieldUpdateOperationsInput | $Enums.LaundryItemType
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LaundryOrderCreateInput = {
+    id?: string
+    status?: $Enums.LaundryOrderStatus
+    paymentStatus?: $Enums.LaundryPaymentStatus
+    notes?: string | null
+    subtotal: Decimal | DecimalJsLike | number | string
+    tax?: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    receivedAt?: Date | string | null
+    readyAt?: Date | string | null
+    deliveredAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    guest: GuestCreateNestedOneWithoutLaundryOrdersInput
+    reservation?: ReservationCreateNestedOneWithoutLaundryOrdersInput
+    folio?: FolioCreateNestedOneWithoutLaundryOrdersInput
+    items?: LaundryOrderItemCreateNestedManyWithoutOrderInput
+    payments?: PaymentCreateNestedManyWithoutLaundryOrderInput
+  }
+
+  export type LaundryOrderUncheckedCreateInput = {
+    id?: string
+    guestId: string
+    reservationId?: string | null
+    folioId?: string | null
+    status?: $Enums.LaundryOrderStatus
+    paymentStatus?: $Enums.LaundryPaymentStatus
+    notes?: string | null
+    subtotal: Decimal | DecimalJsLike | number | string
+    tax?: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    receivedAt?: Date | string | null
+    readyAt?: Date | string | null
+    deliveredAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: LaundryOrderItemUncheckedCreateNestedManyWithoutOrderInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutLaundryOrderInput
+  }
+
+  export type LaundryOrderUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumLaundryOrderStatusFieldUpdateOperationsInput | $Enums.LaundryOrderStatus
+    paymentStatus?: EnumLaundryPaymentStatusFieldUpdateOperationsInput | $Enums.LaundryPaymentStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    receivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    readyAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    guest?: GuestUpdateOneRequiredWithoutLaundryOrdersNestedInput
+    reservation?: ReservationUpdateOneWithoutLaundryOrdersNestedInput
+    folio?: FolioUpdateOneWithoutLaundryOrdersNestedInput
+    items?: LaundryOrderItemUpdateManyWithoutOrderNestedInput
+    payments?: PaymentUpdateManyWithoutLaundryOrderNestedInput
+  }
+
+  export type LaundryOrderUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    guestId?: StringFieldUpdateOperationsInput | string
+    reservationId?: NullableStringFieldUpdateOperationsInput | string | null
+    folioId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumLaundryOrderStatusFieldUpdateOperationsInput | $Enums.LaundryOrderStatus
+    paymentStatus?: EnumLaundryPaymentStatusFieldUpdateOperationsInput | $Enums.LaundryPaymentStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    receivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    readyAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: LaundryOrderItemUncheckedUpdateManyWithoutOrderNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutLaundryOrderNestedInput
+  }
+
+  export type LaundryOrderCreateManyInput = {
+    id?: string
+    guestId: string
+    reservationId?: string | null
+    folioId?: string | null
+    status?: $Enums.LaundryOrderStatus
+    paymentStatus?: $Enums.LaundryPaymentStatus
+    notes?: string | null
+    subtotal: Decimal | DecimalJsLike | number | string
+    tax?: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    receivedAt?: Date | string | null
+    readyAt?: Date | string | null
+    deliveredAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type LaundryOrderUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumLaundryOrderStatusFieldUpdateOperationsInput | $Enums.LaundryOrderStatus
+    paymentStatus?: EnumLaundryPaymentStatusFieldUpdateOperationsInput | $Enums.LaundryPaymentStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    receivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    readyAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LaundryOrderUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    guestId?: StringFieldUpdateOperationsInput | string
+    reservationId?: NullableStringFieldUpdateOperationsInput | string | null
+    folioId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumLaundryOrderStatusFieldUpdateOperationsInput | $Enums.LaundryOrderStatus
+    paymentStatus?: EnumLaundryPaymentStatusFieldUpdateOperationsInput | $Enums.LaundryPaymentStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    receivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    readyAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LaundryOrderItemCreateInput = {
+    id?: string
+    name: string
+    quantity: number
+    unitPrice: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    order: LaundryOrderCreateNestedOneWithoutItemsInput
+    laundryItem: LaundryItemCreateNestedOneWithoutOrderItemsInput
+  }
+
+  export type LaundryOrderItemUncheckedCreateInput = {
+    id?: string
+    orderId: string
+    laundryItemId: string
+    name: string
+    quantity: number
+    unitPrice: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+  }
+
+  export type LaundryOrderItemUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    order?: LaundryOrderUpdateOneRequiredWithoutItemsNestedInput
+    laundryItem?: LaundryItemUpdateOneRequiredWithoutOrderItemsNestedInput
+  }
+
+  export type LaundryOrderItemUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orderId?: StringFieldUpdateOperationsInput | string
+    laundryItemId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LaundryOrderItemCreateManyInput = {
+    id?: string
+    orderId: string
+    laundryItemId: string
+    name: string
+    quantity: number
+    unitPrice: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+  }
+
+  export type LaundryOrderItemUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LaundryOrderItemUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orderId?: StringFieldUpdateOperationsInput | string
+    laundryItemId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GymMembershipPlanCreateInput = {
+    id?: string
+    name: string
+    description?: string | null
+    duration: $Enums.GymMembershipDuration
+    durationValue?: number
+    price: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    memberships?: GymMembershipCreateNestedManyWithoutPlanInput
+  }
+
+  export type GymMembershipPlanUncheckedCreateInput = {
+    id?: string
+    name: string
+    description?: string | null
+    duration: $Enums.GymMembershipDuration
+    durationValue?: number
+    price: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    memberships?: GymMembershipUncheckedCreateNestedManyWithoutPlanInput
+  }
+
+  export type GymMembershipPlanUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: EnumGymMembershipDurationFieldUpdateOperationsInput | $Enums.GymMembershipDuration
+    durationValue?: IntFieldUpdateOperationsInput | number
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    memberships?: GymMembershipUpdateManyWithoutPlanNestedInput
+  }
+
+  export type GymMembershipPlanUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: EnumGymMembershipDurationFieldUpdateOperationsInput | $Enums.GymMembershipDuration
+    durationValue?: IntFieldUpdateOperationsInput | number
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    memberships?: GymMembershipUncheckedUpdateManyWithoutPlanNestedInput
+  }
+
+  export type GymMembershipPlanCreateManyInput = {
+    id?: string
+    name: string
+    description?: string | null
+    duration: $Enums.GymMembershipDuration
+    durationValue?: number
+    price: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GymMembershipPlanUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: EnumGymMembershipDurationFieldUpdateOperationsInput | $Enums.GymMembershipDuration
+    durationValue?: IntFieldUpdateOperationsInput | number
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GymMembershipPlanUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: EnumGymMembershipDurationFieldUpdateOperationsInput | $Enums.GymMembershipDuration
+    durationValue?: IntFieldUpdateOperationsInput | number
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GymMembershipCreateInput = {
+    id?: string
+    status?: $Enums.GymMembershipStatus
+    paymentStatus?: $Enums.GymPaymentStatus
+    settlementMethod?: $Enums.GymSettlementMethod | null
+    startDate: Date | string
+    endDate: Date | string
+    price: Decimal | DecimalJsLike | number | string
+    notes?: string | null
+    activatedAt?: Date | string | null
+    suspendedAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    reservation?: ReservationCreateNestedOneWithoutGymMembershipsInput
+    guest: GuestCreateNestedOneWithoutGymMembershipsInput
+    plan: GymMembershipPlanCreateNestedOneWithoutMembershipsInput
+    payments?: PaymentCreateNestedManyWithoutGymMembershipInput
+  }
+
+  export type GymMembershipUncheckedCreateInput = {
+    id?: string
+    guestId: string
+    planId: string
+    reservationId?: string | null
+    status?: $Enums.GymMembershipStatus
+    paymentStatus?: $Enums.GymPaymentStatus
+    settlementMethod?: $Enums.GymSettlementMethod | null
+    startDate: Date | string
+    endDate: Date | string
+    price: Decimal | DecimalJsLike | number | string
+    notes?: string | null
+    activatedAt?: Date | string | null
+    suspendedAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    payments?: PaymentUncheckedCreateNestedManyWithoutGymMembershipInput
+  }
+
+  export type GymMembershipUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumGymMembershipStatusFieldUpdateOperationsInput | $Enums.GymMembershipStatus
+    paymentStatus?: EnumGymPaymentStatusFieldUpdateOperationsInput | $Enums.GymPaymentStatus
+    settlementMethod?: NullableEnumGymSettlementMethodFieldUpdateOperationsInput | $Enums.GymSettlementMethod | null
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    suspendedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reservation?: ReservationUpdateOneWithoutGymMembershipsNestedInput
+    guest?: GuestUpdateOneRequiredWithoutGymMembershipsNestedInput
+    plan?: GymMembershipPlanUpdateOneRequiredWithoutMembershipsNestedInput
+    payments?: PaymentUpdateManyWithoutGymMembershipNestedInput
+  }
+
+  export type GymMembershipUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    guestId?: StringFieldUpdateOperationsInput | string
+    planId?: StringFieldUpdateOperationsInput | string
+    reservationId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumGymMembershipStatusFieldUpdateOperationsInput | $Enums.GymMembershipStatus
+    paymentStatus?: EnumGymPaymentStatusFieldUpdateOperationsInput | $Enums.GymPaymentStatus
+    settlementMethod?: NullableEnumGymSettlementMethodFieldUpdateOperationsInput | $Enums.GymSettlementMethod | null
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    suspendedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    payments?: PaymentUncheckedUpdateManyWithoutGymMembershipNestedInput
+  }
+
+  export type GymMembershipCreateManyInput = {
+    id?: string
+    guestId: string
+    planId: string
+    reservationId?: string | null
+    status?: $Enums.GymMembershipStatus
+    paymentStatus?: $Enums.GymPaymentStatus
+    settlementMethod?: $Enums.GymSettlementMethod | null
+    startDate: Date | string
+    endDate: Date | string
+    price: Decimal | DecimalJsLike | number | string
+    notes?: string | null
+    activatedAt?: Date | string | null
+    suspendedAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GymMembershipUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumGymMembershipStatusFieldUpdateOperationsInput | $Enums.GymMembershipStatus
+    paymentStatus?: EnumGymPaymentStatusFieldUpdateOperationsInput | $Enums.GymPaymentStatus
+    settlementMethod?: NullableEnumGymSettlementMethodFieldUpdateOperationsInput | $Enums.GymSettlementMethod | null
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    suspendedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GymMembershipUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    guestId?: StringFieldUpdateOperationsInput | string
+    planId?: StringFieldUpdateOperationsInput | string
+    reservationId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumGymMembershipStatusFieldUpdateOperationsInput | $Enums.GymMembershipStatus
+    paymentStatus?: EnumGymPaymentStatusFieldUpdateOperationsInput | $Enums.GymPaymentStatus
+    settlementMethod?: NullableEnumGymSettlementMethodFieldUpdateOperationsInput | $Enums.GymSettlementMethod | null
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    suspendedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -39959,6 +48283,18 @@ export namespace Prisma {
     none?: RestaurantOrderWhereInput
   }
 
+  export type LaundryOrderListRelationFilter = {
+    every?: LaundryOrderWhereInput
+    some?: LaundryOrderWhereInput
+    none?: LaundryOrderWhereInput
+  }
+
+  export type GymMembershipListRelationFilter = {
+    every?: GymMembershipWhereInput
+    some?: GymMembershipWhereInput
+    none?: GymMembershipWhereInput
+  }
+
   export type CompanyNullableScalarRelationFilter = {
     is?: CompanyWhereInput | null
     isNot?: CompanyWhereInput | null
@@ -39985,6 +48321,14 @@ export namespace Prisma {
   }
 
   export type RestaurantOrderOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type LaundryOrderOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type GymMembershipOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -40961,6 +49305,16 @@ export namespace Prisma {
     isNot?: RestaurantOrderWhereInput | null
   }
 
+  export type LaundryOrderNullableScalarRelationFilter = {
+    is?: LaundryOrderWhereInput | null
+    isNot?: LaundryOrderWhereInput | null
+  }
+
+  export type GymMembershipNullableScalarRelationFilter = {
+    is?: GymMembershipWhereInput | null
+    isNot?: GymMembershipWhereInput | null
+  }
+
   export type PaymentRefundListRelationFilter = {
     every?: PaymentRefundWhereInput
     some?: PaymentRefundWhereInput
@@ -40975,6 +49329,8 @@ export namespace Prisma {
     id?: SortOrder
     folioId?: SortOrder
     restaurantOrderId?: SortOrder
+    laundryOrderId?: SortOrder
+    gymMembershipId?: SortOrder
     amount?: SortOrder
     refundedAmount?: SortOrder
     status?: SortOrder
@@ -40992,6 +49348,8 @@ export namespace Prisma {
     id?: SortOrder
     folioId?: SortOrder
     restaurantOrderId?: SortOrder
+    laundryOrderId?: SortOrder
+    gymMembershipId?: SortOrder
     amount?: SortOrder
     refundedAmount?: SortOrder
     status?: SortOrder
@@ -41004,6 +49362,8 @@ export namespace Prisma {
     id?: SortOrder
     folioId?: SortOrder
     restaurantOrderId?: SortOrder
+    laundryOrderId?: SortOrder
+    gymMembershipId?: SortOrder
     amount?: SortOrder
     refundedAmount?: SortOrder
     status?: SortOrder
@@ -41621,6 +49981,416 @@ export namespace Prisma {
     _max?: NestedEnumMaintenancePriorityFilter<$PrismaModel>
   }
 
+  export type EnumLaundryItemTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.LaundryItemType | EnumLaundryItemTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.LaundryItemType[] | ListEnumLaundryItemTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.LaundryItemType[] | ListEnumLaundryItemTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumLaundryItemTypeFilter<$PrismaModel> | $Enums.LaundryItemType
+  }
+
+  export type LaundryOrderItemListRelationFilter = {
+    every?: LaundryOrderItemWhereInput
+    some?: LaundryOrderItemWhereInput
+    none?: LaundryOrderItemWhereInput
+  }
+
+  export type LaundryOrderItemOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type LaundryItemCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    type?: SortOrder
+    price?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type LaundryItemAvgOrderByAggregateInput = {
+    price?: SortOrder
+  }
+
+  export type LaundryItemMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    type?: SortOrder
+    price?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type LaundryItemMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    type?: SortOrder
+    price?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type LaundryItemSumOrderByAggregateInput = {
+    price?: SortOrder
+  }
+
+  export type EnumLaundryItemTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.LaundryItemType | EnumLaundryItemTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.LaundryItemType[] | ListEnumLaundryItemTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.LaundryItemType[] | ListEnumLaundryItemTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumLaundryItemTypeWithAggregatesFilter<$PrismaModel> | $Enums.LaundryItemType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumLaundryItemTypeFilter<$PrismaModel>
+    _max?: NestedEnumLaundryItemTypeFilter<$PrismaModel>
+  }
+
+  export type EnumLaundryOrderStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.LaundryOrderStatus | EnumLaundryOrderStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.LaundryOrderStatus[] | ListEnumLaundryOrderStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.LaundryOrderStatus[] | ListEnumLaundryOrderStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumLaundryOrderStatusFilter<$PrismaModel> | $Enums.LaundryOrderStatus
+  }
+
+  export type EnumLaundryPaymentStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.LaundryPaymentStatus | EnumLaundryPaymentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.LaundryPaymentStatus[] | ListEnumLaundryPaymentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.LaundryPaymentStatus[] | ListEnumLaundryPaymentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumLaundryPaymentStatusFilter<$PrismaModel> | $Enums.LaundryPaymentStatus
+  }
+
+  export type LaundryOrderCountOrderByAggregateInput = {
+    id?: SortOrder
+    guestId?: SortOrder
+    reservationId?: SortOrder
+    folioId?: SortOrder
+    status?: SortOrder
+    paymentStatus?: SortOrder
+    notes?: SortOrder
+    subtotal?: SortOrder
+    tax?: SortOrder
+    total?: SortOrder
+    receivedAt?: SortOrder
+    readyAt?: SortOrder
+    deliveredAt?: SortOrder
+    cancelledAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type LaundryOrderAvgOrderByAggregateInput = {
+    subtotal?: SortOrder
+    tax?: SortOrder
+    total?: SortOrder
+  }
+
+  export type LaundryOrderMaxOrderByAggregateInput = {
+    id?: SortOrder
+    guestId?: SortOrder
+    reservationId?: SortOrder
+    folioId?: SortOrder
+    status?: SortOrder
+    paymentStatus?: SortOrder
+    notes?: SortOrder
+    subtotal?: SortOrder
+    tax?: SortOrder
+    total?: SortOrder
+    receivedAt?: SortOrder
+    readyAt?: SortOrder
+    deliveredAt?: SortOrder
+    cancelledAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type LaundryOrderMinOrderByAggregateInput = {
+    id?: SortOrder
+    guestId?: SortOrder
+    reservationId?: SortOrder
+    folioId?: SortOrder
+    status?: SortOrder
+    paymentStatus?: SortOrder
+    notes?: SortOrder
+    subtotal?: SortOrder
+    tax?: SortOrder
+    total?: SortOrder
+    receivedAt?: SortOrder
+    readyAt?: SortOrder
+    deliveredAt?: SortOrder
+    cancelledAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type LaundryOrderSumOrderByAggregateInput = {
+    subtotal?: SortOrder
+    tax?: SortOrder
+    total?: SortOrder
+  }
+
+  export type EnumLaundryOrderStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.LaundryOrderStatus | EnumLaundryOrderStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.LaundryOrderStatus[] | ListEnumLaundryOrderStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.LaundryOrderStatus[] | ListEnumLaundryOrderStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumLaundryOrderStatusWithAggregatesFilter<$PrismaModel> | $Enums.LaundryOrderStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumLaundryOrderStatusFilter<$PrismaModel>
+    _max?: NestedEnumLaundryOrderStatusFilter<$PrismaModel>
+  }
+
+  export type EnumLaundryPaymentStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.LaundryPaymentStatus | EnumLaundryPaymentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.LaundryPaymentStatus[] | ListEnumLaundryPaymentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.LaundryPaymentStatus[] | ListEnumLaundryPaymentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumLaundryPaymentStatusWithAggregatesFilter<$PrismaModel> | $Enums.LaundryPaymentStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumLaundryPaymentStatusFilter<$PrismaModel>
+    _max?: NestedEnumLaundryPaymentStatusFilter<$PrismaModel>
+  }
+
+  export type LaundryOrderScalarRelationFilter = {
+    is?: LaundryOrderWhereInput
+    isNot?: LaundryOrderWhereInput
+  }
+
+  export type LaundryItemScalarRelationFilter = {
+    is?: LaundryItemWhereInput
+    isNot?: LaundryItemWhereInput
+  }
+
+  export type LaundryOrderItemCountOrderByAggregateInput = {
+    id?: SortOrder
+    orderId?: SortOrder
+    laundryItemId?: SortOrder
+    name?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    total?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type LaundryOrderItemAvgOrderByAggregateInput = {
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    total?: SortOrder
+  }
+
+  export type LaundryOrderItemMaxOrderByAggregateInput = {
+    id?: SortOrder
+    orderId?: SortOrder
+    laundryItemId?: SortOrder
+    name?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    total?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type LaundryOrderItemMinOrderByAggregateInput = {
+    id?: SortOrder
+    orderId?: SortOrder
+    laundryItemId?: SortOrder
+    name?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    total?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type LaundryOrderItemSumOrderByAggregateInput = {
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    total?: SortOrder
+  }
+
+  export type EnumGymMembershipDurationFilter<$PrismaModel = never> = {
+    equals?: $Enums.GymMembershipDuration | EnumGymMembershipDurationFieldRefInput<$PrismaModel>
+    in?: $Enums.GymMembershipDuration[] | ListEnumGymMembershipDurationFieldRefInput<$PrismaModel>
+    notIn?: $Enums.GymMembershipDuration[] | ListEnumGymMembershipDurationFieldRefInput<$PrismaModel>
+    not?: NestedEnumGymMembershipDurationFilter<$PrismaModel> | $Enums.GymMembershipDuration
+  }
+
+  export type GymMembershipPlanCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    duration?: SortOrder
+    durationValue?: SortOrder
+    price?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GymMembershipPlanAvgOrderByAggregateInput = {
+    durationValue?: SortOrder
+    price?: SortOrder
+  }
+
+  export type GymMembershipPlanMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    duration?: SortOrder
+    durationValue?: SortOrder
+    price?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GymMembershipPlanMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    duration?: SortOrder
+    durationValue?: SortOrder
+    price?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GymMembershipPlanSumOrderByAggregateInput = {
+    durationValue?: SortOrder
+    price?: SortOrder
+  }
+
+  export type EnumGymMembershipDurationWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.GymMembershipDuration | EnumGymMembershipDurationFieldRefInput<$PrismaModel>
+    in?: $Enums.GymMembershipDuration[] | ListEnumGymMembershipDurationFieldRefInput<$PrismaModel>
+    notIn?: $Enums.GymMembershipDuration[] | ListEnumGymMembershipDurationFieldRefInput<$PrismaModel>
+    not?: NestedEnumGymMembershipDurationWithAggregatesFilter<$PrismaModel> | $Enums.GymMembershipDuration
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumGymMembershipDurationFilter<$PrismaModel>
+    _max?: NestedEnumGymMembershipDurationFilter<$PrismaModel>
+  }
+
+  export type EnumGymMembershipStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.GymMembershipStatus | EnumGymMembershipStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.GymMembershipStatus[] | ListEnumGymMembershipStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.GymMembershipStatus[] | ListEnumGymMembershipStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumGymMembershipStatusFilter<$PrismaModel> | $Enums.GymMembershipStatus
+  }
+
+  export type EnumGymPaymentStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.GymPaymentStatus | EnumGymPaymentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.GymPaymentStatus[] | ListEnumGymPaymentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.GymPaymentStatus[] | ListEnumGymPaymentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumGymPaymentStatusFilter<$PrismaModel> | $Enums.GymPaymentStatus
+  }
+
+  export type EnumGymSettlementMethodNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.GymSettlementMethod | EnumGymSettlementMethodFieldRefInput<$PrismaModel> | null
+    in?: $Enums.GymSettlementMethod[] | ListEnumGymSettlementMethodFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.GymSettlementMethod[] | ListEnumGymSettlementMethodFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumGymSettlementMethodNullableFilter<$PrismaModel> | $Enums.GymSettlementMethod | null
+  }
+
+  export type GymMembershipPlanScalarRelationFilter = {
+    is?: GymMembershipPlanWhereInput
+    isNot?: GymMembershipPlanWhereInput
+  }
+
+  export type GymMembershipCountOrderByAggregateInput = {
+    id?: SortOrder
+    guestId?: SortOrder
+    planId?: SortOrder
+    reservationId?: SortOrder
+    status?: SortOrder
+    paymentStatus?: SortOrder
+    settlementMethod?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    price?: SortOrder
+    notes?: SortOrder
+    activatedAt?: SortOrder
+    suspendedAt?: SortOrder
+    cancelledAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GymMembershipAvgOrderByAggregateInput = {
+    price?: SortOrder
+  }
+
+  export type GymMembershipMaxOrderByAggregateInput = {
+    id?: SortOrder
+    guestId?: SortOrder
+    planId?: SortOrder
+    reservationId?: SortOrder
+    status?: SortOrder
+    paymentStatus?: SortOrder
+    settlementMethod?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    price?: SortOrder
+    notes?: SortOrder
+    activatedAt?: SortOrder
+    suspendedAt?: SortOrder
+    cancelledAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GymMembershipMinOrderByAggregateInput = {
+    id?: SortOrder
+    guestId?: SortOrder
+    planId?: SortOrder
+    reservationId?: SortOrder
+    status?: SortOrder
+    paymentStatus?: SortOrder
+    settlementMethod?: SortOrder
+    startDate?: SortOrder
+    endDate?: SortOrder
+    price?: SortOrder
+    notes?: SortOrder
+    activatedAt?: SortOrder
+    suspendedAt?: SortOrder
+    cancelledAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GymMembershipSumOrderByAggregateInput = {
+    price?: SortOrder
+  }
+
+  export type EnumGymMembershipStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.GymMembershipStatus | EnumGymMembershipStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.GymMembershipStatus[] | ListEnumGymMembershipStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.GymMembershipStatus[] | ListEnumGymMembershipStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumGymMembershipStatusWithAggregatesFilter<$PrismaModel> | $Enums.GymMembershipStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumGymMembershipStatusFilter<$PrismaModel>
+    _max?: NestedEnumGymMembershipStatusFilter<$PrismaModel>
+  }
+
+  export type EnumGymPaymentStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.GymPaymentStatus | EnumGymPaymentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.GymPaymentStatus[] | ListEnumGymPaymentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.GymPaymentStatus[] | ListEnumGymPaymentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumGymPaymentStatusWithAggregatesFilter<$PrismaModel> | $Enums.GymPaymentStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumGymPaymentStatusFilter<$PrismaModel>
+    _max?: NestedEnumGymPaymentStatusFilter<$PrismaModel>
+  }
+
+  export type EnumGymSettlementMethodNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.GymSettlementMethod | EnumGymSettlementMethodFieldRefInput<$PrismaModel> | null
+    in?: $Enums.GymSettlementMethod[] | ListEnumGymSettlementMethodFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.GymSettlementMethod[] | ListEnumGymSettlementMethodFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumGymSettlementMethodNullableWithAggregatesFilter<$PrismaModel> | $Enums.GymSettlementMethod | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumGymSettlementMethodNullableFilter<$PrismaModel>
+    _max?: NestedEnumGymSettlementMethodNullableFilter<$PrismaModel>
+  }
+
   export type UserRoleCreateNestedManyWithoutUserInput = {
     create?: XOR<UserRoleCreateWithoutUserInput, UserRoleUncheckedCreateWithoutUserInput> | UserRoleCreateWithoutUserInput[] | UserRoleUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserRoleCreateOrConnectWithoutUserInput | UserRoleCreateOrConnectWithoutUserInput[]
@@ -41855,6 +50625,20 @@ export namespace Prisma {
     connect?: RestaurantOrderWhereUniqueInput | RestaurantOrderWhereUniqueInput[]
   }
 
+  export type LaundryOrderCreateNestedManyWithoutGuestInput = {
+    create?: XOR<LaundryOrderCreateWithoutGuestInput, LaundryOrderUncheckedCreateWithoutGuestInput> | LaundryOrderCreateWithoutGuestInput[] | LaundryOrderUncheckedCreateWithoutGuestInput[]
+    connectOrCreate?: LaundryOrderCreateOrConnectWithoutGuestInput | LaundryOrderCreateOrConnectWithoutGuestInput[]
+    createMany?: LaundryOrderCreateManyGuestInputEnvelope
+    connect?: LaundryOrderWhereUniqueInput | LaundryOrderWhereUniqueInput[]
+  }
+
+  export type GymMembershipCreateNestedManyWithoutGuestInput = {
+    create?: XOR<GymMembershipCreateWithoutGuestInput, GymMembershipUncheckedCreateWithoutGuestInput> | GymMembershipCreateWithoutGuestInput[] | GymMembershipUncheckedCreateWithoutGuestInput[]
+    connectOrCreate?: GymMembershipCreateOrConnectWithoutGuestInput | GymMembershipCreateOrConnectWithoutGuestInput[]
+    createMany?: GymMembershipCreateManyGuestInputEnvelope
+    connect?: GymMembershipWhereUniqueInput | GymMembershipWhereUniqueInput[]
+  }
+
   export type CompanyCreateNestedOneWithoutGuestsInput = {
     create?: XOR<CompanyCreateWithoutGuestsInput, CompanyUncheckedCreateWithoutGuestsInput>
     connectOrCreate?: CompanyCreateOrConnectWithoutGuestsInput
@@ -41901,6 +50685,20 @@ export namespace Prisma {
     connectOrCreate?: RestaurantOrderCreateOrConnectWithoutGuestInput | RestaurantOrderCreateOrConnectWithoutGuestInput[]
     createMany?: RestaurantOrderCreateManyGuestInputEnvelope
     connect?: RestaurantOrderWhereUniqueInput | RestaurantOrderWhereUniqueInput[]
+  }
+
+  export type LaundryOrderUncheckedCreateNestedManyWithoutGuestInput = {
+    create?: XOR<LaundryOrderCreateWithoutGuestInput, LaundryOrderUncheckedCreateWithoutGuestInput> | LaundryOrderCreateWithoutGuestInput[] | LaundryOrderUncheckedCreateWithoutGuestInput[]
+    connectOrCreate?: LaundryOrderCreateOrConnectWithoutGuestInput | LaundryOrderCreateOrConnectWithoutGuestInput[]
+    createMany?: LaundryOrderCreateManyGuestInputEnvelope
+    connect?: LaundryOrderWhereUniqueInput | LaundryOrderWhereUniqueInput[]
+  }
+
+  export type GymMembershipUncheckedCreateNestedManyWithoutGuestInput = {
+    create?: XOR<GymMembershipCreateWithoutGuestInput, GymMembershipUncheckedCreateWithoutGuestInput> | GymMembershipCreateWithoutGuestInput[] | GymMembershipUncheckedCreateWithoutGuestInput[]
+    connectOrCreate?: GymMembershipCreateOrConnectWithoutGuestInput | GymMembershipCreateOrConnectWithoutGuestInput[]
+    createMany?: GymMembershipCreateManyGuestInputEnvelope
+    connect?: GymMembershipWhereUniqueInput | GymMembershipWhereUniqueInput[]
   }
 
   export type NullableEnumGenderFieldUpdateOperationsInput = {
@@ -41999,6 +50797,34 @@ export namespace Prisma {
     deleteMany?: RestaurantOrderScalarWhereInput | RestaurantOrderScalarWhereInput[]
   }
 
+  export type LaundryOrderUpdateManyWithoutGuestNestedInput = {
+    create?: XOR<LaundryOrderCreateWithoutGuestInput, LaundryOrderUncheckedCreateWithoutGuestInput> | LaundryOrderCreateWithoutGuestInput[] | LaundryOrderUncheckedCreateWithoutGuestInput[]
+    connectOrCreate?: LaundryOrderCreateOrConnectWithoutGuestInput | LaundryOrderCreateOrConnectWithoutGuestInput[]
+    upsert?: LaundryOrderUpsertWithWhereUniqueWithoutGuestInput | LaundryOrderUpsertWithWhereUniqueWithoutGuestInput[]
+    createMany?: LaundryOrderCreateManyGuestInputEnvelope
+    set?: LaundryOrderWhereUniqueInput | LaundryOrderWhereUniqueInput[]
+    disconnect?: LaundryOrderWhereUniqueInput | LaundryOrderWhereUniqueInput[]
+    delete?: LaundryOrderWhereUniqueInput | LaundryOrderWhereUniqueInput[]
+    connect?: LaundryOrderWhereUniqueInput | LaundryOrderWhereUniqueInput[]
+    update?: LaundryOrderUpdateWithWhereUniqueWithoutGuestInput | LaundryOrderUpdateWithWhereUniqueWithoutGuestInput[]
+    updateMany?: LaundryOrderUpdateManyWithWhereWithoutGuestInput | LaundryOrderUpdateManyWithWhereWithoutGuestInput[]
+    deleteMany?: LaundryOrderScalarWhereInput | LaundryOrderScalarWhereInput[]
+  }
+
+  export type GymMembershipUpdateManyWithoutGuestNestedInput = {
+    create?: XOR<GymMembershipCreateWithoutGuestInput, GymMembershipUncheckedCreateWithoutGuestInput> | GymMembershipCreateWithoutGuestInput[] | GymMembershipUncheckedCreateWithoutGuestInput[]
+    connectOrCreate?: GymMembershipCreateOrConnectWithoutGuestInput | GymMembershipCreateOrConnectWithoutGuestInput[]
+    upsert?: GymMembershipUpsertWithWhereUniqueWithoutGuestInput | GymMembershipUpsertWithWhereUniqueWithoutGuestInput[]
+    createMany?: GymMembershipCreateManyGuestInputEnvelope
+    set?: GymMembershipWhereUniqueInput | GymMembershipWhereUniqueInput[]
+    disconnect?: GymMembershipWhereUniqueInput | GymMembershipWhereUniqueInput[]
+    delete?: GymMembershipWhereUniqueInput | GymMembershipWhereUniqueInput[]
+    connect?: GymMembershipWhereUniqueInput | GymMembershipWhereUniqueInput[]
+    update?: GymMembershipUpdateWithWhereUniqueWithoutGuestInput | GymMembershipUpdateWithWhereUniqueWithoutGuestInput[]
+    updateMany?: GymMembershipUpdateManyWithWhereWithoutGuestInput | GymMembershipUpdateManyWithWhereWithoutGuestInput[]
+    deleteMany?: GymMembershipScalarWhereInput | GymMembershipScalarWhereInput[]
+  }
+
   export type CompanyUpdateOneWithoutGuestsNestedInput = {
     create?: XOR<CompanyCreateWithoutGuestsInput, CompanyUncheckedCreateWithoutGuestsInput>
     connectOrCreate?: CompanyCreateOrConnectWithoutGuestsInput
@@ -42091,6 +50917,34 @@ export namespace Prisma {
     update?: RestaurantOrderUpdateWithWhereUniqueWithoutGuestInput | RestaurantOrderUpdateWithWhereUniqueWithoutGuestInput[]
     updateMany?: RestaurantOrderUpdateManyWithWhereWithoutGuestInput | RestaurantOrderUpdateManyWithWhereWithoutGuestInput[]
     deleteMany?: RestaurantOrderScalarWhereInput | RestaurantOrderScalarWhereInput[]
+  }
+
+  export type LaundryOrderUncheckedUpdateManyWithoutGuestNestedInput = {
+    create?: XOR<LaundryOrderCreateWithoutGuestInput, LaundryOrderUncheckedCreateWithoutGuestInput> | LaundryOrderCreateWithoutGuestInput[] | LaundryOrderUncheckedCreateWithoutGuestInput[]
+    connectOrCreate?: LaundryOrderCreateOrConnectWithoutGuestInput | LaundryOrderCreateOrConnectWithoutGuestInput[]
+    upsert?: LaundryOrderUpsertWithWhereUniqueWithoutGuestInput | LaundryOrderUpsertWithWhereUniqueWithoutGuestInput[]
+    createMany?: LaundryOrderCreateManyGuestInputEnvelope
+    set?: LaundryOrderWhereUniqueInput | LaundryOrderWhereUniqueInput[]
+    disconnect?: LaundryOrderWhereUniqueInput | LaundryOrderWhereUniqueInput[]
+    delete?: LaundryOrderWhereUniqueInput | LaundryOrderWhereUniqueInput[]
+    connect?: LaundryOrderWhereUniqueInput | LaundryOrderWhereUniqueInput[]
+    update?: LaundryOrderUpdateWithWhereUniqueWithoutGuestInput | LaundryOrderUpdateWithWhereUniqueWithoutGuestInput[]
+    updateMany?: LaundryOrderUpdateManyWithWhereWithoutGuestInput | LaundryOrderUpdateManyWithWhereWithoutGuestInput[]
+    deleteMany?: LaundryOrderScalarWhereInput | LaundryOrderScalarWhereInput[]
+  }
+
+  export type GymMembershipUncheckedUpdateManyWithoutGuestNestedInput = {
+    create?: XOR<GymMembershipCreateWithoutGuestInput, GymMembershipUncheckedCreateWithoutGuestInput> | GymMembershipCreateWithoutGuestInput[] | GymMembershipUncheckedCreateWithoutGuestInput[]
+    connectOrCreate?: GymMembershipCreateOrConnectWithoutGuestInput | GymMembershipCreateOrConnectWithoutGuestInput[]
+    upsert?: GymMembershipUpsertWithWhereUniqueWithoutGuestInput | GymMembershipUpsertWithWhereUniqueWithoutGuestInput[]
+    createMany?: GymMembershipCreateManyGuestInputEnvelope
+    set?: GymMembershipWhereUniqueInput | GymMembershipWhereUniqueInput[]
+    disconnect?: GymMembershipWhereUniqueInput | GymMembershipWhereUniqueInput[]
+    delete?: GymMembershipWhereUniqueInput | GymMembershipWhereUniqueInput[]
+    connect?: GymMembershipWhereUniqueInput | GymMembershipWhereUniqueInput[]
+    update?: GymMembershipUpdateWithWhereUniqueWithoutGuestInput | GymMembershipUpdateWithWhereUniqueWithoutGuestInput[]
+    updateMany?: GymMembershipUpdateManyWithWhereWithoutGuestInput | GymMembershipUpdateManyWithWhereWithoutGuestInput[]
+    deleteMany?: GymMembershipScalarWhereInput | GymMembershipScalarWhereInput[]
   }
 
   export type GuestCreateNestedOneWithoutAddressesInput = {
@@ -42555,6 +51409,20 @@ export namespace Prisma {
     connect?: RestaurantOrderWhereUniqueInput | RestaurantOrderWhereUniqueInput[]
   }
 
+  export type LaundryOrderCreateNestedManyWithoutReservationInput = {
+    create?: XOR<LaundryOrderCreateWithoutReservationInput, LaundryOrderUncheckedCreateWithoutReservationInput> | LaundryOrderCreateWithoutReservationInput[] | LaundryOrderUncheckedCreateWithoutReservationInput[]
+    connectOrCreate?: LaundryOrderCreateOrConnectWithoutReservationInput | LaundryOrderCreateOrConnectWithoutReservationInput[]
+    createMany?: LaundryOrderCreateManyReservationInputEnvelope
+    connect?: LaundryOrderWhereUniqueInput | LaundryOrderWhereUniqueInput[]
+  }
+
+  export type GymMembershipCreateNestedManyWithoutReservationInput = {
+    create?: XOR<GymMembershipCreateWithoutReservationInput, GymMembershipUncheckedCreateWithoutReservationInput> | GymMembershipCreateWithoutReservationInput[] | GymMembershipUncheckedCreateWithoutReservationInput[]
+    connectOrCreate?: GymMembershipCreateOrConnectWithoutReservationInput | GymMembershipCreateOrConnectWithoutReservationInput[]
+    createMany?: GymMembershipCreateManyReservationInputEnvelope
+    connect?: GymMembershipWhereUniqueInput | GymMembershipWhereUniqueInput[]
+  }
+
   export type FolioUncheckedCreateNestedOneWithoutReservationInput = {
     create?: XOR<FolioCreateWithoutReservationInput, FolioUncheckedCreateWithoutReservationInput>
     connectOrCreate?: FolioCreateOrConnectWithoutReservationInput
@@ -42573,6 +51441,20 @@ export namespace Prisma {
     connectOrCreate?: RestaurantOrderCreateOrConnectWithoutReservationInput | RestaurantOrderCreateOrConnectWithoutReservationInput[]
     createMany?: RestaurantOrderCreateManyReservationInputEnvelope
     connect?: RestaurantOrderWhereUniqueInput | RestaurantOrderWhereUniqueInput[]
+  }
+
+  export type LaundryOrderUncheckedCreateNestedManyWithoutReservationInput = {
+    create?: XOR<LaundryOrderCreateWithoutReservationInput, LaundryOrderUncheckedCreateWithoutReservationInput> | LaundryOrderCreateWithoutReservationInput[] | LaundryOrderUncheckedCreateWithoutReservationInput[]
+    connectOrCreate?: LaundryOrderCreateOrConnectWithoutReservationInput | LaundryOrderCreateOrConnectWithoutReservationInput[]
+    createMany?: LaundryOrderCreateManyReservationInputEnvelope
+    connect?: LaundryOrderWhereUniqueInput | LaundryOrderWhereUniqueInput[]
+  }
+
+  export type GymMembershipUncheckedCreateNestedManyWithoutReservationInput = {
+    create?: XOR<GymMembershipCreateWithoutReservationInput, GymMembershipUncheckedCreateWithoutReservationInput> | GymMembershipCreateWithoutReservationInput[] | GymMembershipUncheckedCreateWithoutReservationInput[]
+    connectOrCreate?: GymMembershipCreateOrConnectWithoutReservationInput | GymMembershipCreateOrConnectWithoutReservationInput[]
+    createMany?: GymMembershipCreateManyReservationInputEnvelope
+    connect?: GymMembershipWhereUniqueInput | GymMembershipWhereUniqueInput[]
   }
 
   export type NullableDecimalFieldUpdateOperationsInput = {
@@ -42653,6 +51535,34 @@ export namespace Prisma {
     deleteMany?: RestaurantOrderScalarWhereInput | RestaurantOrderScalarWhereInput[]
   }
 
+  export type LaundryOrderUpdateManyWithoutReservationNestedInput = {
+    create?: XOR<LaundryOrderCreateWithoutReservationInput, LaundryOrderUncheckedCreateWithoutReservationInput> | LaundryOrderCreateWithoutReservationInput[] | LaundryOrderUncheckedCreateWithoutReservationInput[]
+    connectOrCreate?: LaundryOrderCreateOrConnectWithoutReservationInput | LaundryOrderCreateOrConnectWithoutReservationInput[]
+    upsert?: LaundryOrderUpsertWithWhereUniqueWithoutReservationInput | LaundryOrderUpsertWithWhereUniqueWithoutReservationInput[]
+    createMany?: LaundryOrderCreateManyReservationInputEnvelope
+    set?: LaundryOrderWhereUniqueInput | LaundryOrderWhereUniqueInput[]
+    disconnect?: LaundryOrderWhereUniqueInput | LaundryOrderWhereUniqueInput[]
+    delete?: LaundryOrderWhereUniqueInput | LaundryOrderWhereUniqueInput[]
+    connect?: LaundryOrderWhereUniqueInput | LaundryOrderWhereUniqueInput[]
+    update?: LaundryOrderUpdateWithWhereUniqueWithoutReservationInput | LaundryOrderUpdateWithWhereUniqueWithoutReservationInput[]
+    updateMany?: LaundryOrderUpdateManyWithWhereWithoutReservationInput | LaundryOrderUpdateManyWithWhereWithoutReservationInput[]
+    deleteMany?: LaundryOrderScalarWhereInput | LaundryOrderScalarWhereInput[]
+  }
+
+  export type GymMembershipUpdateManyWithoutReservationNestedInput = {
+    create?: XOR<GymMembershipCreateWithoutReservationInput, GymMembershipUncheckedCreateWithoutReservationInput> | GymMembershipCreateWithoutReservationInput[] | GymMembershipUncheckedCreateWithoutReservationInput[]
+    connectOrCreate?: GymMembershipCreateOrConnectWithoutReservationInput | GymMembershipCreateOrConnectWithoutReservationInput[]
+    upsert?: GymMembershipUpsertWithWhereUniqueWithoutReservationInput | GymMembershipUpsertWithWhereUniqueWithoutReservationInput[]
+    createMany?: GymMembershipCreateManyReservationInputEnvelope
+    set?: GymMembershipWhereUniqueInput | GymMembershipWhereUniqueInput[]
+    disconnect?: GymMembershipWhereUniqueInput | GymMembershipWhereUniqueInput[]
+    delete?: GymMembershipWhereUniqueInput | GymMembershipWhereUniqueInput[]
+    connect?: GymMembershipWhereUniqueInput | GymMembershipWhereUniqueInput[]
+    update?: GymMembershipUpdateWithWhereUniqueWithoutReservationInput | GymMembershipUpdateWithWhereUniqueWithoutReservationInput[]
+    updateMany?: GymMembershipUpdateManyWithWhereWithoutReservationInput | GymMembershipUpdateManyWithWhereWithoutReservationInput[]
+    deleteMany?: GymMembershipScalarWhereInput | GymMembershipScalarWhereInput[]
+  }
+
   export type FolioUncheckedUpdateOneWithoutReservationNestedInput = {
     create?: XOR<FolioCreateWithoutReservationInput, FolioUncheckedCreateWithoutReservationInput>
     connectOrCreate?: FolioCreateOrConnectWithoutReservationInput
@@ -42689,6 +51599,34 @@ export namespace Prisma {
     update?: RestaurantOrderUpdateWithWhereUniqueWithoutReservationInput | RestaurantOrderUpdateWithWhereUniqueWithoutReservationInput[]
     updateMany?: RestaurantOrderUpdateManyWithWhereWithoutReservationInput | RestaurantOrderUpdateManyWithWhereWithoutReservationInput[]
     deleteMany?: RestaurantOrderScalarWhereInput | RestaurantOrderScalarWhereInput[]
+  }
+
+  export type LaundryOrderUncheckedUpdateManyWithoutReservationNestedInput = {
+    create?: XOR<LaundryOrderCreateWithoutReservationInput, LaundryOrderUncheckedCreateWithoutReservationInput> | LaundryOrderCreateWithoutReservationInput[] | LaundryOrderUncheckedCreateWithoutReservationInput[]
+    connectOrCreate?: LaundryOrderCreateOrConnectWithoutReservationInput | LaundryOrderCreateOrConnectWithoutReservationInput[]
+    upsert?: LaundryOrderUpsertWithWhereUniqueWithoutReservationInput | LaundryOrderUpsertWithWhereUniqueWithoutReservationInput[]
+    createMany?: LaundryOrderCreateManyReservationInputEnvelope
+    set?: LaundryOrderWhereUniqueInput | LaundryOrderWhereUniqueInput[]
+    disconnect?: LaundryOrderWhereUniqueInput | LaundryOrderWhereUniqueInput[]
+    delete?: LaundryOrderWhereUniqueInput | LaundryOrderWhereUniqueInput[]
+    connect?: LaundryOrderWhereUniqueInput | LaundryOrderWhereUniqueInput[]
+    update?: LaundryOrderUpdateWithWhereUniqueWithoutReservationInput | LaundryOrderUpdateWithWhereUniqueWithoutReservationInput[]
+    updateMany?: LaundryOrderUpdateManyWithWhereWithoutReservationInput | LaundryOrderUpdateManyWithWhereWithoutReservationInput[]
+    deleteMany?: LaundryOrderScalarWhereInput | LaundryOrderScalarWhereInput[]
+  }
+
+  export type GymMembershipUncheckedUpdateManyWithoutReservationNestedInput = {
+    create?: XOR<GymMembershipCreateWithoutReservationInput, GymMembershipUncheckedCreateWithoutReservationInput> | GymMembershipCreateWithoutReservationInput[] | GymMembershipUncheckedCreateWithoutReservationInput[]
+    connectOrCreate?: GymMembershipCreateOrConnectWithoutReservationInput | GymMembershipCreateOrConnectWithoutReservationInput[]
+    upsert?: GymMembershipUpsertWithWhereUniqueWithoutReservationInput | GymMembershipUpsertWithWhereUniqueWithoutReservationInput[]
+    createMany?: GymMembershipCreateManyReservationInputEnvelope
+    set?: GymMembershipWhereUniqueInput | GymMembershipWhereUniqueInput[]
+    disconnect?: GymMembershipWhereUniqueInput | GymMembershipWhereUniqueInput[]
+    delete?: GymMembershipWhereUniqueInput | GymMembershipWhereUniqueInput[]
+    connect?: GymMembershipWhereUniqueInput | GymMembershipWhereUniqueInput[]
+    update?: GymMembershipUpdateWithWhereUniqueWithoutReservationInput | GymMembershipUpdateWithWhereUniqueWithoutReservationInput[]
+    updateMany?: GymMembershipUpdateManyWithWhereWithoutReservationInput | GymMembershipUpdateManyWithWhereWithoutReservationInput[]
+    deleteMany?: GymMembershipScalarWhereInput | GymMembershipScalarWhereInput[]
   }
 
   export type ReservationCreateNestedOneWithoutAuditLogsInput = {
@@ -42729,6 +51667,13 @@ export namespace Prisma {
     connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
   }
 
+  export type LaundryOrderCreateNestedManyWithoutFolioInput = {
+    create?: XOR<LaundryOrderCreateWithoutFolioInput, LaundryOrderUncheckedCreateWithoutFolioInput> | LaundryOrderCreateWithoutFolioInput[] | LaundryOrderUncheckedCreateWithoutFolioInput[]
+    connectOrCreate?: LaundryOrderCreateOrConnectWithoutFolioInput | LaundryOrderCreateOrConnectWithoutFolioInput[]
+    createMany?: LaundryOrderCreateManyFolioInputEnvelope
+    connect?: LaundryOrderWhereUniqueInput | LaundryOrderWhereUniqueInput[]
+  }
+
   export type FolioTransactionUncheckedCreateNestedManyWithoutFolioInput = {
     create?: XOR<FolioTransactionCreateWithoutFolioInput, FolioTransactionUncheckedCreateWithoutFolioInput> | FolioTransactionCreateWithoutFolioInput[] | FolioTransactionUncheckedCreateWithoutFolioInput[]
     connectOrCreate?: FolioTransactionCreateOrConnectWithoutFolioInput | FolioTransactionCreateOrConnectWithoutFolioInput[]
@@ -42741,6 +51686,13 @@ export namespace Prisma {
     connectOrCreate?: PaymentCreateOrConnectWithoutFolioInput | PaymentCreateOrConnectWithoutFolioInput[]
     createMany?: PaymentCreateManyFolioInputEnvelope
     connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+  }
+
+  export type LaundryOrderUncheckedCreateNestedManyWithoutFolioInput = {
+    create?: XOR<LaundryOrderCreateWithoutFolioInput, LaundryOrderUncheckedCreateWithoutFolioInput> | LaundryOrderCreateWithoutFolioInput[] | LaundryOrderUncheckedCreateWithoutFolioInput[]
+    connectOrCreate?: LaundryOrderCreateOrConnectWithoutFolioInput | LaundryOrderCreateOrConnectWithoutFolioInput[]
+    createMany?: LaundryOrderCreateManyFolioInputEnvelope
+    connect?: LaundryOrderWhereUniqueInput | LaundryOrderWhereUniqueInput[]
   }
 
   export type ReservationUpdateOneRequiredWithoutFolioNestedInput = {
@@ -42779,6 +51731,20 @@ export namespace Prisma {
     deleteMany?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
   }
 
+  export type LaundryOrderUpdateManyWithoutFolioNestedInput = {
+    create?: XOR<LaundryOrderCreateWithoutFolioInput, LaundryOrderUncheckedCreateWithoutFolioInput> | LaundryOrderCreateWithoutFolioInput[] | LaundryOrderUncheckedCreateWithoutFolioInput[]
+    connectOrCreate?: LaundryOrderCreateOrConnectWithoutFolioInput | LaundryOrderCreateOrConnectWithoutFolioInput[]
+    upsert?: LaundryOrderUpsertWithWhereUniqueWithoutFolioInput | LaundryOrderUpsertWithWhereUniqueWithoutFolioInput[]
+    createMany?: LaundryOrderCreateManyFolioInputEnvelope
+    set?: LaundryOrderWhereUniqueInput | LaundryOrderWhereUniqueInput[]
+    disconnect?: LaundryOrderWhereUniqueInput | LaundryOrderWhereUniqueInput[]
+    delete?: LaundryOrderWhereUniqueInput | LaundryOrderWhereUniqueInput[]
+    connect?: LaundryOrderWhereUniqueInput | LaundryOrderWhereUniqueInput[]
+    update?: LaundryOrderUpdateWithWhereUniqueWithoutFolioInput | LaundryOrderUpdateWithWhereUniqueWithoutFolioInput[]
+    updateMany?: LaundryOrderUpdateManyWithWhereWithoutFolioInput | LaundryOrderUpdateManyWithWhereWithoutFolioInput[]
+    deleteMany?: LaundryOrderScalarWhereInput | LaundryOrderScalarWhereInput[]
+  }
+
   export type FolioTransactionUncheckedUpdateManyWithoutFolioNestedInput = {
     create?: XOR<FolioTransactionCreateWithoutFolioInput, FolioTransactionUncheckedCreateWithoutFolioInput> | FolioTransactionCreateWithoutFolioInput[] | FolioTransactionUncheckedCreateWithoutFolioInput[]
     connectOrCreate?: FolioTransactionCreateOrConnectWithoutFolioInput | FolioTransactionCreateOrConnectWithoutFolioInput[]
@@ -42805,6 +51771,20 @@ export namespace Prisma {
     update?: PaymentUpdateWithWhereUniqueWithoutFolioInput | PaymentUpdateWithWhereUniqueWithoutFolioInput[]
     updateMany?: PaymentUpdateManyWithWhereWithoutFolioInput | PaymentUpdateManyWithWhereWithoutFolioInput[]
     deleteMany?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
+  }
+
+  export type LaundryOrderUncheckedUpdateManyWithoutFolioNestedInput = {
+    create?: XOR<LaundryOrderCreateWithoutFolioInput, LaundryOrderUncheckedCreateWithoutFolioInput> | LaundryOrderCreateWithoutFolioInput[] | LaundryOrderUncheckedCreateWithoutFolioInput[]
+    connectOrCreate?: LaundryOrderCreateOrConnectWithoutFolioInput | LaundryOrderCreateOrConnectWithoutFolioInput[]
+    upsert?: LaundryOrderUpsertWithWhereUniqueWithoutFolioInput | LaundryOrderUpsertWithWhereUniqueWithoutFolioInput[]
+    createMany?: LaundryOrderCreateManyFolioInputEnvelope
+    set?: LaundryOrderWhereUniqueInput | LaundryOrderWhereUniqueInput[]
+    disconnect?: LaundryOrderWhereUniqueInput | LaundryOrderWhereUniqueInput[]
+    delete?: LaundryOrderWhereUniqueInput | LaundryOrderWhereUniqueInput[]
+    connect?: LaundryOrderWhereUniqueInput | LaundryOrderWhereUniqueInput[]
+    update?: LaundryOrderUpdateWithWhereUniqueWithoutFolioInput | LaundryOrderUpdateWithWhereUniqueWithoutFolioInput[]
+    updateMany?: LaundryOrderUpdateManyWithWhereWithoutFolioInput | LaundryOrderUpdateManyWithWhereWithoutFolioInput[]
+    deleteMany?: LaundryOrderScalarWhereInput | LaundryOrderScalarWhereInput[]
   }
 
   export type FolioCreateNestedOneWithoutTransactionsInput = {
@@ -42835,6 +51815,18 @@ export namespace Prisma {
     create?: XOR<RestaurantOrderCreateWithoutPaymentsInput, RestaurantOrderUncheckedCreateWithoutPaymentsInput>
     connectOrCreate?: RestaurantOrderCreateOrConnectWithoutPaymentsInput
     connect?: RestaurantOrderWhereUniqueInput
+  }
+
+  export type LaundryOrderCreateNestedOneWithoutPaymentsInput = {
+    create?: XOR<LaundryOrderCreateWithoutPaymentsInput, LaundryOrderUncheckedCreateWithoutPaymentsInput>
+    connectOrCreate?: LaundryOrderCreateOrConnectWithoutPaymentsInput
+    connect?: LaundryOrderWhereUniqueInput
+  }
+
+  export type GymMembershipCreateNestedOneWithoutPaymentsInput = {
+    create?: XOR<GymMembershipCreateWithoutPaymentsInput, GymMembershipUncheckedCreateWithoutPaymentsInput>
+    connectOrCreate?: GymMembershipCreateOrConnectWithoutPaymentsInput
+    connect?: GymMembershipWhereUniqueInput
   }
 
   export type PaymentRefundCreateNestedManyWithoutPaymentInput = {
@@ -42877,6 +51869,26 @@ export namespace Prisma {
     delete?: RestaurantOrderWhereInput | boolean
     connect?: RestaurantOrderWhereUniqueInput
     update?: XOR<XOR<RestaurantOrderUpdateToOneWithWhereWithoutPaymentsInput, RestaurantOrderUpdateWithoutPaymentsInput>, RestaurantOrderUncheckedUpdateWithoutPaymentsInput>
+  }
+
+  export type LaundryOrderUpdateOneWithoutPaymentsNestedInput = {
+    create?: XOR<LaundryOrderCreateWithoutPaymentsInput, LaundryOrderUncheckedCreateWithoutPaymentsInput>
+    connectOrCreate?: LaundryOrderCreateOrConnectWithoutPaymentsInput
+    upsert?: LaundryOrderUpsertWithoutPaymentsInput
+    disconnect?: LaundryOrderWhereInput | boolean
+    delete?: LaundryOrderWhereInput | boolean
+    connect?: LaundryOrderWhereUniqueInput
+    update?: XOR<XOR<LaundryOrderUpdateToOneWithWhereWithoutPaymentsInput, LaundryOrderUpdateWithoutPaymentsInput>, LaundryOrderUncheckedUpdateWithoutPaymentsInput>
+  }
+
+  export type GymMembershipUpdateOneWithoutPaymentsNestedInput = {
+    create?: XOR<GymMembershipCreateWithoutPaymentsInput, GymMembershipUncheckedCreateWithoutPaymentsInput>
+    connectOrCreate?: GymMembershipCreateOrConnectWithoutPaymentsInput
+    upsert?: GymMembershipUpsertWithoutPaymentsInput
+    disconnect?: GymMembershipWhereInput | boolean
+    delete?: GymMembershipWhereInput | boolean
+    connect?: GymMembershipWhereUniqueInput
+    update?: XOR<XOR<GymMembershipUpdateToOneWithWhereWithoutPaymentsInput, GymMembershipUpdateWithoutPaymentsInput>, GymMembershipUncheckedUpdateWithoutPaymentsInput>
   }
 
   export type PaymentRefundUpdateManyWithoutPaymentNestedInput = {
@@ -43439,6 +52451,362 @@ export namespace Prisma {
     delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMaintenanceAssignmentsInput, UserUpdateWithoutMaintenanceAssignmentsInput>, UserUncheckedUpdateWithoutMaintenanceAssignmentsInput>
+  }
+
+  export type LaundryOrderItemCreateNestedManyWithoutLaundryItemInput = {
+    create?: XOR<LaundryOrderItemCreateWithoutLaundryItemInput, LaundryOrderItemUncheckedCreateWithoutLaundryItemInput> | LaundryOrderItemCreateWithoutLaundryItemInput[] | LaundryOrderItemUncheckedCreateWithoutLaundryItemInput[]
+    connectOrCreate?: LaundryOrderItemCreateOrConnectWithoutLaundryItemInput | LaundryOrderItemCreateOrConnectWithoutLaundryItemInput[]
+    createMany?: LaundryOrderItemCreateManyLaundryItemInputEnvelope
+    connect?: LaundryOrderItemWhereUniqueInput | LaundryOrderItemWhereUniqueInput[]
+  }
+
+  export type LaundryOrderItemUncheckedCreateNestedManyWithoutLaundryItemInput = {
+    create?: XOR<LaundryOrderItemCreateWithoutLaundryItemInput, LaundryOrderItemUncheckedCreateWithoutLaundryItemInput> | LaundryOrderItemCreateWithoutLaundryItemInput[] | LaundryOrderItemUncheckedCreateWithoutLaundryItemInput[]
+    connectOrCreate?: LaundryOrderItemCreateOrConnectWithoutLaundryItemInput | LaundryOrderItemCreateOrConnectWithoutLaundryItemInput[]
+    createMany?: LaundryOrderItemCreateManyLaundryItemInputEnvelope
+    connect?: LaundryOrderItemWhereUniqueInput | LaundryOrderItemWhereUniqueInput[]
+  }
+
+  export type EnumLaundryItemTypeFieldUpdateOperationsInput = {
+    set?: $Enums.LaundryItemType
+  }
+
+  export type LaundryOrderItemUpdateManyWithoutLaundryItemNestedInput = {
+    create?: XOR<LaundryOrderItemCreateWithoutLaundryItemInput, LaundryOrderItemUncheckedCreateWithoutLaundryItemInput> | LaundryOrderItemCreateWithoutLaundryItemInput[] | LaundryOrderItemUncheckedCreateWithoutLaundryItemInput[]
+    connectOrCreate?: LaundryOrderItemCreateOrConnectWithoutLaundryItemInput | LaundryOrderItemCreateOrConnectWithoutLaundryItemInput[]
+    upsert?: LaundryOrderItemUpsertWithWhereUniqueWithoutLaundryItemInput | LaundryOrderItemUpsertWithWhereUniqueWithoutLaundryItemInput[]
+    createMany?: LaundryOrderItemCreateManyLaundryItemInputEnvelope
+    set?: LaundryOrderItemWhereUniqueInput | LaundryOrderItemWhereUniqueInput[]
+    disconnect?: LaundryOrderItemWhereUniqueInput | LaundryOrderItemWhereUniqueInput[]
+    delete?: LaundryOrderItemWhereUniqueInput | LaundryOrderItemWhereUniqueInput[]
+    connect?: LaundryOrderItemWhereUniqueInput | LaundryOrderItemWhereUniqueInput[]
+    update?: LaundryOrderItemUpdateWithWhereUniqueWithoutLaundryItemInput | LaundryOrderItemUpdateWithWhereUniqueWithoutLaundryItemInput[]
+    updateMany?: LaundryOrderItemUpdateManyWithWhereWithoutLaundryItemInput | LaundryOrderItemUpdateManyWithWhereWithoutLaundryItemInput[]
+    deleteMany?: LaundryOrderItemScalarWhereInput | LaundryOrderItemScalarWhereInput[]
+  }
+
+  export type LaundryOrderItemUncheckedUpdateManyWithoutLaundryItemNestedInput = {
+    create?: XOR<LaundryOrderItemCreateWithoutLaundryItemInput, LaundryOrderItemUncheckedCreateWithoutLaundryItemInput> | LaundryOrderItemCreateWithoutLaundryItemInput[] | LaundryOrderItemUncheckedCreateWithoutLaundryItemInput[]
+    connectOrCreate?: LaundryOrderItemCreateOrConnectWithoutLaundryItemInput | LaundryOrderItemCreateOrConnectWithoutLaundryItemInput[]
+    upsert?: LaundryOrderItemUpsertWithWhereUniqueWithoutLaundryItemInput | LaundryOrderItemUpsertWithWhereUniqueWithoutLaundryItemInput[]
+    createMany?: LaundryOrderItemCreateManyLaundryItemInputEnvelope
+    set?: LaundryOrderItemWhereUniqueInput | LaundryOrderItemWhereUniqueInput[]
+    disconnect?: LaundryOrderItemWhereUniqueInput | LaundryOrderItemWhereUniqueInput[]
+    delete?: LaundryOrderItemWhereUniqueInput | LaundryOrderItemWhereUniqueInput[]
+    connect?: LaundryOrderItemWhereUniqueInput | LaundryOrderItemWhereUniqueInput[]
+    update?: LaundryOrderItemUpdateWithWhereUniqueWithoutLaundryItemInput | LaundryOrderItemUpdateWithWhereUniqueWithoutLaundryItemInput[]
+    updateMany?: LaundryOrderItemUpdateManyWithWhereWithoutLaundryItemInput | LaundryOrderItemUpdateManyWithWhereWithoutLaundryItemInput[]
+    deleteMany?: LaundryOrderItemScalarWhereInput | LaundryOrderItemScalarWhereInput[]
+  }
+
+  export type GuestCreateNestedOneWithoutLaundryOrdersInput = {
+    create?: XOR<GuestCreateWithoutLaundryOrdersInput, GuestUncheckedCreateWithoutLaundryOrdersInput>
+    connectOrCreate?: GuestCreateOrConnectWithoutLaundryOrdersInput
+    connect?: GuestWhereUniqueInput
+  }
+
+  export type ReservationCreateNestedOneWithoutLaundryOrdersInput = {
+    create?: XOR<ReservationCreateWithoutLaundryOrdersInput, ReservationUncheckedCreateWithoutLaundryOrdersInput>
+    connectOrCreate?: ReservationCreateOrConnectWithoutLaundryOrdersInput
+    connect?: ReservationWhereUniqueInput
+  }
+
+  export type FolioCreateNestedOneWithoutLaundryOrdersInput = {
+    create?: XOR<FolioCreateWithoutLaundryOrdersInput, FolioUncheckedCreateWithoutLaundryOrdersInput>
+    connectOrCreate?: FolioCreateOrConnectWithoutLaundryOrdersInput
+    connect?: FolioWhereUniqueInput
+  }
+
+  export type LaundryOrderItemCreateNestedManyWithoutOrderInput = {
+    create?: XOR<LaundryOrderItemCreateWithoutOrderInput, LaundryOrderItemUncheckedCreateWithoutOrderInput> | LaundryOrderItemCreateWithoutOrderInput[] | LaundryOrderItemUncheckedCreateWithoutOrderInput[]
+    connectOrCreate?: LaundryOrderItemCreateOrConnectWithoutOrderInput | LaundryOrderItemCreateOrConnectWithoutOrderInput[]
+    createMany?: LaundryOrderItemCreateManyOrderInputEnvelope
+    connect?: LaundryOrderItemWhereUniqueInput | LaundryOrderItemWhereUniqueInput[]
+  }
+
+  export type PaymentCreateNestedManyWithoutLaundryOrderInput = {
+    create?: XOR<PaymentCreateWithoutLaundryOrderInput, PaymentUncheckedCreateWithoutLaundryOrderInput> | PaymentCreateWithoutLaundryOrderInput[] | PaymentUncheckedCreateWithoutLaundryOrderInput[]
+    connectOrCreate?: PaymentCreateOrConnectWithoutLaundryOrderInput | PaymentCreateOrConnectWithoutLaundryOrderInput[]
+    createMany?: PaymentCreateManyLaundryOrderInputEnvelope
+    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+  }
+
+  export type LaundryOrderItemUncheckedCreateNestedManyWithoutOrderInput = {
+    create?: XOR<LaundryOrderItemCreateWithoutOrderInput, LaundryOrderItemUncheckedCreateWithoutOrderInput> | LaundryOrderItemCreateWithoutOrderInput[] | LaundryOrderItemUncheckedCreateWithoutOrderInput[]
+    connectOrCreate?: LaundryOrderItemCreateOrConnectWithoutOrderInput | LaundryOrderItemCreateOrConnectWithoutOrderInput[]
+    createMany?: LaundryOrderItemCreateManyOrderInputEnvelope
+    connect?: LaundryOrderItemWhereUniqueInput | LaundryOrderItemWhereUniqueInput[]
+  }
+
+  export type PaymentUncheckedCreateNestedManyWithoutLaundryOrderInput = {
+    create?: XOR<PaymentCreateWithoutLaundryOrderInput, PaymentUncheckedCreateWithoutLaundryOrderInput> | PaymentCreateWithoutLaundryOrderInput[] | PaymentUncheckedCreateWithoutLaundryOrderInput[]
+    connectOrCreate?: PaymentCreateOrConnectWithoutLaundryOrderInput | PaymentCreateOrConnectWithoutLaundryOrderInput[]
+    createMany?: PaymentCreateManyLaundryOrderInputEnvelope
+    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+  }
+
+  export type EnumLaundryOrderStatusFieldUpdateOperationsInput = {
+    set?: $Enums.LaundryOrderStatus
+  }
+
+  export type EnumLaundryPaymentStatusFieldUpdateOperationsInput = {
+    set?: $Enums.LaundryPaymentStatus
+  }
+
+  export type GuestUpdateOneRequiredWithoutLaundryOrdersNestedInput = {
+    create?: XOR<GuestCreateWithoutLaundryOrdersInput, GuestUncheckedCreateWithoutLaundryOrdersInput>
+    connectOrCreate?: GuestCreateOrConnectWithoutLaundryOrdersInput
+    upsert?: GuestUpsertWithoutLaundryOrdersInput
+    connect?: GuestWhereUniqueInput
+    update?: XOR<XOR<GuestUpdateToOneWithWhereWithoutLaundryOrdersInput, GuestUpdateWithoutLaundryOrdersInput>, GuestUncheckedUpdateWithoutLaundryOrdersInput>
+  }
+
+  export type ReservationUpdateOneWithoutLaundryOrdersNestedInput = {
+    create?: XOR<ReservationCreateWithoutLaundryOrdersInput, ReservationUncheckedCreateWithoutLaundryOrdersInput>
+    connectOrCreate?: ReservationCreateOrConnectWithoutLaundryOrdersInput
+    upsert?: ReservationUpsertWithoutLaundryOrdersInput
+    disconnect?: ReservationWhereInput | boolean
+    delete?: ReservationWhereInput | boolean
+    connect?: ReservationWhereUniqueInput
+    update?: XOR<XOR<ReservationUpdateToOneWithWhereWithoutLaundryOrdersInput, ReservationUpdateWithoutLaundryOrdersInput>, ReservationUncheckedUpdateWithoutLaundryOrdersInput>
+  }
+
+  export type FolioUpdateOneWithoutLaundryOrdersNestedInput = {
+    create?: XOR<FolioCreateWithoutLaundryOrdersInput, FolioUncheckedCreateWithoutLaundryOrdersInput>
+    connectOrCreate?: FolioCreateOrConnectWithoutLaundryOrdersInput
+    upsert?: FolioUpsertWithoutLaundryOrdersInput
+    disconnect?: FolioWhereInput | boolean
+    delete?: FolioWhereInput | boolean
+    connect?: FolioWhereUniqueInput
+    update?: XOR<XOR<FolioUpdateToOneWithWhereWithoutLaundryOrdersInput, FolioUpdateWithoutLaundryOrdersInput>, FolioUncheckedUpdateWithoutLaundryOrdersInput>
+  }
+
+  export type LaundryOrderItemUpdateManyWithoutOrderNestedInput = {
+    create?: XOR<LaundryOrderItemCreateWithoutOrderInput, LaundryOrderItemUncheckedCreateWithoutOrderInput> | LaundryOrderItemCreateWithoutOrderInput[] | LaundryOrderItemUncheckedCreateWithoutOrderInput[]
+    connectOrCreate?: LaundryOrderItemCreateOrConnectWithoutOrderInput | LaundryOrderItemCreateOrConnectWithoutOrderInput[]
+    upsert?: LaundryOrderItemUpsertWithWhereUniqueWithoutOrderInput | LaundryOrderItemUpsertWithWhereUniqueWithoutOrderInput[]
+    createMany?: LaundryOrderItemCreateManyOrderInputEnvelope
+    set?: LaundryOrderItemWhereUniqueInput | LaundryOrderItemWhereUniqueInput[]
+    disconnect?: LaundryOrderItemWhereUniqueInput | LaundryOrderItemWhereUniqueInput[]
+    delete?: LaundryOrderItemWhereUniqueInput | LaundryOrderItemWhereUniqueInput[]
+    connect?: LaundryOrderItemWhereUniqueInput | LaundryOrderItemWhereUniqueInput[]
+    update?: LaundryOrderItemUpdateWithWhereUniqueWithoutOrderInput | LaundryOrderItemUpdateWithWhereUniqueWithoutOrderInput[]
+    updateMany?: LaundryOrderItemUpdateManyWithWhereWithoutOrderInput | LaundryOrderItemUpdateManyWithWhereWithoutOrderInput[]
+    deleteMany?: LaundryOrderItemScalarWhereInput | LaundryOrderItemScalarWhereInput[]
+  }
+
+  export type PaymentUpdateManyWithoutLaundryOrderNestedInput = {
+    create?: XOR<PaymentCreateWithoutLaundryOrderInput, PaymentUncheckedCreateWithoutLaundryOrderInput> | PaymentCreateWithoutLaundryOrderInput[] | PaymentUncheckedCreateWithoutLaundryOrderInput[]
+    connectOrCreate?: PaymentCreateOrConnectWithoutLaundryOrderInput | PaymentCreateOrConnectWithoutLaundryOrderInput[]
+    upsert?: PaymentUpsertWithWhereUniqueWithoutLaundryOrderInput | PaymentUpsertWithWhereUniqueWithoutLaundryOrderInput[]
+    createMany?: PaymentCreateManyLaundryOrderInputEnvelope
+    set?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    disconnect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    delete?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    update?: PaymentUpdateWithWhereUniqueWithoutLaundryOrderInput | PaymentUpdateWithWhereUniqueWithoutLaundryOrderInput[]
+    updateMany?: PaymentUpdateManyWithWhereWithoutLaundryOrderInput | PaymentUpdateManyWithWhereWithoutLaundryOrderInput[]
+    deleteMany?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
+  }
+
+  export type LaundryOrderItemUncheckedUpdateManyWithoutOrderNestedInput = {
+    create?: XOR<LaundryOrderItemCreateWithoutOrderInput, LaundryOrderItemUncheckedCreateWithoutOrderInput> | LaundryOrderItemCreateWithoutOrderInput[] | LaundryOrderItemUncheckedCreateWithoutOrderInput[]
+    connectOrCreate?: LaundryOrderItemCreateOrConnectWithoutOrderInput | LaundryOrderItemCreateOrConnectWithoutOrderInput[]
+    upsert?: LaundryOrderItemUpsertWithWhereUniqueWithoutOrderInput | LaundryOrderItemUpsertWithWhereUniqueWithoutOrderInput[]
+    createMany?: LaundryOrderItemCreateManyOrderInputEnvelope
+    set?: LaundryOrderItemWhereUniqueInput | LaundryOrderItemWhereUniqueInput[]
+    disconnect?: LaundryOrderItemWhereUniqueInput | LaundryOrderItemWhereUniqueInput[]
+    delete?: LaundryOrderItemWhereUniqueInput | LaundryOrderItemWhereUniqueInput[]
+    connect?: LaundryOrderItemWhereUniqueInput | LaundryOrderItemWhereUniqueInput[]
+    update?: LaundryOrderItemUpdateWithWhereUniqueWithoutOrderInput | LaundryOrderItemUpdateWithWhereUniqueWithoutOrderInput[]
+    updateMany?: LaundryOrderItemUpdateManyWithWhereWithoutOrderInput | LaundryOrderItemUpdateManyWithWhereWithoutOrderInput[]
+    deleteMany?: LaundryOrderItemScalarWhereInput | LaundryOrderItemScalarWhereInput[]
+  }
+
+  export type PaymentUncheckedUpdateManyWithoutLaundryOrderNestedInput = {
+    create?: XOR<PaymentCreateWithoutLaundryOrderInput, PaymentUncheckedCreateWithoutLaundryOrderInput> | PaymentCreateWithoutLaundryOrderInput[] | PaymentUncheckedCreateWithoutLaundryOrderInput[]
+    connectOrCreate?: PaymentCreateOrConnectWithoutLaundryOrderInput | PaymentCreateOrConnectWithoutLaundryOrderInput[]
+    upsert?: PaymentUpsertWithWhereUniqueWithoutLaundryOrderInput | PaymentUpsertWithWhereUniqueWithoutLaundryOrderInput[]
+    createMany?: PaymentCreateManyLaundryOrderInputEnvelope
+    set?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    disconnect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    delete?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    update?: PaymentUpdateWithWhereUniqueWithoutLaundryOrderInput | PaymentUpdateWithWhereUniqueWithoutLaundryOrderInput[]
+    updateMany?: PaymentUpdateManyWithWhereWithoutLaundryOrderInput | PaymentUpdateManyWithWhereWithoutLaundryOrderInput[]
+    deleteMany?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
+  }
+
+  export type LaundryOrderCreateNestedOneWithoutItemsInput = {
+    create?: XOR<LaundryOrderCreateWithoutItemsInput, LaundryOrderUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: LaundryOrderCreateOrConnectWithoutItemsInput
+    connect?: LaundryOrderWhereUniqueInput
+  }
+
+  export type LaundryItemCreateNestedOneWithoutOrderItemsInput = {
+    create?: XOR<LaundryItemCreateWithoutOrderItemsInput, LaundryItemUncheckedCreateWithoutOrderItemsInput>
+    connectOrCreate?: LaundryItemCreateOrConnectWithoutOrderItemsInput
+    connect?: LaundryItemWhereUniqueInput
+  }
+
+  export type LaundryOrderUpdateOneRequiredWithoutItemsNestedInput = {
+    create?: XOR<LaundryOrderCreateWithoutItemsInput, LaundryOrderUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: LaundryOrderCreateOrConnectWithoutItemsInput
+    upsert?: LaundryOrderUpsertWithoutItemsInput
+    connect?: LaundryOrderWhereUniqueInput
+    update?: XOR<XOR<LaundryOrderUpdateToOneWithWhereWithoutItemsInput, LaundryOrderUpdateWithoutItemsInput>, LaundryOrderUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type LaundryItemUpdateOneRequiredWithoutOrderItemsNestedInput = {
+    create?: XOR<LaundryItemCreateWithoutOrderItemsInput, LaundryItemUncheckedCreateWithoutOrderItemsInput>
+    connectOrCreate?: LaundryItemCreateOrConnectWithoutOrderItemsInput
+    upsert?: LaundryItemUpsertWithoutOrderItemsInput
+    connect?: LaundryItemWhereUniqueInput
+    update?: XOR<XOR<LaundryItemUpdateToOneWithWhereWithoutOrderItemsInput, LaundryItemUpdateWithoutOrderItemsInput>, LaundryItemUncheckedUpdateWithoutOrderItemsInput>
+  }
+
+  export type GymMembershipCreateNestedManyWithoutPlanInput = {
+    create?: XOR<GymMembershipCreateWithoutPlanInput, GymMembershipUncheckedCreateWithoutPlanInput> | GymMembershipCreateWithoutPlanInput[] | GymMembershipUncheckedCreateWithoutPlanInput[]
+    connectOrCreate?: GymMembershipCreateOrConnectWithoutPlanInput | GymMembershipCreateOrConnectWithoutPlanInput[]
+    createMany?: GymMembershipCreateManyPlanInputEnvelope
+    connect?: GymMembershipWhereUniqueInput | GymMembershipWhereUniqueInput[]
+  }
+
+  export type GymMembershipUncheckedCreateNestedManyWithoutPlanInput = {
+    create?: XOR<GymMembershipCreateWithoutPlanInput, GymMembershipUncheckedCreateWithoutPlanInput> | GymMembershipCreateWithoutPlanInput[] | GymMembershipUncheckedCreateWithoutPlanInput[]
+    connectOrCreate?: GymMembershipCreateOrConnectWithoutPlanInput | GymMembershipCreateOrConnectWithoutPlanInput[]
+    createMany?: GymMembershipCreateManyPlanInputEnvelope
+    connect?: GymMembershipWhereUniqueInput | GymMembershipWhereUniqueInput[]
+  }
+
+  export type EnumGymMembershipDurationFieldUpdateOperationsInput = {
+    set?: $Enums.GymMembershipDuration
+  }
+
+  export type GymMembershipUpdateManyWithoutPlanNestedInput = {
+    create?: XOR<GymMembershipCreateWithoutPlanInput, GymMembershipUncheckedCreateWithoutPlanInput> | GymMembershipCreateWithoutPlanInput[] | GymMembershipUncheckedCreateWithoutPlanInput[]
+    connectOrCreate?: GymMembershipCreateOrConnectWithoutPlanInput | GymMembershipCreateOrConnectWithoutPlanInput[]
+    upsert?: GymMembershipUpsertWithWhereUniqueWithoutPlanInput | GymMembershipUpsertWithWhereUniqueWithoutPlanInput[]
+    createMany?: GymMembershipCreateManyPlanInputEnvelope
+    set?: GymMembershipWhereUniqueInput | GymMembershipWhereUniqueInput[]
+    disconnect?: GymMembershipWhereUniqueInput | GymMembershipWhereUniqueInput[]
+    delete?: GymMembershipWhereUniqueInput | GymMembershipWhereUniqueInput[]
+    connect?: GymMembershipWhereUniqueInput | GymMembershipWhereUniqueInput[]
+    update?: GymMembershipUpdateWithWhereUniqueWithoutPlanInput | GymMembershipUpdateWithWhereUniqueWithoutPlanInput[]
+    updateMany?: GymMembershipUpdateManyWithWhereWithoutPlanInput | GymMembershipUpdateManyWithWhereWithoutPlanInput[]
+    deleteMany?: GymMembershipScalarWhereInput | GymMembershipScalarWhereInput[]
+  }
+
+  export type GymMembershipUncheckedUpdateManyWithoutPlanNestedInput = {
+    create?: XOR<GymMembershipCreateWithoutPlanInput, GymMembershipUncheckedCreateWithoutPlanInput> | GymMembershipCreateWithoutPlanInput[] | GymMembershipUncheckedCreateWithoutPlanInput[]
+    connectOrCreate?: GymMembershipCreateOrConnectWithoutPlanInput | GymMembershipCreateOrConnectWithoutPlanInput[]
+    upsert?: GymMembershipUpsertWithWhereUniqueWithoutPlanInput | GymMembershipUpsertWithWhereUniqueWithoutPlanInput[]
+    createMany?: GymMembershipCreateManyPlanInputEnvelope
+    set?: GymMembershipWhereUniqueInput | GymMembershipWhereUniqueInput[]
+    disconnect?: GymMembershipWhereUniqueInput | GymMembershipWhereUniqueInput[]
+    delete?: GymMembershipWhereUniqueInput | GymMembershipWhereUniqueInput[]
+    connect?: GymMembershipWhereUniqueInput | GymMembershipWhereUniqueInput[]
+    update?: GymMembershipUpdateWithWhereUniqueWithoutPlanInput | GymMembershipUpdateWithWhereUniqueWithoutPlanInput[]
+    updateMany?: GymMembershipUpdateManyWithWhereWithoutPlanInput | GymMembershipUpdateManyWithWhereWithoutPlanInput[]
+    deleteMany?: GymMembershipScalarWhereInput | GymMembershipScalarWhereInput[]
+  }
+
+  export type ReservationCreateNestedOneWithoutGymMembershipsInput = {
+    create?: XOR<ReservationCreateWithoutGymMembershipsInput, ReservationUncheckedCreateWithoutGymMembershipsInput>
+    connectOrCreate?: ReservationCreateOrConnectWithoutGymMembershipsInput
+    connect?: ReservationWhereUniqueInput
+  }
+
+  export type GuestCreateNestedOneWithoutGymMembershipsInput = {
+    create?: XOR<GuestCreateWithoutGymMembershipsInput, GuestUncheckedCreateWithoutGymMembershipsInput>
+    connectOrCreate?: GuestCreateOrConnectWithoutGymMembershipsInput
+    connect?: GuestWhereUniqueInput
+  }
+
+  export type GymMembershipPlanCreateNestedOneWithoutMembershipsInput = {
+    create?: XOR<GymMembershipPlanCreateWithoutMembershipsInput, GymMembershipPlanUncheckedCreateWithoutMembershipsInput>
+    connectOrCreate?: GymMembershipPlanCreateOrConnectWithoutMembershipsInput
+    connect?: GymMembershipPlanWhereUniqueInput
+  }
+
+  export type PaymentCreateNestedManyWithoutGymMembershipInput = {
+    create?: XOR<PaymentCreateWithoutGymMembershipInput, PaymentUncheckedCreateWithoutGymMembershipInput> | PaymentCreateWithoutGymMembershipInput[] | PaymentUncheckedCreateWithoutGymMembershipInput[]
+    connectOrCreate?: PaymentCreateOrConnectWithoutGymMembershipInput | PaymentCreateOrConnectWithoutGymMembershipInput[]
+    createMany?: PaymentCreateManyGymMembershipInputEnvelope
+    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+  }
+
+  export type PaymentUncheckedCreateNestedManyWithoutGymMembershipInput = {
+    create?: XOR<PaymentCreateWithoutGymMembershipInput, PaymentUncheckedCreateWithoutGymMembershipInput> | PaymentCreateWithoutGymMembershipInput[] | PaymentUncheckedCreateWithoutGymMembershipInput[]
+    connectOrCreate?: PaymentCreateOrConnectWithoutGymMembershipInput | PaymentCreateOrConnectWithoutGymMembershipInput[]
+    createMany?: PaymentCreateManyGymMembershipInputEnvelope
+    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+  }
+
+  export type EnumGymMembershipStatusFieldUpdateOperationsInput = {
+    set?: $Enums.GymMembershipStatus
+  }
+
+  export type EnumGymPaymentStatusFieldUpdateOperationsInput = {
+    set?: $Enums.GymPaymentStatus
+  }
+
+  export type NullableEnumGymSettlementMethodFieldUpdateOperationsInput = {
+    set?: $Enums.GymSettlementMethod | null
+  }
+
+  export type ReservationUpdateOneWithoutGymMembershipsNestedInput = {
+    create?: XOR<ReservationCreateWithoutGymMembershipsInput, ReservationUncheckedCreateWithoutGymMembershipsInput>
+    connectOrCreate?: ReservationCreateOrConnectWithoutGymMembershipsInput
+    upsert?: ReservationUpsertWithoutGymMembershipsInput
+    disconnect?: ReservationWhereInput | boolean
+    delete?: ReservationWhereInput | boolean
+    connect?: ReservationWhereUniqueInput
+    update?: XOR<XOR<ReservationUpdateToOneWithWhereWithoutGymMembershipsInput, ReservationUpdateWithoutGymMembershipsInput>, ReservationUncheckedUpdateWithoutGymMembershipsInput>
+  }
+
+  export type GuestUpdateOneRequiredWithoutGymMembershipsNestedInput = {
+    create?: XOR<GuestCreateWithoutGymMembershipsInput, GuestUncheckedCreateWithoutGymMembershipsInput>
+    connectOrCreate?: GuestCreateOrConnectWithoutGymMembershipsInput
+    upsert?: GuestUpsertWithoutGymMembershipsInput
+    connect?: GuestWhereUniqueInput
+    update?: XOR<XOR<GuestUpdateToOneWithWhereWithoutGymMembershipsInput, GuestUpdateWithoutGymMembershipsInput>, GuestUncheckedUpdateWithoutGymMembershipsInput>
+  }
+
+  export type GymMembershipPlanUpdateOneRequiredWithoutMembershipsNestedInput = {
+    create?: XOR<GymMembershipPlanCreateWithoutMembershipsInput, GymMembershipPlanUncheckedCreateWithoutMembershipsInput>
+    connectOrCreate?: GymMembershipPlanCreateOrConnectWithoutMembershipsInput
+    upsert?: GymMembershipPlanUpsertWithoutMembershipsInput
+    connect?: GymMembershipPlanWhereUniqueInput
+    update?: XOR<XOR<GymMembershipPlanUpdateToOneWithWhereWithoutMembershipsInput, GymMembershipPlanUpdateWithoutMembershipsInput>, GymMembershipPlanUncheckedUpdateWithoutMembershipsInput>
+  }
+
+  export type PaymentUpdateManyWithoutGymMembershipNestedInput = {
+    create?: XOR<PaymentCreateWithoutGymMembershipInput, PaymentUncheckedCreateWithoutGymMembershipInput> | PaymentCreateWithoutGymMembershipInput[] | PaymentUncheckedCreateWithoutGymMembershipInput[]
+    connectOrCreate?: PaymentCreateOrConnectWithoutGymMembershipInput | PaymentCreateOrConnectWithoutGymMembershipInput[]
+    upsert?: PaymentUpsertWithWhereUniqueWithoutGymMembershipInput | PaymentUpsertWithWhereUniqueWithoutGymMembershipInput[]
+    createMany?: PaymentCreateManyGymMembershipInputEnvelope
+    set?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    disconnect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    delete?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    update?: PaymentUpdateWithWhereUniqueWithoutGymMembershipInput | PaymentUpdateWithWhereUniqueWithoutGymMembershipInput[]
+    updateMany?: PaymentUpdateManyWithWhereWithoutGymMembershipInput | PaymentUpdateManyWithWhereWithoutGymMembershipInput[]
+    deleteMany?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
+  }
+
+  export type PaymentUncheckedUpdateManyWithoutGymMembershipNestedInput = {
+    create?: XOR<PaymentCreateWithoutGymMembershipInput, PaymentUncheckedCreateWithoutGymMembershipInput> | PaymentCreateWithoutGymMembershipInput[] | PaymentUncheckedCreateWithoutGymMembershipInput[]
+    connectOrCreate?: PaymentCreateOrConnectWithoutGymMembershipInput | PaymentCreateOrConnectWithoutGymMembershipInput[]
+    upsert?: PaymentUpsertWithWhereUniqueWithoutGymMembershipInput | PaymentUpsertWithWhereUniqueWithoutGymMembershipInput[]
+    createMany?: PaymentCreateManyGymMembershipInputEnvelope
+    set?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    disconnect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    delete?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    update?: PaymentUpdateWithWhereUniqueWithoutGymMembershipInput | PaymentUpdateWithWhereUniqueWithoutGymMembershipInput[]
+    updateMany?: PaymentUpdateManyWithWhereWithoutGymMembershipInput | PaymentUpdateManyWithWhereWithoutGymMembershipInput[]
+    deleteMany?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -44059,6 +53427,125 @@ export namespace Prisma {
     _max?: NestedEnumMaintenancePriorityFilter<$PrismaModel>
   }
 
+  export type NestedEnumLaundryItemTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.LaundryItemType | EnumLaundryItemTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.LaundryItemType[] | ListEnumLaundryItemTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.LaundryItemType[] | ListEnumLaundryItemTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumLaundryItemTypeFilter<$PrismaModel> | $Enums.LaundryItemType
+  }
+
+  export type NestedEnumLaundryItemTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.LaundryItemType | EnumLaundryItemTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.LaundryItemType[] | ListEnumLaundryItemTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.LaundryItemType[] | ListEnumLaundryItemTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumLaundryItemTypeWithAggregatesFilter<$PrismaModel> | $Enums.LaundryItemType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumLaundryItemTypeFilter<$PrismaModel>
+    _max?: NestedEnumLaundryItemTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumLaundryOrderStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.LaundryOrderStatus | EnumLaundryOrderStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.LaundryOrderStatus[] | ListEnumLaundryOrderStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.LaundryOrderStatus[] | ListEnumLaundryOrderStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumLaundryOrderStatusFilter<$PrismaModel> | $Enums.LaundryOrderStatus
+  }
+
+  export type NestedEnumLaundryPaymentStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.LaundryPaymentStatus | EnumLaundryPaymentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.LaundryPaymentStatus[] | ListEnumLaundryPaymentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.LaundryPaymentStatus[] | ListEnumLaundryPaymentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumLaundryPaymentStatusFilter<$PrismaModel> | $Enums.LaundryPaymentStatus
+  }
+
+  export type NestedEnumLaundryOrderStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.LaundryOrderStatus | EnumLaundryOrderStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.LaundryOrderStatus[] | ListEnumLaundryOrderStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.LaundryOrderStatus[] | ListEnumLaundryOrderStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumLaundryOrderStatusWithAggregatesFilter<$PrismaModel> | $Enums.LaundryOrderStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumLaundryOrderStatusFilter<$PrismaModel>
+    _max?: NestedEnumLaundryOrderStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumLaundryPaymentStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.LaundryPaymentStatus | EnumLaundryPaymentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.LaundryPaymentStatus[] | ListEnumLaundryPaymentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.LaundryPaymentStatus[] | ListEnumLaundryPaymentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumLaundryPaymentStatusWithAggregatesFilter<$PrismaModel> | $Enums.LaundryPaymentStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumLaundryPaymentStatusFilter<$PrismaModel>
+    _max?: NestedEnumLaundryPaymentStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumGymMembershipDurationFilter<$PrismaModel = never> = {
+    equals?: $Enums.GymMembershipDuration | EnumGymMembershipDurationFieldRefInput<$PrismaModel>
+    in?: $Enums.GymMembershipDuration[] | ListEnumGymMembershipDurationFieldRefInput<$PrismaModel>
+    notIn?: $Enums.GymMembershipDuration[] | ListEnumGymMembershipDurationFieldRefInput<$PrismaModel>
+    not?: NestedEnumGymMembershipDurationFilter<$PrismaModel> | $Enums.GymMembershipDuration
+  }
+
+  export type NestedEnumGymMembershipDurationWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.GymMembershipDuration | EnumGymMembershipDurationFieldRefInput<$PrismaModel>
+    in?: $Enums.GymMembershipDuration[] | ListEnumGymMembershipDurationFieldRefInput<$PrismaModel>
+    notIn?: $Enums.GymMembershipDuration[] | ListEnumGymMembershipDurationFieldRefInput<$PrismaModel>
+    not?: NestedEnumGymMembershipDurationWithAggregatesFilter<$PrismaModel> | $Enums.GymMembershipDuration
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumGymMembershipDurationFilter<$PrismaModel>
+    _max?: NestedEnumGymMembershipDurationFilter<$PrismaModel>
+  }
+
+  export type NestedEnumGymMembershipStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.GymMembershipStatus | EnumGymMembershipStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.GymMembershipStatus[] | ListEnumGymMembershipStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.GymMembershipStatus[] | ListEnumGymMembershipStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumGymMembershipStatusFilter<$PrismaModel> | $Enums.GymMembershipStatus
+  }
+
+  export type NestedEnumGymPaymentStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.GymPaymentStatus | EnumGymPaymentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.GymPaymentStatus[] | ListEnumGymPaymentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.GymPaymentStatus[] | ListEnumGymPaymentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumGymPaymentStatusFilter<$PrismaModel> | $Enums.GymPaymentStatus
+  }
+
+  export type NestedEnumGymSettlementMethodNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.GymSettlementMethod | EnumGymSettlementMethodFieldRefInput<$PrismaModel> | null
+    in?: $Enums.GymSettlementMethod[] | ListEnumGymSettlementMethodFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.GymSettlementMethod[] | ListEnumGymSettlementMethodFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumGymSettlementMethodNullableFilter<$PrismaModel> | $Enums.GymSettlementMethod | null
+  }
+
+  export type NestedEnumGymMembershipStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.GymMembershipStatus | EnumGymMembershipStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.GymMembershipStatus[] | ListEnumGymMembershipStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.GymMembershipStatus[] | ListEnumGymMembershipStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumGymMembershipStatusWithAggregatesFilter<$PrismaModel> | $Enums.GymMembershipStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumGymMembershipStatusFilter<$PrismaModel>
+    _max?: NestedEnumGymMembershipStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumGymPaymentStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.GymPaymentStatus | EnumGymPaymentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.GymPaymentStatus[] | ListEnumGymPaymentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.GymPaymentStatus[] | ListEnumGymPaymentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumGymPaymentStatusWithAggregatesFilter<$PrismaModel> | $Enums.GymPaymentStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumGymPaymentStatusFilter<$PrismaModel>
+    _max?: NestedEnumGymPaymentStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumGymSettlementMethodNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.GymSettlementMethod | EnumGymSettlementMethodFieldRefInput<$PrismaModel> | null
+    in?: $Enums.GymSettlementMethod[] | ListEnumGymSettlementMethodFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.GymSettlementMethod[] | ListEnumGymSettlementMethodFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumGymSettlementMethodNullableWithAggregatesFilter<$PrismaModel> | $Enums.GymSettlementMethod | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumGymSettlementMethodNullableFilter<$PrismaModel>
+    _max?: NestedEnumGymSettlementMethodNullableFilter<$PrismaModel>
+  }
+
   export type UserRoleCreateWithoutUserInput = {
     id?: string
     createdAt?: Date | string
@@ -44320,6 +53807,8 @@ export namespace Prisma {
     folio?: FolioCreateNestedOneWithoutReservationInput
     auditLogs?: ReservationAuditCreateNestedManyWithoutReservationInput
     restaurantOrders?: RestaurantOrderCreateNestedManyWithoutReservationInput
+    laundryOrders?: LaundryOrderCreateNestedManyWithoutReservationInput
+    gymMemberships?: GymMembershipCreateNestedManyWithoutReservationInput
   }
 
   export type ReservationUncheckedCreateWithoutGuestInput = {
@@ -44348,6 +53837,8 @@ export namespace Prisma {
     folio?: FolioUncheckedCreateNestedOneWithoutReservationInput
     auditLogs?: ReservationAuditUncheckedCreateNestedManyWithoutReservationInput
     restaurantOrders?: RestaurantOrderUncheckedCreateNestedManyWithoutReservationInput
+    laundryOrders?: LaundryOrderUncheckedCreateNestedManyWithoutReservationInput
+    gymMemberships?: GymMembershipUncheckedCreateNestedManyWithoutReservationInput
   }
 
   export type ReservationCreateOrConnectWithoutGuestInput = {
@@ -44541,6 +54032,104 @@ export namespace Prisma {
 
   export type RestaurantOrderCreateManyGuestInputEnvelope = {
     data: RestaurantOrderCreateManyGuestInput | RestaurantOrderCreateManyGuestInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type LaundryOrderCreateWithoutGuestInput = {
+    id?: string
+    status?: $Enums.LaundryOrderStatus
+    paymentStatus?: $Enums.LaundryPaymentStatus
+    notes?: string | null
+    subtotal: Decimal | DecimalJsLike | number | string
+    tax?: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    receivedAt?: Date | string | null
+    readyAt?: Date | string | null
+    deliveredAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    reservation?: ReservationCreateNestedOneWithoutLaundryOrdersInput
+    folio?: FolioCreateNestedOneWithoutLaundryOrdersInput
+    items?: LaundryOrderItemCreateNestedManyWithoutOrderInput
+    payments?: PaymentCreateNestedManyWithoutLaundryOrderInput
+  }
+
+  export type LaundryOrderUncheckedCreateWithoutGuestInput = {
+    id?: string
+    reservationId?: string | null
+    folioId?: string | null
+    status?: $Enums.LaundryOrderStatus
+    paymentStatus?: $Enums.LaundryPaymentStatus
+    notes?: string | null
+    subtotal: Decimal | DecimalJsLike | number | string
+    tax?: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    receivedAt?: Date | string | null
+    readyAt?: Date | string | null
+    deliveredAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: LaundryOrderItemUncheckedCreateNestedManyWithoutOrderInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutLaundryOrderInput
+  }
+
+  export type LaundryOrderCreateOrConnectWithoutGuestInput = {
+    where: LaundryOrderWhereUniqueInput
+    create: XOR<LaundryOrderCreateWithoutGuestInput, LaundryOrderUncheckedCreateWithoutGuestInput>
+  }
+
+  export type LaundryOrderCreateManyGuestInputEnvelope = {
+    data: LaundryOrderCreateManyGuestInput | LaundryOrderCreateManyGuestInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type GymMembershipCreateWithoutGuestInput = {
+    id?: string
+    status?: $Enums.GymMembershipStatus
+    paymentStatus?: $Enums.GymPaymentStatus
+    settlementMethod?: $Enums.GymSettlementMethod | null
+    startDate: Date | string
+    endDate: Date | string
+    price: Decimal | DecimalJsLike | number | string
+    notes?: string | null
+    activatedAt?: Date | string | null
+    suspendedAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    reservation?: ReservationCreateNestedOneWithoutGymMembershipsInput
+    plan: GymMembershipPlanCreateNestedOneWithoutMembershipsInput
+    payments?: PaymentCreateNestedManyWithoutGymMembershipInput
+  }
+
+  export type GymMembershipUncheckedCreateWithoutGuestInput = {
+    id?: string
+    planId: string
+    reservationId?: string | null
+    status?: $Enums.GymMembershipStatus
+    paymentStatus?: $Enums.GymPaymentStatus
+    settlementMethod?: $Enums.GymSettlementMethod | null
+    startDate: Date | string
+    endDate: Date | string
+    price: Decimal | DecimalJsLike | number | string
+    notes?: string | null
+    activatedAt?: Date | string | null
+    suspendedAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    payments?: PaymentUncheckedCreateNestedManyWithoutGymMembershipInput
+  }
+
+  export type GymMembershipCreateOrConnectWithoutGuestInput = {
+    where: GymMembershipWhereUniqueInput
+    create: XOR<GymMembershipCreateWithoutGuestInput, GymMembershipUncheckedCreateWithoutGuestInput>
+  }
+
+  export type GymMembershipCreateManyGuestInputEnvelope = {
+    data: GymMembershipCreateManyGuestInput | GymMembershipCreateManyGuestInput[]
     skipDuplicates?: boolean
   }
 
@@ -44773,6 +54362,82 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"RestaurantOrder"> | Date | string
   }
 
+  export type LaundryOrderUpsertWithWhereUniqueWithoutGuestInput = {
+    where: LaundryOrderWhereUniqueInput
+    update: XOR<LaundryOrderUpdateWithoutGuestInput, LaundryOrderUncheckedUpdateWithoutGuestInput>
+    create: XOR<LaundryOrderCreateWithoutGuestInput, LaundryOrderUncheckedCreateWithoutGuestInput>
+  }
+
+  export type LaundryOrderUpdateWithWhereUniqueWithoutGuestInput = {
+    where: LaundryOrderWhereUniqueInput
+    data: XOR<LaundryOrderUpdateWithoutGuestInput, LaundryOrderUncheckedUpdateWithoutGuestInput>
+  }
+
+  export type LaundryOrderUpdateManyWithWhereWithoutGuestInput = {
+    where: LaundryOrderScalarWhereInput
+    data: XOR<LaundryOrderUpdateManyMutationInput, LaundryOrderUncheckedUpdateManyWithoutGuestInput>
+  }
+
+  export type LaundryOrderScalarWhereInput = {
+    AND?: LaundryOrderScalarWhereInput | LaundryOrderScalarWhereInput[]
+    OR?: LaundryOrderScalarWhereInput[]
+    NOT?: LaundryOrderScalarWhereInput | LaundryOrderScalarWhereInput[]
+    id?: StringFilter<"LaundryOrder"> | string
+    guestId?: StringFilter<"LaundryOrder"> | string
+    reservationId?: StringNullableFilter<"LaundryOrder"> | string | null
+    folioId?: StringNullableFilter<"LaundryOrder"> | string | null
+    status?: EnumLaundryOrderStatusFilter<"LaundryOrder"> | $Enums.LaundryOrderStatus
+    paymentStatus?: EnumLaundryPaymentStatusFilter<"LaundryOrder"> | $Enums.LaundryPaymentStatus
+    notes?: StringNullableFilter<"LaundryOrder"> | string | null
+    subtotal?: DecimalFilter<"LaundryOrder"> | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFilter<"LaundryOrder"> | Decimal | DecimalJsLike | number | string
+    total?: DecimalFilter<"LaundryOrder"> | Decimal | DecimalJsLike | number | string
+    receivedAt?: DateTimeNullableFilter<"LaundryOrder"> | Date | string | null
+    readyAt?: DateTimeNullableFilter<"LaundryOrder"> | Date | string | null
+    deliveredAt?: DateTimeNullableFilter<"LaundryOrder"> | Date | string | null
+    cancelledAt?: DateTimeNullableFilter<"LaundryOrder"> | Date | string | null
+    createdAt?: DateTimeFilter<"LaundryOrder"> | Date | string
+    updatedAt?: DateTimeFilter<"LaundryOrder"> | Date | string
+  }
+
+  export type GymMembershipUpsertWithWhereUniqueWithoutGuestInput = {
+    where: GymMembershipWhereUniqueInput
+    update: XOR<GymMembershipUpdateWithoutGuestInput, GymMembershipUncheckedUpdateWithoutGuestInput>
+    create: XOR<GymMembershipCreateWithoutGuestInput, GymMembershipUncheckedCreateWithoutGuestInput>
+  }
+
+  export type GymMembershipUpdateWithWhereUniqueWithoutGuestInput = {
+    where: GymMembershipWhereUniqueInput
+    data: XOR<GymMembershipUpdateWithoutGuestInput, GymMembershipUncheckedUpdateWithoutGuestInput>
+  }
+
+  export type GymMembershipUpdateManyWithWhereWithoutGuestInput = {
+    where: GymMembershipScalarWhereInput
+    data: XOR<GymMembershipUpdateManyMutationInput, GymMembershipUncheckedUpdateManyWithoutGuestInput>
+  }
+
+  export type GymMembershipScalarWhereInput = {
+    AND?: GymMembershipScalarWhereInput | GymMembershipScalarWhereInput[]
+    OR?: GymMembershipScalarWhereInput[]
+    NOT?: GymMembershipScalarWhereInput | GymMembershipScalarWhereInput[]
+    id?: StringFilter<"GymMembership"> | string
+    guestId?: StringFilter<"GymMembership"> | string
+    planId?: StringFilter<"GymMembership"> | string
+    reservationId?: StringNullableFilter<"GymMembership"> | string | null
+    status?: EnumGymMembershipStatusFilter<"GymMembership"> | $Enums.GymMembershipStatus
+    paymentStatus?: EnumGymPaymentStatusFilter<"GymMembership"> | $Enums.GymPaymentStatus
+    settlementMethod?: EnumGymSettlementMethodNullableFilter<"GymMembership"> | $Enums.GymSettlementMethod | null
+    startDate?: DateTimeFilter<"GymMembership"> | Date | string
+    endDate?: DateTimeFilter<"GymMembership"> | Date | string
+    price?: DecimalFilter<"GymMembership"> | Decimal | DecimalJsLike | number | string
+    notes?: StringNullableFilter<"GymMembership"> | string | null
+    activatedAt?: DateTimeNullableFilter<"GymMembership"> | Date | string | null
+    suspendedAt?: DateTimeNullableFilter<"GymMembership"> | Date | string | null
+    cancelledAt?: DateTimeNullableFilter<"GymMembership"> | Date | string | null
+    createdAt?: DateTimeFilter<"GymMembership"> | Date | string
+    updatedAt?: DateTimeFilter<"GymMembership"> | Date | string
+  }
+
   export type CompanyUpsertWithoutGuestsInput = {
     update: XOR<CompanyUpdateWithoutGuestsInput, CompanyUncheckedUpdateWithoutGuestsInput>
     create: XOR<CompanyCreateWithoutGuestsInput, CompanyUncheckedCreateWithoutGuestsInput>
@@ -44824,6 +54489,8 @@ export namespace Prisma {
     emergencyContacts?: GuestEmergencyContactCreateNestedManyWithoutGuestInput
     paymentMethods?: GuestPaymentMethodCreateNestedManyWithoutGuestInput
     restaurantOrders?: RestaurantOrderCreateNestedManyWithoutGuestInput
+    laundryOrders?: LaundryOrderCreateNestedManyWithoutGuestInput
+    gymMemberships?: GymMembershipCreateNestedManyWithoutGuestInput
     company?: CompanyCreateNestedOneWithoutGuestsInput
   }
 
@@ -44854,6 +54521,8 @@ export namespace Prisma {
     emergencyContacts?: GuestEmergencyContactUncheckedCreateNestedManyWithoutGuestInput
     paymentMethods?: GuestPaymentMethodUncheckedCreateNestedManyWithoutGuestInput
     restaurantOrders?: RestaurantOrderUncheckedCreateNestedManyWithoutGuestInput
+    laundryOrders?: LaundryOrderUncheckedCreateNestedManyWithoutGuestInput
+    gymMemberships?: GymMembershipUncheckedCreateNestedManyWithoutGuestInput
   }
 
   export type GuestCreateOrConnectWithoutAddressesInput = {
@@ -44898,6 +54567,8 @@ export namespace Prisma {
     emergencyContacts?: GuestEmergencyContactUpdateManyWithoutGuestNestedInput
     paymentMethods?: GuestPaymentMethodUpdateManyWithoutGuestNestedInput
     restaurantOrders?: RestaurantOrderUpdateManyWithoutGuestNestedInput
+    laundryOrders?: LaundryOrderUpdateManyWithoutGuestNestedInput
+    gymMemberships?: GymMembershipUpdateManyWithoutGuestNestedInput
     company?: CompanyUpdateOneWithoutGuestsNestedInput
   }
 
@@ -44928,6 +54599,8 @@ export namespace Prisma {
     emergencyContacts?: GuestEmergencyContactUncheckedUpdateManyWithoutGuestNestedInput
     paymentMethods?: GuestPaymentMethodUncheckedUpdateManyWithoutGuestNestedInput
     restaurantOrders?: RestaurantOrderUncheckedUpdateManyWithoutGuestNestedInput
+    laundryOrders?: LaundryOrderUncheckedUpdateManyWithoutGuestNestedInput
+    gymMemberships?: GymMembershipUncheckedUpdateManyWithoutGuestNestedInput
   }
 
   export type GuestCreateWithoutDocumentsInput = {
@@ -44956,6 +54629,8 @@ export namespace Prisma {
     emergencyContacts?: GuestEmergencyContactCreateNestedManyWithoutGuestInput
     paymentMethods?: GuestPaymentMethodCreateNestedManyWithoutGuestInput
     restaurantOrders?: RestaurantOrderCreateNestedManyWithoutGuestInput
+    laundryOrders?: LaundryOrderCreateNestedManyWithoutGuestInput
+    gymMemberships?: GymMembershipCreateNestedManyWithoutGuestInput
     company?: CompanyCreateNestedOneWithoutGuestsInput
   }
 
@@ -44986,6 +54661,8 @@ export namespace Prisma {
     emergencyContacts?: GuestEmergencyContactUncheckedCreateNestedManyWithoutGuestInput
     paymentMethods?: GuestPaymentMethodUncheckedCreateNestedManyWithoutGuestInput
     restaurantOrders?: RestaurantOrderUncheckedCreateNestedManyWithoutGuestInput
+    laundryOrders?: LaundryOrderUncheckedCreateNestedManyWithoutGuestInput
+    gymMemberships?: GymMembershipUncheckedCreateNestedManyWithoutGuestInput
   }
 
   export type GuestCreateOrConnectWithoutDocumentsInput = {
@@ -45030,6 +54707,8 @@ export namespace Prisma {
     emergencyContacts?: GuestEmergencyContactUpdateManyWithoutGuestNestedInput
     paymentMethods?: GuestPaymentMethodUpdateManyWithoutGuestNestedInput
     restaurantOrders?: RestaurantOrderUpdateManyWithoutGuestNestedInput
+    laundryOrders?: LaundryOrderUpdateManyWithoutGuestNestedInput
+    gymMemberships?: GymMembershipUpdateManyWithoutGuestNestedInput
     company?: CompanyUpdateOneWithoutGuestsNestedInput
   }
 
@@ -45060,6 +54739,8 @@ export namespace Prisma {
     emergencyContacts?: GuestEmergencyContactUncheckedUpdateManyWithoutGuestNestedInput
     paymentMethods?: GuestPaymentMethodUncheckedUpdateManyWithoutGuestNestedInput
     restaurantOrders?: RestaurantOrderUncheckedUpdateManyWithoutGuestNestedInput
+    laundryOrders?: LaundryOrderUncheckedUpdateManyWithoutGuestNestedInput
+    gymMemberships?: GymMembershipUncheckedUpdateManyWithoutGuestNestedInput
   }
 
   export type GuestCreateWithoutEmergencyContactsInput = {
@@ -45088,6 +54769,8 @@ export namespace Prisma {
     documents?: GuestDocumentCreateNestedManyWithoutGuestInput
     paymentMethods?: GuestPaymentMethodCreateNestedManyWithoutGuestInput
     restaurantOrders?: RestaurantOrderCreateNestedManyWithoutGuestInput
+    laundryOrders?: LaundryOrderCreateNestedManyWithoutGuestInput
+    gymMemberships?: GymMembershipCreateNestedManyWithoutGuestInput
     company?: CompanyCreateNestedOneWithoutGuestsInput
   }
 
@@ -45118,6 +54801,8 @@ export namespace Prisma {
     documents?: GuestDocumentUncheckedCreateNestedManyWithoutGuestInput
     paymentMethods?: GuestPaymentMethodUncheckedCreateNestedManyWithoutGuestInput
     restaurantOrders?: RestaurantOrderUncheckedCreateNestedManyWithoutGuestInput
+    laundryOrders?: LaundryOrderUncheckedCreateNestedManyWithoutGuestInput
+    gymMemberships?: GymMembershipUncheckedCreateNestedManyWithoutGuestInput
   }
 
   export type GuestCreateOrConnectWithoutEmergencyContactsInput = {
@@ -45162,6 +54847,8 @@ export namespace Prisma {
     documents?: GuestDocumentUpdateManyWithoutGuestNestedInput
     paymentMethods?: GuestPaymentMethodUpdateManyWithoutGuestNestedInput
     restaurantOrders?: RestaurantOrderUpdateManyWithoutGuestNestedInput
+    laundryOrders?: LaundryOrderUpdateManyWithoutGuestNestedInput
+    gymMemberships?: GymMembershipUpdateManyWithoutGuestNestedInput
     company?: CompanyUpdateOneWithoutGuestsNestedInput
   }
 
@@ -45192,6 +54879,8 @@ export namespace Prisma {
     documents?: GuestDocumentUncheckedUpdateManyWithoutGuestNestedInput
     paymentMethods?: GuestPaymentMethodUncheckedUpdateManyWithoutGuestNestedInput
     restaurantOrders?: RestaurantOrderUncheckedUpdateManyWithoutGuestNestedInput
+    laundryOrders?: LaundryOrderUncheckedUpdateManyWithoutGuestNestedInput
+    gymMemberships?: GymMembershipUncheckedUpdateManyWithoutGuestNestedInput
   }
 
   export type GuestCreateWithoutPaymentMethodsInput = {
@@ -45220,6 +54909,8 @@ export namespace Prisma {
     documents?: GuestDocumentCreateNestedManyWithoutGuestInput
     emergencyContacts?: GuestEmergencyContactCreateNestedManyWithoutGuestInput
     restaurantOrders?: RestaurantOrderCreateNestedManyWithoutGuestInput
+    laundryOrders?: LaundryOrderCreateNestedManyWithoutGuestInput
+    gymMemberships?: GymMembershipCreateNestedManyWithoutGuestInput
     company?: CompanyCreateNestedOneWithoutGuestsInput
   }
 
@@ -45250,6 +54941,8 @@ export namespace Prisma {
     documents?: GuestDocumentUncheckedCreateNestedManyWithoutGuestInput
     emergencyContacts?: GuestEmergencyContactUncheckedCreateNestedManyWithoutGuestInput
     restaurantOrders?: RestaurantOrderUncheckedCreateNestedManyWithoutGuestInput
+    laundryOrders?: LaundryOrderUncheckedCreateNestedManyWithoutGuestInput
+    gymMemberships?: GymMembershipUncheckedCreateNestedManyWithoutGuestInput
   }
 
   export type GuestCreateOrConnectWithoutPaymentMethodsInput = {
@@ -45294,6 +54987,8 @@ export namespace Prisma {
     documents?: GuestDocumentUpdateManyWithoutGuestNestedInput
     emergencyContacts?: GuestEmergencyContactUpdateManyWithoutGuestNestedInput
     restaurantOrders?: RestaurantOrderUpdateManyWithoutGuestNestedInput
+    laundryOrders?: LaundryOrderUpdateManyWithoutGuestNestedInput
+    gymMemberships?: GymMembershipUpdateManyWithoutGuestNestedInput
     company?: CompanyUpdateOneWithoutGuestsNestedInput
   }
 
@@ -45324,6 +55019,8 @@ export namespace Prisma {
     documents?: GuestDocumentUncheckedUpdateManyWithoutGuestNestedInput
     emergencyContacts?: GuestEmergencyContactUncheckedUpdateManyWithoutGuestNestedInput
     restaurantOrders?: RestaurantOrderUncheckedUpdateManyWithoutGuestNestedInput
+    laundryOrders?: LaundryOrderUncheckedUpdateManyWithoutGuestNestedInput
+    gymMemberships?: GymMembershipUncheckedUpdateManyWithoutGuestNestedInput
   }
 
   export type RoomCreateWithoutRoomTypeInput = {
@@ -45554,6 +55251,8 @@ export namespace Prisma {
     folio?: FolioCreateNestedOneWithoutReservationInput
     auditLogs?: ReservationAuditCreateNestedManyWithoutReservationInput
     restaurantOrders?: RestaurantOrderCreateNestedManyWithoutReservationInput
+    laundryOrders?: LaundryOrderCreateNestedManyWithoutReservationInput
+    gymMemberships?: GymMembershipCreateNestedManyWithoutReservationInput
   }
 
   export type ReservationUncheckedCreateWithoutRoomInput = {
@@ -45582,6 +55281,8 @@ export namespace Prisma {
     folio?: FolioUncheckedCreateNestedOneWithoutReservationInput
     auditLogs?: ReservationAuditUncheckedCreateNestedManyWithoutReservationInput
     restaurantOrders?: RestaurantOrderUncheckedCreateNestedManyWithoutReservationInput
+    laundryOrders?: LaundryOrderUncheckedCreateNestedManyWithoutReservationInput
+    gymMemberships?: GymMembershipUncheckedCreateNestedManyWithoutReservationInput
   }
 
   export type ReservationCreateOrConnectWithoutRoomInput = {
@@ -45833,6 +55534,8 @@ export namespace Prisma {
     folio?: FolioCreateNestedOneWithoutReservationInput
     auditLogs?: ReservationAuditCreateNestedManyWithoutReservationInput
     restaurantOrders?: RestaurantOrderCreateNestedManyWithoutReservationInput
+    laundryOrders?: LaundryOrderCreateNestedManyWithoutReservationInput
+    gymMemberships?: GymMembershipCreateNestedManyWithoutReservationInput
   }
 
   export type ReservationUncheckedCreateWithoutRoomRateInput = {
@@ -45861,6 +55564,8 @@ export namespace Prisma {
     folio?: FolioUncheckedCreateNestedOneWithoutReservationInput
     auditLogs?: ReservationAuditUncheckedCreateNestedManyWithoutReservationInput
     restaurantOrders?: RestaurantOrderUncheckedCreateNestedManyWithoutReservationInput
+    laundryOrders?: LaundryOrderUncheckedCreateNestedManyWithoutReservationInput
+    gymMemberships?: GymMembershipUncheckedCreateNestedManyWithoutReservationInput
   }
 
   export type ReservationCreateOrConnectWithoutRoomRateInput = {
@@ -45983,6 +55688,8 @@ export namespace Prisma {
     emergencyContacts?: GuestEmergencyContactCreateNestedManyWithoutGuestInput
     paymentMethods?: GuestPaymentMethodCreateNestedManyWithoutGuestInput
     restaurantOrders?: RestaurantOrderCreateNestedManyWithoutGuestInput
+    laundryOrders?: LaundryOrderCreateNestedManyWithoutGuestInput
+    gymMemberships?: GymMembershipCreateNestedManyWithoutGuestInput
     company?: CompanyCreateNestedOneWithoutGuestsInput
   }
 
@@ -46013,6 +55720,8 @@ export namespace Prisma {
     emergencyContacts?: GuestEmergencyContactUncheckedCreateNestedManyWithoutGuestInput
     paymentMethods?: GuestPaymentMethodUncheckedCreateNestedManyWithoutGuestInput
     restaurantOrders?: RestaurantOrderUncheckedCreateNestedManyWithoutGuestInput
+    laundryOrders?: LaundryOrderUncheckedCreateNestedManyWithoutGuestInput
+    gymMemberships?: GymMembershipUncheckedCreateNestedManyWithoutGuestInput
   }
 
   export type GuestCreateOrConnectWithoutReservationsInput = {
@@ -46076,12 +55785,14 @@ export namespace Prisma {
     id?: string
     transactions?: FolioTransactionCreateNestedManyWithoutFolioInput
     payments?: PaymentCreateNestedManyWithoutFolioInput
+    laundryOrders?: LaundryOrderCreateNestedManyWithoutFolioInput
   }
 
   export type FolioUncheckedCreateWithoutReservationInput = {
     id?: string
     transactions?: FolioTransactionUncheckedCreateNestedManyWithoutFolioInput
     payments?: PaymentUncheckedCreateNestedManyWithoutFolioInput
+    laundryOrders?: LaundryOrderUncheckedCreateNestedManyWithoutFolioInput
   }
 
   export type FolioCreateOrConnectWithoutReservationInput = {
@@ -46171,6 +55882,104 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type LaundryOrderCreateWithoutReservationInput = {
+    id?: string
+    status?: $Enums.LaundryOrderStatus
+    paymentStatus?: $Enums.LaundryPaymentStatus
+    notes?: string | null
+    subtotal: Decimal | DecimalJsLike | number | string
+    tax?: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    receivedAt?: Date | string | null
+    readyAt?: Date | string | null
+    deliveredAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    guest: GuestCreateNestedOneWithoutLaundryOrdersInput
+    folio?: FolioCreateNestedOneWithoutLaundryOrdersInput
+    items?: LaundryOrderItemCreateNestedManyWithoutOrderInput
+    payments?: PaymentCreateNestedManyWithoutLaundryOrderInput
+  }
+
+  export type LaundryOrderUncheckedCreateWithoutReservationInput = {
+    id?: string
+    guestId: string
+    folioId?: string | null
+    status?: $Enums.LaundryOrderStatus
+    paymentStatus?: $Enums.LaundryPaymentStatus
+    notes?: string | null
+    subtotal: Decimal | DecimalJsLike | number | string
+    tax?: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    receivedAt?: Date | string | null
+    readyAt?: Date | string | null
+    deliveredAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: LaundryOrderItemUncheckedCreateNestedManyWithoutOrderInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutLaundryOrderInput
+  }
+
+  export type LaundryOrderCreateOrConnectWithoutReservationInput = {
+    where: LaundryOrderWhereUniqueInput
+    create: XOR<LaundryOrderCreateWithoutReservationInput, LaundryOrderUncheckedCreateWithoutReservationInput>
+  }
+
+  export type LaundryOrderCreateManyReservationInputEnvelope = {
+    data: LaundryOrderCreateManyReservationInput | LaundryOrderCreateManyReservationInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type GymMembershipCreateWithoutReservationInput = {
+    id?: string
+    status?: $Enums.GymMembershipStatus
+    paymentStatus?: $Enums.GymPaymentStatus
+    settlementMethod?: $Enums.GymSettlementMethod | null
+    startDate: Date | string
+    endDate: Date | string
+    price: Decimal | DecimalJsLike | number | string
+    notes?: string | null
+    activatedAt?: Date | string | null
+    suspendedAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    guest: GuestCreateNestedOneWithoutGymMembershipsInput
+    plan: GymMembershipPlanCreateNestedOneWithoutMembershipsInput
+    payments?: PaymentCreateNestedManyWithoutGymMembershipInput
+  }
+
+  export type GymMembershipUncheckedCreateWithoutReservationInput = {
+    id?: string
+    guestId: string
+    planId: string
+    status?: $Enums.GymMembershipStatus
+    paymentStatus?: $Enums.GymPaymentStatus
+    settlementMethod?: $Enums.GymSettlementMethod | null
+    startDate: Date | string
+    endDate: Date | string
+    price: Decimal | DecimalJsLike | number | string
+    notes?: string | null
+    activatedAt?: Date | string | null
+    suspendedAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    payments?: PaymentUncheckedCreateNestedManyWithoutGymMembershipInput
+  }
+
+  export type GymMembershipCreateOrConnectWithoutReservationInput = {
+    where: GymMembershipWhereUniqueInput
+    create: XOR<GymMembershipCreateWithoutReservationInput, GymMembershipUncheckedCreateWithoutReservationInput>
+  }
+
+  export type GymMembershipCreateManyReservationInputEnvelope = {
+    data: GymMembershipCreateManyReservationInput | GymMembershipCreateManyReservationInput[]
+    skipDuplicates?: boolean
+  }
+
   export type GuestUpsertWithoutReservationsInput = {
     update: XOR<GuestUpdateWithoutReservationsInput, GuestUncheckedUpdateWithoutReservationsInput>
     create: XOR<GuestCreateWithoutReservationsInput, GuestUncheckedCreateWithoutReservationsInput>
@@ -46208,6 +56017,8 @@ export namespace Prisma {
     emergencyContacts?: GuestEmergencyContactUpdateManyWithoutGuestNestedInput
     paymentMethods?: GuestPaymentMethodUpdateManyWithoutGuestNestedInput
     restaurantOrders?: RestaurantOrderUpdateManyWithoutGuestNestedInput
+    laundryOrders?: LaundryOrderUpdateManyWithoutGuestNestedInput
+    gymMemberships?: GymMembershipUpdateManyWithoutGuestNestedInput
     company?: CompanyUpdateOneWithoutGuestsNestedInput
   }
 
@@ -46238,6 +56049,8 @@ export namespace Prisma {
     emergencyContacts?: GuestEmergencyContactUncheckedUpdateManyWithoutGuestNestedInput
     paymentMethods?: GuestPaymentMethodUncheckedUpdateManyWithoutGuestNestedInput
     restaurantOrders?: RestaurantOrderUncheckedUpdateManyWithoutGuestNestedInput
+    laundryOrders?: LaundryOrderUncheckedUpdateManyWithoutGuestNestedInput
+    gymMemberships?: GymMembershipUncheckedUpdateManyWithoutGuestNestedInput
   }
 
   export type RoomUpsertWithoutReservationsInput = {
@@ -46319,12 +56132,14 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     transactions?: FolioTransactionUpdateManyWithoutFolioNestedInput
     payments?: PaymentUpdateManyWithoutFolioNestedInput
+    laundryOrders?: LaundryOrderUpdateManyWithoutFolioNestedInput
   }
 
   export type FolioUncheckedUpdateWithoutReservationInput = {
     id?: StringFieldUpdateOperationsInput | string
     transactions?: FolioTransactionUncheckedUpdateManyWithoutFolioNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutFolioNestedInput
+    laundryOrders?: LaundryOrderUncheckedUpdateManyWithoutFolioNestedInput
   }
 
   export type ReservationAuditUpsertWithWhereUniqueWithoutReservationInput = {
@@ -46373,6 +56188,38 @@ export namespace Prisma {
     data: XOR<RestaurantOrderUpdateManyMutationInput, RestaurantOrderUncheckedUpdateManyWithoutReservationInput>
   }
 
+  export type LaundryOrderUpsertWithWhereUniqueWithoutReservationInput = {
+    where: LaundryOrderWhereUniqueInput
+    update: XOR<LaundryOrderUpdateWithoutReservationInput, LaundryOrderUncheckedUpdateWithoutReservationInput>
+    create: XOR<LaundryOrderCreateWithoutReservationInput, LaundryOrderUncheckedCreateWithoutReservationInput>
+  }
+
+  export type LaundryOrderUpdateWithWhereUniqueWithoutReservationInput = {
+    where: LaundryOrderWhereUniqueInput
+    data: XOR<LaundryOrderUpdateWithoutReservationInput, LaundryOrderUncheckedUpdateWithoutReservationInput>
+  }
+
+  export type LaundryOrderUpdateManyWithWhereWithoutReservationInput = {
+    where: LaundryOrderScalarWhereInput
+    data: XOR<LaundryOrderUpdateManyMutationInput, LaundryOrderUncheckedUpdateManyWithoutReservationInput>
+  }
+
+  export type GymMembershipUpsertWithWhereUniqueWithoutReservationInput = {
+    where: GymMembershipWhereUniqueInput
+    update: XOR<GymMembershipUpdateWithoutReservationInput, GymMembershipUncheckedUpdateWithoutReservationInput>
+    create: XOR<GymMembershipCreateWithoutReservationInput, GymMembershipUncheckedCreateWithoutReservationInput>
+  }
+
+  export type GymMembershipUpdateWithWhereUniqueWithoutReservationInput = {
+    where: GymMembershipWhereUniqueInput
+    data: XOR<GymMembershipUpdateWithoutReservationInput, GymMembershipUncheckedUpdateWithoutReservationInput>
+  }
+
+  export type GymMembershipUpdateManyWithWhereWithoutReservationInput = {
+    where: GymMembershipScalarWhereInput
+    data: XOR<GymMembershipUpdateManyMutationInput, GymMembershipUncheckedUpdateManyWithoutReservationInput>
+  }
+
   export type ReservationCreateWithoutAuditLogsInput = {
     id?: string
     nightlyRate: Decimal | DecimalJsLike | number | string
@@ -46399,6 +56246,8 @@ export namespace Prisma {
     roomRate: RoomRateCreateNestedOneWithoutReservationsInput
     folio?: FolioCreateNestedOneWithoutReservationInput
     restaurantOrders?: RestaurantOrderCreateNestedManyWithoutReservationInput
+    laundryOrders?: LaundryOrderCreateNestedManyWithoutReservationInput
+    gymMemberships?: GymMembershipCreateNestedManyWithoutReservationInput
   }
 
   export type ReservationUncheckedCreateWithoutAuditLogsInput = {
@@ -46427,6 +56276,8 @@ export namespace Prisma {
     createdAt?: Date | string
     folio?: FolioUncheckedCreateNestedOneWithoutReservationInput
     restaurantOrders?: RestaurantOrderUncheckedCreateNestedManyWithoutReservationInput
+    laundryOrders?: LaundryOrderUncheckedCreateNestedManyWithoutReservationInput
+    gymMemberships?: GymMembershipUncheckedCreateNestedManyWithoutReservationInput
   }
 
   export type ReservationCreateOrConnectWithoutAuditLogsInput = {
@@ -46471,6 +56322,8 @@ export namespace Prisma {
     roomRate?: RoomRateUpdateOneRequiredWithoutReservationsNestedInput
     folio?: FolioUpdateOneWithoutReservationNestedInput
     restaurantOrders?: RestaurantOrderUpdateManyWithoutReservationNestedInput
+    laundryOrders?: LaundryOrderUpdateManyWithoutReservationNestedInput
+    gymMemberships?: GymMembershipUpdateManyWithoutReservationNestedInput
   }
 
   export type ReservationUncheckedUpdateWithoutAuditLogsInput = {
@@ -46499,6 +56352,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     folio?: FolioUncheckedUpdateOneWithoutReservationNestedInput
     restaurantOrders?: RestaurantOrderUncheckedUpdateManyWithoutReservationNestedInput
+    laundryOrders?: LaundryOrderUncheckedUpdateManyWithoutReservationNestedInput
+    gymMemberships?: GymMembershipUncheckedUpdateManyWithoutReservationNestedInput
   }
 
   export type ReservationCreateWithoutFolioInput = {
@@ -46527,6 +56382,8 @@ export namespace Prisma {
     roomRate: RoomRateCreateNestedOneWithoutReservationsInput
     auditLogs?: ReservationAuditCreateNestedManyWithoutReservationInput
     restaurantOrders?: RestaurantOrderCreateNestedManyWithoutReservationInput
+    laundryOrders?: LaundryOrderCreateNestedManyWithoutReservationInput
+    gymMemberships?: GymMembershipCreateNestedManyWithoutReservationInput
   }
 
   export type ReservationUncheckedCreateWithoutFolioInput = {
@@ -46555,6 +56412,8 @@ export namespace Prisma {
     createdAt?: Date | string
     auditLogs?: ReservationAuditUncheckedCreateNestedManyWithoutReservationInput
     restaurantOrders?: RestaurantOrderUncheckedCreateNestedManyWithoutReservationInput
+    laundryOrders?: LaundryOrderUncheckedCreateNestedManyWithoutReservationInput
+    gymMemberships?: GymMembershipUncheckedCreateNestedManyWithoutReservationInput
   }
 
   export type ReservationCreateOrConnectWithoutFolioInput = {
@@ -46597,12 +56456,16 @@ export namespace Prisma {
     method: $Enums.PaymentMethod
     createdAt?: Date | string
     restaurantOrder?: RestaurantOrderCreateNestedOneWithoutPaymentsInput
+    laundryOrder?: LaundryOrderCreateNestedOneWithoutPaymentsInput
+    gymMembership?: GymMembershipCreateNestedOneWithoutPaymentsInput
     refunds?: PaymentRefundCreateNestedManyWithoutPaymentInput
   }
 
   export type PaymentUncheckedCreateWithoutFolioInput = {
     id?: string
     restaurantOrderId?: string | null
+    laundryOrderId?: string | null
+    gymMembershipId?: string | null
     amount: Decimal | DecimalJsLike | number | string
     refundedAmount?: Decimal | DecimalJsLike | number | string
     status?: $Enums.PaymentStatus
@@ -46619,6 +56482,56 @@ export namespace Prisma {
 
   export type PaymentCreateManyFolioInputEnvelope = {
     data: PaymentCreateManyFolioInput | PaymentCreateManyFolioInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type LaundryOrderCreateWithoutFolioInput = {
+    id?: string
+    status?: $Enums.LaundryOrderStatus
+    paymentStatus?: $Enums.LaundryPaymentStatus
+    notes?: string | null
+    subtotal: Decimal | DecimalJsLike | number | string
+    tax?: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    receivedAt?: Date | string | null
+    readyAt?: Date | string | null
+    deliveredAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    guest: GuestCreateNestedOneWithoutLaundryOrdersInput
+    reservation?: ReservationCreateNestedOneWithoutLaundryOrdersInput
+    items?: LaundryOrderItemCreateNestedManyWithoutOrderInput
+    payments?: PaymentCreateNestedManyWithoutLaundryOrderInput
+  }
+
+  export type LaundryOrderUncheckedCreateWithoutFolioInput = {
+    id?: string
+    guestId: string
+    reservationId?: string | null
+    status?: $Enums.LaundryOrderStatus
+    paymentStatus?: $Enums.LaundryPaymentStatus
+    notes?: string | null
+    subtotal: Decimal | DecimalJsLike | number | string
+    tax?: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    receivedAt?: Date | string | null
+    readyAt?: Date | string | null
+    deliveredAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: LaundryOrderItemUncheckedCreateNestedManyWithoutOrderInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutLaundryOrderInput
+  }
+
+  export type LaundryOrderCreateOrConnectWithoutFolioInput = {
+    where: LaundryOrderWhereUniqueInput
+    create: XOR<LaundryOrderCreateWithoutFolioInput, LaundryOrderUncheckedCreateWithoutFolioInput>
+  }
+
+  export type LaundryOrderCreateManyFolioInputEnvelope = {
+    data: LaundryOrderCreateManyFolioInput | LaundryOrderCreateManyFolioInput[]
     skipDuplicates?: boolean
   }
 
@@ -46659,6 +56572,8 @@ export namespace Prisma {
     roomRate?: RoomRateUpdateOneRequiredWithoutReservationsNestedInput
     auditLogs?: ReservationAuditUpdateManyWithoutReservationNestedInput
     restaurantOrders?: RestaurantOrderUpdateManyWithoutReservationNestedInput
+    laundryOrders?: LaundryOrderUpdateManyWithoutReservationNestedInput
+    gymMemberships?: GymMembershipUpdateManyWithoutReservationNestedInput
   }
 
   export type ReservationUncheckedUpdateWithoutFolioInput = {
@@ -46687,6 +56602,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     auditLogs?: ReservationAuditUncheckedUpdateManyWithoutReservationNestedInput
     restaurantOrders?: RestaurantOrderUncheckedUpdateManyWithoutReservationNestedInput
+    laundryOrders?: LaundryOrderUncheckedUpdateManyWithoutReservationNestedInput
+    gymMemberships?: GymMembershipUncheckedUpdateManyWithoutReservationNestedInput
   }
 
   export type FolioTransactionUpsertWithWhereUniqueWithoutFolioInput = {
@@ -46740,6 +56657,8 @@ export namespace Prisma {
     id?: StringFilter<"Payment"> | string
     folioId?: StringNullableFilter<"Payment"> | string | null
     restaurantOrderId?: StringNullableFilter<"Payment"> | string | null
+    laundryOrderId?: StringNullableFilter<"Payment"> | string | null
+    gymMembershipId?: StringNullableFilter<"Payment"> | string | null
     amount?: DecimalFilter<"Payment"> | Decimal | DecimalJsLike | number | string
     refundedAmount?: DecimalFilter<"Payment"> | Decimal | DecimalJsLike | number | string
     status?: EnumPaymentStatusFilter<"Payment"> | $Enums.PaymentStatus
@@ -46748,16 +56667,34 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Payment"> | Date | string
   }
 
+  export type LaundryOrderUpsertWithWhereUniqueWithoutFolioInput = {
+    where: LaundryOrderWhereUniqueInput
+    update: XOR<LaundryOrderUpdateWithoutFolioInput, LaundryOrderUncheckedUpdateWithoutFolioInput>
+    create: XOR<LaundryOrderCreateWithoutFolioInput, LaundryOrderUncheckedCreateWithoutFolioInput>
+  }
+
+  export type LaundryOrderUpdateWithWhereUniqueWithoutFolioInput = {
+    where: LaundryOrderWhereUniqueInput
+    data: XOR<LaundryOrderUpdateWithoutFolioInput, LaundryOrderUncheckedUpdateWithoutFolioInput>
+  }
+
+  export type LaundryOrderUpdateManyWithWhereWithoutFolioInput = {
+    where: LaundryOrderScalarWhereInput
+    data: XOR<LaundryOrderUpdateManyMutationInput, LaundryOrderUncheckedUpdateManyWithoutFolioInput>
+  }
+
   export type FolioCreateWithoutTransactionsInput = {
     id?: string
     reservation: ReservationCreateNestedOneWithoutFolioInput
     payments?: PaymentCreateNestedManyWithoutFolioInput
+    laundryOrders?: LaundryOrderCreateNestedManyWithoutFolioInput
   }
 
   export type FolioUncheckedCreateWithoutTransactionsInput = {
     id?: string
     reservationId: string
     payments?: PaymentUncheckedCreateNestedManyWithoutFolioInput
+    laundryOrders?: LaundryOrderUncheckedCreateNestedManyWithoutFolioInput
   }
 
   export type FolioCreateOrConnectWithoutTransactionsInput = {
@@ -46780,24 +56717,28 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     reservation?: ReservationUpdateOneRequiredWithoutFolioNestedInput
     payments?: PaymentUpdateManyWithoutFolioNestedInput
+    laundryOrders?: LaundryOrderUpdateManyWithoutFolioNestedInput
   }
 
   export type FolioUncheckedUpdateWithoutTransactionsInput = {
     id?: StringFieldUpdateOperationsInput | string
     reservationId?: StringFieldUpdateOperationsInput | string
     payments?: PaymentUncheckedUpdateManyWithoutFolioNestedInput
+    laundryOrders?: LaundryOrderUncheckedUpdateManyWithoutFolioNestedInput
   }
 
   export type FolioCreateWithoutPaymentsInput = {
     id?: string
     reservation: ReservationCreateNestedOneWithoutFolioInput
     transactions?: FolioTransactionCreateNestedManyWithoutFolioInput
+    laundryOrders?: LaundryOrderCreateNestedManyWithoutFolioInput
   }
 
   export type FolioUncheckedCreateWithoutPaymentsInput = {
     id?: string
     reservationId: string
     transactions?: FolioTransactionUncheckedCreateNestedManyWithoutFolioInput
+    laundryOrders?: LaundryOrderUncheckedCreateNestedManyWithoutFolioInput
   }
 
   export type FolioCreateOrConnectWithoutPaymentsInput = {
@@ -46852,6 +56793,94 @@ export namespace Prisma {
     create: XOR<RestaurantOrderCreateWithoutPaymentsInput, RestaurantOrderUncheckedCreateWithoutPaymentsInput>
   }
 
+  export type LaundryOrderCreateWithoutPaymentsInput = {
+    id?: string
+    status?: $Enums.LaundryOrderStatus
+    paymentStatus?: $Enums.LaundryPaymentStatus
+    notes?: string | null
+    subtotal: Decimal | DecimalJsLike | number | string
+    tax?: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    receivedAt?: Date | string | null
+    readyAt?: Date | string | null
+    deliveredAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    guest: GuestCreateNestedOneWithoutLaundryOrdersInput
+    reservation?: ReservationCreateNestedOneWithoutLaundryOrdersInput
+    folio?: FolioCreateNestedOneWithoutLaundryOrdersInput
+    items?: LaundryOrderItemCreateNestedManyWithoutOrderInput
+  }
+
+  export type LaundryOrderUncheckedCreateWithoutPaymentsInput = {
+    id?: string
+    guestId: string
+    reservationId?: string | null
+    folioId?: string | null
+    status?: $Enums.LaundryOrderStatus
+    paymentStatus?: $Enums.LaundryPaymentStatus
+    notes?: string | null
+    subtotal: Decimal | DecimalJsLike | number | string
+    tax?: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    receivedAt?: Date | string | null
+    readyAt?: Date | string | null
+    deliveredAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: LaundryOrderItemUncheckedCreateNestedManyWithoutOrderInput
+  }
+
+  export type LaundryOrderCreateOrConnectWithoutPaymentsInput = {
+    where: LaundryOrderWhereUniqueInput
+    create: XOR<LaundryOrderCreateWithoutPaymentsInput, LaundryOrderUncheckedCreateWithoutPaymentsInput>
+  }
+
+  export type GymMembershipCreateWithoutPaymentsInput = {
+    id?: string
+    status?: $Enums.GymMembershipStatus
+    paymentStatus?: $Enums.GymPaymentStatus
+    settlementMethod?: $Enums.GymSettlementMethod | null
+    startDate: Date | string
+    endDate: Date | string
+    price: Decimal | DecimalJsLike | number | string
+    notes?: string | null
+    activatedAt?: Date | string | null
+    suspendedAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    reservation?: ReservationCreateNestedOneWithoutGymMembershipsInput
+    guest: GuestCreateNestedOneWithoutGymMembershipsInput
+    plan: GymMembershipPlanCreateNestedOneWithoutMembershipsInput
+  }
+
+  export type GymMembershipUncheckedCreateWithoutPaymentsInput = {
+    id?: string
+    guestId: string
+    planId: string
+    reservationId?: string | null
+    status?: $Enums.GymMembershipStatus
+    paymentStatus?: $Enums.GymPaymentStatus
+    settlementMethod?: $Enums.GymSettlementMethod | null
+    startDate: Date | string
+    endDate: Date | string
+    price: Decimal | DecimalJsLike | number | string
+    notes?: string | null
+    activatedAt?: Date | string | null
+    suspendedAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GymMembershipCreateOrConnectWithoutPaymentsInput = {
+    where: GymMembershipWhereUniqueInput
+    create: XOR<GymMembershipCreateWithoutPaymentsInput, GymMembershipUncheckedCreateWithoutPaymentsInput>
+  }
+
   export type PaymentRefundCreateWithoutPaymentInput = {
     id?: string
     amount: Decimal | DecimalJsLike | number | string
@@ -46897,12 +56926,14 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     reservation?: ReservationUpdateOneRequiredWithoutFolioNestedInput
     transactions?: FolioTransactionUpdateManyWithoutFolioNestedInput
+    laundryOrders?: LaundryOrderUpdateManyWithoutFolioNestedInput
   }
 
   export type FolioUncheckedUpdateWithoutPaymentsInput = {
     id?: StringFieldUpdateOperationsInput | string
     reservationId?: StringFieldUpdateOperationsInput | string
     transactions?: FolioTransactionUncheckedUpdateManyWithoutFolioNestedInput
+    laundryOrders?: LaundryOrderUncheckedUpdateManyWithoutFolioNestedInput
   }
 
   export type RestaurantOrderUpsertWithoutPaymentsInput = {
@@ -46958,6 +56989,106 @@ export namespace Prisma {
     items?: RestaurantOrderItemUncheckedUpdateManyWithoutOrderNestedInput
   }
 
+  export type LaundryOrderUpsertWithoutPaymentsInput = {
+    update: XOR<LaundryOrderUpdateWithoutPaymentsInput, LaundryOrderUncheckedUpdateWithoutPaymentsInput>
+    create: XOR<LaundryOrderCreateWithoutPaymentsInput, LaundryOrderUncheckedCreateWithoutPaymentsInput>
+    where?: LaundryOrderWhereInput
+  }
+
+  export type LaundryOrderUpdateToOneWithWhereWithoutPaymentsInput = {
+    where?: LaundryOrderWhereInput
+    data: XOR<LaundryOrderUpdateWithoutPaymentsInput, LaundryOrderUncheckedUpdateWithoutPaymentsInput>
+  }
+
+  export type LaundryOrderUpdateWithoutPaymentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumLaundryOrderStatusFieldUpdateOperationsInput | $Enums.LaundryOrderStatus
+    paymentStatus?: EnumLaundryPaymentStatusFieldUpdateOperationsInput | $Enums.LaundryPaymentStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    receivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    readyAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    guest?: GuestUpdateOneRequiredWithoutLaundryOrdersNestedInput
+    reservation?: ReservationUpdateOneWithoutLaundryOrdersNestedInput
+    folio?: FolioUpdateOneWithoutLaundryOrdersNestedInput
+    items?: LaundryOrderItemUpdateManyWithoutOrderNestedInput
+  }
+
+  export type LaundryOrderUncheckedUpdateWithoutPaymentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    guestId?: StringFieldUpdateOperationsInput | string
+    reservationId?: NullableStringFieldUpdateOperationsInput | string | null
+    folioId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumLaundryOrderStatusFieldUpdateOperationsInput | $Enums.LaundryOrderStatus
+    paymentStatus?: EnumLaundryPaymentStatusFieldUpdateOperationsInput | $Enums.LaundryPaymentStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    receivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    readyAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: LaundryOrderItemUncheckedUpdateManyWithoutOrderNestedInput
+  }
+
+  export type GymMembershipUpsertWithoutPaymentsInput = {
+    update: XOR<GymMembershipUpdateWithoutPaymentsInput, GymMembershipUncheckedUpdateWithoutPaymentsInput>
+    create: XOR<GymMembershipCreateWithoutPaymentsInput, GymMembershipUncheckedCreateWithoutPaymentsInput>
+    where?: GymMembershipWhereInput
+  }
+
+  export type GymMembershipUpdateToOneWithWhereWithoutPaymentsInput = {
+    where?: GymMembershipWhereInput
+    data: XOR<GymMembershipUpdateWithoutPaymentsInput, GymMembershipUncheckedUpdateWithoutPaymentsInput>
+  }
+
+  export type GymMembershipUpdateWithoutPaymentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumGymMembershipStatusFieldUpdateOperationsInput | $Enums.GymMembershipStatus
+    paymentStatus?: EnumGymPaymentStatusFieldUpdateOperationsInput | $Enums.GymPaymentStatus
+    settlementMethod?: NullableEnumGymSettlementMethodFieldUpdateOperationsInput | $Enums.GymSettlementMethod | null
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    suspendedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reservation?: ReservationUpdateOneWithoutGymMembershipsNestedInput
+    guest?: GuestUpdateOneRequiredWithoutGymMembershipsNestedInput
+    plan?: GymMembershipPlanUpdateOneRequiredWithoutMembershipsNestedInput
+  }
+
+  export type GymMembershipUncheckedUpdateWithoutPaymentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    guestId?: StringFieldUpdateOperationsInput | string
+    planId?: StringFieldUpdateOperationsInput | string
+    reservationId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumGymMembershipStatusFieldUpdateOperationsInput | $Enums.GymMembershipStatus
+    paymentStatus?: EnumGymPaymentStatusFieldUpdateOperationsInput | $Enums.GymPaymentStatus
+    settlementMethod?: NullableEnumGymSettlementMethodFieldUpdateOperationsInput | $Enums.GymSettlementMethod | null
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    suspendedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type PaymentRefundUpsertWithWhereUniqueWithoutPaymentInput = {
     where: PaymentRefundWhereUniqueInput
     update: XOR<PaymentRefundUpdateWithoutPaymentInput, PaymentRefundUncheckedUpdateWithoutPaymentInput>
@@ -46998,12 +57129,16 @@ export namespace Prisma {
     createdAt?: Date | string
     folio?: FolioCreateNestedOneWithoutPaymentsInput
     restaurantOrder?: RestaurantOrderCreateNestedOneWithoutPaymentsInput
+    laundryOrder?: LaundryOrderCreateNestedOneWithoutPaymentsInput
+    gymMembership?: GymMembershipCreateNestedOneWithoutPaymentsInput
   }
 
   export type PaymentUncheckedCreateWithoutRefundsInput = {
     id?: string
     folioId?: string | null
     restaurantOrderId?: string | null
+    laundryOrderId?: string | null
+    gymMembershipId?: string | null
     amount: Decimal | DecimalJsLike | number | string
     refundedAmount?: Decimal | DecimalJsLike | number | string
     status?: $Enums.PaymentStatus
@@ -47038,12 +57173,16 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     folio?: FolioUpdateOneWithoutPaymentsNestedInput
     restaurantOrder?: RestaurantOrderUpdateOneWithoutPaymentsNestedInput
+    laundryOrder?: LaundryOrderUpdateOneWithoutPaymentsNestedInput
+    gymMembership?: GymMembershipUpdateOneWithoutPaymentsNestedInput
   }
 
   export type PaymentUncheckedUpdateWithoutRefundsInput = {
     id?: StringFieldUpdateOperationsInput | string
     folioId?: NullableStringFieldUpdateOperationsInput | string | null
     restaurantOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    laundryOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    gymMembershipId?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     refundedAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
@@ -47078,6 +57217,8 @@ export namespace Prisma {
     roomRate: RoomRateCreateNestedOneWithoutReservationsInput
     folio?: FolioCreateNestedOneWithoutReservationInput
     auditLogs?: ReservationAuditCreateNestedManyWithoutReservationInput
+    laundryOrders?: LaundryOrderCreateNestedManyWithoutReservationInput
+    gymMemberships?: GymMembershipCreateNestedManyWithoutReservationInput
   }
 
   export type ReservationUncheckedCreateWithoutRestaurantOrdersInput = {
@@ -47106,6 +57247,8 @@ export namespace Prisma {
     createdAt?: Date | string
     folio?: FolioUncheckedCreateNestedOneWithoutReservationInput
     auditLogs?: ReservationAuditUncheckedCreateNestedManyWithoutReservationInput
+    laundryOrders?: LaundryOrderUncheckedCreateNestedManyWithoutReservationInput
+    gymMemberships?: GymMembershipUncheckedCreateNestedManyWithoutReservationInput
   }
 
   export type ReservationCreateOrConnectWithoutRestaurantOrdersInput = {
@@ -47139,6 +57282,8 @@ export namespace Prisma {
     documents?: GuestDocumentCreateNestedManyWithoutGuestInput
     emergencyContacts?: GuestEmergencyContactCreateNestedManyWithoutGuestInput
     paymentMethods?: GuestPaymentMethodCreateNestedManyWithoutGuestInput
+    laundryOrders?: LaundryOrderCreateNestedManyWithoutGuestInput
+    gymMemberships?: GymMembershipCreateNestedManyWithoutGuestInput
     company?: CompanyCreateNestedOneWithoutGuestsInput
   }
 
@@ -47169,6 +57314,8 @@ export namespace Prisma {
     documents?: GuestDocumentUncheckedCreateNestedManyWithoutGuestInput
     emergencyContacts?: GuestEmergencyContactUncheckedCreateNestedManyWithoutGuestInput
     paymentMethods?: GuestPaymentMethodUncheckedCreateNestedManyWithoutGuestInput
+    laundryOrders?: LaundryOrderUncheckedCreateNestedManyWithoutGuestInput
+    gymMemberships?: GymMembershipUncheckedCreateNestedManyWithoutGuestInput
   }
 
   export type GuestCreateOrConnectWithoutRestaurantOrdersInput = {
@@ -47211,12 +57358,16 @@ export namespace Prisma {
     method: $Enums.PaymentMethod
     createdAt?: Date | string
     folio?: FolioCreateNestedOneWithoutPaymentsInput
+    laundryOrder?: LaundryOrderCreateNestedOneWithoutPaymentsInput
+    gymMembership?: GymMembershipCreateNestedOneWithoutPaymentsInput
     refunds?: PaymentRefundCreateNestedManyWithoutPaymentInput
   }
 
   export type PaymentUncheckedCreateWithoutRestaurantOrderInput = {
     id?: string
     folioId?: string | null
+    laundryOrderId?: string | null
+    gymMembershipId?: string | null
     amount: Decimal | DecimalJsLike | number | string
     refundedAmount?: Decimal | DecimalJsLike | number | string
     status?: $Enums.PaymentStatus
@@ -47273,6 +57424,8 @@ export namespace Prisma {
     roomRate?: RoomRateUpdateOneRequiredWithoutReservationsNestedInput
     folio?: FolioUpdateOneWithoutReservationNestedInput
     auditLogs?: ReservationAuditUpdateManyWithoutReservationNestedInput
+    laundryOrders?: LaundryOrderUpdateManyWithoutReservationNestedInput
+    gymMemberships?: GymMembershipUpdateManyWithoutReservationNestedInput
   }
 
   export type ReservationUncheckedUpdateWithoutRestaurantOrdersInput = {
@@ -47301,6 +57454,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     folio?: FolioUncheckedUpdateOneWithoutReservationNestedInput
     auditLogs?: ReservationAuditUncheckedUpdateManyWithoutReservationNestedInput
+    laundryOrders?: LaundryOrderUncheckedUpdateManyWithoutReservationNestedInput
+    gymMemberships?: GymMembershipUncheckedUpdateManyWithoutReservationNestedInput
   }
 
   export type GuestUpsertWithoutRestaurantOrdersInput = {
@@ -47340,6 +57495,8 @@ export namespace Prisma {
     documents?: GuestDocumentUpdateManyWithoutGuestNestedInput
     emergencyContacts?: GuestEmergencyContactUpdateManyWithoutGuestNestedInput
     paymentMethods?: GuestPaymentMethodUpdateManyWithoutGuestNestedInput
+    laundryOrders?: LaundryOrderUpdateManyWithoutGuestNestedInput
+    gymMemberships?: GymMembershipUpdateManyWithoutGuestNestedInput
     company?: CompanyUpdateOneWithoutGuestsNestedInput
   }
 
@@ -47370,6 +57527,8 @@ export namespace Prisma {
     documents?: GuestDocumentUncheckedUpdateManyWithoutGuestNestedInput
     emergencyContacts?: GuestEmergencyContactUncheckedUpdateManyWithoutGuestNestedInput
     paymentMethods?: GuestPaymentMethodUncheckedUpdateManyWithoutGuestNestedInput
+    laundryOrders?: LaundryOrderUncheckedUpdateManyWithoutGuestNestedInput
+    gymMemberships?: GymMembershipUncheckedUpdateManyWithoutGuestNestedInput
   }
 
   export type RestaurantOrderItemUpsertWithWhereUniqueWithoutOrderInput = {
@@ -47629,6 +57788,8 @@ export namespace Prisma {
     emergencyContacts?: GuestEmergencyContactCreateNestedManyWithoutGuestInput
     paymentMethods?: GuestPaymentMethodCreateNestedManyWithoutGuestInput
     restaurantOrders?: RestaurantOrderCreateNestedManyWithoutGuestInput
+    laundryOrders?: LaundryOrderCreateNestedManyWithoutGuestInput
+    gymMemberships?: GymMembershipCreateNestedManyWithoutGuestInput
   }
 
   export type GuestUncheckedCreateWithoutCompanyInput = {
@@ -47658,6 +57819,8 @@ export namespace Prisma {
     emergencyContacts?: GuestEmergencyContactUncheckedCreateNestedManyWithoutGuestInput
     paymentMethods?: GuestPaymentMethodUncheckedCreateNestedManyWithoutGuestInput
     restaurantOrders?: RestaurantOrderUncheckedCreateNestedManyWithoutGuestInput
+    laundryOrders?: LaundryOrderUncheckedCreateNestedManyWithoutGuestInput
+    gymMemberships?: GymMembershipUncheckedCreateNestedManyWithoutGuestInput
   }
 
   export type GuestCreateOrConnectWithoutCompanyInput = {
@@ -48589,6 +58752,1100 @@ export namespace Prisma {
     maintenanceReports?: MaintenanceUncheckedUpdateManyWithoutReportedByNestedInput
   }
 
+  export type LaundryOrderItemCreateWithoutLaundryItemInput = {
+    id?: string
+    name: string
+    quantity: number
+    unitPrice: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    order: LaundryOrderCreateNestedOneWithoutItemsInput
+  }
+
+  export type LaundryOrderItemUncheckedCreateWithoutLaundryItemInput = {
+    id?: string
+    orderId: string
+    name: string
+    quantity: number
+    unitPrice: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+  }
+
+  export type LaundryOrderItemCreateOrConnectWithoutLaundryItemInput = {
+    where: LaundryOrderItemWhereUniqueInput
+    create: XOR<LaundryOrderItemCreateWithoutLaundryItemInput, LaundryOrderItemUncheckedCreateWithoutLaundryItemInput>
+  }
+
+  export type LaundryOrderItemCreateManyLaundryItemInputEnvelope = {
+    data: LaundryOrderItemCreateManyLaundryItemInput | LaundryOrderItemCreateManyLaundryItemInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type LaundryOrderItemUpsertWithWhereUniqueWithoutLaundryItemInput = {
+    where: LaundryOrderItemWhereUniqueInput
+    update: XOR<LaundryOrderItemUpdateWithoutLaundryItemInput, LaundryOrderItemUncheckedUpdateWithoutLaundryItemInput>
+    create: XOR<LaundryOrderItemCreateWithoutLaundryItemInput, LaundryOrderItemUncheckedCreateWithoutLaundryItemInput>
+  }
+
+  export type LaundryOrderItemUpdateWithWhereUniqueWithoutLaundryItemInput = {
+    where: LaundryOrderItemWhereUniqueInput
+    data: XOR<LaundryOrderItemUpdateWithoutLaundryItemInput, LaundryOrderItemUncheckedUpdateWithoutLaundryItemInput>
+  }
+
+  export type LaundryOrderItemUpdateManyWithWhereWithoutLaundryItemInput = {
+    where: LaundryOrderItemScalarWhereInput
+    data: XOR<LaundryOrderItemUpdateManyMutationInput, LaundryOrderItemUncheckedUpdateManyWithoutLaundryItemInput>
+  }
+
+  export type LaundryOrderItemScalarWhereInput = {
+    AND?: LaundryOrderItemScalarWhereInput | LaundryOrderItemScalarWhereInput[]
+    OR?: LaundryOrderItemScalarWhereInput[]
+    NOT?: LaundryOrderItemScalarWhereInput | LaundryOrderItemScalarWhereInput[]
+    id?: StringFilter<"LaundryOrderItem"> | string
+    orderId?: StringFilter<"LaundryOrderItem"> | string
+    laundryItemId?: StringFilter<"LaundryOrderItem"> | string
+    name?: StringFilter<"LaundryOrderItem"> | string
+    quantity?: IntFilter<"LaundryOrderItem"> | number
+    unitPrice?: DecimalFilter<"LaundryOrderItem"> | Decimal | DecimalJsLike | number | string
+    total?: DecimalFilter<"LaundryOrderItem"> | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFilter<"LaundryOrderItem"> | Date | string
+  }
+
+  export type GuestCreateWithoutLaundryOrdersInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    middleName?: string | null
+    email?: string | null
+    phone?: string | null
+    dateOfBirth?: Date | string | null
+    gender?: $Enums.Gender | null
+    nationality?: string | null
+    language?: string | null
+    occupation?: string | null
+    profileImage?: string | null
+    passportId?: string | null
+    loyaltyNumber?: string | null
+    loyaltyPoints?: number
+    vip?: boolean
+    blacklisted?: boolean
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    reservations?: ReservationCreateNestedManyWithoutGuestInput
+    addresses?: GuestAddressCreateNestedManyWithoutGuestInput
+    documents?: GuestDocumentCreateNestedManyWithoutGuestInput
+    emergencyContacts?: GuestEmergencyContactCreateNestedManyWithoutGuestInput
+    paymentMethods?: GuestPaymentMethodCreateNestedManyWithoutGuestInput
+    restaurantOrders?: RestaurantOrderCreateNestedManyWithoutGuestInput
+    gymMemberships?: GymMembershipCreateNestedManyWithoutGuestInput
+    company?: CompanyCreateNestedOneWithoutGuestsInput
+  }
+
+  export type GuestUncheckedCreateWithoutLaundryOrdersInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    middleName?: string | null
+    email?: string | null
+    phone?: string | null
+    dateOfBirth?: Date | string | null
+    gender?: $Enums.Gender | null
+    nationality?: string | null
+    language?: string | null
+    occupation?: string | null
+    profileImage?: string | null
+    passportId?: string | null
+    loyaltyNumber?: string | null
+    loyaltyPoints?: number
+    vip?: boolean
+    blacklisted?: boolean
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    companyId?: string | null
+    reservations?: ReservationUncheckedCreateNestedManyWithoutGuestInput
+    addresses?: GuestAddressUncheckedCreateNestedManyWithoutGuestInput
+    documents?: GuestDocumentUncheckedCreateNestedManyWithoutGuestInput
+    emergencyContacts?: GuestEmergencyContactUncheckedCreateNestedManyWithoutGuestInput
+    paymentMethods?: GuestPaymentMethodUncheckedCreateNestedManyWithoutGuestInput
+    restaurantOrders?: RestaurantOrderUncheckedCreateNestedManyWithoutGuestInput
+    gymMemberships?: GymMembershipUncheckedCreateNestedManyWithoutGuestInput
+  }
+
+  export type GuestCreateOrConnectWithoutLaundryOrdersInput = {
+    where: GuestWhereUniqueInput
+    create: XOR<GuestCreateWithoutLaundryOrdersInput, GuestUncheckedCreateWithoutLaundryOrdersInput>
+  }
+
+  export type ReservationCreateWithoutLaundryOrdersInput = {
+    id?: string
+    nightlyRate: Decimal | DecimalJsLike | number | string
+    tax?: Decimal | DecimalJsLike | number | string | null
+    discount?: Decimal | DecimalJsLike | number | string | null
+    totalAmount: Decimal | DecimalJsLike | number | string
+    cancelledAt?: Date | string | null
+    cancelledById?: string | null
+    cancellationReason?: string | null
+    checkedInAt?: Date | string | null
+    checkedOutAt?: Date | string | null
+    noShowAt?: Date | string | null
+    note?: string | null
+    checkIn: Date | string
+    checkOut: Date | string
+    adults?: number
+    children?: number
+    totalGuests?: number
+    type: $Enums.ReservationType
+    status: $Enums.ReservationStatus
+    createdAt?: Date | string
+    guest: GuestCreateNestedOneWithoutReservationsInput
+    room: RoomCreateNestedOneWithoutReservationsInput
+    roomRate: RoomRateCreateNestedOneWithoutReservationsInput
+    folio?: FolioCreateNestedOneWithoutReservationInput
+    auditLogs?: ReservationAuditCreateNestedManyWithoutReservationInput
+    restaurantOrders?: RestaurantOrderCreateNestedManyWithoutReservationInput
+    gymMemberships?: GymMembershipCreateNestedManyWithoutReservationInput
+  }
+
+  export type ReservationUncheckedCreateWithoutLaundryOrdersInput = {
+    id?: string
+    guestId: string
+    roomId: string
+    roomRateId: string
+    nightlyRate: Decimal | DecimalJsLike | number | string
+    tax?: Decimal | DecimalJsLike | number | string | null
+    discount?: Decimal | DecimalJsLike | number | string | null
+    totalAmount: Decimal | DecimalJsLike | number | string
+    cancelledAt?: Date | string | null
+    cancelledById?: string | null
+    cancellationReason?: string | null
+    checkedInAt?: Date | string | null
+    checkedOutAt?: Date | string | null
+    noShowAt?: Date | string | null
+    note?: string | null
+    checkIn: Date | string
+    checkOut: Date | string
+    adults?: number
+    children?: number
+    totalGuests?: number
+    type: $Enums.ReservationType
+    status: $Enums.ReservationStatus
+    createdAt?: Date | string
+    folio?: FolioUncheckedCreateNestedOneWithoutReservationInput
+    auditLogs?: ReservationAuditUncheckedCreateNestedManyWithoutReservationInput
+    restaurantOrders?: RestaurantOrderUncheckedCreateNestedManyWithoutReservationInput
+    gymMemberships?: GymMembershipUncheckedCreateNestedManyWithoutReservationInput
+  }
+
+  export type ReservationCreateOrConnectWithoutLaundryOrdersInput = {
+    where: ReservationWhereUniqueInput
+    create: XOR<ReservationCreateWithoutLaundryOrdersInput, ReservationUncheckedCreateWithoutLaundryOrdersInput>
+  }
+
+  export type FolioCreateWithoutLaundryOrdersInput = {
+    id?: string
+    reservation: ReservationCreateNestedOneWithoutFolioInput
+    transactions?: FolioTransactionCreateNestedManyWithoutFolioInput
+    payments?: PaymentCreateNestedManyWithoutFolioInput
+  }
+
+  export type FolioUncheckedCreateWithoutLaundryOrdersInput = {
+    id?: string
+    reservationId: string
+    transactions?: FolioTransactionUncheckedCreateNestedManyWithoutFolioInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutFolioInput
+  }
+
+  export type FolioCreateOrConnectWithoutLaundryOrdersInput = {
+    where: FolioWhereUniqueInput
+    create: XOR<FolioCreateWithoutLaundryOrdersInput, FolioUncheckedCreateWithoutLaundryOrdersInput>
+  }
+
+  export type LaundryOrderItemCreateWithoutOrderInput = {
+    id?: string
+    name: string
+    quantity: number
+    unitPrice: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    laundryItem: LaundryItemCreateNestedOneWithoutOrderItemsInput
+  }
+
+  export type LaundryOrderItemUncheckedCreateWithoutOrderInput = {
+    id?: string
+    laundryItemId: string
+    name: string
+    quantity: number
+    unitPrice: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+  }
+
+  export type LaundryOrderItemCreateOrConnectWithoutOrderInput = {
+    where: LaundryOrderItemWhereUniqueInput
+    create: XOR<LaundryOrderItemCreateWithoutOrderInput, LaundryOrderItemUncheckedCreateWithoutOrderInput>
+  }
+
+  export type LaundryOrderItemCreateManyOrderInputEnvelope = {
+    data: LaundryOrderItemCreateManyOrderInput | LaundryOrderItemCreateManyOrderInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PaymentCreateWithoutLaundryOrderInput = {
+    id?: string
+    amount: Decimal | DecimalJsLike | number | string
+    refundedAmount?: Decimal | DecimalJsLike | number | string
+    status?: $Enums.PaymentStatus
+    reference?: string | null
+    method: $Enums.PaymentMethod
+    createdAt?: Date | string
+    folio?: FolioCreateNestedOneWithoutPaymentsInput
+    restaurantOrder?: RestaurantOrderCreateNestedOneWithoutPaymentsInput
+    gymMembership?: GymMembershipCreateNestedOneWithoutPaymentsInput
+    refunds?: PaymentRefundCreateNestedManyWithoutPaymentInput
+  }
+
+  export type PaymentUncheckedCreateWithoutLaundryOrderInput = {
+    id?: string
+    folioId?: string | null
+    restaurantOrderId?: string | null
+    gymMembershipId?: string | null
+    amount: Decimal | DecimalJsLike | number | string
+    refundedAmount?: Decimal | DecimalJsLike | number | string
+    status?: $Enums.PaymentStatus
+    reference?: string | null
+    method: $Enums.PaymentMethod
+    createdAt?: Date | string
+    refunds?: PaymentRefundUncheckedCreateNestedManyWithoutPaymentInput
+  }
+
+  export type PaymentCreateOrConnectWithoutLaundryOrderInput = {
+    where: PaymentWhereUniqueInput
+    create: XOR<PaymentCreateWithoutLaundryOrderInput, PaymentUncheckedCreateWithoutLaundryOrderInput>
+  }
+
+  export type PaymentCreateManyLaundryOrderInputEnvelope = {
+    data: PaymentCreateManyLaundryOrderInput | PaymentCreateManyLaundryOrderInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type GuestUpsertWithoutLaundryOrdersInput = {
+    update: XOR<GuestUpdateWithoutLaundryOrdersInput, GuestUncheckedUpdateWithoutLaundryOrdersInput>
+    create: XOR<GuestCreateWithoutLaundryOrdersInput, GuestUncheckedCreateWithoutLaundryOrdersInput>
+    where?: GuestWhereInput
+  }
+
+  export type GuestUpdateToOneWithWhereWithoutLaundryOrdersInput = {
+    where?: GuestWhereInput
+    data: XOR<GuestUpdateWithoutLaundryOrdersInput, GuestUncheckedUpdateWithoutLaundryOrdersInput>
+  }
+
+  export type GuestUpdateWithoutLaundryOrdersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+    nationality?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: NullableStringFieldUpdateOperationsInput | string | null
+    occupation?: NullableStringFieldUpdateOperationsInput | string | null
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    passportId?: NullableStringFieldUpdateOperationsInput | string | null
+    loyaltyNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    loyaltyPoints?: IntFieldUpdateOperationsInput | number
+    vip?: BoolFieldUpdateOperationsInput | boolean
+    blacklisted?: BoolFieldUpdateOperationsInput | boolean
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reservations?: ReservationUpdateManyWithoutGuestNestedInput
+    addresses?: GuestAddressUpdateManyWithoutGuestNestedInput
+    documents?: GuestDocumentUpdateManyWithoutGuestNestedInput
+    emergencyContacts?: GuestEmergencyContactUpdateManyWithoutGuestNestedInput
+    paymentMethods?: GuestPaymentMethodUpdateManyWithoutGuestNestedInput
+    restaurantOrders?: RestaurantOrderUpdateManyWithoutGuestNestedInput
+    gymMemberships?: GymMembershipUpdateManyWithoutGuestNestedInput
+    company?: CompanyUpdateOneWithoutGuestsNestedInput
+  }
+
+  export type GuestUncheckedUpdateWithoutLaundryOrdersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+    nationality?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: NullableStringFieldUpdateOperationsInput | string | null
+    occupation?: NullableStringFieldUpdateOperationsInput | string | null
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    passportId?: NullableStringFieldUpdateOperationsInput | string | null
+    loyaltyNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    loyaltyPoints?: IntFieldUpdateOperationsInput | number
+    vip?: BoolFieldUpdateOperationsInput | boolean
+    blacklisted?: BoolFieldUpdateOperationsInput | boolean
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    companyId?: NullableStringFieldUpdateOperationsInput | string | null
+    reservations?: ReservationUncheckedUpdateManyWithoutGuestNestedInput
+    addresses?: GuestAddressUncheckedUpdateManyWithoutGuestNestedInput
+    documents?: GuestDocumentUncheckedUpdateManyWithoutGuestNestedInput
+    emergencyContacts?: GuestEmergencyContactUncheckedUpdateManyWithoutGuestNestedInput
+    paymentMethods?: GuestPaymentMethodUncheckedUpdateManyWithoutGuestNestedInput
+    restaurantOrders?: RestaurantOrderUncheckedUpdateManyWithoutGuestNestedInput
+    gymMemberships?: GymMembershipUncheckedUpdateManyWithoutGuestNestedInput
+  }
+
+  export type ReservationUpsertWithoutLaundryOrdersInput = {
+    update: XOR<ReservationUpdateWithoutLaundryOrdersInput, ReservationUncheckedUpdateWithoutLaundryOrdersInput>
+    create: XOR<ReservationCreateWithoutLaundryOrdersInput, ReservationUncheckedCreateWithoutLaundryOrdersInput>
+    where?: ReservationWhereInput
+  }
+
+  export type ReservationUpdateToOneWithWhereWithoutLaundryOrdersInput = {
+    where?: ReservationWhereInput
+    data: XOR<ReservationUpdateWithoutLaundryOrdersInput, ReservationUncheckedUpdateWithoutLaundryOrdersInput>
+  }
+
+  export type ReservationUpdateWithoutLaundryOrdersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nightlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
+    checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
+    adults?: IntFieldUpdateOperationsInput | number
+    children?: IntFieldUpdateOperationsInput | number
+    totalGuests?: IntFieldUpdateOperationsInput | number
+    type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
+    status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    guest?: GuestUpdateOneRequiredWithoutReservationsNestedInput
+    room?: RoomUpdateOneRequiredWithoutReservationsNestedInput
+    roomRate?: RoomRateUpdateOneRequiredWithoutReservationsNestedInput
+    folio?: FolioUpdateOneWithoutReservationNestedInput
+    auditLogs?: ReservationAuditUpdateManyWithoutReservationNestedInput
+    restaurantOrders?: RestaurantOrderUpdateManyWithoutReservationNestedInput
+    gymMemberships?: GymMembershipUpdateManyWithoutReservationNestedInput
+  }
+
+  export type ReservationUncheckedUpdateWithoutLaundryOrdersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    guestId?: StringFieldUpdateOperationsInput | string
+    roomId?: StringFieldUpdateOperationsInput | string
+    roomRateId?: StringFieldUpdateOperationsInput | string
+    nightlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
+    checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
+    adults?: IntFieldUpdateOperationsInput | number
+    children?: IntFieldUpdateOperationsInput | number
+    totalGuests?: IntFieldUpdateOperationsInput | number
+    type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
+    status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    folio?: FolioUncheckedUpdateOneWithoutReservationNestedInput
+    auditLogs?: ReservationAuditUncheckedUpdateManyWithoutReservationNestedInput
+    restaurantOrders?: RestaurantOrderUncheckedUpdateManyWithoutReservationNestedInput
+    gymMemberships?: GymMembershipUncheckedUpdateManyWithoutReservationNestedInput
+  }
+
+  export type FolioUpsertWithoutLaundryOrdersInput = {
+    update: XOR<FolioUpdateWithoutLaundryOrdersInput, FolioUncheckedUpdateWithoutLaundryOrdersInput>
+    create: XOR<FolioCreateWithoutLaundryOrdersInput, FolioUncheckedCreateWithoutLaundryOrdersInput>
+    where?: FolioWhereInput
+  }
+
+  export type FolioUpdateToOneWithWhereWithoutLaundryOrdersInput = {
+    where?: FolioWhereInput
+    data: XOR<FolioUpdateWithoutLaundryOrdersInput, FolioUncheckedUpdateWithoutLaundryOrdersInput>
+  }
+
+  export type FolioUpdateWithoutLaundryOrdersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reservation?: ReservationUpdateOneRequiredWithoutFolioNestedInput
+    transactions?: FolioTransactionUpdateManyWithoutFolioNestedInput
+    payments?: PaymentUpdateManyWithoutFolioNestedInput
+  }
+
+  export type FolioUncheckedUpdateWithoutLaundryOrdersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reservationId?: StringFieldUpdateOperationsInput | string
+    transactions?: FolioTransactionUncheckedUpdateManyWithoutFolioNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutFolioNestedInput
+  }
+
+  export type LaundryOrderItemUpsertWithWhereUniqueWithoutOrderInput = {
+    where: LaundryOrderItemWhereUniqueInput
+    update: XOR<LaundryOrderItemUpdateWithoutOrderInput, LaundryOrderItemUncheckedUpdateWithoutOrderInput>
+    create: XOR<LaundryOrderItemCreateWithoutOrderInput, LaundryOrderItemUncheckedCreateWithoutOrderInput>
+  }
+
+  export type LaundryOrderItemUpdateWithWhereUniqueWithoutOrderInput = {
+    where: LaundryOrderItemWhereUniqueInput
+    data: XOR<LaundryOrderItemUpdateWithoutOrderInput, LaundryOrderItemUncheckedUpdateWithoutOrderInput>
+  }
+
+  export type LaundryOrderItemUpdateManyWithWhereWithoutOrderInput = {
+    where: LaundryOrderItemScalarWhereInput
+    data: XOR<LaundryOrderItemUpdateManyMutationInput, LaundryOrderItemUncheckedUpdateManyWithoutOrderInput>
+  }
+
+  export type PaymentUpsertWithWhereUniqueWithoutLaundryOrderInput = {
+    where: PaymentWhereUniqueInput
+    update: XOR<PaymentUpdateWithoutLaundryOrderInput, PaymentUncheckedUpdateWithoutLaundryOrderInput>
+    create: XOR<PaymentCreateWithoutLaundryOrderInput, PaymentUncheckedCreateWithoutLaundryOrderInput>
+  }
+
+  export type PaymentUpdateWithWhereUniqueWithoutLaundryOrderInput = {
+    where: PaymentWhereUniqueInput
+    data: XOR<PaymentUpdateWithoutLaundryOrderInput, PaymentUncheckedUpdateWithoutLaundryOrderInput>
+  }
+
+  export type PaymentUpdateManyWithWhereWithoutLaundryOrderInput = {
+    where: PaymentScalarWhereInput
+    data: XOR<PaymentUpdateManyMutationInput, PaymentUncheckedUpdateManyWithoutLaundryOrderInput>
+  }
+
+  export type LaundryOrderCreateWithoutItemsInput = {
+    id?: string
+    status?: $Enums.LaundryOrderStatus
+    paymentStatus?: $Enums.LaundryPaymentStatus
+    notes?: string | null
+    subtotal: Decimal | DecimalJsLike | number | string
+    tax?: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    receivedAt?: Date | string | null
+    readyAt?: Date | string | null
+    deliveredAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    guest: GuestCreateNestedOneWithoutLaundryOrdersInput
+    reservation?: ReservationCreateNestedOneWithoutLaundryOrdersInput
+    folio?: FolioCreateNestedOneWithoutLaundryOrdersInput
+    payments?: PaymentCreateNestedManyWithoutLaundryOrderInput
+  }
+
+  export type LaundryOrderUncheckedCreateWithoutItemsInput = {
+    id?: string
+    guestId: string
+    reservationId?: string | null
+    folioId?: string | null
+    status?: $Enums.LaundryOrderStatus
+    paymentStatus?: $Enums.LaundryPaymentStatus
+    notes?: string | null
+    subtotal: Decimal | DecimalJsLike | number | string
+    tax?: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    receivedAt?: Date | string | null
+    readyAt?: Date | string | null
+    deliveredAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    payments?: PaymentUncheckedCreateNestedManyWithoutLaundryOrderInput
+  }
+
+  export type LaundryOrderCreateOrConnectWithoutItemsInput = {
+    where: LaundryOrderWhereUniqueInput
+    create: XOR<LaundryOrderCreateWithoutItemsInput, LaundryOrderUncheckedCreateWithoutItemsInput>
+  }
+
+  export type LaundryItemCreateWithoutOrderItemsInput = {
+    id?: string
+    name: string
+    description?: string | null
+    type: $Enums.LaundryItemType
+    price: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type LaundryItemUncheckedCreateWithoutOrderItemsInput = {
+    id?: string
+    name: string
+    description?: string | null
+    type: $Enums.LaundryItemType
+    price: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type LaundryItemCreateOrConnectWithoutOrderItemsInput = {
+    where: LaundryItemWhereUniqueInput
+    create: XOR<LaundryItemCreateWithoutOrderItemsInput, LaundryItemUncheckedCreateWithoutOrderItemsInput>
+  }
+
+  export type LaundryOrderUpsertWithoutItemsInput = {
+    update: XOR<LaundryOrderUpdateWithoutItemsInput, LaundryOrderUncheckedUpdateWithoutItemsInput>
+    create: XOR<LaundryOrderCreateWithoutItemsInput, LaundryOrderUncheckedCreateWithoutItemsInput>
+    where?: LaundryOrderWhereInput
+  }
+
+  export type LaundryOrderUpdateToOneWithWhereWithoutItemsInput = {
+    where?: LaundryOrderWhereInput
+    data: XOR<LaundryOrderUpdateWithoutItemsInput, LaundryOrderUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type LaundryOrderUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumLaundryOrderStatusFieldUpdateOperationsInput | $Enums.LaundryOrderStatus
+    paymentStatus?: EnumLaundryPaymentStatusFieldUpdateOperationsInput | $Enums.LaundryPaymentStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    receivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    readyAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    guest?: GuestUpdateOneRequiredWithoutLaundryOrdersNestedInput
+    reservation?: ReservationUpdateOneWithoutLaundryOrdersNestedInput
+    folio?: FolioUpdateOneWithoutLaundryOrdersNestedInput
+    payments?: PaymentUpdateManyWithoutLaundryOrderNestedInput
+  }
+
+  export type LaundryOrderUncheckedUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    guestId?: StringFieldUpdateOperationsInput | string
+    reservationId?: NullableStringFieldUpdateOperationsInput | string | null
+    folioId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumLaundryOrderStatusFieldUpdateOperationsInput | $Enums.LaundryOrderStatus
+    paymentStatus?: EnumLaundryPaymentStatusFieldUpdateOperationsInput | $Enums.LaundryPaymentStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    receivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    readyAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    payments?: PaymentUncheckedUpdateManyWithoutLaundryOrderNestedInput
+  }
+
+  export type LaundryItemUpsertWithoutOrderItemsInput = {
+    update: XOR<LaundryItemUpdateWithoutOrderItemsInput, LaundryItemUncheckedUpdateWithoutOrderItemsInput>
+    create: XOR<LaundryItemCreateWithoutOrderItemsInput, LaundryItemUncheckedCreateWithoutOrderItemsInput>
+    where?: LaundryItemWhereInput
+  }
+
+  export type LaundryItemUpdateToOneWithWhereWithoutOrderItemsInput = {
+    where?: LaundryItemWhereInput
+    data: XOR<LaundryItemUpdateWithoutOrderItemsInput, LaundryItemUncheckedUpdateWithoutOrderItemsInput>
+  }
+
+  export type LaundryItemUpdateWithoutOrderItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumLaundryItemTypeFieldUpdateOperationsInput | $Enums.LaundryItemType
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LaundryItemUncheckedUpdateWithoutOrderItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumLaundryItemTypeFieldUpdateOperationsInput | $Enums.LaundryItemType
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GymMembershipCreateWithoutPlanInput = {
+    id?: string
+    status?: $Enums.GymMembershipStatus
+    paymentStatus?: $Enums.GymPaymentStatus
+    settlementMethod?: $Enums.GymSettlementMethod | null
+    startDate: Date | string
+    endDate: Date | string
+    price: Decimal | DecimalJsLike | number | string
+    notes?: string | null
+    activatedAt?: Date | string | null
+    suspendedAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    reservation?: ReservationCreateNestedOneWithoutGymMembershipsInput
+    guest: GuestCreateNestedOneWithoutGymMembershipsInput
+    payments?: PaymentCreateNestedManyWithoutGymMembershipInput
+  }
+
+  export type GymMembershipUncheckedCreateWithoutPlanInput = {
+    id?: string
+    guestId: string
+    reservationId?: string | null
+    status?: $Enums.GymMembershipStatus
+    paymentStatus?: $Enums.GymPaymentStatus
+    settlementMethod?: $Enums.GymSettlementMethod | null
+    startDate: Date | string
+    endDate: Date | string
+    price: Decimal | DecimalJsLike | number | string
+    notes?: string | null
+    activatedAt?: Date | string | null
+    suspendedAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    payments?: PaymentUncheckedCreateNestedManyWithoutGymMembershipInput
+  }
+
+  export type GymMembershipCreateOrConnectWithoutPlanInput = {
+    where: GymMembershipWhereUniqueInput
+    create: XOR<GymMembershipCreateWithoutPlanInput, GymMembershipUncheckedCreateWithoutPlanInput>
+  }
+
+  export type GymMembershipCreateManyPlanInputEnvelope = {
+    data: GymMembershipCreateManyPlanInput | GymMembershipCreateManyPlanInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type GymMembershipUpsertWithWhereUniqueWithoutPlanInput = {
+    where: GymMembershipWhereUniqueInput
+    update: XOR<GymMembershipUpdateWithoutPlanInput, GymMembershipUncheckedUpdateWithoutPlanInput>
+    create: XOR<GymMembershipCreateWithoutPlanInput, GymMembershipUncheckedCreateWithoutPlanInput>
+  }
+
+  export type GymMembershipUpdateWithWhereUniqueWithoutPlanInput = {
+    where: GymMembershipWhereUniqueInput
+    data: XOR<GymMembershipUpdateWithoutPlanInput, GymMembershipUncheckedUpdateWithoutPlanInput>
+  }
+
+  export type GymMembershipUpdateManyWithWhereWithoutPlanInput = {
+    where: GymMembershipScalarWhereInput
+    data: XOR<GymMembershipUpdateManyMutationInput, GymMembershipUncheckedUpdateManyWithoutPlanInput>
+  }
+
+  export type ReservationCreateWithoutGymMembershipsInput = {
+    id?: string
+    nightlyRate: Decimal | DecimalJsLike | number | string
+    tax?: Decimal | DecimalJsLike | number | string | null
+    discount?: Decimal | DecimalJsLike | number | string | null
+    totalAmount: Decimal | DecimalJsLike | number | string
+    cancelledAt?: Date | string | null
+    cancelledById?: string | null
+    cancellationReason?: string | null
+    checkedInAt?: Date | string | null
+    checkedOutAt?: Date | string | null
+    noShowAt?: Date | string | null
+    note?: string | null
+    checkIn: Date | string
+    checkOut: Date | string
+    adults?: number
+    children?: number
+    totalGuests?: number
+    type: $Enums.ReservationType
+    status: $Enums.ReservationStatus
+    createdAt?: Date | string
+    guest: GuestCreateNestedOneWithoutReservationsInput
+    room: RoomCreateNestedOneWithoutReservationsInput
+    roomRate: RoomRateCreateNestedOneWithoutReservationsInput
+    folio?: FolioCreateNestedOneWithoutReservationInput
+    auditLogs?: ReservationAuditCreateNestedManyWithoutReservationInput
+    restaurantOrders?: RestaurantOrderCreateNestedManyWithoutReservationInput
+    laundryOrders?: LaundryOrderCreateNestedManyWithoutReservationInput
+  }
+
+  export type ReservationUncheckedCreateWithoutGymMembershipsInput = {
+    id?: string
+    guestId: string
+    roomId: string
+    roomRateId: string
+    nightlyRate: Decimal | DecimalJsLike | number | string
+    tax?: Decimal | DecimalJsLike | number | string | null
+    discount?: Decimal | DecimalJsLike | number | string | null
+    totalAmount: Decimal | DecimalJsLike | number | string
+    cancelledAt?: Date | string | null
+    cancelledById?: string | null
+    cancellationReason?: string | null
+    checkedInAt?: Date | string | null
+    checkedOutAt?: Date | string | null
+    noShowAt?: Date | string | null
+    note?: string | null
+    checkIn: Date | string
+    checkOut: Date | string
+    adults?: number
+    children?: number
+    totalGuests?: number
+    type: $Enums.ReservationType
+    status: $Enums.ReservationStatus
+    createdAt?: Date | string
+    folio?: FolioUncheckedCreateNestedOneWithoutReservationInput
+    auditLogs?: ReservationAuditUncheckedCreateNestedManyWithoutReservationInput
+    restaurantOrders?: RestaurantOrderUncheckedCreateNestedManyWithoutReservationInput
+    laundryOrders?: LaundryOrderUncheckedCreateNestedManyWithoutReservationInput
+  }
+
+  export type ReservationCreateOrConnectWithoutGymMembershipsInput = {
+    where: ReservationWhereUniqueInput
+    create: XOR<ReservationCreateWithoutGymMembershipsInput, ReservationUncheckedCreateWithoutGymMembershipsInput>
+  }
+
+  export type GuestCreateWithoutGymMembershipsInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    middleName?: string | null
+    email?: string | null
+    phone?: string | null
+    dateOfBirth?: Date | string | null
+    gender?: $Enums.Gender | null
+    nationality?: string | null
+    language?: string | null
+    occupation?: string | null
+    profileImage?: string | null
+    passportId?: string | null
+    loyaltyNumber?: string | null
+    loyaltyPoints?: number
+    vip?: boolean
+    blacklisted?: boolean
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    reservations?: ReservationCreateNestedManyWithoutGuestInput
+    addresses?: GuestAddressCreateNestedManyWithoutGuestInput
+    documents?: GuestDocumentCreateNestedManyWithoutGuestInput
+    emergencyContacts?: GuestEmergencyContactCreateNestedManyWithoutGuestInput
+    paymentMethods?: GuestPaymentMethodCreateNestedManyWithoutGuestInput
+    restaurantOrders?: RestaurantOrderCreateNestedManyWithoutGuestInput
+    laundryOrders?: LaundryOrderCreateNestedManyWithoutGuestInput
+    company?: CompanyCreateNestedOneWithoutGuestsInput
+  }
+
+  export type GuestUncheckedCreateWithoutGymMembershipsInput = {
+    id?: string
+    firstName: string
+    lastName: string
+    middleName?: string | null
+    email?: string | null
+    phone?: string | null
+    dateOfBirth?: Date | string | null
+    gender?: $Enums.Gender | null
+    nationality?: string | null
+    language?: string | null
+    occupation?: string | null
+    profileImage?: string | null
+    passportId?: string | null
+    loyaltyNumber?: string | null
+    loyaltyPoints?: number
+    vip?: boolean
+    blacklisted?: boolean
+    notes?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    companyId?: string | null
+    reservations?: ReservationUncheckedCreateNestedManyWithoutGuestInput
+    addresses?: GuestAddressUncheckedCreateNestedManyWithoutGuestInput
+    documents?: GuestDocumentUncheckedCreateNestedManyWithoutGuestInput
+    emergencyContacts?: GuestEmergencyContactUncheckedCreateNestedManyWithoutGuestInput
+    paymentMethods?: GuestPaymentMethodUncheckedCreateNestedManyWithoutGuestInput
+    restaurantOrders?: RestaurantOrderUncheckedCreateNestedManyWithoutGuestInput
+    laundryOrders?: LaundryOrderUncheckedCreateNestedManyWithoutGuestInput
+  }
+
+  export type GuestCreateOrConnectWithoutGymMembershipsInput = {
+    where: GuestWhereUniqueInput
+    create: XOR<GuestCreateWithoutGymMembershipsInput, GuestUncheckedCreateWithoutGymMembershipsInput>
+  }
+
+  export type GymMembershipPlanCreateWithoutMembershipsInput = {
+    id?: string
+    name: string
+    description?: string | null
+    duration: $Enums.GymMembershipDuration
+    durationValue?: number
+    price: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GymMembershipPlanUncheckedCreateWithoutMembershipsInput = {
+    id?: string
+    name: string
+    description?: string | null
+    duration: $Enums.GymMembershipDuration
+    durationValue?: number
+    price: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GymMembershipPlanCreateOrConnectWithoutMembershipsInput = {
+    where: GymMembershipPlanWhereUniqueInput
+    create: XOR<GymMembershipPlanCreateWithoutMembershipsInput, GymMembershipPlanUncheckedCreateWithoutMembershipsInput>
+  }
+
+  export type PaymentCreateWithoutGymMembershipInput = {
+    id?: string
+    amount: Decimal | DecimalJsLike | number | string
+    refundedAmount?: Decimal | DecimalJsLike | number | string
+    status?: $Enums.PaymentStatus
+    reference?: string | null
+    method: $Enums.PaymentMethod
+    createdAt?: Date | string
+    folio?: FolioCreateNestedOneWithoutPaymentsInput
+    restaurantOrder?: RestaurantOrderCreateNestedOneWithoutPaymentsInput
+    laundryOrder?: LaundryOrderCreateNestedOneWithoutPaymentsInput
+    refunds?: PaymentRefundCreateNestedManyWithoutPaymentInput
+  }
+
+  export type PaymentUncheckedCreateWithoutGymMembershipInput = {
+    id?: string
+    folioId?: string | null
+    restaurantOrderId?: string | null
+    laundryOrderId?: string | null
+    amount: Decimal | DecimalJsLike | number | string
+    refundedAmount?: Decimal | DecimalJsLike | number | string
+    status?: $Enums.PaymentStatus
+    reference?: string | null
+    method: $Enums.PaymentMethod
+    createdAt?: Date | string
+    refunds?: PaymentRefundUncheckedCreateNestedManyWithoutPaymentInput
+  }
+
+  export type PaymentCreateOrConnectWithoutGymMembershipInput = {
+    where: PaymentWhereUniqueInput
+    create: XOR<PaymentCreateWithoutGymMembershipInput, PaymentUncheckedCreateWithoutGymMembershipInput>
+  }
+
+  export type PaymentCreateManyGymMembershipInputEnvelope = {
+    data: PaymentCreateManyGymMembershipInput | PaymentCreateManyGymMembershipInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ReservationUpsertWithoutGymMembershipsInput = {
+    update: XOR<ReservationUpdateWithoutGymMembershipsInput, ReservationUncheckedUpdateWithoutGymMembershipsInput>
+    create: XOR<ReservationCreateWithoutGymMembershipsInput, ReservationUncheckedCreateWithoutGymMembershipsInput>
+    where?: ReservationWhereInput
+  }
+
+  export type ReservationUpdateToOneWithWhereWithoutGymMembershipsInput = {
+    where?: ReservationWhereInput
+    data: XOR<ReservationUpdateWithoutGymMembershipsInput, ReservationUncheckedUpdateWithoutGymMembershipsInput>
+  }
+
+  export type ReservationUpdateWithoutGymMembershipsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    nightlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
+    checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
+    adults?: IntFieldUpdateOperationsInput | number
+    children?: IntFieldUpdateOperationsInput | number
+    totalGuests?: IntFieldUpdateOperationsInput | number
+    type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
+    status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    guest?: GuestUpdateOneRequiredWithoutReservationsNestedInput
+    room?: RoomUpdateOneRequiredWithoutReservationsNestedInput
+    roomRate?: RoomRateUpdateOneRequiredWithoutReservationsNestedInput
+    folio?: FolioUpdateOneWithoutReservationNestedInput
+    auditLogs?: ReservationAuditUpdateManyWithoutReservationNestedInput
+    restaurantOrders?: RestaurantOrderUpdateManyWithoutReservationNestedInput
+    laundryOrders?: LaundryOrderUpdateManyWithoutReservationNestedInput
+  }
+
+  export type ReservationUncheckedUpdateWithoutGymMembershipsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    guestId?: StringFieldUpdateOperationsInput | string
+    roomId?: StringFieldUpdateOperationsInput | string
+    roomRateId?: StringFieldUpdateOperationsInput | string
+    nightlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    totalAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledById?: NullableStringFieldUpdateOperationsInput | string | null
+    cancellationReason?: NullableStringFieldUpdateOperationsInput | string | null
+    checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    noShowAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    checkIn?: DateTimeFieldUpdateOperationsInput | Date | string
+    checkOut?: DateTimeFieldUpdateOperationsInput | Date | string
+    adults?: IntFieldUpdateOperationsInput | number
+    children?: IntFieldUpdateOperationsInput | number
+    totalGuests?: IntFieldUpdateOperationsInput | number
+    type?: EnumReservationTypeFieldUpdateOperationsInput | $Enums.ReservationType
+    status?: EnumReservationStatusFieldUpdateOperationsInput | $Enums.ReservationStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    folio?: FolioUncheckedUpdateOneWithoutReservationNestedInput
+    auditLogs?: ReservationAuditUncheckedUpdateManyWithoutReservationNestedInput
+    restaurantOrders?: RestaurantOrderUncheckedUpdateManyWithoutReservationNestedInput
+    laundryOrders?: LaundryOrderUncheckedUpdateManyWithoutReservationNestedInput
+  }
+
+  export type GuestUpsertWithoutGymMembershipsInput = {
+    update: XOR<GuestUpdateWithoutGymMembershipsInput, GuestUncheckedUpdateWithoutGymMembershipsInput>
+    create: XOR<GuestCreateWithoutGymMembershipsInput, GuestUncheckedCreateWithoutGymMembershipsInput>
+    where?: GuestWhereInput
+  }
+
+  export type GuestUpdateToOneWithWhereWithoutGymMembershipsInput = {
+    where?: GuestWhereInput
+    data: XOR<GuestUpdateWithoutGymMembershipsInput, GuestUncheckedUpdateWithoutGymMembershipsInput>
+  }
+
+  export type GuestUpdateWithoutGymMembershipsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+    nationality?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: NullableStringFieldUpdateOperationsInput | string | null
+    occupation?: NullableStringFieldUpdateOperationsInput | string | null
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    passportId?: NullableStringFieldUpdateOperationsInput | string | null
+    loyaltyNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    loyaltyPoints?: IntFieldUpdateOperationsInput | number
+    vip?: BoolFieldUpdateOperationsInput | boolean
+    blacklisted?: BoolFieldUpdateOperationsInput | boolean
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reservations?: ReservationUpdateManyWithoutGuestNestedInput
+    addresses?: GuestAddressUpdateManyWithoutGuestNestedInput
+    documents?: GuestDocumentUpdateManyWithoutGuestNestedInput
+    emergencyContacts?: GuestEmergencyContactUpdateManyWithoutGuestNestedInput
+    paymentMethods?: GuestPaymentMethodUpdateManyWithoutGuestNestedInput
+    restaurantOrders?: RestaurantOrderUpdateManyWithoutGuestNestedInput
+    laundryOrders?: LaundryOrderUpdateManyWithoutGuestNestedInput
+    company?: CompanyUpdateOneWithoutGuestsNestedInput
+  }
+
+  export type GuestUncheckedUpdateWithoutGymMembershipsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    middleName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+    nationality?: NullableStringFieldUpdateOperationsInput | string | null
+    language?: NullableStringFieldUpdateOperationsInput | string | null
+    occupation?: NullableStringFieldUpdateOperationsInput | string | null
+    profileImage?: NullableStringFieldUpdateOperationsInput | string | null
+    passportId?: NullableStringFieldUpdateOperationsInput | string | null
+    loyaltyNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    loyaltyPoints?: IntFieldUpdateOperationsInput | number
+    vip?: BoolFieldUpdateOperationsInput | boolean
+    blacklisted?: BoolFieldUpdateOperationsInput | boolean
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    companyId?: NullableStringFieldUpdateOperationsInput | string | null
+    reservations?: ReservationUncheckedUpdateManyWithoutGuestNestedInput
+    addresses?: GuestAddressUncheckedUpdateManyWithoutGuestNestedInput
+    documents?: GuestDocumentUncheckedUpdateManyWithoutGuestNestedInput
+    emergencyContacts?: GuestEmergencyContactUncheckedUpdateManyWithoutGuestNestedInput
+    paymentMethods?: GuestPaymentMethodUncheckedUpdateManyWithoutGuestNestedInput
+    restaurantOrders?: RestaurantOrderUncheckedUpdateManyWithoutGuestNestedInput
+    laundryOrders?: LaundryOrderUncheckedUpdateManyWithoutGuestNestedInput
+  }
+
+  export type GymMembershipPlanUpsertWithoutMembershipsInput = {
+    update: XOR<GymMembershipPlanUpdateWithoutMembershipsInput, GymMembershipPlanUncheckedUpdateWithoutMembershipsInput>
+    create: XOR<GymMembershipPlanCreateWithoutMembershipsInput, GymMembershipPlanUncheckedCreateWithoutMembershipsInput>
+    where?: GymMembershipPlanWhereInput
+  }
+
+  export type GymMembershipPlanUpdateToOneWithWhereWithoutMembershipsInput = {
+    where?: GymMembershipPlanWhereInput
+    data: XOR<GymMembershipPlanUpdateWithoutMembershipsInput, GymMembershipPlanUncheckedUpdateWithoutMembershipsInput>
+  }
+
+  export type GymMembershipPlanUpdateWithoutMembershipsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: EnumGymMembershipDurationFieldUpdateOperationsInput | $Enums.GymMembershipDuration
+    durationValue?: IntFieldUpdateOperationsInput | number
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GymMembershipPlanUncheckedUpdateWithoutMembershipsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: EnumGymMembershipDurationFieldUpdateOperationsInput | $Enums.GymMembershipDuration
+    durationValue?: IntFieldUpdateOperationsInput | number
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PaymentUpsertWithWhereUniqueWithoutGymMembershipInput = {
+    where: PaymentWhereUniqueInput
+    update: XOR<PaymentUpdateWithoutGymMembershipInput, PaymentUncheckedUpdateWithoutGymMembershipInput>
+    create: XOR<PaymentCreateWithoutGymMembershipInput, PaymentUncheckedCreateWithoutGymMembershipInput>
+  }
+
+  export type PaymentUpdateWithWhereUniqueWithoutGymMembershipInput = {
+    where: PaymentWhereUniqueInput
+    data: XOR<PaymentUpdateWithoutGymMembershipInput, PaymentUncheckedUpdateWithoutGymMembershipInput>
+  }
+
+  export type PaymentUpdateManyWithWhereWithoutGymMembershipInput = {
+    where: PaymentScalarWhereInput
+    data: XOR<PaymentUpdateManyMutationInput, PaymentUncheckedUpdateManyWithoutGymMembershipInput>
+  }
+
   export type UserRoleCreateManyUserInput = {
     id?: string
     roleId: string
@@ -48855,6 +60112,42 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type LaundryOrderCreateManyGuestInput = {
+    id?: string
+    reservationId?: string | null
+    folioId?: string | null
+    status?: $Enums.LaundryOrderStatus
+    paymentStatus?: $Enums.LaundryPaymentStatus
+    notes?: string | null
+    subtotal: Decimal | DecimalJsLike | number | string
+    tax?: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    receivedAt?: Date | string | null
+    readyAt?: Date | string | null
+    deliveredAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GymMembershipCreateManyGuestInput = {
+    id?: string
+    planId: string
+    reservationId?: string | null
+    status?: $Enums.GymMembershipStatus
+    paymentStatus?: $Enums.GymPaymentStatus
+    settlementMethod?: $Enums.GymSettlementMethod | null
+    startDate: Date | string
+    endDate: Date | string
+    price: Decimal | DecimalJsLike | number | string
+    notes?: string | null
+    activatedAt?: Date | string | null
+    suspendedAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type ReservationUpdateWithoutGuestInput = {
     id?: StringFieldUpdateOperationsInput | string
     nightlyRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -48881,6 +60174,8 @@ export namespace Prisma {
     folio?: FolioUpdateOneWithoutReservationNestedInput
     auditLogs?: ReservationAuditUpdateManyWithoutReservationNestedInput
     restaurantOrders?: RestaurantOrderUpdateManyWithoutReservationNestedInput
+    laundryOrders?: LaundryOrderUpdateManyWithoutReservationNestedInput
+    gymMemberships?: GymMembershipUpdateManyWithoutReservationNestedInput
   }
 
   export type ReservationUncheckedUpdateWithoutGuestInput = {
@@ -48909,6 +60204,8 @@ export namespace Prisma {
     folio?: FolioUncheckedUpdateOneWithoutReservationNestedInput
     auditLogs?: ReservationAuditUncheckedUpdateManyWithoutReservationNestedInput
     restaurantOrders?: RestaurantOrderUncheckedUpdateManyWithoutReservationNestedInput
+    laundryOrders?: LaundryOrderUncheckedUpdateManyWithoutReservationNestedInput
+    gymMemberships?: GymMembershipUncheckedUpdateManyWithoutReservationNestedInput
   }
 
   export type ReservationUncheckedUpdateManyWithoutGuestInput = {
@@ -49135,6 +60432,120 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type LaundryOrderUpdateWithoutGuestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumLaundryOrderStatusFieldUpdateOperationsInput | $Enums.LaundryOrderStatus
+    paymentStatus?: EnumLaundryPaymentStatusFieldUpdateOperationsInput | $Enums.LaundryPaymentStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    receivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    readyAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reservation?: ReservationUpdateOneWithoutLaundryOrdersNestedInput
+    folio?: FolioUpdateOneWithoutLaundryOrdersNestedInput
+    items?: LaundryOrderItemUpdateManyWithoutOrderNestedInput
+    payments?: PaymentUpdateManyWithoutLaundryOrderNestedInput
+  }
+
+  export type LaundryOrderUncheckedUpdateWithoutGuestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reservationId?: NullableStringFieldUpdateOperationsInput | string | null
+    folioId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumLaundryOrderStatusFieldUpdateOperationsInput | $Enums.LaundryOrderStatus
+    paymentStatus?: EnumLaundryPaymentStatusFieldUpdateOperationsInput | $Enums.LaundryPaymentStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    receivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    readyAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: LaundryOrderItemUncheckedUpdateManyWithoutOrderNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutLaundryOrderNestedInput
+  }
+
+  export type LaundryOrderUncheckedUpdateManyWithoutGuestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reservationId?: NullableStringFieldUpdateOperationsInput | string | null
+    folioId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumLaundryOrderStatusFieldUpdateOperationsInput | $Enums.LaundryOrderStatus
+    paymentStatus?: EnumLaundryPaymentStatusFieldUpdateOperationsInput | $Enums.LaundryPaymentStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    receivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    readyAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GymMembershipUpdateWithoutGuestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumGymMembershipStatusFieldUpdateOperationsInput | $Enums.GymMembershipStatus
+    paymentStatus?: EnumGymPaymentStatusFieldUpdateOperationsInput | $Enums.GymPaymentStatus
+    settlementMethod?: NullableEnumGymSettlementMethodFieldUpdateOperationsInput | $Enums.GymSettlementMethod | null
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    suspendedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reservation?: ReservationUpdateOneWithoutGymMembershipsNestedInput
+    plan?: GymMembershipPlanUpdateOneRequiredWithoutMembershipsNestedInput
+    payments?: PaymentUpdateManyWithoutGymMembershipNestedInput
+  }
+
+  export type GymMembershipUncheckedUpdateWithoutGuestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    planId?: StringFieldUpdateOperationsInput | string
+    reservationId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumGymMembershipStatusFieldUpdateOperationsInput | $Enums.GymMembershipStatus
+    paymentStatus?: EnumGymPaymentStatusFieldUpdateOperationsInput | $Enums.GymPaymentStatus
+    settlementMethod?: NullableEnumGymSettlementMethodFieldUpdateOperationsInput | $Enums.GymSettlementMethod | null
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    suspendedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    payments?: PaymentUncheckedUpdateManyWithoutGymMembershipNestedInput
+  }
+
+  export type GymMembershipUncheckedUpdateManyWithoutGuestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    planId?: StringFieldUpdateOperationsInput | string
+    reservationId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumGymMembershipStatusFieldUpdateOperationsInput | $Enums.GymMembershipStatus
+    paymentStatus?: EnumGymPaymentStatusFieldUpdateOperationsInput | $Enums.GymPaymentStatus
+    settlementMethod?: NullableEnumGymSettlementMethodFieldUpdateOperationsInput | $Enums.GymSettlementMethod | null
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    suspendedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type RoomCreateManyRoomTypeInput = {
     id?: string
     number: string
@@ -49328,6 +60739,8 @@ export namespace Prisma {
     folio?: FolioUpdateOneWithoutReservationNestedInput
     auditLogs?: ReservationAuditUpdateManyWithoutReservationNestedInput
     restaurantOrders?: RestaurantOrderUpdateManyWithoutReservationNestedInput
+    laundryOrders?: LaundryOrderUpdateManyWithoutReservationNestedInput
+    gymMemberships?: GymMembershipUpdateManyWithoutReservationNestedInput
   }
 
   export type ReservationUncheckedUpdateWithoutRoomInput = {
@@ -49356,6 +60769,8 @@ export namespace Prisma {
     folio?: FolioUncheckedUpdateOneWithoutReservationNestedInput
     auditLogs?: ReservationAuditUncheckedUpdateManyWithoutReservationNestedInput
     restaurantOrders?: RestaurantOrderUncheckedUpdateManyWithoutReservationNestedInput
+    laundryOrders?: LaundryOrderUncheckedUpdateManyWithoutReservationNestedInput
+    gymMemberships?: GymMembershipUncheckedUpdateManyWithoutReservationNestedInput
   }
 
   export type ReservationUncheckedUpdateManyWithoutRoomInput = {
@@ -49506,6 +60921,8 @@ export namespace Prisma {
     folio?: FolioUpdateOneWithoutReservationNestedInput
     auditLogs?: ReservationAuditUpdateManyWithoutReservationNestedInput
     restaurantOrders?: RestaurantOrderUpdateManyWithoutReservationNestedInput
+    laundryOrders?: LaundryOrderUpdateManyWithoutReservationNestedInput
+    gymMemberships?: GymMembershipUpdateManyWithoutReservationNestedInput
   }
 
   export type ReservationUncheckedUpdateWithoutRoomRateInput = {
@@ -49534,6 +60951,8 @@ export namespace Prisma {
     folio?: FolioUncheckedUpdateOneWithoutReservationNestedInput
     auditLogs?: ReservationAuditUncheckedUpdateManyWithoutReservationNestedInput
     restaurantOrders?: RestaurantOrderUncheckedUpdateManyWithoutReservationNestedInput
+    laundryOrders?: LaundryOrderUncheckedUpdateManyWithoutReservationNestedInput
+    gymMemberships?: GymMembershipUncheckedUpdateManyWithoutReservationNestedInput
   }
 
   export type ReservationUncheckedUpdateManyWithoutRoomRateInput = {
@@ -49588,6 +61007,42 @@ export namespace Prisma {
     completedAt?: Date | string | null
     completedById?: string | null
     createdAt?: Date | string
+  }
+
+  export type LaundryOrderCreateManyReservationInput = {
+    id?: string
+    guestId: string
+    folioId?: string | null
+    status?: $Enums.LaundryOrderStatus
+    paymentStatus?: $Enums.LaundryPaymentStatus
+    notes?: string | null
+    subtotal: Decimal | DecimalJsLike | number | string
+    tax?: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    receivedAt?: Date | string | null
+    readyAt?: Date | string | null
+    deliveredAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GymMembershipCreateManyReservationInput = {
+    id?: string
+    guestId: string
+    planId: string
+    status?: $Enums.GymMembershipStatus
+    paymentStatus?: $Enums.GymPaymentStatus
+    settlementMethod?: $Enums.GymSettlementMethod | null
+    startDate: Date | string
+    endDate: Date | string
+    price: Decimal | DecimalJsLike | number | string
+    notes?: string | null
+    activatedAt?: Date | string | null
+    suspendedAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ReservationAuditUpdateWithoutReservationInput = {
@@ -49681,6 +61136,120 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type LaundryOrderUpdateWithoutReservationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumLaundryOrderStatusFieldUpdateOperationsInput | $Enums.LaundryOrderStatus
+    paymentStatus?: EnumLaundryPaymentStatusFieldUpdateOperationsInput | $Enums.LaundryPaymentStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    receivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    readyAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    guest?: GuestUpdateOneRequiredWithoutLaundryOrdersNestedInput
+    folio?: FolioUpdateOneWithoutLaundryOrdersNestedInput
+    items?: LaundryOrderItemUpdateManyWithoutOrderNestedInput
+    payments?: PaymentUpdateManyWithoutLaundryOrderNestedInput
+  }
+
+  export type LaundryOrderUncheckedUpdateWithoutReservationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    guestId?: StringFieldUpdateOperationsInput | string
+    folioId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumLaundryOrderStatusFieldUpdateOperationsInput | $Enums.LaundryOrderStatus
+    paymentStatus?: EnumLaundryPaymentStatusFieldUpdateOperationsInput | $Enums.LaundryPaymentStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    receivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    readyAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: LaundryOrderItemUncheckedUpdateManyWithoutOrderNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutLaundryOrderNestedInput
+  }
+
+  export type LaundryOrderUncheckedUpdateManyWithoutReservationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    guestId?: StringFieldUpdateOperationsInput | string
+    folioId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumLaundryOrderStatusFieldUpdateOperationsInput | $Enums.LaundryOrderStatus
+    paymentStatus?: EnumLaundryPaymentStatusFieldUpdateOperationsInput | $Enums.LaundryPaymentStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    receivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    readyAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GymMembershipUpdateWithoutReservationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumGymMembershipStatusFieldUpdateOperationsInput | $Enums.GymMembershipStatus
+    paymentStatus?: EnumGymPaymentStatusFieldUpdateOperationsInput | $Enums.GymPaymentStatus
+    settlementMethod?: NullableEnumGymSettlementMethodFieldUpdateOperationsInput | $Enums.GymSettlementMethod | null
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    suspendedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    guest?: GuestUpdateOneRequiredWithoutGymMembershipsNestedInput
+    plan?: GymMembershipPlanUpdateOneRequiredWithoutMembershipsNestedInput
+    payments?: PaymentUpdateManyWithoutGymMembershipNestedInput
+  }
+
+  export type GymMembershipUncheckedUpdateWithoutReservationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    guestId?: StringFieldUpdateOperationsInput | string
+    planId?: StringFieldUpdateOperationsInput | string
+    status?: EnumGymMembershipStatusFieldUpdateOperationsInput | $Enums.GymMembershipStatus
+    paymentStatus?: EnumGymPaymentStatusFieldUpdateOperationsInput | $Enums.GymPaymentStatus
+    settlementMethod?: NullableEnumGymSettlementMethodFieldUpdateOperationsInput | $Enums.GymSettlementMethod | null
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    suspendedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    payments?: PaymentUncheckedUpdateManyWithoutGymMembershipNestedInput
+  }
+
+  export type GymMembershipUncheckedUpdateManyWithoutReservationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    guestId?: StringFieldUpdateOperationsInput | string
+    planId?: StringFieldUpdateOperationsInput | string
+    status?: EnumGymMembershipStatusFieldUpdateOperationsInput | $Enums.GymMembershipStatus
+    paymentStatus?: EnumGymPaymentStatusFieldUpdateOperationsInput | $Enums.GymPaymentStatus
+    settlementMethod?: NullableEnumGymSettlementMethodFieldUpdateOperationsInput | $Enums.GymSettlementMethod | null
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    suspendedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type FolioTransactionCreateManyFolioInput = {
     id?: string
     type: $Enums.FolioTransactionType
@@ -49692,12 +61261,32 @@ export namespace Prisma {
   export type PaymentCreateManyFolioInput = {
     id?: string
     restaurantOrderId?: string | null
+    laundryOrderId?: string | null
+    gymMembershipId?: string | null
     amount: Decimal | DecimalJsLike | number | string
     refundedAmount?: Decimal | DecimalJsLike | number | string
     status?: $Enums.PaymentStatus
     reference?: string | null
     method: $Enums.PaymentMethod
     createdAt?: Date | string
+  }
+
+  export type LaundryOrderCreateManyFolioInput = {
+    id?: string
+    guestId: string
+    reservationId?: string | null
+    status?: $Enums.LaundryOrderStatus
+    paymentStatus?: $Enums.LaundryPaymentStatus
+    notes?: string | null
+    subtotal: Decimal | DecimalJsLike | number | string
+    tax?: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    receivedAt?: Date | string | null
+    readyAt?: Date | string | null
+    deliveredAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type FolioTransactionUpdateWithoutFolioInput = {
@@ -49733,12 +61322,16 @@ export namespace Prisma {
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     restaurantOrder?: RestaurantOrderUpdateOneWithoutPaymentsNestedInput
+    laundryOrder?: LaundryOrderUpdateOneWithoutPaymentsNestedInput
+    gymMembership?: GymMembershipUpdateOneWithoutPaymentsNestedInput
     refunds?: PaymentRefundUpdateManyWithoutPaymentNestedInput
   }
 
   export type PaymentUncheckedUpdateWithoutFolioInput = {
     id?: StringFieldUpdateOperationsInput | string
     restaurantOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    laundryOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    gymMembershipId?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     refundedAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
@@ -49751,12 +61344,72 @@ export namespace Prisma {
   export type PaymentUncheckedUpdateManyWithoutFolioInput = {
     id?: StringFieldUpdateOperationsInput | string
     restaurantOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    laundryOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    gymMembershipId?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     refundedAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     reference?: NullableStringFieldUpdateOperationsInput | string | null
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LaundryOrderUpdateWithoutFolioInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumLaundryOrderStatusFieldUpdateOperationsInput | $Enums.LaundryOrderStatus
+    paymentStatus?: EnumLaundryPaymentStatusFieldUpdateOperationsInput | $Enums.LaundryPaymentStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    receivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    readyAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    guest?: GuestUpdateOneRequiredWithoutLaundryOrdersNestedInput
+    reservation?: ReservationUpdateOneWithoutLaundryOrdersNestedInput
+    items?: LaundryOrderItemUpdateManyWithoutOrderNestedInput
+    payments?: PaymentUpdateManyWithoutLaundryOrderNestedInput
+  }
+
+  export type LaundryOrderUncheckedUpdateWithoutFolioInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    guestId?: StringFieldUpdateOperationsInput | string
+    reservationId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumLaundryOrderStatusFieldUpdateOperationsInput | $Enums.LaundryOrderStatus
+    paymentStatus?: EnumLaundryPaymentStatusFieldUpdateOperationsInput | $Enums.LaundryPaymentStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    receivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    readyAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: LaundryOrderItemUncheckedUpdateManyWithoutOrderNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutLaundryOrderNestedInput
+  }
+
+  export type LaundryOrderUncheckedUpdateManyWithoutFolioInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    guestId?: StringFieldUpdateOperationsInput | string
+    reservationId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumLaundryOrderStatusFieldUpdateOperationsInput | $Enums.LaundryOrderStatus
+    paymentStatus?: EnumLaundryPaymentStatusFieldUpdateOperationsInput | $Enums.LaundryPaymentStatus
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    subtotal?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    tax?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    receivedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    readyAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deliveredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PaymentRefundCreateManyPaymentInput = {
@@ -49810,6 +61463,8 @@ export namespace Prisma {
   export type PaymentCreateManyRestaurantOrderInput = {
     id?: string
     folioId?: string | null
+    laundryOrderId?: string | null
+    gymMembershipId?: string | null
     amount: Decimal | DecimalJsLike | number | string
     refundedAmount?: Decimal | DecimalJsLike | number | string
     status?: $Enums.PaymentStatus
@@ -49851,12 +61506,16 @@ export namespace Prisma {
     method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     folio?: FolioUpdateOneWithoutPaymentsNestedInput
+    laundryOrder?: LaundryOrderUpdateOneWithoutPaymentsNestedInput
+    gymMembership?: GymMembershipUpdateOneWithoutPaymentsNestedInput
     refunds?: PaymentRefundUpdateManyWithoutPaymentNestedInput
   }
 
   export type PaymentUncheckedUpdateWithoutRestaurantOrderInput = {
     id?: StringFieldUpdateOperationsInput | string
     folioId?: NullableStringFieldUpdateOperationsInput | string | null
+    laundryOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    gymMembershipId?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     refundedAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
@@ -49869,6 +61528,8 @@ export namespace Prisma {
   export type PaymentUncheckedUpdateManyWithoutRestaurantOrderInput = {
     id?: StringFieldUpdateOperationsInput | string
     folioId?: NullableStringFieldUpdateOperationsInput | string | null
+    laundryOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    gymMembershipId?: NullableStringFieldUpdateOperationsInput | string | null
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     refundedAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
@@ -49959,6 +61620,8 @@ export namespace Prisma {
     emergencyContacts?: GuestEmergencyContactUpdateManyWithoutGuestNestedInput
     paymentMethods?: GuestPaymentMethodUpdateManyWithoutGuestNestedInput
     restaurantOrders?: RestaurantOrderUpdateManyWithoutGuestNestedInput
+    laundryOrders?: LaundryOrderUpdateManyWithoutGuestNestedInput
+    gymMemberships?: GymMembershipUpdateManyWithoutGuestNestedInput
   }
 
   export type GuestUncheckedUpdateWithoutCompanyInput = {
@@ -49988,6 +61651,8 @@ export namespace Prisma {
     emergencyContacts?: GuestEmergencyContactUncheckedUpdateManyWithoutGuestNestedInput
     paymentMethods?: GuestPaymentMethodUncheckedUpdateManyWithoutGuestNestedInput
     restaurantOrders?: RestaurantOrderUncheckedUpdateManyWithoutGuestNestedInput
+    laundryOrders?: LaundryOrderUncheckedUpdateManyWithoutGuestNestedInput
+    gymMemberships?: GymMembershipUncheckedUpdateManyWithoutGuestNestedInput
   }
 
   export type GuestUncheckedUpdateManyWithoutCompanyInput = {
@@ -50071,6 +61736,268 @@ export namespace Prisma {
 
   export type RolePermissionUncheckedUpdateManyWithoutPermissionInput = {
     roleId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type LaundryOrderItemCreateManyLaundryItemInput = {
+    id?: string
+    orderId: string
+    name: string
+    quantity: number
+    unitPrice: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+  }
+
+  export type LaundryOrderItemUpdateWithoutLaundryItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    order?: LaundryOrderUpdateOneRequiredWithoutItemsNestedInput
+  }
+
+  export type LaundryOrderItemUncheckedUpdateWithoutLaundryItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orderId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LaundryOrderItemUncheckedUpdateManyWithoutLaundryItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    orderId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LaundryOrderItemCreateManyOrderInput = {
+    id?: string
+    laundryItemId: string
+    name: string
+    quantity: number
+    unitPrice: Decimal | DecimalJsLike | number | string
+    total: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+  }
+
+  export type PaymentCreateManyLaundryOrderInput = {
+    id?: string
+    folioId?: string | null
+    restaurantOrderId?: string | null
+    gymMembershipId?: string | null
+    amount: Decimal | DecimalJsLike | number | string
+    refundedAmount?: Decimal | DecimalJsLike | number | string
+    status?: $Enums.PaymentStatus
+    reference?: string | null
+    method: $Enums.PaymentMethod
+    createdAt?: Date | string
+  }
+
+  export type LaundryOrderItemUpdateWithoutOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    laundryItem?: LaundryItemUpdateOneRequiredWithoutOrderItemsNestedInput
+  }
+
+  export type LaundryOrderItemUncheckedUpdateWithoutOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    laundryItemId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LaundryOrderItemUncheckedUpdateManyWithoutOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    laundryItemId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    total?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PaymentUpdateWithoutLaundryOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    refundedAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    folio?: FolioUpdateOneWithoutPaymentsNestedInput
+    restaurantOrder?: RestaurantOrderUpdateOneWithoutPaymentsNestedInput
+    gymMembership?: GymMembershipUpdateOneWithoutPaymentsNestedInput
+    refunds?: PaymentRefundUpdateManyWithoutPaymentNestedInput
+  }
+
+  export type PaymentUncheckedUpdateWithoutLaundryOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    folioId?: NullableStringFieldUpdateOperationsInput | string | null
+    restaurantOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    gymMembershipId?: NullableStringFieldUpdateOperationsInput | string | null
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    refundedAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    refunds?: PaymentRefundUncheckedUpdateManyWithoutPaymentNestedInput
+  }
+
+  export type PaymentUncheckedUpdateManyWithoutLaundryOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    folioId?: NullableStringFieldUpdateOperationsInput | string | null
+    restaurantOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    gymMembershipId?: NullableStringFieldUpdateOperationsInput | string | null
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    refundedAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GymMembershipCreateManyPlanInput = {
+    id?: string
+    guestId: string
+    reservationId?: string | null
+    status?: $Enums.GymMembershipStatus
+    paymentStatus?: $Enums.GymPaymentStatus
+    settlementMethod?: $Enums.GymSettlementMethod | null
+    startDate: Date | string
+    endDate: Date | string
+    price: Decimal | DecimalJsLike | number | string
+    notes?: string | null
+    activatedAt?: Date | string | null
+    suspendedAt?: Date | string | null
+    cancelledAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GymMembershipUpdateWithoutPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumGymMembershipStatusFieldUpdateOperationsInput | $Enums.GymMembershipStatus
+    paymentStatus?: EnumGymPaymentStatusFieldUpdateOperationsInput | $Enums.GymPaymentStatus
+    settlementMethod?: NullableEnumGymSettlementMethodFieldUpdateOperationsInput | $Enums.GymSettlementMethod | null
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    suspendedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reservation?: ReservationUpdateOneWithoutGymMembershipsNestedInput
+    guest?: GuestUpdateOneRequiredWithoutGymMembershipsNestedInput
+    payments?: PaymentUpdateManyWithoutGymMembershipNestedInput
+  }
+
+  export type GymMembershipUncheckedUpdateWithoutPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    guestId?: StringFieldUpdateOperationsInput | string
+    reservationId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumGymMembershipStatusFieldUpdateOperationsInput | $Enums.GymMembershipStatus
+    paymentStatus?: EnumGymPaymentStatusFieldUpdateOperationsInput | $Enums.GymPaymentStatus
+    settlementMethod?: NullableEnumGymSettlementMethodFieldUpdateOperationsInput | $Enums.GymSettlementMethod | null
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    suspendedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    payments?: PaymentUncheckedUpdateManyWithoutGymMembershipNestedInput
+  }
+
+  export type GymMembershipUncheckedUpdateManyWithoutPlanInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    guestId?: StringFieldUpdateOperationsInput | string
+    reservationId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumGymMembershipStatusFieldUpdateOperationsInput | $Enums.GymMembershipStatus
+    paymentStatus?: EnumGymPaymentStatusFieldUpdateOperationsInput | $Enums.GymPaymentStatus
+    settlementMethod?: NullableEnumGymSettlementMethodFieldUpdateOperationsInput | $Enums.GymSettlementMethod | null
+    startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    endDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    activatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    suspendedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PaymentCreateManyGymMembershipInput = {
+    id?: string
+    folioId?: string | null
+    restaurantOrderId?: string | null
+    laundryOrderId?: string | null
+    amount: Decimal | DecimalJsLike | number | string
+    refundedAmount?: Decimal | DecimalJsLike | number | string
+    status?: $Enums.PaymentStatus
+    reference?: string | null
+    method: $Enums.PaymentMethod
+    createdAt?: Date | string
+  }
+
+  export type PaymentUpdateWithoutGymMembershipInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    refundedAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    folio?: FolioUpdateOneWithoutPaymentsNestedInput
+    restaurantOrder?: RestaurantOrderUpdateOneWithoutPaymentsNestedInput
+    laundryOrder?: LaundryOrderUpdateOneWithoutPaymentsNestedInput
+    refunds?: PaymentRefundUpdateManyWithoutPaymentNestedInput
+  }
+
+  export type PaymentUncheckedUpdateWithoutGymMembershipInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    folioId?: NullableStringFieldUpdateOperationsInput | string | null
+    restaurantOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    laundryOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    refundedAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    refunds?: PaymentRefundUncheckedUpdateManyWithoutPaymentNestedInput
+  }
+
+  export type PaymentUncheckedUpdateManyWithoutGymMembershipInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    folioId?: NullableStringFieldUpdateOperationsInput | string | null
+    restaurantOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    laundryOrderId?: NullableStringFieldUpdateOperationsInput | string | null
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    refundedAmount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    status?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

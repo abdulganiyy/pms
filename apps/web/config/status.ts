@@ -6,7 +6,9 @@ export type StatusType =
   | "userStatus"
   | "role"
   | "reservationType"
-  | "folio";
+  | "folio"
+  | "laundry"
+  | "gym";
 
 type StatusConfig = {
   label: string;
@@ -277,6 +279,64 @@ export const statusConfig: Record<StatusType, Record<string, StatusConfig>> = {
     PAYMENT: {
       label: "Payment",
       className: "bg-green-100 text-green-800",
+    },
+  },
+  laundry: {
+    PENDING: {
+      label: "Pending",
+      className:
+        "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400",
+    },
+    RECEIVED: {
+      label: "Received",
+      className:
+        "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400",
+    },
+    PROCESSING: {
+      label: "Processing",
+      className:
+        "bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400",
+    },
+    READY: {
+      label: "Ready",
+      className:
+        "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400",
+    },
+    DELIVERED: {
+      label: "Delivered",
+      className:
+        "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400",
+    },
+    CANCELLED: {
+      label: "Cancelled",
+      className: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400",
+    },
+  },
+
+  gym: {
+    PENDING: {
+      label: "Pending",
+      className:
+        "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400",
+    },
+    ACTIVE: {
+      label: "Active",
+      className:
+        "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400",
+    },
+    EXPIRED: {
+      label: "Expired",
+      className:
+        "bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-400",
+    },
+    SUSPENDED: {
+      label: "Suspended",
+      className:
+        "bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400",
+    },
+    CANCELLED: {
+      label: "Cancelled",
+      className: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400",
     },
   },
 };

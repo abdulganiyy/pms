@@ -492,7 +492,7 @@ export class RestaurantorderService {
       }
 
       const payments = order.payments.filter(
-        (payment) => payment.status !== RestaurantPaymentStatus.REFUNDED,
+        (payment) => payment.status !== PaymentStatus.REFUNDED,
       );
 
       const totalPaid = payments.reduce(

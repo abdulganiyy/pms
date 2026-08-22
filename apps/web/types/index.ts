@@ -297,3 +297,95 @@ export type Housekeeping = {
   assignedTo: User;
   room: Room;
 };
+
+export type LaundryOrderStatus =
+  "PENDING" | "RECEIVED" | "PROCESSING" | "READY" | "DELIVERED" | "CANCELLED";
+
+export type LaundryPaymentStatus =
+  "UNPAID" | "PARTIALLY_PAID" | "PAID" | "REFUNDED";
+
+export type LaundryItem = {
+  id: string;
+  laundryOrderId: string;
+
+  name: string;
+  quantity: number;
+  unitPrice: number;
+  total: number;
+
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type LaundryOrder = {
+  id: string;
+
+  reservationId?: string | null;
+  guestId?: string | null;
+
+  roomNumber?: string | null;
+
+  status: LaundryOrderStatus;
+  paymentStatus: LaundryPaymentStatus;
+
+  pickupDate?: string | null;
+  deliveryDate?: string | null;
+
+  subtotal: number;
+  tax: number;
+  total: number;
+
+  notes?: string | null;
+
+  items: LaundryItem[];
+
+  guest?: {
+    id: string;
+    firstName: string;
+    lastName: string;
+    email?: string | null;
+    phone?: string | null;
+  } | null;
+
+  reservation?: {
+    id: string;
+
+    room?: {
+      id: string;
+      number: string;
+    } | null;
+  } | null;
+
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type GymMembership = {
+  id: string;
+  status: string;
+  startDate: string;
+  endDate: string;
+  price: number | string;
+  notes?: string;
+
+  guest?: {
+    firstName: string;
+    lastName: string;
+    email?: string;
+    phone?: string;
+  };
+
+  reservation?: {
+    id: string;
+
+    room?: {
+      number: string;
+    };
+  };
+
+  plan?: {
+    name: string;
+    duration?: string;
+    durationValue?: number;
+  };
+};

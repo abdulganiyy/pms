@@ -52,6 +52,7 @@ type CustomTableProps<T extends { id: string }> = {
   onDeleteSelected?: (ids: string[]) => void;
   filters?: TableFilter[];
   searcheable?: boolean;
+  showPagination?: boolean;
   pagination: PaginationState;
   onPaginationChange: OnChangeFn<PaginationState>;
   meta: {
@@ -77,6 +78,7 @@ export function CustomTable<T extends { id: string }>({
   emptyDescription,
   emptyActionLabel,
   onEmptyAction,
+  showPagination = true,
 }: CustomTableProps<T>) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [globalFilter, setGlobalFilter] = useState("");
@@ -243,9 +245,11 @@ export function CustomTable<T extends { id: string }>({
           )}
         </TableBody>
       </Table>
-      <div className="p-2">
-        <Pagination table={table} total={meta?.total} />
-      </div>
+      {showPagination && (
+        <div className="p-2">
+          <Pagination table={table} total={meta?.total} />
+        </div>
+      )}
     </div>
   );
 }

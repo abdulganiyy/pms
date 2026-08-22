@@ -56,9 +56,14 @@ const RoomRateDetails = ({ roomrate }: RoomRateProps) => {
                 value={format(roomrate.endDate, "MMMM do, yyyy")}
               />
 
-              <DetailItem label="Price" value={roomrate.price} />
-
-              <DetailItem label="Currency" value={roomrate.currency} />
+              <DetailItem
+                label="Price"
+                value={new Intl.NumberFormat("en-NG", {
+                  style: "currency",
+                  currency: `${roomrate.currency ?? "NGN"}`,
+                  maximumFractionDigits: 0,
+                }).format(roomrate.price ?? 0)}
+              />
             </div>
           </section>
 

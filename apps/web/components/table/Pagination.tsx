@@ -37,7 +37,7 @@ export function Pagination<T>({ table, total }: PaginationProps<T>) {
   const end = Math.min((currentPage + 1) * pageSize, total);
 
   return (
-    <div className="flex items-center gap-2 justify-between border-t">
+    <div className="flex items-center gap-2 justify-between border-t pt-2">
       <span className="text-sm text-[#B5B7C0]">
         Showing data {start} to {end} of{" "}
         {new Intl.NumberFormat("en", {

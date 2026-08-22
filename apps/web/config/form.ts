@@ -230,18 +230,18 @@ export const createRoomRateFieldConfig: FieldConfig[] = [
     label: "Price",
     type: "number",
   },
-  {
-    name: "currency",
-    label: "Currency",
-    type: "select",
-    placeholder: "Select Currency",
-    options: [
-      { label: "Nigerian Naira (NGN)", value: "NGN" },
-      { label: "US Dollar (USD)", value: "USD" },
-      { label: "British Pound (GBP)", value: "GBP" },
-      { label: "Euro (EUR)", value: "EUR" },
-    ],
-  },
+  // {
+  //   name: "currency",
+  //   label: "Currency",
+  //   type: "select",
+  //   placeholder: "Select Currency",
+  //   options: [
+  //     { label: "Nigerian Naira (NGN)", value: "NGN" },
+  //     { label: "US Dollar (USD)", value: "USD" },
+  //     { label: "British Pound (GBP)", value: "GBP" },
+  //     { label: "Euro (EUR)", value: "EUR" },
+  //   ],
+  // },
 ];
 
 export const editRoomRateFieldConfig = [...createRoomRateFieldConfig];
@@ -606,5 +606,242 @@ export const assignHousekeepingTaskFieldConfig: FieldConfig[] = [
     label: "User",
     placeholder: "Select User",
     type: "select",
+  },
+];
+
+export const createLaundryItemFieldConfig: FieldConfig[] = [
+  {
+    name: "name",
+    label: "Item Name",
+    type: "text",
+    placeholder: "e.g. Shirt",
+  },
+
+  {
+    name: "description",
+    label: "Description",
+    type: "textarea",
+    placeholder: "Optional description",
+  },
+
+  {
+    name: "price",
+    label: "Price",
+    type: "number",
+    placeholder: "e.g. 1500",
+  },
+
+  {
+    name: "type",
+    label: "Type",
+    type: "select",
+    options: [
+      {
+        label: "Wash",
+        value: "WASH",
+      },
+      {
+        label: "Dry Clean",
+        value: "DRY_CLEAN",
+      },
+      {
+        label: "Iron",
+        value: "IRON",
+      },
+      {
+        label: "Press",
+        value: "PRESS",
+      },
+      {
+        label: "Fold",
+        value: "FOLD",
+      },
+      {
+        label: "Other",
+        value: "OTHER",
+      },
+    ],
+  },
+];
+
+export const createLaundryOrderFieldConfig = ({
+  laundryItems,
+  guestOptions,
+  reservationOptions,
+}: {
+  laundryItems: any[];
+  guestOptions: {
+    label: string;
+    value: string;
+  }[];
+  reservationOptions: {
+    label: string;
+    value: string;
+  }[];
+}): FieldConfig[] => [
+  {
+    name: "guestId",
+    label: "Guest",
+    type: "select",
+    options: guestOptions,
+    required: true,
+  },
+
+  {
+    name: "reservationId",
+    label: "Reservation",
+    type: "searchable-select",
+    options: reservationOptions,
+  },
+
+  {
+    name: "items",
+    label: "Laundry Items",
+    type: "array",
+
+    fields: [
+      {
+        name: "laundryItemId",
+        label: "Laundry Service",
+        type: "searchable-select",
+
+        options: laundryItems.map((item) => ({
+          label: `${item.name} - ${new Intl.NumberFormat("en-NG", {
+            style: "currency",
+            currency: "NGN",
+            maximumFractionDigits: 0,
+          }).format(Number(item.price))}`,
+          value: item.id,
+        })),
+      },
+
+      {
+        name: "quantity",
+        label: "Quantity",
+        type: "number",
+        min: 1,
+      },
+    ],
+  },
+
+  {
+    name: "notes",
+    label: "Notes",
+    type: "textarea",
+  },
+];
+
+export const createGymMembershipFieldConfig = ({
+  guestOptions,
+  planOptions,
+  reservationOptions,
+}: {
+  guestOptions: {
+    label: string;
+    value: string;
+  }[];
+
+  planOptions: {
+    label: string;
+    value: string;
+  }[];
+
+  reservationOptions: {
+    label: string;
+    value: string;
+  }[];
+}): FieldConfig[] => [
+  {
+    name: "guestId",
+    label: "Guest",
+    type: "searchable-select",
+    options: guestOptions,
+    required: true,
+  },
+
+  {
+    name: "reservationId",
+    label: "Reservation",
+    type: "searchable-select",
+    options: reservationOptions,
+  },
+
+  {
+    name: "planId",
+    label: "Membership Plan",
+    type: "select",
+    options: planOptions,
+    required: true,
+  },
+
+  {
+    name: "startDate",
+    label: "Start Date",
+    type: "date",
+    // required: true,
+  },
+
+  {
+    name: "notes",
+    label: "Notes",
+    type: "textarea",
+  },
+];
+
+export const createGymPlanFieldConfig: FieldConfig[] = [
+  {
+    name: "name",
+    label: "Plan Name",
+    type: "text",
+    required: true,
+  },
+
+  {
+    name: "description",
+    label: "Description",
+    type: "textarea",
+  },
+
+  {
+    name: "duration",
+    label: "Duration",
+    type: "select",
+
+    options: [
+      {
+        label: "Daily",
+        value: "DAILY",
+      },
+      {
+        label: "Weekly",
+        value: "WEEKLY",
+      },
+      {
+        label: "Monthly",
+        value: "MONTHLY",
+      },
+      {
+        label: "Quarterly",
+        value: "QUARTERLY",
+      },
+      {
+        label: "Yearly",
+        value: "YEARLY",
+      },
+    ],
+  },
+
+  {
+    name: "durationValue",
+    label: "Duration Value",
+    type: "number",
+    min: 1,
+  },
+
+  {
+    name: "price",
+    label: "Price",
+    type: "number",
+    min: 0,
   },
 ];

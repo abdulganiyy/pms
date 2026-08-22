@@ -1,4 +1,6 @@
 "use client";
+import { GymPlans } from "@/components/gym/GymPlans";
+import { LaundryItems } from "@/components/laundry/LaundryItems";
 import { Menus } from "@/components/menu/Menus";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -12,12 +14,18 @@ export default function InventoryPage() {
       <Tabs defaultValue="menu">
         <TabsList variant="line">
           <TabsTrigger value="menu">Menu Item</TabsTrigger>
-          <TabsTrigger value="inventory">Inventory</TabsTrigger>
+          <TabsTrigger value="gymplan">Gym Plan</TabsTrigger>
+          <TabsTrigger value="laundryitem">Laundry Item</TabsTrigger>
         </TabsList>
         <TabsContent value="menu">
           <Menus />
         </TabsContent>
-        <TabsContent value="inventory"></TabsContent>
+        <TabsContent value="gymplan">
+          <GymPlans />
+        </TabsContent>
+        <TabsContent value="laundryitem">
+          <LaundryItems />
+        </TabsContent>
       </Tabs>
     </div>
   );

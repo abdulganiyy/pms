@@ -12,12 +12,6 @@ import { RestaurantOrder } from "@/types";
 import CreateRestaurantOrder from "./CreateRestaurantOrder";
 import { StatusBadge } from "../StatusBadge";
 import RestaurantOrderDetails from "./RestaurantOrderDetails";
-import RestaurantOrderActionMenu from "./RestaurantOrderActionMenu";
-
-// import RestaurantOrderDetails from "./RestaurantOrderDetails";
-// import CreateRestaurantOrder from "./CreateRestaurantOrder";
-// import EditRestaurantOrder from "./EditRestaurantOrder";
-// import DeleteRestaurantOrder from "./DeleteRestaurantOrder";
 
 export const RestaurantOrders = () => {
   const [pagination, setPagination] = useState({
@@ -111,14 +105,6 @@ export const RestaurantOrders = () => {
               },
             },
 
-            // {
-            //   id: "waiter",
-            //   header: "Waiter",
-            //   cell: ({ row }) => {
-            //     return <div>{"—"}</div>;
-            //   },
-            // },
-
             {
               id: "items",
               header: "Items",
@@ -126,22 +112,6 @@ export const RestaurantOrders = () => {
                 return <div>{row.original.items?.length ?? 0}</div>;
               },
             },
-
-            // {
-            //   id: "subtotal",
-            //   header: "Subtotal",
-            //   cell: ({ row }) => {
-            //     return <div>{row.original.subtotal}</div>;
-            //   },
-            // },
-
-            // {
-            //   id: "tax",
-            //   header: "Tax",
-            //   cell: ({ row }) => {
-            //     return <div>{row.original.tax}</div>;
-            //   },
-            // },
 
             {
               id: "total",
@@ -186,7 +156,6 @@ export const RestaurantOrders = () => {
               cell: ({ row }) => (
                 <div className="flex gap-2">
                   <RestaurantOrderDetails restaurantorder={row.original} />
-                  {/* <RestaurantOrderActionMenu order={row.original} /> */}
                 </div>
               ),
             },
